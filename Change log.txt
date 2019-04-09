@@ -1,0 +1,6 @@
+04/04/2019 - Started working on the checkout page.
+08/04/2019 - Checkout page UI completed.
+08/04/2019 - Started working on the payments modal.
+08/04/2019 - Added a reservation period of 10 minutes once a user hasclicked to buy a ticket
+the ticket is removed from a users basket and put back onto active listings after this period.
+09/04/2019 - Created a UI for making payments with a Ionic modal page, have started writing the logic to process card payments.
