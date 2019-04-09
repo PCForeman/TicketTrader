@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-navbar color="midnight-blue">
+    <ion-buttons right>
+      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+      <button ion-button icon-only color="light" (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button ion-button icon-only color="light" (click)="checkOut()">
+        <ion-icon name="basket"></ion-icon>
+      </button>
+      <button ion-button icon-only color="light" (click)="orderHistory()">
+        <ion-icon name="clipboard"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title position text-center>Account</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-content>
+    <ion-item-group>
+      <ion-list-header position text-center>Account Details</ion-list-header>
+      <ion-label position text-center>First name</ion-label>
+      <ion-item position text-center>{{
+        (userData | async)?.firstname
+      }}</ion-item>
+      <ion-label position text-center>Surname</ion-label>
+      <ion-item position text-center>{{
+        (userData | async)?.surname
+      }}</ion-item>
+      <ion-label position text-center>Email Address</ion-label>
+      <ion-item position text-center>{{ (userData | async)?.email }}</ion-item>
+      <ion-label position text-center>Address</ion-label>
+      <ion-item position text-center>{{
+        (userData | async)?.addressL1
+      }}</ion-item>
+      <ion-label position text-center>Postcode</ion-label>
+      <ion-item position text-center>{{
+        (userData | async)?.addressPC
+      }}</ion-item>
+      <ion-label position text-center>Phone Number</ion-label>
+      <ion-item position text-center>{{
+        (userData | async)?.phoneNo
+      }}</ion-item>
+      <ion-label position text-center>Date of birth</ion-label>
+      <ion-item position text-center>{{ (userData | async)?.dOb }}</ion-item>
+      <br />
+      <ion-title position text-center>Change your password</ion-title>
+      <ion-item>
+        <ion-label floating position text-center
+          >Enter current password</ion-label
+        >
+        <ion-input
+          position
+          text-center
+          type="password"
+          [(ngModel)]="currentPassword"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating position text-center>Enter new password</ion-label>
+        <ion-input
+          position
+          text-center
+          type="password"
+          [(ngModel)]="newPassword"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating position text-center
+          >Confirm new password</ion-label
+        >
+        <ion-input
+          position
+          text-center
+          type="password"
+          [(ngModel)]="comparePassword"
+        ></ion-input>
+      </ion-item>
+
+      <button
+        ion-button
+        id="btnChangePassword"
+        class="button"
+        color="midnight-blue"
+        block
+        (click)="updateUserPassword()"
+      >
+        Update password
+      </button>
+    </ion-item-group>
+  </ion-content>
+</ion-content>

@@ -1,0 +1,33 @@
+page-page {
+  p.solid {
+    border: 2px midnightblue;
+    border-style: solid;
+    color: midnightblue
+  }
+
+  b.background {
+    border: 2px midnightblue;
+    border-style: solid;
+    background-color: midnightblue;
+    color: midnightblue
+  }
+
+  button {
+    border: 5px midnightblue;
+    border-style: outset;
+    color: white;
+    background-color: midnightblue;
+    text-align: center
+  }
+
+  #infoWindowButton {
+    margin: 10px;
+    width: 112.5px;
+    height: 30px;
+    border: 5px midnightblue;
+    border-style: outset;
+    color: white;
+    background-color: midnightblue;
+    text-align: center
+  }
+}

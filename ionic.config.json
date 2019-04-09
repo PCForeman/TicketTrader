@@ -1,0 +1,7 @@
+{
+  "name": "Practice",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
