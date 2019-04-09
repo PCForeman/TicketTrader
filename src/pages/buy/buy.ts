@@ -116,7 +116,7 @@ export class BuyPage {
     var uId = this.afAuth.auth.currentUser.uid;
     var ticketId = (target.parentElement.parentElement.children.item(1).innerHTML);
     var sId = (target.parentElement.parentElement.children.item(2).innerHTML);
-    var sPrice = (target.parentElement.parentElement.children.item(5).innerHTML);
+    var sPrice = (target.parentElement.parentElement.children.item(5).innerHTML.substr(6,10));
     var temp = [];
     var ticketClicked =
       parseInt(

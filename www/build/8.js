@@ -1,6 +1,6 @@
 webpackJsonp([8],{
 
-/***/ 522:
+/***/ 523:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdminViewPageModule", function() { return AdminViewPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__admin_view__ = __webpack_require__(534);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__admin_view__ = __webpack_require__(535);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,7 +34,7 @@ var AdminViewPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 534:
+/***/ 535:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61,7 +61,7 @@ var AdminViewPage = /** @class */ (function () {
     }
     AdminViewPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-admin-view",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader Master - Copy\prco304-final-year-project-PCForeman\src\pages\admin-view\admin-view.html"*/'<ion-tabs position="text-center" color="midnight-blue">\n  <ion-tab color="midnight-blue" [root]="adminRoot" tabTitle="Pending listings" tabIcon="document"></ion-tab>\n  <ion-tab color="midnight-blue" [root]="admin2Root" tabTitle="Active listings" tabIcon="happy"></ion-tab>\n  <ion-tab color="midnight-blue" [root]="admin3Root" tabTitle="Rejected listings" tabIcon="sad"></ion-tab>\n</ion-tabs>\n\n<head>\n  <link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet">\n</head>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader Master - Copy\prco304-final-year-project-PCForeman\src\pages\admin-view\admin-view.html"*/
+            selector: "page-admin-view",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin-view\admin-view.html"*/'<ion-tabs position="text-center" color="midnight-blue">\n  <ion-tab color="midnight-blue" [root]="adminRoot" tabTitle="Pending listings" tabIcon="document"></ion-tab>\n  <ion-tab color="midnight-blue" [root]="admin2Root" tabTitle="Active listings" tabIcon="happy"></ion-tab>\n  <ion-tab color="midnight-blue" [root]="admin3Root" tabTitle="Rejected listings" tabIcon="sad"></ion-tab>\n</ion-tabs>\n\n<head>\n  <link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet">\n</head>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin-view\admin-view.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
     ], AdminViewPage);

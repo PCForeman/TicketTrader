@@ -1,6 +1,6 @@
 webpackJsonp([7],{
 
-/***/ 526:
+/***/ 525:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Admin2PageModule", function() { return Admin2PageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__admin2__ = __webpack_require__(537);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__admin2__ = __webpack_require__(536);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,7 +34,7 @@ var Admin2PageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 537:
+/***/ 536:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -279,7 +279,7 @@ var Admin2Page = /** @class */ (function () {
     };
     Admin2Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-admin2",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader Master - Copy\prco304-final-year-project-PCForeman\src\pages\admin2\admin2.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Active listings</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <ion-list>\n    <div id="pendingTickets" ion-item *ngFor="let item of items; let i = index">\n      <h1 id="ticketId" position left>{{ i + 1 }} {{ item.Key }}</h1>\n      <h2 position text-center>Artist: {{ item.Name }}</h2>\n      <h2 position text-center>Venue: {{ item.Venue }}</h2>\n      <h2 position text-center>Price:£{{ item.Price }}</h2>\n      <h2 position text-center>Date: {{ item.Date }}</h2>\n      <h2 position text-center>Time: {{ item.Time }}</h2>\n      <button\n        ion-button\n        class="button"\n        color="midnight-blue"\n        block\n        (click)="remove()"\n      >\n        Remove listing\n      </button>\n      <h2></h2>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader Master - Copy\prco304-final-year-project-PCForeman\src\pages\admin2\admin2.html"*/
+            selector: "page-admin2",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin2\admin2.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Active listings</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <ion-list>\n    <div id="pendingTickets" ion-item *ngFor="let item of items; let i = index">\n      <h1 id="ticketId" position left>{{ i + 1 }} {{ item.Key }}</h1>\n      <h2 position text-center>Artist: {{ item.Name }}</h2>\n      <h2 position text-center>Venue: {{ item.Venue }}</h2>\n      <h2 position text-center>Price:£{{ item.Price }}</h2>\n      <h2 position text-center>Date: {{ item.Date }}</h2>\n      <h2 position text-center>Time: {{ item.Time }}</h2>\n      <button\n        ion-button\n        class="button"\n        color="midnight-blue"\n        block\n        (click)="remove()"\n      >\n        Remove listing\n      </button>\n      <h2></h2>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin2\admin2.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],

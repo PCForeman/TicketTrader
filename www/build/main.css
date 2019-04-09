@@ -27973,15 +27973,30 @@ ion-navbar.toolbar {
   padding: 7.5% 5%  !important;
 }
 
-#item {
-  border-radius: 30px !important;
-  padding-left: 30px !important;
-  font-size: 0.9em;
-  margin-bottom: 10px;
-  border: 1px solid #ffffff;
-  border-bottom: 0px !important;
-  -webkit-box-shadow: none !important;
-  box-shadow: none !important;
+page-buy #modalButton {
+  outline: none;
+  height: 50px;
+  text-align: center;
+  width: 250px;
+  border-radius: 40px;
+  background: midnightblue;
+  border: 2px solid black;
+  color: white;
+  letter-spacing: 1px;
+  text-shadow: 0;
+}
+
+page-buy #ngForButtons {
+  outline: none;
+  height: 50px;
+  text-align: center;
+  width: 250px;
+  border-radius: 40px;
+  background: midnightblue;
+  border: 2px solid black;
+  color: white;
+  letter-spacing: 1px;
+  text-shadow: 0;
 }
 
 page-home #restOf {
@@ -28036,12 +28051,17 @@ page-page b.background {
   color: midnightblue;
 }
 
-page-page button {
-  border: 5px midnightblue;
-  border-style: outset;
-  color: white;
-  background-color: midnightblue;
+page-page #ngForButtons {
+  outline: none;
+  height: 50px;
   text-align: center;
+  width: 250px;
+  border-radius: 40px;
+  background: midnightblue;
+  border: 2px solid black;
+  color: white;
+  letter-spacing: 1px;
+  text-shadow: 0;
 }
 
 page-page #infoWindowButton {
@@ -28053,4 +28073,18 @@ page-page #infoWindowButton {
   color: white;
   background-color: midnightblue;
   text-align: center;
+}
+
+#modalButton {
+  outline: none;
+  position: center;
+  height: 50px;
+  text-align: center;
+  width: 250px;
+  border-radius: 40px;
+  background: midnightblue;
+  border: 2px solid black;
+  color: white;
+  letter-spacing: 1px;
+  text-shadow: 0;
 }
