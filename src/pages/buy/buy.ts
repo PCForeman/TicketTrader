@@ -119,12 +119,21 @@ export class BuyPage {
     var sPrice = target.parentElement.parentElement.children
       .item(5)
       .innerHTML.substr(6, 10);
+      var sArtist = target.parentElement.parentElement.children
+      .item(3)
+      .innerHTML.substr(0);
+      var sVenue = target.parentElement.parentElement.children
+      .item(4)
+      .innerHTML.substr(6);
+      var sDate = target.parentElement.parentElement.children
+      .item(6)
+      .innerHTML.substr(6, 10);
     var temp = [];
     var ticketClicked =
       parseInt(
         target.parentElement.parentElement.children.item(0).innerHTML.valueOf()
       ) - 1;
-    console.log(uId, ticketId, sId, sPrice);
+    console.log(uId, ticketId, sId, sPrice, sVenue, sArtist, sDate);
     console.log(ticketClicked);
     temp.push(this.items[ticketClicked]);
     console.log(temp);
@@ -153,7 +162,9 @@ export class BuyPage {
       userId: uId,
       ticketRef: ticketId,
       sellerId: sId,
-      price: sPrice
+      price: sPrice,
+      artist: sArtist,
+      date: sDate,
     };
     const myModal = this.modal.create(
       "PaymentModalPage",

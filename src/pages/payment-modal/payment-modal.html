@@ -4,36 +4,43 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-<ion-item>
-<ion-label position text-center>Name on card</ion-label>
-</ion-item>
-<ion-item>
-<ion-input position text-center></ion-input>
-</ion-item>
+  <ion-list position text-center>
+    <ion-title>
+      Order Summary
+    </ion-title>
+    {{ listingData.artist }}<br />
+    {{ listingData.date }}<br />Reference number<br />
+    {{ listingData.ticketRef }}
+  </ion-list>
 
-<ion-item>
-    <ion-label position text-center>16 Digit card number</ion-label>
-    </ion-item>
-    <ion-item>
+  <ion-item>
+    <ion-label position text-center>Name on card</ion-label>
+  </ion-item>
+  <ion-item>
     <ion-input position text-center></ion-input>
-    </ion-item>
+  </ion-item>
 
-    <ion-item>
-        <ion-label position text-center>Expiry date</ion-label>
-        </ion-item>
-        <ion-item>
-        <ion-input id ="input" position text-center></ion-input>
-        </ion-item>
+  <ion-item>
+    <ion-label position text-center>16 Digit card number</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-input position text-center></ion-input>
+  </ion-item>
 
-        <ion-item>
-            <ion-label position text-center>CVC</ion-label>
-            </ion-item>
-            <ion-item>
-            <ion-input position text-center></ion-input>
-            </ion-item>
+  <ion-item>
+    <ion-label position text-center>Expiry date</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-input id="input" position text-center></ion-input>
+  </ion-item>
 
-            <button id="modalButton" ion-button>{{listingData.price}}</button>
+  <ion-item>
+    <ion-label position text-center>CVC</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-input position text-center></ion-input>
+  </ion-item>
 
+  <button id="modalButton" ion-button>{{ listingData.price }}</button>
 </ion-content>

@@ -33,9 +33,9 @@
       <h5 position text-center>Date: {{ item.Date }}</h5>
       <h6 position text-center>Time: {{ item.Time }}</h6>
       <button
+        class="modalButton"
         [id]="i"
         ion-button
-        color="midnight-blue"
         block
         (click)="checkOut(index)"
       >

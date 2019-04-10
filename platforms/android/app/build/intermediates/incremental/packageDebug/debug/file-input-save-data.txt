@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Apr 10 13:30:10 BST 2019
+#Wed Apr 10 15:52:05 BST 2019
 124.path=www/plugins/cordova-plugin-googlemaps/www/BaseClass.js
 60.set=ASSET
 52.set=ASSET

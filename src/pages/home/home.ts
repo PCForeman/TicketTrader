@@ -208,7 +208,7 @@ export class HomePage {
           " " +
           currentVenue +
           "<br>" +
-          '<button id="infoWindowButton" type="button" onclick = "buyTickets()">Buy this ticket?</button>';
+          '<button class="infoWindowButton" type="button" onclick = "buyTickets()">Buy this ticket?</button>';
         this.addInfoWindow(marker, content);
       }
     }
