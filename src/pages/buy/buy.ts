@@ -67,7 +67,7 @@ export class BuyPage {
           var eventSellerUID = snapshot.payload.child(`Seller`).val();
           var checkOutTime = snapshot.payload.child(`checkOutTime`).val();
           var timeNow = Date.now();
-        //  console.log(checkOutTime + 450000, timeNow);
+          //  console.log(checkOutTime + 450000, timeNow);
           var eventName = snapshot.payload.child(`Name`).val();
           var eventPrice = snapshot.payload.child(`Price`).val();
           var eventVenue = snapshot.payload.child(`Venue`).val();
@@ -77,7 +77,7 @@ export class BuyPage {
           var eventCustomerPayout = snapshot.payload.child(`Payout`).val();
           var eventServiceCharge = snapshot.payload.child(`Charge`).val();
           var maxTime = checkOutTime + 600000;
-        //  console.log(maxTime);
+          //  console.log(maxTime);
           if (maxTime <= timeNow) {
             this.timedOutListings.push({
               Name: eventName,
@@ -93,36 +93,38 @@ export class BuyPage {
             x++;
             count + 1;
             var indexToPush = count;
-          //  console.log(count, indexToPush)
+            //  console.log(count, indexToPush)
             this.afDatabase
               .list(`approvedTickets/`)
               .push(this.timedOutListings[0]);
-              console.log(this.timedOutListings[0]);
-              this.timedOutListings.splice(0, 1);
+            console.log(this.timedOutListings[0]);
+            this.timedOutListings.splice(0, 1);
             this.afDatabase
               .object(`ticketsInBasket/${currentUser}/${keyValue}`)
               .remove();
           } else if (maxTime > timeNow) {
-          //  console.log("Hello", maxTime);
+            //  console.log("Hello", maxTime);
           }
         });
       }
     });
   }
 
-  
   checkOut() {
     var target = event.srcElement;
     var uId = this.afAuth.auth.currentUser.uid;
-    var ticketId = (target.parentElement.parentElement.children.item(1).innerHTML);
-    var sId = (target.parentElement.parentElement.children.item(2).innerHTML);
-    var sPrice = (target.parentElement.parentElement.children.item(5).innerHTML.substr(6,10));
+    var ticketId = target.parentElement.parentElement.children.item(1)
+      .innerHTML;
+    var sId = target.parentElement.parentElement.children.item(2).innerHTML;
+    var sPrice = target.parentElement.parentElement.children
+      .item(5)
+      .innerHTML.substr(6, 10);
     var temp = [];
     var ticketClicked =
       parseInt(
         target.parentElement.parentElement.children.item(0).innerHTML.valueOf()
       ) - 1;
-      console.log(uId, ticketId, sId, sPrice);
+    console.log(uId, ticketId, sId, sPrice);
     console.log(ticketClicked);
     temp.push(this.items[ticketClicked]);
     console.log(temp);
@@ -143,13 +145,22 @@ export class BuyPage {
       ];
     });
     const myModalOpts: ModalOptions = {
-      cssClass: 'modal',
+      cssClass: "modal",
       enableBackdropDismiss: false,
-      showBackdrop: true,
-    }
-    const listingRef = {userId: uId, ticketRef: ticketId, sellerId: sId, price: sPrice}
-    const myModal = this.modal.create('PaymentModalPage', {ticket: listingRef}, myModalOpts);
-    myModal.present()
+      showBackdrop: true
+    };
+    const listingRef = {
+      userId: uId,
+      ticketRef: ticketId,
+      sellerId: sId,
+      price: sPrice
+    };
+    const myModal = this.modal.create(
+      "PaymentModalPage",
+      { ticket: listingRef },
+      myModalOpts
+    );
+    myModal.present();
   }
 
   retrieveCheckoutTickets() {
@@ -197,7 +208,7 @@ export class BuyPage {
             Seller: eventSellerUID,
             Payout: eventCustomerPayout,
             Charge: eventServiceCharge,
-            CheckoutPeriod:timeLeft
+            CheckoutPeriod: timeLeft
           });
           x++;
           count + 1;
