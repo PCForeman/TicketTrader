@@ -67,9 +67,6 @@ var PaymentModalPage = /** @class */ (function () {
         this.navParams = navParams;
         this.vCtrl = vCtrl;
     }
-    PaymentModalPage.prototype.close = function () {
-        this.vCtrl.dismiss();
-    };
     PaymentModalPage.prototype.ionViewWillLoad = function () {
         var ticket = this.navParams.get('ticket');
         this.listingData = ticket;
@@ -77,7 +74,7 @@ var PaymentModalPage = /** @class */ (function () {
     };
     PaymentModalPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-payment-modal',template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons end>\n      <button ion-button (click)="close()">Close</button>\n    </ion-buttons>\n    <ion-title>Checkout</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n<ion-item>\n<ion-label position text-center>Name on card</ion-label>\n</ion-item>\n<ion-item>\n<ion-input position text-center></ion-input>\n</ion-item>\n\n<ion-item>\n    <ion-label position text-center>16 Digit card number</ion-label>\n    </ion-item>\n    <ion-item>\n    <ion-input position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n        <ion-label position text-center>Expiry date</ion-label>\n        </ion-item>\n        <ion-item>\n        <ion-input id ="input" position text-center></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-label position text-center>CVC</ion-label>\n            </ion-item>\n            <ion-item>\n            <ion-input position text-center></ion-input>\n            </ion-item>\n\n            <button id="modalButton" ion-button>{{listingData.price}}</button>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/,
+            selector: 'page-payment-modal',template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-title position text-center>Checkout</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n<ion-item>\n<ion-label position text-center>Name on card</ion-label>\n</ion-item>\n<ion-item>\n<ion-input position text-center></ion-input>\n</ion-item>\n\n<ion-item>\n    <ion-label position text-center>16 Digit card number</ion-label>\n    </ion-item>\n    <ion-item>\n    <ion-input position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n        <ion-label position text-center>Expiry date</ion-label>\n        </ion-item>\n        <ion-item>\n        <ion-input id ="input" position text-center></ion-input>\n        </ion-item>\n\n        <ion-item>\n            <ion-label position text-center>CVC</ion-label>\n            </ion-item>\n            <ion-item>\n            <ion-input position text-center></ion-input>\n            </ion-item>\n\n            <button id="modalButton" ion-button>{{listingData.price}}</button>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */]])
     ], PaymentModalPage);

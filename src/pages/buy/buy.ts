@@ -146,7 +146,7 @@ export class BuyPage {
     });
     const myModalOpts: ModalOptions = {
       cssClass: "modal",
-      enableBackdropDismiss: false,
+      enableBackdropDismiss: true,
       showBackdrop: true
     };
     const listingRef = {

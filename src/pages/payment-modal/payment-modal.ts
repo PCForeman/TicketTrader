@@ -20,9 +20,6 @@ listingData:any;
   constructor(public navParams: NavParams, private vCtrl: ViewController) {
   }
 
-close(){
-this.vCtrl.dismiss();
-}
 
   ionViewWillLoad() {
     const ticket = this.navParams.get('ticket');
