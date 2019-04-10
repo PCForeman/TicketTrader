@@ -68,15 +68,14 @@ export class OrderHistoryPage {
           duration: 2000
         })
         .present();
-        this.navCtrl.setRoot('HomePage')
-        this.refresh()
+      this.navCtrl.setRoot("HomePage");
+      this.refresh();
     });
   }
 
   refresh(): void {
     window.location.reload();
   }
-
 
   retrieveLiveListings() {
     var currentUser = this.afAuth.auth.currentUser.uid;

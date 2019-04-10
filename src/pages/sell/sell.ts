@@ -5,7 +5,7 @@ import {
   NavParams,
   ToastController,
   App,
-  LoadingController,
+  LoadingController
 } from "ionic-angular";
 import { Listings } from "../../models/listing";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -52,33 +52,31 @@ export class SellPage {
     public navParams: NavParams
   ) {}
 
-
- async takePhoto(){
-   try{
-    const options: CameraOptions = {
-      quality: 50,
-      targetHeight: 500,
-      targetWidth: 500,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.PNG,
-      mediaType: this.camera.MediaType.PICTURE
+  async takePhoto() {
+    try {
+      const options: CameraOptions = {
+        quality: 50,
+        targetHeight: 500,
+        targetWidth: 500,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.PNG,
+        mediaType: this.camera.MediaType.PICTURE
+      };
+      const end = this.camera.getPicture(options);
+      console.log(end);
+      const image = `data:image/png;base64,${end}`;
+      const pictures = this.storage.ref("tickets");
+      pictures.putString(image, "data_url");
+    } catch (e) {
+      console.log(e);
     }
-   const end = this.camera.getPicture(options)
-   console.log(end);
-   const image = `data:image/png;base64,${end}`
-   const pictures = this.storage.ref('tickets')
-   pictures.putString(image, 'data_url');
-  }catch (e) {
-console.log(e)
   }
- }
 
   checkOut() {
     this.navCtrl.push("BuyPage");
   }
 
-  storageRef(){
-  }
+  storageRef() {}
 
   orderHistory() {
     this.navCtrl.push("OrderHistoryPage");
@@ -181,7 +179,6 @@ console.log(e)
       });
   }
 
-
   showSpinner() {
     let loading = this.ldCtrl.create({
       content: ""
@@ -198,10 +195,10 @@ console.log(e)
     var location = this.listing.listingLocation;
     var startTime = this.listing.listingTime;
     var date = this.listing.listingDate.toString();
-    var p3 = date.slice(0,4);
-    var p2 = date.slice(5,7);
-    var p1 = date.slice(8,11);
-    var rDate = p1+'/'+p2+'/'+p3;
+    var p3 = date.slice(0, 4);
+    var p2 = date.slice(5, 7);
+    var p1 = date.slice(8, 11);
+    var rDate = p1 + "/" + p2 + "/" + p3;
     console.log(rDate);
     var price = this.listing.listingPrice;
     if (

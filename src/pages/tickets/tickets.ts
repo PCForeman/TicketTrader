@@ -79,8 +79,6 @@ export class TicketsPage {
     }
   }
 
-
-
   checkOut() {
     this.navCtrl.push("BuyPage");
   }
@@ -91,7 +89,7 @@ export class TicketsPage {
 
   buy() {
     var timeClicked = Date.now();
-    var checkOutBy = timeClicked + 600000
+    var checkOutBy = timeClicked + 600000;
     console.log(timeClicked);
     const userId = this.afAuth.auth.currentUser.uid;
     var temp = [];
@@ -127,7 +125,7 @@ export class TicketsPage {
             Creation: v.Creation,
             Charge: v.Charge,
             checkOutTime: timeClicked,
-            reservationPerioid:checkOutBy
+            reservationPerioid: checkOutBy
           }
         ];
         var checkOutRef = this.afAuth.auth.currentUser.uid;

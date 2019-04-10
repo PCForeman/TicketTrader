@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavParams, ViewController } from 'ionic-angular';
+import { Component } from "@angular/core";
+import { IonicPage, NavParams, ViewController } from "ionic-angular";
 
 /**
  * Generated class for the PaymentModalPage page.
@@ -10,19 +10,16 @@ import { IonicPage, NavParams, ViewController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-payment-modal',
-  templateUrl: 'payment-modal.html',
+  selector: "page-payment-modal",
+  templateUrl: "payment-modal.html"
 })
 export class PaymentModalPage {
+  listingData: any;
 
-listingData:any;
-
-  constructor(public navParams: NavParams, private vCtrl: ViewController) {
-  }
-
+  constructor(public navParams: NavParams, private vCtrl: ViewController) {}
 
   ionViewWillLoad() {
-    const ticket = this.navParams.get('ticket');
+    const ticket = this.navParams.get("ticket");
     this.listingData = ticket;
     console.log(this.listingData);
   }

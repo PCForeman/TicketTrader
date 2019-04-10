@@ -6,7 +6,8 @@
         ion-button
         icon-only
         color="light"
-        (click)="ticketTradeInfo()">
+        (click)="ticketTradeInfo()"
+      >
         <ion-icon name="information-circle"></ion-icon>
       </button>
       <button id="logout" ion-button icon-only color="light" (click)="logout()">
@@ -21,9 +22,14 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-title position text-center>Payment</ion-title>
+  <ion-title position text-center>Awaiting payment</ion-title>
   <ion-list>
-    <div [id]="i" ion-item *ngFor="let item of items; let i = index">
+    <div
+      class="ngDiv"
+      [id]="i"
+      ion-item
+      *ngFor="let item of items; let i = index"
+    >
       <h1 hidden>{{ i + 1 }}</h1>
       <h1 hidden>{{ item.Key }}</h1>
       <h1 hidden>{{ item.Seller }}</h1>

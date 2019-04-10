@@ -33,8 +33,14 @@
     (ionClear)="initializeItems()"
   >
   </ion-searchbar>
+  <br />
   <ion-list>
-    <div [id]="i" ion-item *ngFor="let item of items; let i = index">
+    <div
+      class="ngDiv"
+      [id]="i"
+      ion-item
+      *ngFor="let item of items; let i = index"
+    >
       <h1 hidden>{{ i + 1 }}</h1>
       <h1 hidden>{{ item.Seller }}</h1>
       <h2 position text-center>{{ item.Name }}</h2>
@@ -54,4 +60,5 @@
       <h6></h6>
     </div>
   </ion-list>
+  <br />
 </ion-content>

@@ -1,14 +1,10 @@
 <ion-header>
-
   <ion-navbar color="midnight-blue">
     <ion-title position text-center>Register</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-
   <ion-item>
     <ion-label floating>Enter a valid email address</ion-label>
     <ion-input type="text" [(ngModel)]="user.email"></ion-input>
@@ -46,9 +42,16 @@
 
   <ion-item>
     <ion-label floating>Date of birth</ion-label>
-    <ion-datetime displayformat="DD/MM/YY" [(ngModel)]="user.dOb"></ion-datetime>
+    <ion-datetime
+      displayformat="DD/MM/YY"
+      [(ngModel)]="user.dOb"
+    ></ion-datetime>
   </ion-item>
 
-  <button class="registerButton" ion-button  block (click)='rRegister(user);'>Register</button>
-  <button class="registerButton" ion-button  block (click)='rLogin();'>Already registered?</button>
+  <button class="registerButton" ion-button block (click)="rRegister(user)">
+    Register
+  </button>
+  <button class="registerButton" ion-button block (click)="rLogin()">
+    Already registered?
+  </button>
 </ion-content>

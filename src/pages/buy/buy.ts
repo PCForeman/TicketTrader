@@ -10,13 +10,6 @@ import {
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
 
-/**
- * Generated class for the BuyPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: "page-buy",
@@ -119,13 +112,13 @@ export class BuyPage {
     var sPrice = target.parentElement.parentElement.children
       .item(5)
       .innerHTML.substr(6, 10);
-      var sArtist = target.parentElement.parentElement.children
+    var sArtist = target.parentElement.parentElement.children
       .item(3)
       .innerHTML.substr(0);
-      var sVenue = target.parentElement.parentElement.children
+    var sVenue = target.parentElement.parentElement.children
       .item(4)
       .innerHTML.substr(6);
-      var sDate = target.parentElement.parentElement.children
+    var sDate = target.parentElement.parentElement.children
       .item(6)
       .innerHTML.substr(6, 10);
     var temp = [];
@@ -164,7 +157,7 @@ export class BuyPage {
       sellerId: sId,
       price: sPrice,
       artist: sArtist,
-      date: sDate,
+      date: sDate
     };
     const myModal = this.modal.create(
       "PaymentModalPage",

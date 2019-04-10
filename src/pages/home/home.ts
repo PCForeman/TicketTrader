@@ -215,11 +215,11 @@ export class HomePage {
   }
 
   checkOut() {
-    this.navCtrl.push('BuyPage');
+    this.navCtrl.push("BuyPage");
   }
 
-  orderHistory(){
-    this.navCtrl.push('OrderHistoryPage');
+  orderHistory() {
+    this.navCtrl.push("OrderHistoryPage");
   }
 
   addInfoWindow(marker, content) {
