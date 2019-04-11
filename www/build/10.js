@@ -61,16 +61,47 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var AccountPage = /** @class */ (function () {
-    function AccountPage(afDatabase, afAuth, toast, app, navCtrl, navParams) {
+    function AccountPage(afDatabase, afAuth, toast, app, modal, navCtrl, navParams) {
         this.afDatabase = afDatabase;
         this.afAuth = afAuth;
         this.toast = toast;
         this.app = app;
+        this.modal = modal;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
     }
     AccountPage.prototype.ionViewDidLoad = function () {
         this.displayAccountData();
+    };
+    AccountPage.prototype.openModal = function () {
+        var _this = this;
+        var currentUser = this.afAuth.auth.currentUser.uid;
+        var ref = this.afDatabase.object("user/" + currentUser);
+        ref.snapshotChanges().subscribe(function (snapshot) {
+            var ad1 = snapshot.payload.child("addressL1/").val().toString();
+            var ad2 = snapshot.payload.child("addressPC/").val().toString();
+            var dob = snapshot.payload.child("dOb/").val().toString();
+            var em = snapshot.payload.child("email/").val().toString();
+            var fn = snapshot.payload.child("firstname/").val().toString();
+            var pw = snapshot.payload.child("password/").val().toString();
+            var pn = snapshot.payload.child("phoneNo/").val().toString();
+            var sn = snapshot.payload.child("surname/").val().toString();
+            var myModalOpts = {
+                cssClass: "modal",
+                enableBackdropDismiss: true,
+                showBackdrop: true
+            };
+            var listingRef = {
+                userId: ad1,
+                ticketRef: ad2,
+                sellerId: dob,
+                price: em,
+                artist: fn,
+                date: pw
+            };
+            var myModal = _this.modal.create("ModalAccountPage", { ticket: listingRef }, myModalOpts);
+            myModal.present();
+        });
     };
     AccountPage.prototype.getUserPassword = function () {
         var _this = this;
@@ -153,12 +184,13 @@ var AccountPage = /** @class */ (function () {
     };
     AccountPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-account",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\account\account.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Account</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-content>\n      <div class="ngDivAccount">\n    <ion-item-group>\n      <ion-list-header position text-center color="white">Account Details</ion-list-header>\n      <ion-label position text-center>First name</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.firstname\n      }}</ion-item>\n      <ion-label position text-center>Surname</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.surname\n      }}</ion-item>\n      <ion-label position text-center>Email Address</ion-label>\n      <ion-item position text-center>{{ (userData | async)?.email }}</ion-item>\n      <ion-label position text-center>Address</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.addressL1\n      }}</ion-item>\n      <ion-label position text-center>Postcode</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.addressPC\n      }}</ion-item>\n      <ion-label position text-center>Phone Number</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.phoneNo\n      }}</ion-item>\n      <ion-label position text-center>Date of birth</ion-label>\n      <ion-item position text-center>{{ (userData | async)?.dOb }}</ion-item>\n      <br />\n    </ion-item-group>\n    <button\n    ion-button\n    id="btnChangePassword"\n    class="modalButton"\n    color="midnight-blue"\n    block\n    (click)="updateUserPassword()">\n    Update details\n  </button>\n      </div>\n      </ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\account\account.html"*/
+            selector: "page-account",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\account\account.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Account</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-content>\n      <div class="ngDivAccount">\n    <ion-item-group>\n      <ion-list-header position text-center color="white">Account Details</ion-list-header>\n      <ion-label position text-center>First name</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.firstname\n      }}</ion-item>\n      <ion-label position text-center>Surname</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.surname\n      }}</ion-item>\n      <ion-label position text-center>Email Address</ion-label>\n      <ion-item position text-center>{{ (userData | async)?.email }}</ion-item>\n      <ion-label position text-center>Address</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.addressL1\n      }}</ion-item>\n      <ion-label position text-center>Postcode</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.addressPC\n      }}</ion-item>\n      <ion-label position text-center>Phone Number</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.phoneNo\n      }}</ion-item>\n      <ion-label position text-center>Date of birth</ion-label>\n      <ion-item position text-center>{{ (userData | async)?.dOb }}</ion-item>\n      <br />\n    </ion-item-group>\n    <button\n    ion-button\n    id="btnChangePassword"\n    class="modalButton"\n    color="midnight-blue"\n    block\n    (click)="openModal()">\n    Update details\n  </button>\n      </div>\n      </ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\account\account.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
             __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])
     ], AccountPage);

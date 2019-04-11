@@ -4,7 +4,9 @@ import {
   NavController,
   NavParams,
   App,
-  ToastController
+  ToastController,
+  ModalController,
+  ModalOptions
 } from "ionic-angular";
 import { AngularFireDatabase, AngularFireObject } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -29,6 +31,7 @@ export class AccountPage {
     private afAuth: AngularFireAuth,
     private toast: ToastController,
     private app: App,
+    private modal: ModalController,
     public navCtrl: NavController,
     public navParams: NavParams
   ) {}
@@ -36,6 +39,44 @@ export class AccountPage {
   ionViewDidLoad() {
     this.displayAccountData();
   }
+
+  openModal(){
+
+    var currentUser = this.afAuth.auth.currentUser.uid;
+    var ref = this.afDatabase.object(`user/${currentUser}`);
+    ref.snapshotChanges().subscribe(snapshot => {
+    const ad1 =  snapshot.payload.child(`addressL1/`).val().toString();
+    const ad2 = snapshot.payload.child(`addressPC/`).val().toString();
+    const dob =  snapshot.payload.child(`dOb/`).val().toString();
+    const em =  snapshot.payload.child(`email/`).val().toString();
+    const fn =  snapshot.payload.child(`firstname/`).val().toString();
+    const pw =  snapshot.payload.child(`password/`).val().toString();
+    const pn =  snapshot.payload.child(`phoneNo/`).val().toString();
+    const sn =  snapshot.payload.child(`surname/`).val().toString();
+    const myModalOpts: ModalOptions = {
+      cssClass: "modal",
+      enableBackdropDismiss: true,
+      showBackdrop: true
+    };
+    const listingRef = {
+      adress1: ad1,
+      adress2: ad2,
+      dOb: dob,
+      email: em,
+      password: pw,
+      firstname: fn,
+      phonenumber: pn,
+      surname: sn 
+    };
+    
+    const myModal = this.modal.create(
+      "ModalAccountPage",
+      { ticket: listingRef },
+      myModalOpts
+    );
+    myModal.present();
+  })
+}
 
   getUserPassword() {
     this.playerPassword = this.afDatabase.object(

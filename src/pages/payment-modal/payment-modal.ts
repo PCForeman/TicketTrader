@@ -14,10 +14,9 @@ import { IonicPage, NavParams, ViewController } from "ionic-angular";
   templateUrl: "payment-modal.html"
 })
 export class PaymentModalPage {
-  listingData: any;
 
   constructor(public navParams: NavParams, private vCtrl: ViewController) {}
-
+  listingData: any;
 close(){
   this.vCtrl.dismiss();
 }
