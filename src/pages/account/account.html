@@ -21,8 +21,9 @@
 </ion-header>
 <ion-content padding>
   <ion-content>
+      <div class="ngDivAccount">
     <ion-item-group>
-      <ion-list-header position text-center>Account Details</ion-list-header>
+      <ion-list-header position text-center color="white">Account Details</ion-list-header>
       <ion-label position text-center>First name</ion-label>
       <ion-item position text-center>{{
         (userData | async)?.firstname
@@ -48,51 +49,15 @@
       <ion-label position text-center>Date of birth</ion-label>
       <ion-item position text-center>{{ (userData | async)?.dOb }}</ion-item>
       <br />
-      <ion-title position text-center>Change your password</ion-title>
-      <ion-item>
-        <ion-label floating position text-center
-          >Enter current password</ion-label
-        >
-        <ion-input
-          position
-          text-center
-          type="password"
-          [(ngModel)]="currentPassword"
-        ></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating position text-center>Enter new password</ion-label>
-        <ion-input
-          position
-          text-center
-          type="password"
-          [(ngModel)]="newPassword"
-        ></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating position text-center
-          >Confirm new password</ion-label
-        >
-        <ion-input
-          position
-          text-center
-          type="password"
-          [(ngModel)]="comparePassword"
-        ></ion-input>
-      </ion-item>
-
-      <button
-        ion-button
-        id="btnChangePassword"
-        class="modalButton"
-        color="midnight-blue"
-        block
-        (click)="updateUserPassword()"
-      >
-        Update password
-      </button>
     </ion-item-group>
-  </ion-content>
-</ion-content>
+    <button
+    ion-button
+    id="btnChangePassword"
+    class="modalButton"
+    color="midnight-blue"
+    block
+    (click)="updateUserPassword()">
+    Update details
+  </button>
+      </div>
+      </ion-content>

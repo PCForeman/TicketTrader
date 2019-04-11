@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 532:
+/***/ 533:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SellPageModule", function() { return SellPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sell__ = __webpack_require__(542);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sell__ = __webpack_require__(544);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -23,12 +23,8 @@ var SellPageModule = /** @class */ (function () {
     }
     SellPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__sell__["a" /* SellPage */],
-            ],
-            imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__sell__["a" /* SellPage */]),
-            ],
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__sell__["a" /* SellPage */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__sell__["a" /* SellPage */])]
         })
     ], SellPageModule);
     return SellPageModule;
@@ -38,7 +34,7 @@ var SellPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 542:
+/***/ 544:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -145,8 +141,8 @@ var SellPage = /** @class */ (function () {
                     end = this.camera.getPicture(options);
                     console.log(end);
                     image = "data:image/png;base64," + end;
-                    pictures = this.storage.ref('tickets');
-                    pictures.putString(image, 'data_url');
+                    pictures = this.storage.ref("tickets");
+                    pictures.putString(image, "data_url");
                 }
                 catch (e) {
                     console.log(e);
@@ -158,8 +154,7 @@ var SellPage = /** @class */ (function () {
     SellPage.prototype.checkOut = function () {
         this.navCtrl.push("BuyPage");
     };
-    SellPage.prototype.storageRef = function () {
-    };
+    SellPage.prototype.storageRef = function () { };
     SellPage.prototype.orderHistory = function () {
         this.navCtrl.push("OrderHistoryPage");
     };
@@ -269,7 +264,7 @@ var SellPage = /** @class */ (function () {
                         p3 = date.slice(0, 4);
                         p2 = date.slice(5, 7);
                         p1 = date.slice(8, 11);
-                        rDate = p1 + '/' + p2 + '/' + p3;
+                        rDate = p1 + "/" + p2 + "/" + p3;
                         console.log(rDate);
                         price = this.listing.listingPrice;
                         if (!(artist == "" ||
@@ -320,7 +315,7 @@ var SellPage = /** @class */ (function () {
     };
     SellPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-sell",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Sell Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-list-header text-center>List a ticket</ion-list-header>\n  <ion-item>\n    <ion-label floating>Event</ion-label>\n    <ion-input id="txtEvent" [(ngModel)]="listing.listingName"></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>Location</ion-label>\n    <ion-input\n      id="txtLocation"\n      [(ngModel)]="listing.listingLocation"\n    ></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>Start time</ion-label>\n    <ion-input id="txtTime" [(ngModel)]="listing.listingTime"></ion-input>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>Date of event</ion-label>\n    <ion-datetime\n      id="listingDate"\n      displayformat="DD/MM/YY"\n      [(ngModel)]="listing.listingDate"\n    ></ion-datetime>\n  </ion-item>\n  <ion-item>\n    <ion-label floating>Price £</ion-label>\n    <ion-input id="txtPrice" [(ngModel)]="listing.listingPrice"></ion-input>\n    <button\n      ion-button\n      id="btnCheckPrice"\n      icon-only\n      color="light"\n      (click)="ticketIncomeCalc()"\n      item-end\n    >\n      <ion-icon name="checkmark-circle"></ion-icon>\n    </button>\n  </ion-item>\n  <p>\n    <img *ngIf="image" [src]="image" />\n    <button\n      ion-button\n      id="btnUploadTicket"\n      class="sellButton"\n      block\n      (click)="takePhoto()"\n    >\n      Select Ticket\n    </button>\n    <button\n      ion-button\n      id="btnCreateListing"\n      class="sellButton"\n      block\n      (click)="createListing()"\n    >\n      Create your listing\n    </button>\n  </p>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/
+            selector: "page-sell",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Sell Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <div class="ngDivAccount">\n    <ion-list-header text-center>List a ticket</ion-list-header>\n    <ion-item>\n      <ion-label floating>Event</ion-label>\n      <ion-input id="txtEvent" [(ngModel)]="listing.listingName"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Location</ion-label>\n      <ion-input\n        id="txtLocation"\n        [(ngModel)]="listing.listingLocation"\n      ></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Start time</ion-label>\n      <ion-input id="txtTime" [(ngModel)]="listing.listingTime"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Date of event</ion-label>\n      <ion-datetime\n        id="listingDate"\n        displayformat="DD/MM/YY"\n        [(ngModel)]="listing.listingDate"\n      ></ion-datetime>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Price £</ion-label>\n      <ion-input id="txtPrice" [(ngModel)]="listing.listingPrice"></ion-input>\n      <button\n        ion-button\n        id="btnCheckPrice"\n        icon-only\n        color="light"\n        (click)="ticketIncomeCalc()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n    <p>\n      <img *ngIf="image" [src]="image" />\n      <button\n        ion-button\n        id="btnUploadTicket"\n        class="sellButton"\n        block\n        (click)="takePhoto()"\n      >\n        Select Ticket\n      </button>\n      <button\n        ion-button\n        id="btnCreateListing"\n        class="sellButton"\n        block\n        (click)="createListing()"\n      >\n        Create your listing\n      </button>\n    </p>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */],

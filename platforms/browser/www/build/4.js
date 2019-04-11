@@ -1,14 +1,14 @@
 webpackJsonp([4],{
 
-/***/ 527:
+/***/ 529:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BuyPageModule", function() { return BuyPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderHistoryPageModule", function() { return OrderHistoryPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__buy__ = __webpack_require__(537);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__order_history__ = __webpack_require__(540);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,37 +18,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var BuyPageModule = /** @class */ (function () {
-    function BuyPageModule() {
+var OrderHistoryPageModule = /** @class */ (function () {
+    function OrderHistoryPageModule() {
     }
-    BuyPageModule = __decorate([
+    OrderHistoryPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__buy__["a" /* BuyPage */],
-            ],
-            imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__buy__["a" /* BuyPage */]),
-            ],
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__order_history__["a" /* OrderHistoryPage */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__order_history__["a" /* OrderHistoryPage */])]
         })
-    ], BuyPageModule);
-    return BuyPageModule;
+    ], OrderHistoryPageModule);
+    return OrderHistoryPageModule;
 }());
 
-//# sourceMappingURL=buy.module.js.map
+//# sourceMappingURL=order-history.module.js.map
 
 /***/ }),
 
-/***/ 537:
+/***/ 540:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BuyPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrderHistoryPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -62,103 +58,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the BuyPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var BuyPage = /** @class */ (function () {
-    function BuyPage(navCtrl, afAuth, toast, afDatabase, navParams) {
+var OrderHistoryPage = /** @class */ (function () {
+    function OrderHistoryPage(navCtrl, afAuth, afDatabase, toast, navParams) {
         this.navCtrl = navCtrl;
         this.afAuth = afAuth;
-        this.toast = toast;
         this.afDatabase = afDatabase;
+        this.toast = toast;
         this.navParams = navParams;
         this.items = [];
         this.kA = [];
         this.items2 = [];
         this.itemSearch = [];
-        this.timedOutListings = [];
     }
-    BuyPage.prototype.ionViewDidLoad = function () {
-        this.retrieveCheckoutTickets();
-        this.checkOutTimer();
+    OrderHistoryPage.prototype.ionViewDidLoad = function () {
+        this.retrieveLiveListings();
     };
-    BuyPage.prototype.checkOutTimer = function () {
-        var _this = this;
-        var currentUser = this.afAuth.auth.currentUser.uid;
-        var ref = this.afDatabase.object("ticketsInBasket/" + currentUser);
-        ref.snapshotChanges().subscribe(function (snapshot) {
-            var allData = snapshot.payload.val();
-            var array = [];
-            array.push(allData);
-            var value = Object.keys(allData);
-            var keyArray = [];
-            keyArray.push(value);
-            for (var i = 0; i < value.length; i++) {
-                var x = 0;
-                var count = 0;
-                var selectedIndex = i;
-                var keyValue = value[selectedIndex];
-                var indexSelecta = value.length - value.length + i;
-                var id = value[indexSelecta];
-                _this.kA.push(id);
-                var ref = _this.afDatabase.object("ticketsInBasket/" + currentUser + "/" + keyValue);
-                ref.snapshotChanges().subscribe(function (snapshot) {
-                    var eventSellerUID = snapshot.payload.child("Seller").val();
-                    var checkOutTime = snapshot.payload.child("checkOutTime").val();
-                    var timeNow = Date.now();
-                    //  console.log(checkOutTime + 450000, timeNow);
-                    var eventName = snapshot.payload.child("Name").val();
-                    var eventPrice = snapshot.payload.child("Price").val();
-                    var eventVenue = snapshot.payload.child("Venue").val();
-                    var eventDate = snapshot.payload.child("Date").val();
-                    var eventTime = snapshot.payload.child("Time").val();
-                    var eventCreationDate = snapshot.payload.child("Creation").val();
-                    var eventCustomerPayout = snapshot.payload.child("Payout").val();
-                    var eventServiceCharge = snapshot.payload.child("Charge").val();
-                    var maxTime = checkOutTime + 600000;
-                    //  console.log(maxTime);
-                    if (maxTime <= timeNow) {
-                        _this.timedOutListings.push({
-                            Name: eventName,
-                            Venue: eventVenue,
-                            Price: eventPrice,
-                            Date: eventDate,
-                            Time: eventTime,
-                            Creation: eventCreationDate,
-                            Seller: eventSellerUID,
-                            Payout: eventCustomerPayout,
-                            Charge: eventServiceCharge
-                        });
-                        x++;
-                        count + 1;
-                        var indexToPush = count;
-                        //  console.log(count, indexToPush)
-                        _this.afDatabase
-                            .list("approvedTickets/")
-                            .push(_this.timedOutListings[0]);
-                        console.log(_this.timedOutListings[0]);
-                        _this.timedOutListings.splice(0, 1);
-                        _this.afDatabase
-                            .object("ticketsInBasket/" + currentUser + "/" + keyValue)
-                            .remove();
-                    }
-                    else if (maxTime > timeNow) {
-                        //  console.log("Hello", maxTime);
-                    }
-                });
-            }
-        });
-    };
-    BuyPage.prototype.checkOut = function () {
+    OrderHistoryPage.prototype.remove = function () {
         var _this = this;
         var temp = [];
         var target = event.srcElement;
         var ticketClicked = parseInt(target.parentElement.parentElement.children.item(0).innerHTML.valueOf()) - 1;
-        var id = (target.parentElement.parentElement.children.item(1).innerHTML);
-        console.log(id);
         console.log(ticketClicked);
         temp.push(this.items[ticketClicked]);
         console.log(temp);
@@ -177,7 +96,7 @@ var BuyPage = /** @class */ (function () {
                     Charge: v.Charge
                 }
             ];
-            //  this.afDatabase.list(`approvedTickets/${tempArray[0].Key}`).remove();
+            _this.afDatabase.list("approvedTickets/" + tempArray[0].Key).remove();
             _this.toast
                 .create({
                 message: "Ticket" +
@@ -189,12 +108,17 @@ var BuyPage = /** @class */ (function () {
                 duration: 2000
             })
                 .present();
+            _this.navCtrl.setRoot("HomePage");
+            _this.refresh();
         });
     };
-    BuyPage.prototype.retrieveCheckoutTickets = function () {
+    OrderHistoryPage.prototype.refresh = function () {
+        window.location.reload();
+    };
+    OrderHistoryPage.prototype.retrieveLiveListings = function () {
         var _this = this;
         var currentUser = this.afAuth.auth.currentUser.uid;
-        var ref = this.afDatabase.object("ticketsInBasket/" + currentUser);
+        var ref = this.afDatabase.object("approvedTickets/");
         ref.snapshotChanges().subscribe(function (snapshot) {
             var allData = snapshot.payload.val();
             var array = [];
@@ -210,53 +134,52 @@ var BuyPage = /** @class */ (function () {
                 var indexSelecta = value.length - value.length + i;
                 var id = value[indexSelecta];
                 _this.kA.push(id);
-                var ref = _this.afDatabase.object("ticketsInBasket/" + currentUser + "/" + keyValue);
+                var ref = _this.afDatabase.object("approvedTickets/" + keyValue);
                 ref.snapshotChanges().subscribe(function (snapshot) {
                     var eventSellerUID = snapshot.payload.child("Seller").val();
-                    var finalKey = _this.kA[_this.kA.length - _this.kA.length + x];
-                    var eventName = snapshot.payload.child("Name").val();
-                    var eventPrice = snapshot.payload.child("Price").val();
-                    var eventVenue = snapshot.payload.child("Venue").val();
-                    var eventDate = snapshot.payload.child("Date").val();
-                    var eventTime = snapshot.payload.child("Time").val();
-                    var eventCreationDate = snapshot.payload.child("Creation").val();
-                    var eventCustomerPayout = snapshot.payload.child("Payout").val();
-                    var eventServiceCharge = snapshot.payload.child("Charge").val();
-                    var reserved = snapshot.payload.child("checkOutTime").val();
-                    var timeLeft = snapshot.payload.child("reservationPerioid").val();
-                    _this.items.push({
-                        Key: finalKey,
-                        Name: eventName,
-                        Venue: eventVenue,
-                        Price: eventPrice,
-                        Date: eventDate,
-                        Time: eventTime,
-                        Creation: eventCreationDate,
-                        Seller: eventSellerUID,
-                        Payout: eventCustomerPayout,
-                        Charge: eventServiceCharge,
-                        CheckoutPeriod: timeLeft
-                    });
-                    x++;
-                    count + 1;
+                    if (eventSellerUID == currentUser) {
+                        var finalKey = _this.kA[_this.kA.length - _this.kA.length + x];
+                        var eventName = snapshot.payload.child("Name").val();
+                        var eventPrice = snapshot.payload.child("Price").val();
+                        var eventVenue = snapshot.payload.child("Venue").val();
+                        var eventDate = snapshot.payload.child("Date").val();
+                        var eventTime = snapshot.payload.child("Time").val();
+                        var eventCreationDate = snapshot.payload.child("Creation").val();
+                        var eventCustomerPayout = snapshot.payload.child("Payout").val();
+                        var eventServiceCharge = snapshot.payload.child("Charge").val();
+                        _this.items.push({
+                            Key: finalKey,
+                            Name: eventName,
+                            Venue: eventVenue,
+                            Price: eventPrice,
+                            Date: eventDate,
+                            Time: eventTime,
+                            Creation: eventCreationDate,
+                            Seller: eventSellerUID,
+                            Payout: eventCustomerPayout,
+                            Charge: eventServiceCharge
+                        });
+                        x++;
+                        count + 1;
+                    }
                 });
             }
         });
     };
-    BuyPage = __decorate([
+    OrderHistoryPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-buy",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader Master - Copy\prco304-final-year-project-PCForeman\src\pages\buy\buy.html"*/'<ion-header>\n\n    <ion-navbar color="midnight-blue">\n\n      <ion-buttons right>\n\n        <button\n\n          id="info"\n\n          ion-button\n\n          icon-only\n\n          color="light"\n\n          (click)="ticketTradeInfo()"\n\n        >\n\n          <ion-icon name="information-circle"></ion-icon>\n\n        </button>\n\n        <button id="logout" ion-button icon-only color="light" (click)="logout()">\n\n          <ion-icon name="log-out"></ion-icon>\n\n        </button>\n\n      </ion-buttons>\n\n      <ion-buttons left>\n\n        <button ion-button icon-only color="light" (click)="orderHistory()">\n\n          <ion-icon name="clipboard"></ion-icon>\n\n        </button>\n\n      </ion-buttons>\n\n      <ion-title position text-center>Checkout</ion-title>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  <ion-content padding>\n\n    <ion-title position text-center>Payment</ion-title>\n\n    <ion-list>\n\n      <div [id]="i" ion-item *ngFor="let item of items; let i = index">\n\n        <h1 hidden>{{ i + 1 }}</h1>\n\n        <h1 hidden>{{item.Key}}</h1>\n\n        <h2 position text-center>{{ item.Name }}</h2>\n\n        <h3 position text-center>Venue: {{ item.Venue }}</h3>\n\n        <h4 position text-center>Price: £{{ item.Price }}</h4>\n\n        <h5 position text-center>Date: {{ item.Date }}</h5>\n\n        <h6 position text-center>Time: {{ item.Time }}</h6>\n\n        <button\n\n          [id]="i"\n\n          ion-button\n\n          class="button"\n\n          color="midnight-blue"\n\n          block\n\n          (click)="checkOut(index)"\n\n        >\n\n          Checkout\n\n        </button>\n\n        <h6></h6>\n\n      </div>\n\n    </ion-list>\n\n  </ion-content>\n\n  '/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader Master - Copy\prco304-final-year-project-PCForeman\src\pages\buy\buy.html"*/
+            selector: "page-order-history",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="info"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <ion-title position text-center>My Active Listings</ion-title>\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h2 position text-center>{{ item.Name }}</h2>\n      <h3 position text-center>Venue: {{ item.Venue }}</h3>\n      <h4 position text-center>Price: £{{ item.Price }}</h4>\n      <h5 position text-center>Date: {{ item.Date }}</h5>\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n      <button\n        [id]="i"\n        class="modalButton"\n        ion-button\n        block\n        (click)="remove(index)"\n      >\n        Remove Listing\n      </button>\n      <h6></h6>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
-    ], BuyPage);
-    return BuyPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"],
+            __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])
+    ], OrderHistoryPage);
+    return OrderHistoryPage;
 }());
 
-//# sourceMappingURL=buy.js.map
+//# sourceMappingURL=order-history.js.map
 
 /***/ })
 

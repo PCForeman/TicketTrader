@@ -22,7 +22,7 @@
   >
   </ion-searchbar>
   <ion-list>
-    <div id="pendingTickets" ion-item *ngFor="let item of items; let i = index">
+    <div class="ngDivAdmin" id="pendingTickets" ion-item *ngFor="let item of items; let i = index">
       <h1 id="ticketId" position left>{{ i + 1 }} {{ item.Key }}</h1>
       <h2 position text-center>Artist: {{ item.Name }}</h2>
       <h2 position text-center>Venue: {{ item.Venue }}</h2>
@@ -30,9 +30,9 @@
       <h2 position text-center>Date: {{ item.Date }}</h2>
       <h2 position text-center>Time: {{ item.Time }}</h2>
       <button
+        [id]="i"
         ion-button
-        class="button"
-        color="midnight-blue"
+        class="modalButton"
         block
         (click)="remove()"
       >

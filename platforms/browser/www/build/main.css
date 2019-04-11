@@ -27968,6 +27968,120 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+.modal {
+  background: rgba(0, 0, 0, 0.5) !important;
+  padding: 7.5% 5% !important;
+}
+
+.ngDiv {
+  border-radius: 20px;
+  background: lightgray;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  margin: 4px 2px;
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+.modalButton {
+  outline: none;
+  position: center;
+  height: 50px;
+  text-align: center;
+  width: 97.5%;
+  border-radius: 40px;
+  background: midnightblue;
+  border: 2px solid black;
+  color: white;
+  letter-spacing: 1px;
+  text-shadow: 0;
+}
+
+.sellButton {
+  outline: none;
+  position: center;
+  height: 50px;
+  text-align: center;
+  width: 97.5%;
+  border-radius: 40px;
+  background: midnightblue;
+  border: 2px solid black;
+  color: white;
+  letter-spacing: 1px;
+  text-shadow: 0;
+}
+
+.loginButton {
+  outline: none;
+  position: center;
+  height: 50px;
+  text-align: center;
+  width: 97.5%;
+  border-radius: 40px;
+  background: midnightblue;
+  border: 2px solid black;
+  color: white;
+  letter-spacing: 1px;
+  text-shadow: 0;
+}
+
+.registerButton {
+  outline: none;
+  position: center;
+  height: 50px;
+  text-align: center;
+  width: 97.5%;
+  border-radius: 40px;
+  background: midnightblue;
+  border: 2px solid black;
+  color: white;
+  letter-spacing: 1px;
+  text-shadow: 0;
+}
+
+.infoWindowButton {
+  outline: none;
+  position: center;
+  height: 50px;
+  text-align: center;
+  width: 97.5%;
+  border-radius: 40px;
+  background: midnightblue;
+  border: 2px solid black;
+  color: white;
+  letter-spacing: 1px;
+  text-shadow: 0;
+}
+
+page-buy #modalButton {
+  outline: none;
+  height: 50px;
+  text-align: center;
+  width: 250px;
+  border-radius: 40px;
+  background: midnightblue;
+  border: 2px solid black;
+  color: white;
+  letter-spacing: 1px;
+  text-shadow: 0;
+}
+
+page-buy #ngForButtons {
+  outline: none;
+  height: 50px;
+  text-align: center;
+  width: 250px;
+  border-radius: 40px;
+  background: midnightblue;
+  border: 2px solid black;
+  color: white;
+  letter-spacing: 1px;
+  text-shadow: 0;
+}
+
 page-home #restOf {
   margin: 0;
   padding: 0;
@@ -27993,48 +28107,21 @@ page-home #button {
   padding-right: 5px;
 }
 
-page-home #infoWindowButton {
-  -webkit-appearance: hidden;
-  -moz-appearance: hidden;
-  appearance: hidden;
-  text-align: center;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
 page-login #footer {
   background-color: midnightblue;
   color: white;
 }
 
-page-page p.solid {
-  border: 2px midnightblue;
-  border-style: solid;
-  color: midnightblue;
-}
-
-page-page b.background {
-  border: 2px midnightblue;
-  border-style: solid;
-  background-color: midnightblue;
-  color: midnightblue;
-}
-
-page-page button {
-  border: 5px midnightblue;
-  border-style: outset;
-  color: white;
-  background-color: midnightblue;
+#modalButton {
+  outline: none;
+  position: center;
+  height: 50px;
   text-align: center;
-}
-
-page-page #infoWindowButton {
-  margin: 10px;
-  width: 112.5px;
-  height: 30px;
-  border: 5px midnightblue;
-  border-style: outset;
+  width: 97.5%;
+  border-radius: 40px;
+  background: midnightblue;
+  border: 2px solid black;
   color: white;
-  background-color: midnightblue;
-  text-align: center;
+  letter-spacing: 1px;
+  text-shadow: 0;
 }

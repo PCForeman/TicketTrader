@@ -20,63 +20,65 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-list-header text-center>List a ticket</ion-list-header>
-  <ion-item>
-    <ion-label floating>Event</ion-label>
-    <ion-input id="txtEvent" [(ngModel)]="listing.listingName"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Location</ion-label>
-    <ion-input
-      id="txtLocation"
-      [(ngModel)]="listing.listingLocation"
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Start time</ion-label>
-    <ion-input id="txtTime" [(ngModel)]="listing.listingTime"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Date of event</ion-label>
-    <ion-datetime
-      id="listingDate"
-      displayformat="DD/MM/YY"
-      [(ngModel)]="listing.listingDate"
-    ></ion-datetime>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Price £</ion-label>
-    <ion-input id="txtPrice" [(ngModel)]="listing.listingPrice"></ion-input>
-    <button
-      ion-button
-      id="btnCheckPrice"
-      icon-only
-      color="light"
-      (click)="ticketIncomeCalc()"
-      item-end
-    >
-      <ion-icon name="checkmark-circle"></ion-icon>
-    </button>
-  </ion-item>
-  <p>
-    <img *ngIf="image" [src]="image" />
-    <button
-      ion-button
-      id="btnUploadTicket"
-      class="sellButton"
-      block
-      (click)="takePhoto()"
-    >
-      Select Ticket
-    </button>
-    <button
-      ion-button
-      id="btnCreateListing"
-      class="sellButton"
-      block
-      (click)="createListing()"
-    >
-      Create your listing
-    </button>
-  </p>
+  <div class="ngDivAccount">
+    <ion-list-header text-center>List a ticket</ion-list-header>
+    <ion-item>
+      <ion-label floating>Event</ion-label>
+      <ion-input id="txtEvent" [(ngModel)]="listing.listingName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Location</ion-label>
+      <ion-input
+        id="txtLocation"
+        [(ngModel)]="listing.listingLocation"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Start time</ion-label>
+      <ion-input id="txtTime" [(ngModel)]="listing.listingTime"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Date of event</ion-label>
+      <ion-datetime
+        id="listingDate"
+        displayformat="DD/MM/YY"
+        [(ngModel)]="listing.listingDate"
+      ></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Price £</ion-label>
+      <ion-input id="txtPrice" [(ngModel)]="listing.listingPrice"></ion-input>
+      <button
+        ion-button
+        id="btnCheckPrice"
+        icon-only
+        color="light"
+        (click)="ticketIncomeCalc()"
+        item-end
+      >
+        <ion-icon name="checkmark-circle"></ion-icon>
+      </button>
+    </ion-item>
+    <p>
+      <img *ngIf="image" [src]="image" />
+      <button
+        ion-button
+        id="btnUploadTicket"
+        class="sellButton"
+        block
+        (click)="takePhoto()"
+      >
+        Select Ticket
+      </button>
+      <button
+        ion-button
+        id="btnCreateListing"
+        class="sellButton"
+        block
+        (click)="createListing()"
+      >
+        Create your listing
+      </button>
+    </p>
+  </div>
 </ion-content>

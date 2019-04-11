@@ -133,6 +133,7 @@ export class TicketsPage {
           .list(`ticketsInBasket/${checkOutRef}`)
           .push(tempArray[0]);
         this.afDatabase.list(`approvedTickets/${tempArray[0].Key}`).remove();
+        this.navCtrl.push('BuyPage')
         this.refresh();
       });
     }

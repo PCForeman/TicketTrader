@@ -23,12 +23,8 @@ var SellPageModule = /** @class */ (function () {
     }
     SellPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__sell__["a" /* SellPage */],
-            ],
-            imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__sell__["a" /* SellPage */]),
-            ],
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__sell__["a" /* SellPage */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__sell__["a" /* SellPage */])]
         })
     ], SellPageModule);
     return SellPageModule;
@@ -145,8 +141,8 @@ var SellPage = /** @class */ (function () {
                     end = this.camera.getPicture(options);
                     console.log(end);
                     image = "data:image/png;base64," + end;
-                    pictures = this.storage.ref('tickets');
-                    pictures.putString(image, 'data_url');
+                    pictures = this.storage.ref("tickets");
+                    pictures.putString(image, "data_url");
                 }
                 catch (e) {
                     console.log(e);
@@ -158,8 +154,7 @@ var SellPage = /** @class */ (function () {
     SellPage.prototype.checkOut = function () {
         this.navCtrl.push("BuyPage");
     };
-    SellPage.prototype.storageRef = function () {
-    };
+    SellPage.prototype.storageRef = function () { };
     SellPage.prototype.orderHistory = function () {
         this.navCtrl.push("OrderHistoryPage");
     };
@@ -269,7 +264,7 @@ var SellPage = /** @class */ (function () {
                         p3 = date.slice(0, 4);
                         p2 = date.slice(5, 7);
                         p1 = date.slice(8, 11);
-                        rDate = p1 + '/' + p2 + '/' + p3;
+                        rDate = p1 + "/" + p2 + "/" + p3;
                         console.log(rDate);
                         price = this.listing.listingPrice;
                         if (!(artist == "" ||

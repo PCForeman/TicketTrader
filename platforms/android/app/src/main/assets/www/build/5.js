@@ -58,12 +58,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the BuyPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 var BuyPage = /** @class */ (function () {
     function BuyPage(navCtrl, afAuth, toast, afDatabase, navParams, modal) {
         this.navCtrl = navCtrl;
@@ -200,7 +194,7 @@ var BuyPage = /** @class */ (function () {
             sellerId: sId,
             price: sPrice,
             artist: sArtist,
-            date: sDate,
+            date: sDate
         };
         var myModal = this.modal.create("PaymentModalPage", { ticket: listingRef }, myModalOpts);
         myModal.present();
@@ -259,7 +253,7 @@ var BuyPage = /** @class */ (function () {
     };
     BuyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-buy",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\buy\buy.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n    <ion-buttons right>\n\n      <button\n\n        id="info"\n\n        ion-button\n\n        icon-only\n\n        color="light"\n\n        (click)="ticketTradeInfo()">\n\n        <ion-icon name="information-circle"></ion-icon>\n\n      </button>\n\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n\n        <ion-icon name="log-out"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-buttons left>\n\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n\n        <ion-icon name="clipboard"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n    <ion-title position text-center>Awaiting payment</ion-title>\n\n  <ion-list>\n\n    <div class="ngDiv" [id]="i" ion-item *ngFor="let item of items; let i = index">\n\n      <h1 hidden>{{ i + 1 }}</h1>\n\n      <h1 hidden>{{ item.Key }}</h1>\n\n      <h1 hidden>{{ item.Seller }}</h1>\n\n      <h2 position text-center>{{ item.Name }}</h2>\n\n      <h3 position text-center>Venue: {{ item.Venue }}</h3>\n\n      <h4 position text-center>Price: £{{ item.Price }}</h4>\n\n      <h5 position text-center>Date: {{ item.Date }}</h5>\n\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n\n      <button\n\n        class="modalButton"\n\n        [id]="i"\n\n        ion-button\n\n        block\n\n        (click)="checkOut(index)"\n\n      >\n\n        Checkout\n\n      </button>\n\n      <h6></h6>\n\n    </div>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\buy\buy.html"*/
+            selector: "page-buy",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\buy\buy.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n    <ion-buttons right>\n\n      <button\n\n        id="info"\n\n        ion-button\n\n        icon-only\n\n        color="light"\n\n        (click)="ticketTradeInfo()"\n\n      >\n\n        <ion-icon name="information-circle"></ion-icon>\n\n      </button>\n\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n\n        <ion-icon name="log-out"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-buttons left>\n\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n\n        <ion-icon name="clipboard"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <ion-title position text-center>Awaiting payment</ion-title>\n\n  <ion-list>\n\n    <div\n\n      class="ngDiv"\n\n      [id]="i"\n\n      ion-item\n\n      *ngFor="let item of items; let i = index"\n\n    >\n\n      <h1 hidden>{{ i + 1 }}</h1>\n\n      <h1 hidden>{{ item.Key }}</h1>\n\n      <h1 hidden>{{ item.Seller }}</h1>\n\n      <h2 position text-center>{{ item.Name }}</h2>\n\n      <h3 position text-center>Venue: {{ item.Venue }}</h3>\n\n      <h4 position text-center>Price: £{{ item.Price }}</h4>\n\n      <h5 position text-center>Date: {{ item.Date }}</h5>\n\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n\n      <button\n\n        class="modalButton"\n\n        [id]="i"\n\n        ion-button\n\n        block\n\n        (click)="checkOut(index)"\n\n      >\n\n        Checkout\n\n      </button>\n\n      <h6></h6>\n\n    </div>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\buy\buy.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],

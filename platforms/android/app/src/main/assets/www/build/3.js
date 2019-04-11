@@ -23,12 +23,8 @@ var PageModule = /** @class */ (function () {
     }
     PageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__page__["a" /* Page */],
-            ],
-            imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__page__["a" /* Page */]),
-            ]
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__page__["a" /* Page */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__page__["a" /* Page */])]
         })
     ], PageModule);
     return PageModule;

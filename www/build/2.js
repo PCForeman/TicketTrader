@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaymentModalPageModule", function() { return PaymentModalPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payment_modal__ = __webpack_require__(541);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payment_modal__ = __webpack_require__(542);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -23,12 +23,8 @@ var PaymentModalPageModule = /** @class */ (function () {
     }
     PaymentModalPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__payment_modal__["a" /* PaymentModalPage */],
-            ],
-            imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__payment_modal__["a" /* PaymentModalPage */]),
-            ],
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__payment_modal__["a" /* PaymentModalPage */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__payment_modal__["a" /* PaymentModalPage */])]
         })
     ], PaymentModalPageModule);
     return PaymentModalPageModule;
@@ -38,7 +34,7 @@ var PaymentModalPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 541:
+/***/ 542:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67,18 +63,22 @@ var PaymentModalPage = /** @class */ (function () {
         this.navParams = navParams;
         this.vCtrl = vCtrl;
     }
+    PaymentModalPage.prototype.close = function () {
+        this.vCtrl.dismiss();
+    };
     PaymentModalPage.prototype.ionViewWillLoad = function () {
-        var ticket = this.navParams.get('ticket');
+        var ticket = this.navParams.get("ticket");
         this.listingData = ticket;
         console.log(this.listingData);
     };
     PaymentModalPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-payment-modal',template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-title position text-center>Checkout</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list position text-center>\n    <ion-title>\n      Order Summary\n    </ion-title>\n    {{ listingData.artist }}<br />\n    {{ listingData.date }}<br />Reference number<br />\n    {{ listingData.ticketRef }}\n  </ion-list>\n<div class="ngFor">\n  <ion-item>\n    <ion-label position text-center>Name on card</ion-label>\n  </ion-item>\n  <ion-item>\n    <ion-input position text-center></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label position text-center>16 Digit card number</ion-label>\n  </ion-item>\n  <ion-item>\n    <ion-input position text-center></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label position text-center>Expiry date</ion-label>\n  </ion-item>\n  <ion-item>\n    <ion-input id="input" position text-center></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label position text-center>CVC</ion-label>\n  </ion-item>\n  <ion-item>\n    <ion-input position text-center></ion-input>\n  </ion-item>\n\n  <button id="modalButton" ion-button>{{ listingData.price }}</button>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/,
+            selector: "page-payment-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button (click)="close()">Close</button>\n    </ion-buttons>\n    <ion-title position text-center>Checkout</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list position text-center>\n    <ion-title>\n      Order Summary\n    </ion-title>\n    {{ listingData.artist }}<br />\n    {{ listingData.date }}<br />Reference number<br />\n    {{ listingData.ticketRef }}\n  </ion-list>\n  <div class="ngFor">\n    <ion-item>\n      <ion-label position text-center>Name on card</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>16 Digit card number</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>Expiry date</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input id="input" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>CVC</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input position text-center></ion-input>\n    </ion-item>\n\n    <button id="modalButton" ion-button>{{ listingData.price }}</button>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */]) === "function" && _b || Object])
     ], PaymentModalPage);
     return PaymentModalPage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=payment-modal.js.map
