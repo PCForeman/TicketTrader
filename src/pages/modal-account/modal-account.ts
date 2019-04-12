@@ -49,7 +49,7 @@ export class ModalAccountPage {
     loading.present();
     setTimeout(() => {
       loading.dismiss();
-    }, 250);
+    }, 2000);
   }
 
   successMessage(){
@@ -63,6 +63,7 @@ export class ModalAccountPage {
     ref.update({ surname: this.uSurname });
     console.log(ref);
     this.successMessage();
+    this.close();
   }
 
   updateName() {

@@ -92,12 +92,14 @@ var AccountPage = /** @class */ (function () {
                 showBackdrop: true
             };
             var listingRef = {
-                userId: ad1,
-                ticketRef: ad2,
-                sellerId: dob,
-                price: em,
-                artist: fn,
-                date: pw
+                adress1: ad1,
+                adress2: ad2,
+                dOb: dob,
+                email: em,
+                password: pw,
+                firstname: fn,
+                phonenumber: pn,
+                surname: sn
             };
             var myModal = _this.modal.create("ModalAccountPage", { ticket: listingRef }, myModalOpts);
             myModal.present();
