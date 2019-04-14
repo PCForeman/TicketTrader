@@ -1,41 +1,44 @@
 -- Merging decision tree log ---
 provider#org.apache.cordova.camera.FileProvider
-INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:14:9-16:20
+INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:15:9-17:20
 	android:grantUriPermissions
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:14:92-126
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:15:92-126
 	android:authorities
 		INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:14:19-66
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:15:19-66
 	android:exported
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:14:67-91
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:15:67-91
 	android:name
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:14:127-180
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:15:127-180
 manifest
-ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-27:12
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-28:12
 MERGED from [:tbxml-android:] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\tbxml-android.aar\2418b910af895237a3e36d1def86f622\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-maps-15.0.1.aar\13c5b9b4fc39c121d805eee8eda329a6\AndroidManifest.xml:17:1-32:12
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-location-15.0.1.aar\d37bd9da77edc59814920f22ce8fcd79\AndroidManifest.xml:2:1-9:12
-MERGED from [com.android.support:appcompat-v7:23.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.4.0.aar\a55f4239faf6d2a99482eb696d811cb1\AndroidManifest.xml:17:1-27:12
 MERGED from [com.google.android.gms:play-services-base:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-base-15.0.1.aar\dcff2c1e9ab027a35969dd2c48a566db\AndroidManifest.xml:17:1-29:12
 MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-15.0.1.aar\ca8c703d87dadf3b8619381ed9a3ff4e\AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-tasks:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-tasks-15.0.1.aar\8320619001beefe60033e36f8b3b9186\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\8705f2ac1036969c94e7de53ffa442c8\AndroidManifest.xml:17:1-28:12
-MERGED from [com.android.support:animated-vector-drawable:23.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.4.0.aar\98472a7da51f04fe93d32d5e68ba6d81\AndroidManifest.xml:2:1-9:12
-MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.4.0.aar\5b1e8d85643771de08446918b076e77d\AndroidManifest.xml:2:1-9:12
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\cd724804191c78a035d53cef1f5e4236\AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\e471ee32b0e58cd451325401d3b25b30\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-v4:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\a6693fc40f026e1a878f16354737ecec\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\1d2300b0ea2d4d6740761cac27d6af3e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\2fa778c77a6bf0dc4bf3d8ff05633e23\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.4.0.aar\36988c4368e835d272ad2a9870bf0478\AndroidManifest.xml:17:1-28:12
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\87670be3c912d8fe91e6b518596933de\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\b688824cda88ed653e8b37f3160ae788\AndroidManifest.xml:17:1-22:12
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\1a5c5c9b706afdcf1d13f505f6f63a0f\AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\0ad4c7019494d95dea3dc6dac5985388\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\5d9e09caa369129cd577c197eb5e10d3\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.4.0.aar\ae8b97941eb3d2018b8edc44c9bd6f1d\AndroidManifest.xml:17:1-28:12
 MERGED from [com.android.support:support-compat:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\aabd220ffc264e46661cd5f1a645bc3a\AndroidManifest.xml:17:1-22:12
 MERGED from [:CordovaLib] C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\CordovaLib\build\intermediates\manifests\full\debug\AndroidManifest.xml:20:1-27:12
 MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\0339110aa212d5920e12d8bc031fb722\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-27:12
-INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-27:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\7807b10f76d79f515507f448b3f098e5\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\7f040dd99ae6a008de01fa6f8dbc4a06\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\a0c14c2f17384ab7936193a23c7d7ec8\AndroidManifest.xml:17:1-22:12
+INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-28:12
 	package
 		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:98-124
 		INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml
@@ -78,8 +81,6 @@ MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\paulf\.g
 MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-maps-15.0.1.aar\13c5b9b4fc39c121d805eee8eda329a6\AndroidManifest.xml:30:5-20
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-location-15.0.1.aar\d37bd9da77edc59814920f22ce8fcd79\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-location-15.0.1.aar\d37bd9da77edc59814920f22ce8fcd79\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:appcompat-v7:23.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.4.0.aar\a55f4239faf6d2a99482eb696d811cb1\AndroidManifest.xml:25:5-20
-MERGED from [com.android.support:appcompat-v7:23.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.4.0.aar\a55f4239faf6d2a99482eb696d811cb1\AndroidManifest.xml:25:5-20
 MERGED from [com.google.android.gms:play-services-base:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-base-15.0.1.aar\dcff2c1e9ab027a35969dd2c48a566db\AndroidManifest.xml:22:5-27:19
 MERGED from [com.google.android.gms:play-services-base:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-base-15.0.1.aar\dcff2c1e9ab027a35969dd2c48a566db\AndroidManifest.xml:22:5-27:19
 MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-15.0.1.aar\ca8c703d87dadf3b8619381ed9a3ff4e\AndroidManifest.xml:22:5-20
@@ -88,18 +89,12 @@ MERGED from [com.google.android.gms:play-services-tasks:15.0.1] C:\Users\paulf\.
 MERGED from [com.google.android.gms:play-services-tasks:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-tasks-15.0.1.aar\8320619001beefe60033e36f8b3b9186\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\8705f2ac1036969c94e7de53ffa442c8\AndroidManifest.xml:22:5-26:19
 MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\8705f2ac1036969c94e7de53ffa442c8\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:animated-vector-drawable:23.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.4.0.aar\98472a7da51f04fe93d32d5e68ba6d81\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:animated-vector-drawable:23.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.4.0.aar\98472a7da51f04fe93d32d5e68ba6d81\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.4.0.aar\5b1e8d85643771de08446918b076e77d\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.4.0.aar\5b1e8d85643771de08446918b076e77d\AndroidManifest.xml:7:5-20
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\cd724804191c78a035d53cef1f5e4236\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\cd724804191c78a035d53cef1f5e4236\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\e471ee32b0e58cd451325401d3b25b30\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\e471ee32b0e58cd451325401d3b25b30\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\1a5c5c9b706afdcf1d13f505f6f63a0f\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\1a5c5c9b706afdcf1d13f505f6f63a0f\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\0ad4c7019494d95dea3dc6dac5985388\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\0ad4c7019494d95dea3dc6dac5985388\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:appcompat-v7:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\2fa778c77a6bf0dc4bf3d8ff05633e23\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:appcompat-v7:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\2fa778c77a6bf0dc4bf3d8ff05633e23\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.4.0.aar\36988c4368e835d272ad2a9870bf0478\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.4.0.aar\36988c4368e835d272ad2a9870bf0478\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.4.0.aar\ae8b97941eb3d2018b8edc44c9bd6f1d\AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.4.0.aar\ae8b97941eb3d2018b8edc44c9bd6f1d\AndroidManifest.xml:22:5-26:19
 	android:supportsRtl
 		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:5:139-165
 	android:label
@@ -151,13 +146,13 @@ MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\paul
 	android:name
 		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:13:20-65
 activity#com.synconset.MultiImageChooserActivity
-ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:17:9-160
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:14:9-160
 	android:label
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:17:19-57
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:14:19-57
 	android:theme
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:17:113-157
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:14:113-157
 	android:name
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:17:58-112
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:14:58-112
 uses-sdk
 ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:19:5-74
 MERGED from [:tbxml-android:] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\tbxml-android.aar\2418b910af895237a3e36d1def86f622\AndroidManifest.xml:7:5-9:41
@@ -166,8 +161,6 @@ MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\paulf\.g
 MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-maps-15.0.1.aar\13c5b9b4fc39c121d805eee8eda329a6\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-location-15.0.1.aar\d37bd9da77edc59814920f22ce8fcd79\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-location-15.0.1.aar\d37bd9da77edc59814920f22ce8fcd79\AndroidManifest.xml:5:5-44
-MERGED from [com.android.support:appcompat-v7:23.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.4.0.aar\a55f4239faf6d2a99482eb696d811cb1\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:appcompat-v7:23.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.4.0.aar\a55f4239faf6d2a99482eb696d811cb1\AndroidManifest.xml:21:5-23:78
 MERGED from [com.google.android.gms:play-services-base:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-base-15.0.1.aar\dcff2c1e9ab027a35969dd2c48a566db\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-base:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-base-15.0.1.aar\dcff2c1e9ab027a35969dd2c48a566db\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-places-placereport:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-15.0.1.aar\ca8c703d87dadf3b8619381ed9a3ff4e\AndroidManifest.xml:20:5-44
@@ -176,28 +169,36 @@ MERGED from [com.google.android.gms:play-services-tasks:15.0.1] C:\Users\paulf\.
 MERGED from [com.google.android.gms:play-services-tasks:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-tasks-15.0.1.aar\8320619001beefe60033e36f8b3b9186\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\8705f2ac1036969c94e7de53ffa442c8\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\8705f2ac1036969c94e7de53ffa442c8\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:23.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.4.0.aar\98472a7da51f04fe93d32d5e68ba6d81\AndroidManifest.xml:5:5-44
-MERGED from [com.android.support:animated-vector-drawable:23.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-23.4.0.aar\98472a7da51f04fe93d32d5e68ba6d81\AndroidManifest.xml:5:5-44
-MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.4.0.aar\5b1e8d85643771de08446918b076e77d\AndroidManifest.xml:5:5-43
-MERGED from [com.android.support:support-vector-drawable:23.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-23.4.0.aar\5b1e8d85643771de08446918b076e77d\AndroidManifest.xml:5:5-43
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\cd724804191c78a035d53cef1f5e4236\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\cd724804191c78a035d53cef1f5e4236\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\e471ee32b0e58cd451325401d3b25b30\AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\e471ee32b0e58cd451325401d3b25b30\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-v4:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\a6693fc40f026e1a878f16354737ecec\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\a6693fc40f026e1a878f16354737ecec\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\1d2300b0ea2d4d6740761cac27d6af3e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\1d2300b0ea2d4d6740761cac27d6af3e\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\2fa778c77a6bf0dc4bf3d8ff05633e23\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:appcompat-v7:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\2fa778c77a6bf0dc4bf3d8ff05633e23\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.4.0.aar\36988c4368e835d272ad2a9870bf0478\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.4.0.aar\36988c4368e835d272ad2a9870bf0478\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\87670be3c912d8fe91e6b518596933de\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\87670be3c912d8fe91e6b518596933de\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\b688824cda88ed653e8b37f3160ae788\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\b688824cda88ed653e8b37f3160ae788\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\1a5c5c9b706afdcf1d13f505f6f63a0f\AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\1a5c5c9b706afdcf1d13f505f6f63a0f\AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\0ad4c7019494d95dea3dc6dac5985388\AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\0ad4c7019494d95dea3dc6dac5985388\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\5d9e09caa369129cd577c197eb5e10d3\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\5d9e09caa369129cd577c197eb5e10d3\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.4.0.aar\ae8b97941eb3d2018b8edc44c9bd6f1d\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-vector-drawable:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.4.0.aar\ae8b97941eb3d2018b8edc44c9bd6f1d\AndroidManifest.xml:20:5-43
 MERGED from [com.android.support:support-compat:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\aabd220ffc264e46661cd5f1a645bc3a\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-compat:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\aabd220ffc264e46661cd5f1a645bc3a\AndroidManifest.xml:20:5-44
 MERGED from [:CordovaLib] C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\CordovaLib\build\intermediates\manifests\full\debug\AndroidManifest.xml:25:5-44
 MERGED from [:CordovaLib] C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\CordovaLib\build\intermediates\manifests\full\debug\AndroidManifest.xml:25:5-44
 MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\0339110aa212d5920e12d8bc031fb722\AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\0339110aa212d5920e12d8bc031fb722\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\7807b10f76d79f515507f448b3f098e5\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\7807b10f76d79f515507f448b3f098e5\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\7f040dd99ae6a008de01fa6f8dbc4a06\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\7f040dd99ae6a008de01fa6f8dbc4a06\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\a0c14c2f17384ab7936193a23c7d7ec8\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\a0c14c2f17384ab7936193a23c7d7ec8\AndroidManifest.xml:20:5-44
 	tools:overrideLibrary
-		ADDED from [com.android.support:appcompat-v7:23.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.4.0.aar\a55f4239faf6d2a99482eb696d811cb1\AndroidManifest.xml:23:9-75
+		ADDED from [com.android.support:appcompat-v7:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\2fa778c77a6bf0dc4bf3d8ff05633e23\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
 		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:19:42-71
 	android:minSdkVersion
@@ -236,12 +237,16 @@ uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:26:5-81
 	android:name
 		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:26:22-78
-meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:15:13-123
-	android:resource
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:15:75-120
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:27:5-80
 	android:name
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:15:24-74
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:27:22-77
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:16:13-123
+	android:resource
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:16:75-120
+	android:name
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:16:24-74
 activity#com.google.android.gms.common.api.GoogleApiActivity
 ADDED from [com.google.android.gms:play-services-base:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-base-15.0.1.aar\dcff2c1e9ab027a35969dd2c48a566db\AndroidManifest.xml:23:9-26:75
 	android:exported
@@ -251,14 +256,12 @@ ADDED from [com.google.android.gms:play-services-base:15.0.1] C:\Users\paulf\.gr
 	android:name
 		ADDED from [com.google.android.gms:play-services-base:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-base-15.0.1.aar\dcff2c1e9ab027a35969dd2c48a566db\AndroidManifest.xml:24:13-79
 meta-data#android.support.VERSION
-ADDED from [com.android.support:support-v4:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\cd724804191c78a035d53cef1f5e4236\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\e471ee32b0e58cd451325401d3b25b30\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\e471ee32b0e58cd451325401d3b25b30\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\1a5c5c9b706afdcf1d13f505f6f63a0f\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\1a5c5c9b706afdcf1d13f505f6f63a0f\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\0ad4c7019494d95dea3dc6dac5985388\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\0ad4c7019494d95dea3dc6dac5985388\AndroidManifest.xml:26:9-28:38
+ADDED from [com.android.support:appcompat-v7:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\2fa778c77a6bf0dc4bf3d8ff05633e23\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.4.0.aar\36988c4368e835d272ad2a9870bf0478\AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.4.0.aar\36988c4368e835d272ad2a9870bf0478\AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.4.0.aar\ae8b97941eb3d2018b8edc44c9bd6f1d\AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.4.0.aar\ae8b97941eb3d2018b8edc44c9bd6f1d\AndroidManifest.xml:23:9-25:38
 	android:value
-		ADDED from [com.android.support:support-v4:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\cd724804191c78a035d53cef1f5e4236\AndroidManifest.xml:28:13-35
+		ADDED from [com.android.support:appcompat-v7:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\2fa778c77a6bf0dc4bf3d8ff05633e23\AndroidManifest.xml:28:13-35
 	android:name
-		ADDED from [com.android.support:support-v4:26.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\cd724804191c78a035d53cef1f5e4236\AndroidManifest.xml:27:13-51
+		ADDED from [com.android.support:appcompat-v7:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\2fa778c77a6bf0dc4bf3d8ff05633e23\AndroidManifest.xml:27:13-51

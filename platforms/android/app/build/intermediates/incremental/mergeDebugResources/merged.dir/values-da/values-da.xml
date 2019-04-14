@@ -54,5 +54,6 @@
     <string name="pgm_location_rejected_by_user">Zgoda na usługi lokalizacji została odrzucona przez użytkownika.</string>
     <string name="pgm_no_location_providers">Na urządzeniu nie odnaleziono usług dostarczających położenie. Aplikacja nie będzie w stanie określić położenia.</string>
     <string name="pgm_no_location_service_is_disabled">Usługi lokalizacji są wyłączone.</string>
+    <string msgid="146198913615257606" name="search_menu_title">"Søg"</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

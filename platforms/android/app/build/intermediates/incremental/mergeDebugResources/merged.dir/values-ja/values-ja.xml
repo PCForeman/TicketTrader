@@ -58,5 +58,6 @@
     <string name="pgm_no_location_providers">利用できる位置情報を取得できる方法(GPSなど)がないため、この端末の位置情報が取得できませんでした。</string>
     <string name="pgm_no_location_service_is_disabled">位置情報サービス(GPSなど)が無効になっています。</string>
     <string name="requesting_thumbnails">サムネイルをリクエスト中です。お待ちください。</string>
+    <string msgid="146198913615257606" name="search_menu_title">"検索"</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

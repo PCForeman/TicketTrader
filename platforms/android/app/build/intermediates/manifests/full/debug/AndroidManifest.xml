@@ -29,6 +29,7 @@
     <uses-feature android:name="android.hardware.location.gps" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:debuggable="true"
@@ -58,6 +59,11 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <activity
+            android:name="com.synconset.MultiImageChooserActivity"
+            android:label="@string/multi_app_name"
+            android:theme="@style/Theme.AppCompat.Light" />
+
         <provider
             android:name="org.apache.cordova.camera.FileProvider"
             android:authorities="io.ionic.starter.provider"
@@ -69,17 +75,13 @@
         </provider>
 
         <activity
-            android:name="com.synconset.MultiImageChooserActivity"
-            android:label="@string/multi_app_name"
-            android:theme="@style/Theme.AppCompat.Light" />
-        <activity
             android:name="com.google.android.gms.common.api.GoogleApiActivity"
             android:exported="false"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <meta-data
             android:name="android.support.VERSION"
-            android:value="26.1.0" />
+            android:value="25.4.0" />
     </application>
 
 </manifest>

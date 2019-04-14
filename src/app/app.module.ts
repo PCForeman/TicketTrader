@@ -17,6 +17,7 @@ import { LoginPageModule } from "../pages/login/login.module";
 import { RegisterPage } from "../pages/register/register";
 import { MyApp } from "./app.component";
 import { FbConfig } from "./app.firebase.config";
+import { Chooser } from '@ionic-native/chooser/index';
 
 @NgModule({
   declarations: [MyApp, RegisterPage],
@@ -34,6 +35,7 @@ import { FbConfig } from "./app.firebase.config";
     Toast,
     Camera,
     SplashScreen,
+    Chooser,
     GoogleMaps,
     AngularFireAuth,
     AngularFireDatabase,

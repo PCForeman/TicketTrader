@@ -54,5 +54,6 @@
     <string name="pgm_location_rejected_by_user">Сервіс пошуку місцезнаходження відхилений користувачем.</string>
     <string name="pgm_no_location_providers">Оскільки цей пристрій не підтримує пошук місцезнаходження, цей додаток не може визначити Ваше розташування.</string>
     <string name="pgm_no_location_service_is_disabled">Сервіс місцезнаходження вимкнений.</string>
+    <string msgid="146198913615257606" name="search_menu_title">"Пошук"</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

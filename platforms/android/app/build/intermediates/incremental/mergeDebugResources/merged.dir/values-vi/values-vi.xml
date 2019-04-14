@@ -54,5 +54,6 @@
     <string name="pgm_location_rejected_by_user">Người dùng không cho phép sử dụng dịch vụ xác định vị trí.</string>
     <string name="pgm_no_location_providers">Thiết bị không hỗ trợ xác định vị trí vì vậy ứng dụng không thể xác định vị trí của bạn.</string>
     <string name="pgm_no_location_service_is_disabled">Dịch vụ xác định vị trí không được kích hoạt.</string>
+    <string msgid="146198913615257606" name="search_menu_title">"Tìm kiếm"</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

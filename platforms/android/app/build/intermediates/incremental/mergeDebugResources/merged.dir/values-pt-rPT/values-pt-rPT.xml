@@ -54,5 +54,6 @@
     <string name="pgm_location_rejected_by_user">O serviço de Localização foi rejeitado pelo usuário.</string>
     <string name="pgm_no_location_providers">Esse dispositivo não tem nenhum provedor de localização, logo, este aplicativo não pode detectar sua localização.</string>
     <string name="pgm_no_location_service_is_disabled">O serviço de Localização está desativado.</string>
+    <string msgid="146198913615257606" name="search_menu_title">"Pesquisar"</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"+999"</string>
 </resources>

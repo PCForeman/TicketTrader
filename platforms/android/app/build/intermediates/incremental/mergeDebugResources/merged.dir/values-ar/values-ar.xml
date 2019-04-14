@@ -54,5 +54,6 @@
     <string name="pgm_location_rejected_by_user">خدمة الموقع مرفوضة من قبل المستخدم</string>
     <string name="pgm_no_location_providers">. نظرًا لأن هذا الجهاز لا يحتوي على أي موفر للموقع ، لا يمكن لهذا التطبيق اكتشاف موقعك</string>
     <string name="pgm_no_location_service_is_disabled">تم تعطيل خدمة الموقع</string>
+    <string msgid="146198913615257606" name="search_menu_title">"البحث"</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"+999"</string>
 </resources>

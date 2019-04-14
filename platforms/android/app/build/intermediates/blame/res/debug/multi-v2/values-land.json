@@ -4,13 +4,13 @@
             "outputFile": "C:\\Users\\paulf\\Desktop\\TicketTrader\\TicketTrader\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-land\\values-land.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\paulf\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-23.4.0.aar\\a55f4239faf6d2a99482eb696d811cb1\\res\\values-land\\values-land.xml",
+                    "source": "C:\\Users\\paulf\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.4.0.aar\\2fa778c77a6bf0dc4bf3d8ff05633e23\\res\\values-land\\values-land.xml",
                     "from": {
-                        "startLines": "2,3,4,5,6,7",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,117,189,259,323,394",
-                        "endColumns": "61,71,69,63,70,67",
-                        "endOffsets": "112,184,254,318,389,457"
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,125,189,260",
+                        "endColumns": "69,63,70,67",
+                        "endOffsets": "120,184,255,323"
                     }
                 }
             ]

@@ -58,5 +58,6 @@
     <string name="pgm_no_location_providers">Cet appareil n\'est pas équipé d\'un service de localisation, cette application ne peut donc pas récupérer votre position.</string>
     <string name="pgm_no_location_service_is_disabled">Le service de localisation est désactivé.</string>
     <string name="requesting_thumbnails">"Demande de vignettes, s'il vous plaît soyez patient"</string>
+    <string msgid="146198913615257606" name="search_menu_title">"Rechercher"</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">">999"</string>
 </resources>

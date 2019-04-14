@@ -45,5 +45,6 @@
     <string name="multi_image_picker_processing_images_message">Esto puede tomar un momento</string>
     <string name="multi_image_picker_processing_images_title">Procesando imágenes</string>
     <string name="requesting_thumbnails">Solicitando miniaturas. Por favor, espere…</string>
+    <string msgid="146198913615257606" name="search_menu_title">"Buscar"</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"+999"</string>
 </resources>

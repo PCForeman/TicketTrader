@@ -1,14 +1,14 @@
 webpackJsonp([6],{
 
-/***/ 526:
+/***/ 528:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Admin3PageModule", function() { return Admin3PageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BuyPageModule", function() { return BuyPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__admin3__ = __webpack_require__(537);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__buy__ = __webpack_require__(540);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,27 +18,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var Admin3PageModule = /** @class */ (function () {
-    function Admin3PageModule() {
+var BuyPageModule = /** @class */ (function () {
+    function BuyPageModule() {
     }
-    Admin3PageModule = __decorate([
+    BuyPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [__WEBPACK_IMPORTED_MODULE_2__admin3__["a" /* Admin3Page */]],
-            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__admin3__["a" /* Admin3Page */])]
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__buy__["a" /* BuyPage */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__buy__["a" /* BuyPage */])]
         })
-    ], Admin3PageModule);
-    return Admin3PageModule;
+    ], BuyPageModule);
+    return BuyPageModule;
 }());
 
-//# sourceMappingURL=admin3.module.js.map
+//# sourceMappingURL=buy.module.js.map
 
 /***/ }),
 
-/***/ 537:
+/***/ 540:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Admin3Page; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BuyPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(52);
@@ -54,168 +54,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 
 
 
 
-var Admin3Page = /** @class */ (function () {
-    function Admin3Page(navCtrl, navParams, ldCtrl, afAuth, fbDatabase, toast, app) {
+var BuyPage = /** @class */ (function () {
+    function BuyPage(navCtrl, afAuth, toast, afDatabase, navParams, modal) {
         this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.ldCtrl = ldCtrl;
         this.afAuth = afAuth;
-        this.fbDatabase = fbDatabase;
         this.toast = toast;
-        this.app = app;
+        this.afDatabase = afDatabase;
+        this.navParams = navParams;
+        this.modal = modal;
         this.items = [];
         this.kA = [];
         this.items2 = [];
         this.itemSearch = [];
+        this.timedOutListings = [];
     }
-    Admin3Page.prototype.ionViewDidLoad = function () {
-        this.retrieveRejectedTickets();
-        this.copyItems();
+    BuyPage.prototype.ionViewDidLoad = function () {
+        this.retrieveCheckoutTickets();
+        this.checkOutTimer();
     };
-    Admin3Page.prototype.initializeItems = function () {
-        this.itemSearch = this.items;
-    };
-    Admin3Page.prototype.copyItems = function () {
-        this.items2 = this.items;
-    };
-    Admin3Page.prototype.onCancel = function () {
-        this.itemSearch = this.items2;
-    };
-    Admin3Page.prototype.getItems = function (searchbar) {
+    BuyPage.prototype.checkOutTimer = function () {
         var _this = this;
-        // Reset items back to all of the items
-        this.initializeItems();
-        console.log(this.itemSearch);
-        // set q to the value of the searchbar
-        var q = searchbar.srcElement.value;
-        console.log(q);
-        // if the value is an empty string don't filter the items
-        if (q == undefined || q == "") {
-            this.items = this.items2;
-            this.items.splice(this.items.length - 1);
-            console.log(this.items);
-        }
-        else {
-            this.itemSearch = this.itemSearch.filter(function (v) {
-                if (v.Key && q) {
-                    if (v.Key.toLowerCase().indexOf(q.toLowerCase()) > -1) {
-                        _this.items = _this.itemSearch;
-                        return true;
-                    }
-                    return false;
-                }
-            });
-            console.log(q, this.itemSearch.length, this.itemSearch);
-            this.items.push(this.itemSearch);
-            this.reloadData();
-        }
-    };
-    Admin3Page.prototype.remove = function () {
-        var _this = this;
-        var temp = [];
-        var target = event.srcElement;
-        var ticketClicked = parseInt(target.parentElement.parentElement.children.item(0).innerHTML.valueOf()) - 1;
-        console.log(ticketClicked);
-        temp.push(this.items[ticketClicked]);
-        temp.filter(function (v) { return __awaiter(_this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        temp = [
-                            {
-                                Key: v.Key,
-                                Name: v.Name,
-                                Venue: v.Venue,
-                                Price: v.Price,
-                                Date: v.Date,
-                                Seller: v.Seller,
-                                Time: v.Time,
-                                Payout: v.Payout,
-                                Creation: v.Creation,
-                                Charge: v.Charge
-                            }
-                        ];
-                        this.fbDatabase.list("rejectedTickets/" + temp[0].Key).remove();
-                        return [4 /*yield*/, this.toast
-                                .create({
-                                message: "Ticket" +
-                                    " " +
-                                    temp[0].Key +
-                                    " " +
-                                    "has been approved and moved to active listings",
-                                position: "top",
-                                duration: 2000
-                            })
-                                .present()];
-                    case 1:
-                        _a.sent();
-                        return [4 /*yield*/, this.showSpinner()];
-                    case 2:
-                        _a.sent();
-                        this.refresh();
-                        this.items = this.items;
-                        return [2 /*return*/];
-                }
-            });
-        }); });
-    };
-    Admin3Page.prototype.refresh = function () {
-        window.location.reload();
-    };
-    Admin3Page.prototype.showSpinner = function () {
-        var loading = this.ldCtrl.create({
-            content: ""
-        });
-        loading.present();
-        setTimeout(function () {
-            loading.dismiss();
-        }, 1500);
-    };
-    Admin3Page.prototype.reloadData = function () {
-        this.items = this.itemSearch;
-    };
-    Admin3Page.prototype.retrieveRejectedTickets = function () {
-        var _this = this;
-        var ref = this.fbDatabase.object("rejectedTickets/");
+        var currentUser = this.afAuth.auth.currentUser.uid;
+        var ref = this.afDatabase.object("ticketsInBasket/" + currentUser);
         ref.snapshotChanges().subscribe(function (snapshot) {
             var allData = snapshot.payload.val();
             var array = [];
@@ -225,23 +89,149 @@ var Admin3Page = /** @class */ (function () {
             keyArray.push(value);
             for (var i = 0; i < value.length; i++) {
                 var x = 0;
+                var count = 0;
                 var selectedIndex = i;
                 var keyValue = value[selectedIndex];
                 var indexSelecta = value.length - value.length + i;
                 var id = value[indexSelecta];
                 _this.kA.push(id);
-                var ref = _this.fbDatabase.object("rejectedTickets/" + keyValue);
+                var ref = _this.afDatabase.object("ticketsInBasket/" + currentUser + "/" + keyValue);
                 ref.snapshotChanges().subscribe(function (snapshot) {
-                    var finalKey = _this.kA[_this.kA.length - _this.kA.length + x];
+                    var eventSellerUID = snapshot.payload.child("Seller").val();
+                    var checkOutTime = snapshot.payload.child("checkOutTime").val();
+                    var timeNow = Date.now();
+                    //  console.log(checkOutTime + 450000, timeNow);
                     var eventName = snapshot.payload.child("Name").val();
                     var eventPrice = snapshot.payload.child("Price").val();
-                    var eventVenue = snapshot.payload.child("Location").val();
+                    var eventVenue = snapshot.payload.child("Venue").val();
                     var eventDate = snapshot.payload.child("Date").val();
                     var eventTime = snapshot.payload.child("Time").val();
                     var eventCreationDate = snapshot.payload.child("Creation").val();
-                    var eventSellerUID = snapshot.payload.child("Seller").val();
                     var eventCustomerPayout = snapshot.payload.child("Payout").val();
                     var eventServiceCharge = snapshot.payload.child("Charge").val();
+                    var maxTime = checkOutTime + 600000;
+                    //  console.log(maxTime);
+                    if (maxTime <= timeNow) {
+                        _this.timedOutListings.push({
+                            Name: eventName,
+                            Venue: eventVenue,
+                            Price: eventPrice,
+                            Date: eventDate,
+                            Time: eventTime,
+                            Creation: eventCreationDate,
+                            Seller: eventSellerUID,
+                            Payout: eventCustomerPayout,
+                            Charge: eventServiceCharge
+                        });
+                        x++;
+                        count + 1;
+                        var indexToPush = count;
+                        //  console.log(count, indexToPush)
+                        _this.afDatabase
+                            .list("approvedTickets/")
+                            .push(_this.timedOutListings[0]);
+                        console.log(_this.timedOutListings[0]);
+                        _this.timedOutListings.splice(0, 1);
+                        _this.afDatabase
+                            .object("ticketsInBasket/" + currentUser + "/" + keyValue)
+                            .remove();
+                    }
+                    else if (maxTime > timeNow) {
+                        //  console.log("Hello", maxTime);
+                    }
+                });
+            }
+        });
+    };
+    BuyPage.prototype.checkOut = function () {
+        var target = event.srcElement;
+        var uId = this.afAuth.auth.currentUser.uid;
+        var ticketId = target.parentElement.parentElement.children.item(1)
+            .innerHTML;
+        var sId = target.parentElement.parentElement.children.item(2).innerHTML;
+        var sPrice = target.parentElement.parentElement.children
+            .item(5)
+            .innerHTML.substr(6, 10);
+        var sArtist = target.parentElement.parentElement.children
+            .item(3)
+            .innerHTML.substr(0);
+        var sVenue = target.parentElement.parentElement.children
+            .item(4)
+            .innerHTML.substr(6);
+        var sDate = target.parentElement.parentElement.children
+            .item(6)
+            .innerHTML.substr(6, 10);
+        var temp = [];
+        var ticketClicked = parseInt(target.parentElement.parentElement.children.item(0).innerHTML.valueOf()) - 1;
+        console.log(uId, ticketId, sId, sPrice, sVenue, sArtist, sDate);
+        console.log(ticketClicked);
+        temp.push(this.items[ticketClicked]);
+        console.log(temp);
+        temp.filter(function (v) {
+            var tempArray = [
+                {
+                    Key: v.Key,
+                    Name: v.Name,
+                    Venue: v.Venue,
+                    Price: v.Price,
+                    Date: v.Date,
+                    Seller: v.Seller,
+                    Time: v.Time,
+                    Payout: v.Payout,
+                    Creation: v.Creation,
+                    Charge: v.Charge
+                }
+            ];
+        });
+        var myModalOpts = {
+            cssClass: "modal",
+            enableBackdropDismiss: true,
+            showBackdrop: true
+        };
+        var listingRef = {
+            userId: uId,
+            ticketRef: ticketId,
+            sellerId: sId,
+            price: sPrice,
+            artist: sArtist,
+            date: sDate
+        };
+        var myModal = this.modal.create("PaymentModalPage", { ticket: listingRef }, myModalOpts);
+        myModal.present();
+    };
+    BuyPage.prototype.retrieveCheckoutTickets = function () {
+        var _this = this;
+        var currentUser = this.afAuth.auth.currentUser.uid;
+        var ref = this.afDatabase.object("ticketsInBasket/" + currentUser);
+        ref.snapshotChanges().subscribe(function (snapshot) {
+            var allData = snapshot.payload.val();
+            var array = [];
+            array.push(allData);
+            var value = Object.keys(allData);
+            var keyArray = [];
+            keyArray.push(value);
+            for (var i = 0; i < value.length; i++) {
+                var x = 0;
+                var count = 0;
+                var selectedIndex = i;
+                var keyValue = value[selectedIndex];
+                var indexSelecta = value.length - value.length + i;
+                var id = value[indexSelecta];
+                _this.kA.push(id);
+                var ref = _this.afDatabase.object("ticketsInBasket/" + currentUser + "/" + keyValue);
+                ref.snapshotChanges().subscribe(function (snapshot) {
+                    var eventSellerUID = snapshot.payload.child("Seller").val();
+                    var finalKey = _this.kA[_this.kA.length - _this.kA.length + x];
+                    var eventName = snapshot.payload.child("Name").val();
+                    var eventPrice = snapshot.payload.child("Price").val();
+                    var eventVenue = snapshot.payload.child("Venue").val();
+                    var eventDate = snapshot.payload.child("Date").val();
+                    var eventTime = snapshot.payload.child("Time").val();
+                    var eventCreationDate = snapshot.payload.child("Creation").val();
+                    var eventCustomerPayout = snapshot.payload.child("Payout").val();
+                    var eventServiceCharge = snapshot.payload.child("Charge").val();
+                    var reserved = snapshot.payload.child("checkOutTime").val();
+                    var timeLeft = snapshot.payload.child("reservationPerioid").val();
                     _this.items.push({
                         Key: finalKey,
                         Name: eventName,
@@ -252,42 +242,30 @@ var Admin3Page = /** @class */ (function () {
                         Creation: eventCreationDate,
                         Seller: eventSellerUID,
                         Payout: eventCustomerPayout,
-                        Charge: eventServiceCharge
+                        Charge: eventServiceCharge,
+                        CheckoutPeriod: timeLeft
                     });
                     x++;
+                    count + 1;
                 });
             }
         });
     };
-    Admin3Page.prototype.logout = function () {
-        var _this = this;
-        this.afAuth.auth.signOut().then(function () {
-            _this.toast
-                .create({
-                message: "Signed out",
-                position: "middle",
-                duration: 3500
-            })
-                .present();
-            _this.app.getRootNav().setRoot("LoginPage");
-        });
-    };
-    Admin3Page = __decorate([
+    BuyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-admin3",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin3\admin3.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Sale History</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <ion-list>\n    <div class="ngDivAdmin" id="pendingTickets" ion-item *ngFor="let item of items; let i = index">\n      <h1 id="ticketId" position left>{{ i + 1 }} {{ item.Key }}</h1>\n      <h2 position text-center>Artist: {{ item.Name }}</h2>\n      <h2 position text-center>Venue: {{ item.Venue }}</h2>\n      <h2 position text-center>Price:£{{ item.Price }}</h2>\n      <h2 position text-center>Date: {{ item.Date }}</h2>\n      <h2 position text-center>Time: {{ item.Time }}</h2>\n      <button\n        [id]="i"\n        ion-button\n        class="modalButton"\n        block\n        (click)="remove()"\n      >\n        Remove listing\n      </button>\n      <h2></h2>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin3\admin3.html"*/
+            selector: "page-buy",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\buy\buy.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n    <ion-buttons right>\n\n      <button\n\n        id="info"\n\n        ion-button\n\n        icon-only\n\n        color="light"\n\n        (click)="ticketTradeInfo()"\n\n      >\n\n        <ion-icon name="information-circle"></ion-icon>\n\n      </button>\n\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n\n        <ion-icon name="log-out"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-buttons left>\n\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n\n        <ion-icon name="clipboard"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <ion-title position text-center>Awaiting payment</ion-title>\n\n  <ion-list>\n\n    <div\n\n      class="ngDiv"\n\n      [id]="i"\n\n      ion-item\n\n      *ngFor="let item of items; let i = index"\n\n    >\n\n      <h1 hidden>{{ i + 1 }}</h1>\n\n      <h1 hidden>{{ item.Key }}</h1>\n\n      <h1 hidden>{{ item.Seller }}</h1>\n\n      <h2 position text-center>{{ item.Name }}</h2>\n\n      <h3 position text-center>Venue: {{ item.Venue }}</h3>\n\n      <h4 position text-center>Price: £{{ item.Price }}</h4>\n\n      <h5 position text-center>Date: {{ item.Date }}</h5>\n\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n\n      <button\n\n        class="modalButton"\n\n        [id]="i"\n\n        ion-button\n\n        block\n\n        (click)="checkOut(index)"\n\n      >\n\n        Checkout\n\n      </button>\n\n      <h6></h6>\n\n    </div>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\buy\buy.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
-            __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */]])
-    ], Admin3Page);
-    return Admin3Page;
+            __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]])
+    ], BuyPage);
+    return BuyPage;
 }());
 
-//# sourceMappingURL=admin3.js.map
+//# sourceMappingURL=buy.js.map
 
 /***/ })
 

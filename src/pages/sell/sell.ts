@@ -12,11 +12,7 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireStorage } from "angularfire2/storage";
 import { HomePage } from "../home/home";
-import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
-import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
-import { e } from "@angular/core/src/render3";
-
-var gListingId;
+import { Chooser } from '@ionic-native/chooser/index';
 var gListingCreationTime;
 var gListingCustomerPayout;
 var gListingServiceCharge;
@@ -44,32 +40,18 @@ export class SellPage {
     private afAuth: AngularFireAuth,
     private toast: ToastController,
     private app: App,
-    private camera: Camera,
-    private storage: AngularFireStorage,
+    private chooser: Chooser,
+    private afStorage: AngularFireStorage,
     private fbDatabase: AngularFireDatabase,
     private ldCtrl: LoadingController,
     public navCtrl: NavController,
     public navParams: NavParams
   ) {}
 
-  async takePhoto() {
-    try {
-      const options: CameraOptions = {
-        quality: 50,
-        targetHeight: 500,
-        targetWidth: 500,
-        destinationType: this.camera.DestinationType.DATA_URL,
-        encodingType: this.camera.EncodingType.PNG,
-        mediaType: this.camera.MediaType.PICTURE
-      };
-      const end = this.camera.getPicture(options);
-      console.log(end);
-      const image = `data:image/png;base64,${end}`;
-      const pictures = this.storage.ref("tickets");
-      pictures.putString(image, "data_url");
-    } catch (e) {
-      console.log(e);
-    }
+  async chooseFile(){
+   await this.chooser.getFile('downloads/image/pdf/docx').then(file => console.log(file ? file.name : 'canceled', this.afStorage.upload('images',file.uri)))
+    .catch((error: any) => console.error(error))
+    ;
   }
 
   checkOut() {
@@ -86,7 +68,6 @@ export class SellPage {
     var bit1 = Date.now();
     var bit2 = Math.floor(Math.random() * 99 + 1);
     var randomID = (bit1 + bit2).toString();
-    gListingId = randomID;
   }
 
   listingTimestamp() {

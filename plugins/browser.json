@@ -43,10 +43,19 @@
     "cordova-plugin-filechooser": {
       "PACKAGE_NAME": "io.ionic.starter"
     },
+    "cordova-plugin-telerik-imagepicker": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
     "cordova-plugin-camera": {
       "PACKAGE_NAME": "io.ionic.starter"
     },
-    "cordova-plugin-telerik-imagepicker": {
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "com-badrit-base64": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-filepath": {
       "PACKAGE_NAME": "io.ionic.starter"
     }
   },

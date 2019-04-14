@@ -4,7 +4,7 @@
             "outputFile": "C:\\Users\\paulf\\Desktop\\TicketTrader\\TicketTrader\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\paulf\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\aabd220ffc264e46661cd5f1a645bc3a\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\paulf\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-25.4.0.aar\\2fa778c77a6bf0dc4bf3d8ff05633e23\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

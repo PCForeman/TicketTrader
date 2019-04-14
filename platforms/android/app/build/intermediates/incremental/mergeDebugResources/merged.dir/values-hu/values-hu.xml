@@ -41,5 +41,6 @@
     <string name="free_version_label">Ingyenes verzió - hátralévő képek: %d</string>
     <string name="multi_app_name">MultiImageChooser</string>
     <string name="requesting_thumbnails">Miniatűrök lekérése, kérjük legyen türelemmel</string>
+    <string msgid="146198913615257606" name="search_menu_title">"Keresés"</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

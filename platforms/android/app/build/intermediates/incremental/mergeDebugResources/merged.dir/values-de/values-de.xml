@@ -61,5 +61,6 @@
     <string name="pgm_no_location_providers">Da dieses Gerät keinen Standortanbieter hat, kann diese App Ihren Standort nicht orten.</string>
     <string name="pgm_no_location_service_is_disabled">Der Standortdienst ist deaktiviert.</string>
     <string name="requesting_thumbnails">Vorschaubilder werden geladen, bitte haben Sie etwas Geduld</string>
+    <string msgid="146198913615257606" name="search_menu_title">"Suchen"</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">"999+"</string>
 </resources>

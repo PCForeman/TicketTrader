@@ -27975,7 +27975,26 @@ ion-navbar.toolbar {
 
 .ngDiv {
   border-radius: 20px;
-  background: lightgray;
+  border: 3px solid midnightblue;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  margin: 4px 2px;
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+.ngDivAccount {
+  width: 97.5%;
+  border-radius: 20px;
+  border: 3px solid midnightblue;
+}
+
+.ngDivAdmin {
+  border-radius: 20px;
+  border: 3px solid midnightblue;
   color: black;
   text-align: center;
   text-decoration: none;

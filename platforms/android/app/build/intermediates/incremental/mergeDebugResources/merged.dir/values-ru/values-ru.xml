@@ -54,5 +54,6 @@
     <string name="pgm_location_rejected_by_user">Определение местоположения отклонено пользователем.</string>
     <string name="pgm_no_location_providers">Поскольку это устройство не поддерживает поиск местоположения, это приложение не может определить Ваше расположение.</string>
     <string name="pgm_no_location_service_is_disabled">Сервис определения местоположения отключен.</string>
+    <string msgid="146198913615257606" name="search_menu_title">"Поиск"</string>
     <string msgid="2869576371154716097" name="status_bar_notification_info_overflow">">999"</string>
 </resources>
