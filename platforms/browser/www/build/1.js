@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 535:
+/***/ 534:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SellPageModule", function() { return SellPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sell__ = __webpack_require__(546);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sell__ = __webpack_require__(545);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,22 +34,21 @@ var SellPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 546:
+/***/ 545:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SellPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_file_chooser_ngx__ = __webpack_require__(300);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_file_ngx__ = __webpack_require__(301);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_database__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_storage__ = __webpack_require__(297);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_angularfire2_storage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__home_home__ = __webpack_require__(299);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_storage__ = __webpack_require__(297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angularfire2_storage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home__ = __webpack_require__(299);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_chooser_index__ = __webpack_require__(300);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -101,19 +100,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-
-var gListingId;
 var gListingCreationTime;
 var gListingCustomerPayout;
 var gListingServiceCharge;
 var SellPage = /** @class */ (function () {
-    function SellPage(afAuth, toast, app, file, chooser, storage, fbDatabase, ldCtrl, navCtrl, navParams) {
+    function SellPage(afAuth, toast, app, chooser, afStorage, fbDatabase, ldCtrl, navCtrl, navParams) {
         this.afAuth = afAuth;
         this.toast = toast;
         this.app = app;
-        this.file = file;
         this.chooser = chooser;
-        this.storage = storage;
+        this.afStorage = afStorage;
         this.fbDatabase = fbDatabase;
         this.ldCtrl = ldCtrl;
         this.navCtrl = navCtrl;
@@ -130,11 +126,17 @@ var SellPage = /** @class */ (function () {
     };
     SellPage.prototype.chooseFile = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var res;
             return __generator(this, function (_a) {
-                this.chooser.open().then(function (uri) {
-                    console.log(uri);
-                });
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.chooser.getFile('image')
+                            .then(function (file) { return console.log(file ? file.name : 'canceled'); })
+                            .catch(function (error) { return console.error(error); })];
+                    case 1:
+                        res = _a.sent();
+                        console.log(res);
+                        return [2 /*return*/];
+                }
             });
         });
     };
@@ -149,7 +151,6 @@ var SellPage = /** @class */ (function () {
         var bit1 = Date.now();
         var bit2 = Math.floor(Math.random() * 99 + 1);
         var randomID = (bit1 + bit2).toString();
-        gListingId = randomID;
     };
     SellPage.prototype.listingTimestamp = function () {
         var Y = new Date().getFullYear().toString();
@@ -290,7 +291,7 @@ var SellPage = /** @class */ (function () {
                                     duration: 2000
                                 })
                                     .present();
-                                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_7__home_home__["a" /* HomePage */]);
+                                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_5__home_home__["a" /* HomePage */]);
                             })];
                     case 3:
                         _a.sent();
@@ -304,13 +305,12 @@ var SellPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: "page-sell",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Sell Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <div class="ngDivAccount">\n    <ion-list-header text-center>List a ticket</ion-list-header>\n    <ion-item>\n      <ion-label floating>Event</ion-label>\n      <ion-input id="txtEvent" [(ngModel)]="listing.listingName"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Location</ion-label>\n      <ion-input\n        id="txtLocation"\n        [(ngModel)]="listing.listingLocation"\n      ></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Start time</ion-label>\n      <ion-input id="txtTime" [(ngModel)]="listing.listingTime"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Date of event</ion-label>\n      <ion-datetime\n        id="listingDate"\n        displayformat="DD/MM/YY"\n        [(ngModel)]="listing.listingDate"\n      ></ion-datetime>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Price £</ion-label>\n      <ion-input id="txtPrice" [(ngModel)]="listing.listingPrice"></ion-input>\n      <button\n        ion-button\n        id="btnCheckPrice"\n        icon-only\n        color="light"\n        (click)="ticketIncomeCalc()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n    <p>\n      <img *ngIf="image" [src]="image" />\n      <button\n        ion-button\n        id="btnUploadTicket"\n        class="sellButton"\n        block\n        (click)="chooseFile()"\n      >\n        Select Ticket\n      </button>\n      <button\n        ion-button\n        id="btnCreateListing"\n        class="sellButton"\n        block\n        (click)="createListing()"\n      >\n        Create your listing\n      </button>\n    </p>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_angularfire2_auth__["AngularFireAuth"],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_file_ngx__["a" /* File */],
-            __WEBPACK_IMPORTED_MODULE_2__ionic_native_file_chooser_ngx__["a" /* FileChooser */],
-            __WEBPACK_IMPORTED_MODULE_6_angularfire2_storage__["AngularFireStorage"],
-            __WEBPACK_IMPORTED_MODULE_5_angularfire2_database__["AngularFireDatabase"],
+            __WEBPACK_IMPORTED_MODULE_6__ionic_native_chooser_index__["a" /* Chooser */],
+            __WEBPACK_IMPORTED_MODULE_4_angularfire2_storage__["AngularFireStorage"],
+            __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])

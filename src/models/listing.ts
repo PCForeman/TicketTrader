@@ -10,4 +10,6 @@ export interface Listings {
   listingCreationDate: String;
   listingCustomerPayout: number;
   listingServiceCharge: number;
+  listingLat: number;
+  lisingLong: number;
 }

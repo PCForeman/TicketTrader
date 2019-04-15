@@ -5,37 +5,39 @@ import {
   NavParams,
   ToastController,
   App,
-  LoadingController
+  LoadingController,
+  ModalController,
+  ModalOptions
 } from "ionic-angular";
 import { Listings } from "../../models/listing";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireStorage } from "angularfire2/storage";
 import { HomePage } from "../home/home";
-import { Chooser } from '@ionic-native/chooser/index';
+import { Chooser } from "@ionic-native/chooser/index";
 var gListingCreationTime;
 var gListingCustomerPayout;
 var gListingServiceCharge;
-
+var gLat;
+var gLng;
+var gVenue;
 @IonicPage()
 @Component({
   selector: "page-sell",
   templateUrl: "sell.html"
 })
 export class SellPage {
-  firebaseService: any;
-  toastCtrl: any;
+
   ionViewDidLoad() {
     console.log("ionViewDidLoad SellPage");
     this.listingTimestamp();
     this.lockTicketButton();
     this.unlockTicketButton();
     this.lockFileUpload();
-    this.unlockFileUpload();
+    this.lockLocationButton();
   }
 
   listing = {} as Listings;
-
   constructor(
     private afAuth: AngularFireAuth,
     private toast: ToastController,
@@ -45,13 +47,16 @@ export class SellPage {
     private fbDatabase: AngularFireDatabase,
     private ldCtrl: LoadingController,
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    private modal: ModalController
   ) {}
 
-  async chooseFile(){
-   await this.chooser.getFile('downloads/image/pdf/docx').then(file => console.log(file ? file.name : 'canceled', this.afStorage.upload('images',file.uri)))
-    .catch((error: any) => console.error(error))
-    ;
+  async chooseFile() {
+    var res = await this.chooser
+      .getFile("image")
+      .then(file => console.log(file ? file.name : "canceled"))
+      .catch((error: any) => console.error(error));
+    console.log(res);
   }
 
   checkOut() {
@@ -100,6 +105,8 @@ export class SellPage {
           duration: 3500
         })
         .present();
+        this.unlockLocationButton();
+        this.unlockUploadButton();
     } else {
       this.toast
         .create({
@@ -131,15 +138,9 @@ export class SellPage {
     disableFileUpload.disabled = true;
   }
 
-  unlockFileUpload() {
-    document
-      .getElementById("btnCheckPrice")
-      .addEventListener("click", function() {
-        var EnableFileUpload = <HTMLButtonElement>(
-          document.getElementById("btnUploadTicket")
-        );
-        EnableFileUpload.disabled = false;
-      });
+  unlockUploadButton() {
+    var button = <HTMLButtonElement>(document.getElementById("btnUploadTicket"));
+    button.disabled = false;
   }
 
   lockTicketButton() {
@@ -148,6 +149,20 @@ export class SellPage {
     );
     disableCreateListing.disabled = true;
   }
+
+  lockLocationButton() {
+    var disableCreateListing = <HTMLButtonElement>(
+      document.getElementById("btnLocation")
+    );
+    disableCreateListing.disabled = true;
+  }
+
+  unlockLocationButton() {
+  var button = <HTMLButtonElement>(document.getElementById("btnLocation"));
+  button.disabled = false;
+
+  }
+
 
   unlockTicketButton() {
     document
@@ -173,7 +188,6 @@ export class SellPage {
   async createListing() {
     await this.showSpinner();
     var artist = this.listing.listingName;
-    var location = this.listing.listingLocation;
     var startTime = this.listing.listingTime;
     var date = this.listing.listingDate.toString();
     var p3 = date.slice(0, 4);
@@ -184,7 +198,6 @@ export class SellPage {
     var price = this.listing.listingPrice;
     if (
       artist == "" ||
-      location == "" ||
       (startTime < 0 && startTime > 24) ||
       date == null ||
       price == NaN ||
@@ -206,6 +219,9 @@ export class SellPage {
         this.listing.listingCreationDate = gListingCreationTime;
         this.listing.listingServiceCharge = gListingServiceCharge;
         this.listing.listingCustomerPayout = gListingCustomerPayout;
+        this.listing.lisingLong = gLng[0];
+        this.listing.listingLat = gLat[0];
+        this.listing.listingLocation = gVenue[0];
         this.listing.listingSold = false;
         var ref = this.fbDatabase
           .list(`unaprovedTickets/`)
@@ -223,4 +239,22 @@ export class SellPage {
       });
     }
   }
+
+  findVenue() {
+    const myModalOpts: ModalOptions = {
+      cssClass: "modal",
+      enableBackdropDismiss: true,
+      showBackdrop: true
+    };
+    const myModal = this.modal.create("SelectLocationModalPage", {}, myModalOpts);
+    myModal.present();
+
+    myModal.onDidDismiss((venueData) => {
+      console.log(venueData.latData, venueData.lngData, venueData.venueData)
+      gLat = venueData.latData;
+      gLng = venueData.lngData;
+      gVenue = venueData.venueData;
+    })
+  }
+
 }

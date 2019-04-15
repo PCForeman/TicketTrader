@@ -1,4 +1,4 @@
-webpackJsonp([13],{
+webpackJsonp([14],{
 
 /***/ 158:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -206,27 +206,27 @@ webpackEmptyAsyncContext.id = 197;
 var map = {
 	"../pages/account/account.module": [
 		523,
-		10
+		11
 	],
 	"../pages/admin-view/admin-view.module": [
 		524,
-		9
+		10
 	],
 	"../pages/admin/admin.module": [
 		525,
-		12
+		13
 	],
 	"../pages/admin2/admin2.module": [
 		526,
-		8
+		9
 	],
 	"../pages/admin3/admin3.module": [
 		527,
-		7
+		8
 	],
 	"../pages/buy/buy.module": [
 		528,
-		6
+		7
 	],
 	"../pages/home/home.module": [
 		256
@@ -236,30 +236,34 @@ var map = {
 	],
 	"../pages/modal-account/modal-account.module": [
 		529,
-		5
+		6
 	],
 	"../pages/order-history/order-history.module": [
 		530,
-		4
+		5
 	],
 	"../pages/page/page.module": [
+		531,
+		4
+	],
+	"../pages/payment-modal/payment-modal.module": [
 		532,
 		3
 	],
-	"../pages/payment-modal/payment-modal.module": [
-		531,
-		2
-	],
 	"../pages/register/register.module": [
 		533,
-		11
+		12
+	],
+	"../pages/select-location-modal/select-location-modal.module": [
+		534,
+		2
 	],
 	"../pages/sell/sell.module": [
-		534,
+		535,
 		1
 	],
 	"../pages/tickets/tickets.module": [
-		535,
+		536,
 		0
 	]
 };
@@ -1050,9 +1054,10 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/modal-account/modal-account.module#ModalAccountPageModule', name: 'ModalAccountPage', segment: 'modal-account', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/order-history/order-history.module#OrderHistoryPageModule', name: 'OrderHistoryPage', segment: 'order-history', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/payment-modal/payment-modal.module#PaymentModalPageModule', name: 'PaymentModalPage', segment: 'payment-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/page/page.module#PageModule', name: 'Page', segment: 'page', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/payment-modal/payment-modal.module#PaymentModalPageModule', name: 'PaymentModalPage', segment: 'payment-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/select-location-modal/select-location-modal.module#SelectLocationModalPageModule', name: 'SelectLocationModalPage', segment: 'select-location-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sell/sell.module#SellPageModule', name: 'SellPage', segment: 'sell', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/tickets/tickets.module#TicketsPageModule', name: 'TicketsPage', segment: 'tickets', priority: 'low', defaultHistory: [] }
                     ]

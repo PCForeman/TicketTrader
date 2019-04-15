@@ -1,14 +1,14 @@
 webpackJsonp([3],{
 
-/***/ 532:
+/***/ 531:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageModule", function() { return PageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaymentModalPageModule", function() { return PaymentModalPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__page__ = __webpack_require__(544);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payment_modal__ = __webpack_require__(544);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,19 +18,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var PageModule = /** @class */ (function () {
-    function PageModule() {
+var PaymentModalPageModule = /** @class */ (function () {
+    function PaymentModalPageModule() {
     }
-    PageModule = __decorate([
+    PaymentModalPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [__WEBPACK_IMPORTED_MODULE_2__page__["a" /* Page */]],
-            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__page__["a" /* Page */])]
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__payment_modal__["a" /* PaymentModalPage */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__payment_modal__["a" /* PaymentModalPage */])]
         })
-    ], PageModule);
-    return PageModule;
+    ], PaymentModalPageModule);
+    return PaymentModalPageModule;
 }());
 
-//# sourceMappingURL=page.module.js.map
+//# sourceMappingURL=payment-modal.module.js.map
 
 /***/ }),
 
@@ -38,7 +38,7 @@ var PageModule = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Page; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PaymentModalPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -53,33 +53,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 /**
- * Generated class for the Page tabs.
+ * Generated class for the PaymentModalPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var Page = /** @class */ (function () {
-    function Page(navCtrl) {
-        this.navCtrl = navCtrl;
-        this.homeRoot = "HomePage";
-        this.ticketsRoot = "TicketsPage";
-        this.sellRoot = "SellPage";
-        this.accountRoot = "AccountPage";
-        this.tab1Root = "TicketsPage";
-        this.tab2Root = "HomePage";
-        this.tab3Root = "SellPage";
-        this.tab4Root = "AccountPage";
+var PaymentModalPage = /** @class */ (function () {
+    function PaymentModalPage(navParams, vCtrl) {
+        this.navParams = navParams;
+        this.vCtrl = vCtrl;
     }
-    Page = __decorate([
+    PaymentModalPage.prototype.close = function () {
+        this.vCtrl.dismiss();
+    };
+    PaymentModalPage.prototype.ionViewWillLoad = function () {
+        var ticket = this.navParams.get("ticket");
+        this.listingData = ticket;
+        console.log(this.listingData);
+    };
+    PaymentModalPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-page",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\page\page.html"*/'<ion-tabs position="centered" color="midnight-blue">\n  <ion-tab\n    color="midnight-blue"\n    [root]="homeRoot"\n    tabTitle="Home"\n    tabIcon="home"\n  ></ion-tab>\n  <ion-tab\n    color="midnight-blue"\n    [root]="ticketsRoot"\n    tabTitle="Listings"\n    tabIcon="search"\n  ></ion-tab>\n  <ion-tab\n    color="midnight-blue"\n    [root]="sellRoot"\n    tabTitle="Sell"\n    tabIcon="cart"\n  ></ion-tab>\n  <ion-tab\n    color="midnight-blue"\n    [root]="accountRoot"\n    tabTitle="Account"\n    tabIcon="settings"\n  ></ion-tab>\n</ion-tabs>\n\n<head>\n  <link\n    href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css"\n    rel="stylesheet"\n  />\n</head>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\page\page.html"*/
+            selector: "page-payment-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button (click)="close()">Close</button>\n    </ion-buttons>\n    <ion-title position text-center>Checkout</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list position text-center>\n    <ion-title>\n      Order Summary\n    </ion-title>\n    {{ listingData.artist }}<br />\n    {{ listingData.date }}<br />Reference number<br />\n    {{ listingData.ticketRef }}\n  </ion-list>\n  <div class="ngFor">\n    <ion-item>\n      <ion-label position text-center>Name on card</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>16 Digit card number</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>Expiry date</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input id="input" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>CVC</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input position text-center></ion-input>\n    </ion-item>\n\n    <button id="modalButton" ion-button>{{ listingData.price }}</button>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
-    ], Page);
-    return Page;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */]])
+    ], PaymentModalPage);
+    return PaymentModalPage;
 }());
 
-//# sourceMappingURL=page.js.map
+//# sourceMappingURL=payment-modal.js.map
 
 /***/ })
 

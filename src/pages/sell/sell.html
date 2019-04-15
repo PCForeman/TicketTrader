@@ -27,13 +27,6 @@
       <ion-input id="txtEvent" [(ngModel)]="listing.listingName"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>Location</ion-label>
-      <ion-input
-        id="txtLocation"
-        [(ngModel)]="listing.listingLocation"
-      ></ion-input>
-    </ion-item>
-    <ion-item>
       <ion-label floating>Start time</ion-label>
       <ion-input id="txtTime" [(ngModel)]="listing.listingTime"></ion-input>
     </ion-item>
@@ -60,6 +53,7 @@
       </button>
     </ion-item>
     <p>
+      <button ion-button id="btnLocation" class="sellButton" block (click)="findVenue()">Find the venue</button>
       <img *ngIf="image" [src]="image" />
       <button
         ion-button

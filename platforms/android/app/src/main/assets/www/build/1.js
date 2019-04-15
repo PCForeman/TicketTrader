@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 534:
+/***/ 535:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SellPageModule", function() { return SellPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sell__ = __webpack_require__(545);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sell__ = __webpack_require__(547);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,7 +34,7 @@ var SellPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 545:
+/***/ 547:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -103,8 +103,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var gListingCreationTime;
 var gListingCustomerPayout;
 var gListingServiceCharge;
+var gLat;
+var gLng;
+var gVenue;
 var SellPage = /** @class */ (function () {
-    function SellPage(afAuth, toast, app, chooser, afStorage, fbDatabase, ldCtrl, navCtrl, navParams) {
+    function SellPage(afAuth, toast, app, chooser, afStorage, fbDatabase, ldCtrl, navCtrl, navParams, modal) {
         this.afAuth = afAuth;
         this.toast = toast;
         this.app = app;
@@ -114,6 +117,7 @@ var SellPage = /** @class */ (function () {
         this.ldCtrl = ldCtrl;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.modal = modal;
         this.listing = {};
     }
     SellPage.prototype.ionViewDidLoad = function () {
@@ -123,16 +127,20 @@ var SellPage = /** @class */ (function () {
         this.unlockTicketButton();
         this.lockFileUpload();
         this.unlockFileUpload();
+        this.lockLocationButton();
     };
     SellPage.prototype.chooseFile = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
+            var res;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.chooser.getFile('downloads/image/pdf/docx').then(function (file) { return console.log(file ? file.name : 'canceled', _this.afStorage.upload('images', file.uri)); })
+                    case 0: return [4 /*yield*/, this.chooser
+                            .getFile("image")
+                            .then(function (file) { return console.log(file ? file.name : "canceled"); })
                             .catch(function (error) { return console.error(error); })];
                     case 1:
-                        _a.sent();
+                        res = _a.sent();
+                        console.log(res);
                         return [2 /*return*/];
                 }
             });
@@ -177,6 +185,7 @@ var SellPage = /** @class */ (function () {
                 duration: 3500
             })
                 .present();
+            this.unlockLocationButton();
         }
         else {
             this.toast
@@ -217,6 +226,14 @@ var SellPage = /** @class */ (function () {
         var disableCreateListing = (document.getElementById("btnCreateListing"));
         disableCreateListing.disabled = true;
     };
+    SellPage.prototype.lockLocationButton = function () {
+        var disableCreateListing = (document.getElementById("btnLocation"));
+        disableCreateListing.disabled = true;
+    };
+    SellPage.prototype.unlockLocationButton = function () {
+        var button = (document.getElementById("btnLocation"));
+        button.disabled = false;
+    };
     SellPage.prototype.unlockTicketButton = function () {
         document
             .getElementById("btnUploadTicket")
@@ -237,14 +254,13 @@ var SellPage = /** @class */ (function () {
     SellPage.prototype.createListing = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
-            var artist, location, startTime, date, p3, p2, p1, rDate, price;
+            var artist, startTime, date, p3, p2, p1, rDate, price;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.showSpinner()];
                     case 1:
                         _a.sent();
                         artist = this.listing.listingName;
-                        location = this.listing.listingLocation;
                         startTime = this.listing.listingTime;
                         date = this.listing.listingDate.toString();
                         p3 = date.slice(0, 4);
@@ -254,7 +270,6 @@ var SellPage = /** @class */ (function () {
                         console.log(rDate);
                         price = this.listing.listingPrice;
                         if (!(artist == "" ||
-                            location == "" ||
                             (startTime < 0 && startTime > 24) ||
                             date == null ||
                             price == NaN ||
@@ -276,6 +291,9 @@ var SellPage = /** @class */ (function () {
                                 _this.listing.listingCreationDate = gListingCreationTime;
                                 _this.listing.listingServiceCharge = gListingServiceCharge;
                                 _this.listing.listingCustomerPayout = gListingCustomerPayout;
+                                _this.listing.lisingLong = gLng[0];
+                                _this.listing.listingLat = gLat[0];
+                                _this.listing.listingLocation = gVenue[0];
                                 _this.listing.listingSold = false;
                                 var ref = _this.fbDatabase
                                     .list("unaprovedTickets/")
@@ -299,9 +317,24 @@ var SellPage = /** @class */ (function () {
             });
         });
     };
+    SellPage.prototype.findVenue = function () {
+        var myModalOpts = {
+            cssClass: "modal",
+            enableBackdropDismiss: true,
+            showBackdrop: true
+        };
+        var myModal = this.modal.create("SelectLocationModalPage", {}, myModalOpts);
+        myModal.present();
+        myModal.onDidDismiss(function (venueData) {
+            console.log(venueData.latData, venueData.lngData, venueData.venueData);
+            gLat = venueData.latData;
+            gLng = venueData.lngData;
+            gVenue = venueData.venueData;
+        });
+    };
     SellPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-sell",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Sell Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <div class="ngDivAccount">\n    <ion-list-header text-center>List a ticket</ion-list-header>\n    <ion-item>\n      <ion-label floating>Event</ion-label>\n      <ion-input id="txtEvent" [(ngModel)]="listing.listingName"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Location</ion-label>\n      <ion-input\n        id="txtLocation"\n        [(ngModel)]="listing.listingLocation"\n      ></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Start time</ion-label>\n      <ion-input id="txtTime" [(ngModel)]="listing.listingTime"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Date of event</ion-label>\n      <ion-datetime\n        id="listingDate"\n        displayformat="DD/MM/YY"\n        [(ngModel)]="listing.listingDate"\n      ></ion-datetime>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Price £</ion-label>\n      <ion-input id="txtPrice" [(ngModel)]="listing.listingPrice"></ion-input>\n      <button\n        ion-button\n        id="btnCheckPrice"\n        icon-only\n        color="light"\n        (click)="ticketIncomeCalc()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n    <p>\n      <img *ngIf="image" [src]="image" />\n      <button\n        ion-button\n        id="btnUploadTicket"\n        class="sellButton"\n        block\n        (click)="chooseFile()"\n      >\n        Select Ticket\n      </button>\n      <button\n        ion-button\n        id="btnCreateListing"\n        class="sellButton"\n        block\n        (click)="createListing()"\n      >\n        Create your listing\n      </button>\n    </p>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/
+            selector: "page-sell",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Sell Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <div class="ngDivAccount">\n    <ion-list-header text-center>List a ticket</ion-list-header>\n    <ion-item>\n      <ion-label floating>Event</ion-label>\n      <ion-input id="txtEvent" [(ngModel)]="listing.listingName"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Start time</ion-label>\n      <ion-input id="txtTime" [(ngModel)]="listing.listingTime"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Date of event</ion-label>\n      <ion-datetime\n        id="listingDate"\n        displayformat="DD/MM/YY"\n        [(ngModel)]="listing.listingDate"\n      ></ion-datetime>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Price £</ion-label>\n      <ion-input id="txtPrice" [(ngModel)]="listing.listingPrice"></ion-input>\n      <button\n        ion-button\n        id="btnCheckPrice"\n        icon-only\n        color="light"\n        (click)="ticketIncomeCalc()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n    <p>\n      <button ion-button id="btnLocation" class="sellButton" block (click)="findVenue()">Find the venue</button>\n      <img *ngIf="image" [src]="image" />\n      <button\n        ion-button\n        id="btnUploadTicket"\n        class="sellButton"\n        block\n        (click)="chooseFile()"\n      >\n        Select Ticket\n      </button>\n      <button\n        ion-button\n        id="btnCreateListing"\n        class="sellButton"\n        block\n        (click)="createListing()"\n      >\n        Create your listing\n      </button>\n    </p>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */],
@@ -311,7 +344,8 @@ var SellPage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]])
     ], SellPage);
     return SellPage;
 }());

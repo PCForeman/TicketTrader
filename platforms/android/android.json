@@ -10,7 +10,7 @@
           "/manifest/application": [
             {
               "xml": "<application android:largeHeap=\"true\" />",
-              "count": 1,
+              "count": 2,
               "mode": "merge",
               "id": "config.xml",
               "oldAttrib": {
