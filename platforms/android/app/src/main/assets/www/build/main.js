@@ -738,7 +738,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var userLat;
 var userLong;
 var userPos;
-var markerObject = [];
 var keys = [];
 var HomePage = /** @class */ (function () {
     function HomePage(afAuth, toast, gLocation, afDatabase, app, ngZone, navCtrl, navParams) {
@@ -750,6 +749,7 @@ var HomePage = /** @class */ (function () {
         this.ngZone = ngZone;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.markerObject = [];
         window.ionicPageRef = {
             zone: this.ngZone,
             component: this
@@ -834,7 +834,8 @@ var HomePage = /** @class */ (function () {
                     var eventServiceCharge = snapshot.payload.child("Charge").val();
                     var lats = snapshot.payload.child("lat").val();
                     var longs = snapshot.payload.child("long").val();
-                    markerObject.push({
+                    _this.markerObject.push({
+                        index: _this.markerObject.length,
                         Key: finalKey,
                         Name: eventName,
                         Venue: eventVenue,
@@ -850,7 +851,8 @@ var HomePage = /** @class */ (function () {
                     });
                     x++;
                 });
-                markerObject.forEach(function (ticket) {
+                _this.markerObject.forEach(function (ticket) {
+                    ticket.index;
                     ticket.Lat;
                     ticket.Long;
                     ticket.Artist;
@@ -861,6 +863,7 @@ var HomePage = /** @class */ (function () {
                         position: latLng
                     });
                     var content = ("<h1 hidden>" + ticket.Key + "</h1>") + "<br>" + " " +
+                        ("<h2 hidden>" + ticket.index + "</h2>") + "<br>" + " " +
                         ticket.Name +
                         "<br>" +
                         "Date" + " " +
@@ -883,8 +886,13 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.buyTickets = function () {
         var _this = this;
+        var timeClicked = Date.now();
+        var checkOutBy = timeClicked + 600000;
+        var temp = [];
+        var tempArray = [];
         var target = event.srcElement;
         var ticketId = target.parentElement.children.item(0).innerHTML;
+        var index = target.parentElement.children.item(2).innerHTML.valueOf();
         var ref = this.afDatabase.object("approvedTickets/" + ticketId);
         ref.snapshotChanges().subscribe(function (snapshot) {
             var seller = snapshot.payload.child("Seller").val();
@@ -901,8 +909,41 @@ var HomePage = /** @class */ (function () {
             console.log(seller, eventName, eventDate, eventPrice, lats, longs, eventTime, eventCreationDate, eventVenue, eventCustomerPayout, eventServiceCharge);
             var buyerId = _this.afAuth.auth.currentUser.uid;
             if (buyerId != seller) {
+                temp.push(_this.markerObject[index]);
+                temp.filter(function (v) {
+                    tempArray = [{
+                            Key: v.Key,
+                            Name: v.Name,
+                            Venue: v.Venue,
+                            Price: v.Price,
+                            Date: v.Date,
+                            Seller: v.Seller,
+                            Time: v.Time,
+                            Payout: v.Payout,
+                            Creation: v.Creation,
+                            Charge: v.Charge,
+                            checkOutTime: timeClicked,
+                            reservationPerioid: checkOutBy,
+                            Lat: lats,
+                            Long: longs
+                        }];
+                });
+                console.log(tempArray);
+                var checkOutRef = _this.afAuth.auth.currentUser.uid;
+                console.log(tempArray[0]);
+                // this.afDatabase
+                //   .list(`ticketsInBasket/${checkOutRef}`)
+                //    .push(tempArray[0]);
+                //    this.afDatabase.object(`approvedTickets/${ticketId}`).remove();
+                _this.navCtrl.push('BuyPage');
+            }
+            else if (buyerId == seller) {
+                _this.toast.create({ message: 'This is your listing', duration: 2000, position: 'top' }).present();
             }
         });
+    };
+    HomePage.prototype.refresh = function () {
+        window.location.reload();
     };
     HomePage.prototype.checkOut = function () {
         this.navCtrl.push("BuyPage");

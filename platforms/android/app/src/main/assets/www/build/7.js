@@ -109,6 +109,8 @@ var BuyPage = /** @class */ (function () {
                     var eventCreationDate = snapshot.payload.child("Creation").val();
                     var eventCustomerPayout = snapshot.payload.child("Payout").val();
                     var eventServiceCharge = snapshot.payload.child("Charge").val();
+                    var lat = snapshot.payload.child("Lat").val();
+                    var long = snapshot.payload.child("Long").val();
                     var maxTime = checkOutTime + 600000;
                     //  console.log(maxTime);
                     if (maxTime <= timeNow) {
@@ -121,7 +123,9 @@ var BuyPage = /** @class */ (function () {
                             Creation: eventCreationDate,
                             Seller: eventSellerUID,
                             Payout: eventCustomerPayout,
-                            Charge: eventServiceCharge
+                            Charge: eventServiceCharge,
+                            Lat: lat,
+                            Long: long
                         });
                         x++;
                         count + 1;

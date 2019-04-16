@@ -1,4 +1,4 @@
-webpackJsonp([13],{
+webpackJsonp([14],{
 
 /***/ 158:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -9,7 +9,7 @@ webpackJsonp([13],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -206,60 +206,64 @@ webpackEmptyAsyncContext.id = 197;
 var map = {
 	"../pages/account/account.module": [
 		523,
-		10
+		11
 	],
 	"../pages/admin-view/admin-view.module": [
 		524,
-		9
+		10
 	],
 	"../pages/admin/admin.module": [
 		525,
-		12
+		13
 	],
 	"../pages/admin2/admin2.module": [
 		526,
-		8
+		9
 	],
 	"../pages/admin3/admin3.module": [
 		527,
-		7
+		8
 	],
 	"../pages/buy/buy.module": [
 		528,
-		6
+		7
 	],
 	"../pages/home/home.module": [
-		256
+		257
 	],
 	"../pages/login/login.module": [
-		257
+		256
 	],
 	"../pages/modal-account/modal-account.module": [
 		529,
-		5
+		6
 	],
 	"../pages/order-history/order-history.module": [
 		530,
-		4
+		5
 	],
 	"../pages/page/page.module": [
 		531,
-		3
+		4
 	],
 	"../pages/payment-modal/payment-modal.module": [
 		532,
-		2
+		3
 	],
 	"../pages/register/register.module": [
 		533,
-		11
+		12
+	],
+	"../pages/select-location-modal/select-location-modal.module": [
+		534,
+		2
 	],
 	"../pages/sell/sell.module": [
-		534,
+		535,
 		1
 	],
 	"../pages/tickets/tickets.module": [
-		535,
+		536,
 		0
 	]
 };
@@ -280,40 +284,6 @@ module.exports = webpackAsyncContext;
 /***/ }),
 
 /***/ 256:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePageModule", function() { return HomePageModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home__ = __webpack_require__(299);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-var HomePageModule = /** @class */ (function () {
-    function HomePageModule() {
-    }
-    HomePageModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [__WEBPACK_IMPORTED_MODULE_2__home__["a" /* HomePage */]],
-            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__home__["a" /* HomePage */])]
-        })
-    ], HomePageModule);
-    return HomePageModule;
-}());
-
-//# sourceMappingURL=home.module.js.map
-
-/***/ }),
-
-/***/ 257:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -347,6 +317,40 @@ var LoginPageModule = /** @class */ (function () {
 
 /***/ }),
 
+/***/ 257:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePageModule", function() { return HomePageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home__ = __webpack_require__(299);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var HomePageModule = /** @class */ (function () {
+    function HomePageModule() {
+    }
+    HomePageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__home__["a" /* HomePage */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__home__["a" /* HomePage */])]
+        })
+    ], HomePageModule);
+    return HomePageModule;
+}());
+
+//# sourceMappingURL=home.module.js.map
+
+/***/ }),
+
 /***/ 298:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -355,7 +359,7 @@ var LoginPageModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(36);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -494,6 +498,8 @@ var AdminPage = /** @class */ (function () {
                     var eventVenue = snapshot.payload.child("listingLocation").val();
                     var eventDate = snapshot.payload.child("listingDate").val();
                     var eventTime = snapshot.payload.child("listingTime").val();
+                    var lats = snapshot.payload.child("listingLat").val();
+                    var longs = snapshot.payload.child("listingLong").val();
                     var eventCreationDate = snapshot.payload
                         .child("listingCreationDate")
                         .val();
@@ -516,7 +522,9 @@ var AdminPage = /** @class */ (function () {
                         Seller: eventSellerUID,
                         Payout: eventCustomerPayout,
                         Charge: eventServiceCharge,
-                        Sold: listingBoolean
+                        Sold: listingBoolean,
+                        lat: lats,
+                        long: longs
                     });
                     x++;
                 });
@@ -546,7 +554,9 @@ var AdminPage = /** @class */ (function () {
                                 Time: v.Time,
                                 Payout: v.Payout,
                                 Creation: v.Creation,
-                                Charge: v.Charge
+                                Charge: v.Charge,
+                                long: v.long,
+                                lat: v.lat
                             }
                         ];
                         this.fbDatabase.list("approvedTickets/").push(temp[0]);
@@ -674,6 +684,8 @@ var AdminPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angularfire2_database__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -722,27 +734,32 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+
 var userLat;
 var userLong;
 var userPos;
+var keys = [];
 var HomePage = /** @class */ (function () {
-    function HomePage(afAuth, toast, gLocation, app, navCtrl, navParams) {
+    function HomePage(afAuth, toast, gLocation, afDatabase, app, ngZone, navCtrl, navParams) {
         this.afAuth = afAuth;
         this.toast = toast;
         this.gLocation = gLocation;
+        this.afDatabase = afDatabase;
         this.app = app;
+        this.ngZone = ngZone;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.markerObject = [];
+        window.ionicPageRef = {
+            zone: this.ngZone,
+            component: this
+        };
     }
     HomePage.prototype.ionViewWillLoad = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.loadMap()];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
+                this.loadMap();
+                return [2 /*return*/];
             });
         });
     };
@@ -765,20 +782,18 @@ var HomePage = /** @class */ (function () {
             userPos = latLng;
             var mapOptions = {
                 center: latLng,
-                zoom: 12,
+                zoom: 7,
                 zoomControl: true,
                 disableDefaultUI: true,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             _this.map = new google.maps.Map(_this.mapElement.nativeElement, mapOptions);
             _this.addUserMarker();
-            _this.displayTicketListings();
-            _this.displayMusicVenues();
+            _this.loadListings();
         }, function (err) {
             console.log(err);
         });
     };
-    HomePage.prototype.addTimeStamps = function () { };
     HomePage.prototype.addUserMarker = function () {
         var marker = new google.maps.Marker({
             map: this.map,
@@ -788,125 +803,163 @@ var HomePage = /** @class */ (function () {
         var content = "You are here" + " ";
         this.addInfoWindow(marker, content);
     };
-    HomePage.prototype.displayMusicVenues = function () {
-        var venues = [
-            "Factory",
-            "The Hub/dBs",
-            "The Junction",
-            "Underground",
-            "Theatre Royale"
-        ];
-        var lats = [50.3682295, 50.3688716, 50.3793757, 50.3798821, 50.3718561];
-        var longs = [-4.1444514, -4.1511745, -4.1340133, -4.1337842, -4.1444436];
-        var condition = longs.length.valueOf();
-        var initaliseIndex = 0;
-        for (initaliseIndex < condition; (initaliseIndex = initaliseIndex + 1);) {
-            if (initaliseIndex > condition) {
-                return false;
-            }
-            else {
-                var selectIndex = initaliseIndex - 1;
-                var currentVenue = venues[selectIndex];
-                var currentLat = lats[selectIndex];
-                var currentLong = longs[selectIndex];
-                var latLng = new google.maps.LatLng(currentLat, currentLong);
-                var marker = new google.maps.Marker({
-                    map: this.map,
-                    animation: google.maps.Animation.DROP,
-                    position: latLng
+    HomePage.prototype.loadListings = function () {
+        var _this = this;
+        var ref = this.afDatabase.object("approvedTickets/");
+        ref.snapshotChanges().subscribe(function (snapshot) {
+            var allData = snapshot.payload.val();
+            var array = [];
+            array.push(allData);
+            var value = Object.keys(allData);
+            var keyArray = [];
+            keyArray.push(value);
+            for (var i = 0; i < value.length; i++) {
+                var x = 0;
+                var selectedIndex = i;
+                var keyValue = value[selectedIndex];
+                var indexSelecta = value.length - value.length + i;
+                var id = value[indexSelecta];
+                keys.push(id);
+                var ref = _this.afDatabase.object("approvedTickets/" + keyValue);
+                ref.snapshotChanges().subscribe(function (snapshot) {
+                    var finalKey = keys[keys.length - keys.length + x];
+                    var eventName = snapshot.payload.child("Name").val();
+                    var eventPrice = snapshot.payload.child("Price").val();
+                    var eventVenue = snapshot.payload.child("Venue").val();
+                    var eventDate = snapshot.payload.child("Date").val();
+                    var eventTime = snapshot.payload.child("Time").val();
+                    var eventCreationDate = snapshot.payload.child("Creation").val();
+                    var eventSellerUID = snapshot.payload.child("Seller").val();
+                    var eventCustomerPayout = snapshot.payload.child("Payout").val();
+                    var eventServiceCharge = snapshot.payload.child("Charge").val();
+                    var lats = snapshot.payload.child("lat").val();
+                    var longs = snapshot.payload.child("long").val();
+                    _this.markerObject.push({
+                        index: _this.markerObject.length,
+                        Key: finalKey,
+                        Name: eventName,
+                        Venue: eventVenue,
+                        Price: eventPrice,
+                        Date: eventDate,
+                        Time: eventTime,
+                        Creation: eventCreationDate,
+                        Seller: eventSellerUID,
+                        Payout: eventCustomerPayout,
+                        Charge: eventServiceCharge,
+                        Lat: lats,
+                        Long: longs
+                    });
+                    x++;
                 });
-                var content = currentVenue;
-                this.addInfoWindow(marker, content);
+                _this.markerObject.forEach(function (ticket) {
+                    ticket.index;
+                    ticket.Lat;
+                    ticket.Long;
+                    ticket.Artist;
+                    var latLng = new google.maps.LatLng(ticket.Lat, ticket.Long);
+                    var marker = new google.maps.Marker({
+                        map: _this.map,
+                        animation: google.maps.Animation.DROP,
+                        position: latLng
+                    });
+                    var content = "<h1 hidden>" +
+                        ticket.Key +
+                        "</h1>" +
+                        "<br>" +
+                        " " +
+                        ("<h2 hidden>" + ticket.index + "</h2>") +
+                        "<br>" +
+                        " " +
+                        ticket.Name +
+                        "<br>" +
+                        "Date" +
+                        " " +
+                        ticket.Date +
+                        "<br>" +
+                        "Time" +
+                        " " +
+                        ticket.Time +
+                        "<br>" +
+                        "Price:" +
+                        " " +
+                        "£" +
+                        ticket.Price +
+                        "<br>" +
+                        " " +
+                        "<br>" +
+                        '<button class="infoWindowButton" <button onClick="window.ionicPageRef.zone.run(function () { window.ionicPageRef.component.buyTickets()})">Buy this ticket?</button>';
+                    _this.addInfoWindow(marker, content);
+                });
             }
-        }
+        });
     };
-    HomePage.prototype.displayTicketListings = function () {
-        var artist = [
-            "AMC & Turno",
-            "Andy C",
-            "Degs",
-            "Hybrid Minds",
-            "Flava D",
-            "Serum"
-        ];
-        var date = [
-            "12/02/2019",
-            "12/02/2019",
-            "12/02/2019",
-            "04/05/2019",
-            "12/02/2019",
-            "12/02/2019"
-        ];
-        var time = [23.0, 22.0, 22.0, 22.0, 23.0, 23.0];
-        var price = [15.5, 18.75, 19.0, 56.0, 32.5, 29.5];
-        var venue = [
-            "The Hub/dBs",
-            "The Factory",
-            "The Hub/dBs",
-            "Factory",
-            "The Hub/dBs",
-            "The Factory"
-        ];
-        var lats = [
-            50.3681744,
-            50.3687971,
-            50.3672925,
-            50.3696466,
-            50.3802831,
-            50.3804371
-        ];
-        var longs = [
-            -4.1444877,
-            -4.1500989,
-            -4.1494981,
-            -4.1470949,
-            -4.1354273,
-            -4.1352771
-        ];
-        var condition = longs.length.valueOf();
-        var initaliseIndex = 0;
-        for (initaliseIndex < condition; (initaliseIndex = initaliseIndex + 1);) {
-            if (initaliseIndex > condition) {
-                return false;
-            }
-            else {
-                var selectIndex = initaliseIndex - 1;
-                var currentArtist = artist[selectIndex];
-                var currentDate = date[selectIndex];
-                var currentTime = parseFloat(time[selectIndex].toString()).toPrecision(4);
-                var currentPrice = parseFloat(price[selectIndex].toString()).toPrecision(4);
-                var currentVenue = venue[selectIndex];
-                var currentLat = lats[selectIndex];
-                var currentLong = longs[selectIndex];
-                var latLng = new google.maps.LatLng(currentLat, currentLong);
-                var marker = new google.maps.Marker({
-                    map: this.map,
-                    animation: google.maps.Animation.DROP,
-                    position: latLng
+    HomePage.prototype.buyTickets = function () {
+        var _this = this;
+        var timeClicked = Date.now();
+        var checkOutBy = timeClicked + 600000;
+        var temp = [];
+        var tempArray = [];
+        var target = event.srcElement;
+        var ticketId = target.parentElement.children.item(0).innerHTML;
+        var index = target.parentElement.children.item(2).innerHTML.valueOf();
+        var ref = this.afDatabase.object("approvedTickets/" + ticketId);
+        ref.snapshotChanges().subscribe(function (snapshot) {
+            var seller = snapshot.payload.child("Seller").val();
+            var eventName = snapshot.payload.child("Name").val();
+            var eventPrice = snapshot.payload.child("Price").val();
+            var eventVenue = snapshot.payload.child("Venue").val();
+            var eventDate = snapshot.payload.child("Date").val();
+            var eventTime = snapshot.payload.child("Time").val();
+            var eventCreationDate = snapshot.payload.child("Creation").val();
+            var eventCustomerPayout = snapshot.payload.child("Payout").val();
+            var eventServiceCharge = snapshot.payload.child("Charge").val();
+            var lats = snapshot.payload.child("lat").val();
+            var longs = snapshot.payload.child("long").val();
+            console.log(seller, eventName, eventDate, eventPrice, lats, longs, eventTime, eventCreationDate, eventVenue, eventCustomerPayout, eventServiceCharge);
+            var buyerId = _this.afAuth.auth.currentUser.uid;
+            if (buyerId != seller) {
+                temp.push(_this.markerObject[index]);
+                temp.filter(function (v) {
+                    tempArray = [
+                        {
+                            Key: v.Key,
+                            Name: v.Name,
+                            Venue: v.Venue,
+                            Price: v.Price,
+                            Date: v.Date,
+                            Seller: v.Seller,
+                            Time: v.Time,
+                            Payout: v.Payout,
+                            Creation: v.Creation,
+                            Charge: v.Charge,
+                            checkOutTime: timeClicked,
+                            reservationPerioid: checkOutBy,
+                            Lat: lats,
+                            Long: longs
+                        }
+                    ];
                 });
-                var content = "Artist:" +
-                    " " +
-                    currentArtist +
-                    "<br>" +
-                    "Date:" +
-                    " " +
-                    currentDate +
-                    "<br>" +
-                    "Time:" +
-                    " " +
-                    currentTime +
-                    "<br>" +
-                    "Price:£" +
-                    currentPrice +
-                    "<br>" +
-                    "Venue:" +
-                    " " +
-                    currentVenue +
-                    "<br>" +
-                    '<button class="infoWindowButton" type="button" onclick = "buyTickets()">Buy this ticket?</button>';
-                this.addInfoWindow(marker, content);
+                console.log(tempArray);
+                var checkOutRef = _this.afAuth.auth.currentUser.uid;
+                _this.afDatabase
+                    .list("ticketsInBasket/" + checkOutRef)
+                    .push(tempArray[0]);
+                _this.afDatabase.object("approvedTickets/" + ticketId).remove();
+                _this.navCtrl.push("BuyPage");
             }
-        }
+            else if (buyerId == seller) {
+                _this.toast
+                    .create({
+                    message: "This is your listing",
+                    duration: 2000,
+                    position: "top"
+                })
+                    .present();
+            }
+        });
+    };
+    HomePage.prototype.refresh = function () {
+        window.location.reload();
     };
     HomePage.prototype.checkOut = function () {
         this.navCtrl.push("BuyPage");
@@ -947,7 +1000,9 @@ var HomePage = /** @class */ (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */],
+            __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["AngularFireDatabase"],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */],
+            __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])
     ], HomePage);
@@ -991,15 +1046,15 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angularfire2__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_auth__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_database__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_database__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_angularfire2_storage__ = __webpack_require__(297);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_angularfire2_storage__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic_angular__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_camera_ngx__ = __webpack_require__(517);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_home_home_module__ = __webpack_require__(256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_home_home_module__ = __webpack_require__(257);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_login_login__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_login_login_module__ = __webpack_require__(257);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_login_login_module__ = __webpack_require__(256);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_register_register__ = __webpack_require__(158);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__app_component__ = __webpack_require__(518);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__app_firebase_config__ = __webpack_require__(519);
@@ -1046,14 +1101,15 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/admin2/admin2.module#Admin2PageModule', name: 'Admin2Page', segment: 'admin2', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin3/admin3.module#Admin3PageModule', name: 'Admin3Page', segment: 'admin3', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/buy/buy.module#BuyPageModule', name: 'BuyPage', segment: 'buy', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/modal-account/modal-account.module#ModalAccountPageModule', name: 'ModalAccountPage', segment: 'modal-account', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/order-history/order-history.module#OrderHistoryPageModule', name: 'OrderHistoryPage', segment: 'order-history', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/page/page.module#PageModule', name: 'Page', segment: 'page', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/payment-modal/payment-modal.module#PaymentModalPageModule', name: 'PaymentModalPage', segment: 'payment-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/select-location-modal/select-location-modal.module#SelectLocationModalPageModule', name: 'SelectLocationModalPage', segment: 'select-location-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sell/sell.module#SellPageModule', name: 'SellPage', segment: 'sell', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/tickets/tickets.module#TicketsPageModule', name: 'TicketsPage', segment: 'tickets', priority: 'low', defaultHistory: [] }
                     ]
                 }),
@@ -1160,7 +1216,7 @@ var FbConfig = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__register_register__ = __webpack_require__(158);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__admin_admin__ = __webpack_require__(298);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {

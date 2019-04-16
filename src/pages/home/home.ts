@@ -15,7 +15,6 @@ declare var google;
 var userLat: number;
 var userLong: number;
 var userPos;
-var markerObject = [];
 var keys = [];
 @IonicPage()
 @Component({
@@ -25,7 +24,7 @@ var keys = [];
 export class HomePage {
   @ViewChild("map") mapElement: ElementRef;
   map: any;
-
+  markerObject = [];
   constructor(
     private afAuth: AngularFireAuth,
     private toast: ToastController,
@@ -35,13 +34,12 @@ export class HomePage {
     private ngZone: NgZone,
     public navCtrl: NavController,
     public navParams: NavParams
-  ) { (<any>window).ionicPageRef = {
-    zone: this.ngZone,
-    component: this
-};
-
+  ) {
+    (<any>window).ionicPageRef = {
+      zone: this.ngZone,
+      component: this
+    };
   }
-
 
   async ionViewWillLoad() {
     this.loadMap();
@@ -126,7 +124,8 @@ export class HomePage {
           const eventServiceCharge = snapshot.payload.child(`Charge`).val();
           const lats = snapshot.payload.child(`lat`).val();
           const longs = snapshot.payload.child(`long`).val();
-          markerObject.push({
+          this.markerObject.push({
+            index: this.markerObject.length,
             Key: finalKey,
             Name: eventName,
             Venue: eventVenue,
@@ -142,7 +141,8 @@ export class HomePage {
           });
           x++;
         });
-        markerObject.forEach(ticket => {
+        this.markerObject.forEach(ticket => {
+          ticket.index;
           ticket.Lat;
           ticket.Long;
           ticket.Artist;
@@ -153,16 +153,26 @@ export class HomePage {
             position: latLng
           });
           let content =
-          ("<h1 hidden>"+ticket.Key+"</h1>") + "<br>" + " " +
+            "<h1 hidden>" +
+            ticket.Key +
+            "</h1>" +
+            "<br>" +
+            " " +
+            ("<h2 hidden>" + ticket.index + "</h2>") +
+            "<br>" +
+            " " +
             ticket.Name +
             "<br>" +
-            "Date" + " " +
+            "Date" +
+            " " +
             ticket.Date +
             "<br>" +
-            "Time" + " " +
+            "Time" +
+            " " +
             ticket.Time +
             "<br>" +
-            "Price:" + " " +
+            "Price:" +
+            " " +
             "£" +
             ticket.Price +
             "<br>" +
@@ -176,28 +186,85 @@ export class HomePage {
   }
 
   buyTickets() {
-   var target = event.srcElement;
-   var ticketId = target.parentElement.children.item(0).innerHTML;
-   var ref = this.afDatabase.object(`approvedTickets/${ticketId}`);
+    var timeClicked = Date.now();
+    var checkOutBy = timeClicked + 600000;
+    var temp = [];
+    var tempArray = [];
+    var target = event.srcElement;
+    var ticketId = target.parentElement.children.item(0).innerHTML;
+    var index = target.parentElement.children.item(2).innerHTML.valueOf();
+    var ref = this.afDatabase.object(`approvedTickets/${ticketId}`);
     ref.snapshotChanges().subscribe(snapshot => {
-     const seller = snapshot.payload.child(`Seller`).val()
-     const eventName = snapshot.payload.child(`Name`).val();
-     const eventPrice = snapshot.payload.child(`Price`).val();
-     const eventVenue = snapshot.payload.child(`Venue`).val();
-     const eventDate = snapshot.payload.child(`Date`).val();
-     const eventTime = snapshot.payload.child(`Time`).val();
-     const eventCreationDate = snapshot.payload.child(`Creation`).val();
-     const eventCustomerPayout = snapshot.payload.child(`Payout`).val();
-     const eventServiceCharge = snapshot.payload.child(`Charge`).val();
-     const lats = snapshot.payload.child(`lat`).val();
-     const longs = snapshot.payload.child(`long`).val();
-     console.log(seller, eventName, eventDate, eventPrice, lats, longs, eventTime, eventCreationDate, eventVenue, eventCustomerPayout, eventServiceCharge);
-     const buyerId = this.afAuth.auth.currentUser.uid;
-     if (buyerId != seller){
+      const seller = snapshot.payload.child(`Seller`).val();
+      const eventName = snapshot.payload.child(`Name`).val();
+      const eventPrice = snapshot.payload.child(`Price`).val();
+      const eventVenue = snapshot.payload.child(`Venue`).val();
+      const eventDate = snapshot.payload.child(`Date`).val();
+      const eventTime = snapshot.payload.child(`Time`).val();
+      const eventCreationDate = snapshot.payload.child(`Creation`).val();
+      const eventCustomerPayout = snapshot.payload.child(`Payout`).val();
+      const eventServiceCharge = snapshot.payload.child(`Charge`).val();
+      const lats = snapshot.payload.child(`lat`).val();
+      const longs = snapshot.payload.child(`long`).val();
+      console.log(
+        seller,
+        eventName,
+        eventDate,
+        eventPrice,
+        lats,
+        longs,
+        eventTime,
+        eventCreationDate,
+        eventVenue,
+        eventCustomerPayout,
+        eventServiceCharge
+      );
+      const buyerId = this.afAuth.auth.currentUser.uid;
+      if (buyerId != seller) {
+        temp.push(this.markerObject[index]);
+        temp.filter(v => {
+          tempArray = [
+            {
+              Key: v.Key,
+              Name: v.Name,
+              Venue: v.Venue,
+              Price: v.Price,
+              Date: v.Date,
+              Seller: v.Seller,
+              Time: v.Time,
+              Payout: v.Payout,
+              Creation: v.Creation,
+              Charge: v.Charge,
+              checkOutTime: timeClicked,
+              reservationPerioid: checkOutBy,
+              Lat: lats,
+              Long: longs
+            }
+          ];
+        });
+        console.log(tempArray);
+        tempArray.splice(1, tempArray.length)
+        var checkOutRef = this.afAuth.auth.currentUser.uid;
+        this.afDatabase
+          .list(`ticketsInBasket/${checkOutRef}`)
+          .push(tempArray[0]);
+        this.afDatabase.object(`approvedTickets/${ticketId}`).remove();
+        this.navCtrl.push("BuyPage");
+      } else if (buyerId == seller) {
+        this.toast
+          .create({
+            message: "This is your listing",
+            duration: 2000,
+            position: "top"
+          })
+          .present();
+      }
+    });
+  }
 
-     }
-  })
-}
+  refresh(): void {
+    window.location.reload();
+  }
 
   checkOut() {
     this.navCtrl.push("BuyPage");
