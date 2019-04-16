@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from "@angular/core";
+import { Component, ViewChild, ElementRef, NgZone } from "@angular/core";
 import {
   IonicPage,
   NavController,
@@ -32,9 +32,16 @@ export class HomePage {
     private gLocation: Geolocation,
     private afDatabase: AngularFireDatabase,
     private app: App,
+    private ngZone: NgZone,
     public navCtrl: NavController,
     public navParams: NavParams
-  ) {}
+  ) { (<any>window).ionicPageRef = {
+    zone: this.ngZone,
+    component: this
+};
+
+  }
+
 
   async ionViewWillLoad() {
     this.loadMap();
@@ -146,6 +153,7 @@ export class HomePage {
             position: latLng
           });
           let content =
+          ("<h1 hidden>"+ticket.Key+"</h1>") + "<br>" + " " +
             ticket.Name +
             "<br>" +
             "Date" + " " +
@@ -160,7 +168,7 @@ export class HomePage {
             "<br>" +
             " " +
             "<br>" +
-            '<button class="infoWindowButton" type="button" onclick = buyTickets()>Buy this ticket?</button>';
+            '<button class="infoWindowButton" <button onClick="window.ionicPageRef.zone.run(function () { window.ionicPageRef.component.buyTickets()})">Buy this ticket?</button>';
           this.addInfoWindow(marker, content);
         });
       }
@@ -168,8 +176,28 @@ export class HomePage {
   }
 
   buyTickets() {
-    this.navCtrl.push("BuyPage");
-  }
+   var target = event.srcElement;
+   var ticketId = target.parentElement.children.item(0).innerHTML;
+   var ref = this.afDatabase.object(`approvedTickets/${ticketId}`);
+    ref.snapshotChanges().subscribe(snapshot => {
+     const seller = snapshot.payload.child(`Seller`).val()
+     const eventName = snapshot.payload.child(`Name`).val();
+     const eventPrice = snapshot.payload.child(`Price`).val();
+     const eventVenue = snapshot.payload.child(`Venue`).val();
+     const eventDate = snapshot.payload.child(`Date`).val();
+     const eventTime = snapshot.payload.child(`Time`).val();
+     const eventCreationDate = snapshot.payload.child(`Creation`).val();
+     const eventCustomerPayout = snapshot.payload.child(`Payout`).val();
+     const eventServiceCharge = snapshot.payload.child(`Charge`).val();
+     const lats = snapshot.payload.child(`lat`).val();
+     const longs = snapshot.payload.child(`long`).val();
+     console.log(seller, eventName, eventDate, eventPrice, lats, longs, eventTime, eventCreationDate, eventVenue, eventCustomerPayout, eventServiceCharge);
+     const buyerId = this.afAuth.auth.currentUser.uid;
+     if (buyerId != seller){
+
+     }
+  })
+}
 
   checkOut() {
     this.navCtrl.push("BuyPage");
