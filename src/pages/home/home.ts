@@ -9,12 +9,14 @@ import {
 import { AngularFireAuth } from "angularfire2/auth";
 import { Observable } from "rxjs";
 import { Geolocation } from "@ionic-native/geolocation";
+import { AngularFireDatabase } from "angularfire2/database";
 
 declare var google;
 var userLat: number;
 var userLong: number;
 var userPos;
-
+var markerObject = [];
+var keys = [];
 @IonicPage()
 @Component({
   selector: "page-home",
@@ -28,13 +30,14 @@ export class HomePage {
     private afAuth: AngularFireAuth,
     private toast: ToastController,
     private gLocation: Geolocation,
+    private afDatabase: AngularFireDatabase,
     private app: App,
     public navCtrl: NavController,
     public navParams: NavParams
   ) {}
 
   async ionViewWillLoad() {
-    await this.loadMap();
+    this.loadMap();
   }
 
   listingData: Observable<any>;
@@ -58,7 +61,7 @@ export class HomePage {
         userPos = latLng;
         let mapOptions = {
           center: latLng,
-          zoom: 12,
+          zoom: 7,
           zoomControl: true,
           disableDefaultUI: true,
           mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -68,16 +71,13 @@ export class HomePage {
           mapOptions
         );
         this.addUserMarker();
-        this.displayTicketListings();
-        this.displayMusicVenues();
+        this.loadListings();
       },
       err => {
         console.log(err);
       }
     );
   }
-
-  addTimeStamps() {}
 
   addUserMarker() {
     let marker = new google.maps.Marker({
@@ -89,129 +89,86 @@ export class HomePage {
     this.addInfoWindow(marker, content);
   }
 
-  displayMusicVenues() {
-    var venues = [
-      "Factory",
-      "The Hub/dBs",
-      "The Junction",
-      "Underground",
-      "Theatre Royale"
-    ];
-    var lats = [50.3682295, 50.3688716, 50.3793757, 50.3798821, 50.3718561];
-    var longs = [-4.1444514, -4.1511745, -4.1340133, -4.1337842, -4.1444436];
-    var condition = longs.length.valueOf();
-    var initaliseIndex = 0;
-    for (initaliseIndex < condition; (initaliseIndex = initaliseIndex + 1); ) {
-      if (initaliseIndex > condition) {
-        return false;
-      } else {
-        var selectIndex = initaliseIndex - 1;
-        var currentVenue = venues[selectIndex];
-        var currentLat = lats[selectIndex];
-        var currentLong = longs[selectIndex];
-        let latLng = new google.maps.LatLng(currentLat, currentLong);
-        let marker = new google.maps.Marker({
-          map: this.map,
-          animation: google.maps.Animation.DROP,
-          position: latLng
+  loadListings() {
+    var ref = this.afDatabase.object(`approvedTickets/`);
+    ref.snapshotChanges().subscribe(snapshot => {
+      var allData = snapshot.payload.val();
+      var array = [];
+      array.push(allData);
+      var value = Object.keys(allData);
+      var keyArray = [];
+      keyArray.push(value);
+      for (var i = 0; i < value.length; i++) {
+        var x = 0;
+        var selectedIndex = i;
+        var keyValue = value[selectedIndex];
+        var indexSelecta = value.length - value.length + i;
+        var id = value[indexSelecta];
+        keys.push(id);
+        var ref = this.afDatabase.object(`approvedTickets/${keyValue}`);
+        ref.snapshotChanges().subscribe(snapshot => {
+          const finalKey = keys[keys.length - keys.length + x];
+          const eventName = snapshot.payload.child(`Name`).val();
+          const eventPrice = snapshot.payload.child(`Price`).val();
+          const eventVenue = snapshot.payload.child(`Venue`).val();
+          const eventDate = snapshot.payload.child(`Date`).val();
+          const eventTime = snapshot.payload.child(`Time`).val();
+          const eventCreationDate = snapshot.payload.child(`Creation`).val();
+          const eventSellerUID = snapshot.payload.child(`Seller`).val();
+          const eventCustomerPayout = snapshot.payload.child(`Payout`).val();
+          const eventServiceCharge = snapshot.payload.child(`Charge`).val();
+          const lats = snapshot.payload.child(`lat`).val();
+          const longs = snapshot.payload.child(`long`).val();
+          markerObject.push({
+            Key: finalKey,
+            Name: eventName,
+            Venue: eventVenue,
+            Price: eventPrice,
+            Date: eventDate,
+            Time: eventTime,
+            Creation: eventCreationDate,
+            Seller: eventSellerUID,
+            Payout: eventCustomerPayout,
+            Charge: eventServiceCharge,
+            Lat: lats,
+            Long: longs
+          });
+          x++;
         });
-        let content = currentVenue;
-        this.addInfoWindow(marker, content);
+        markerObject.forEach(ticket => {
+          ticket.Lat;
+          ticket.Long;
+          ticket.Artist;
+          let latLng = new google.maps.LatLng(ticket.Lat, ticket.Long);
+          let marker = new google.maps.Marker({
+            map: this.map,
+            animation: google.maps.Animation.DROP,
+            position: latLng
+          });
+          let content =
+            ticket.Name +
+            "<br>" +
+            "Date" + " " +
+            ticket.Date +
+            "<br>" +
+            "Time" + " " +
+            ticket.Time +
+            "<br>" +
+            "Price:" + " " +
+            "£" +
+            ticket.Price +
+            "<br>" +
+            " " +
+            "<br>" +
+            '<button class="infoWindowButton" type="button" onclick = buyTickets()>Buy this ticket?</button>';
+          this.addInfoWindow(marker, content);
+        });
       }
-    }
+    });
   }
 
-  displayTicketListings() {
-    var artist = [
-      "AMC & Turno",
-      "Andy C",
-      "Degs",
-      "Hybrid Minds",
-      "Flava D",
-      "Serum"
-    ];
-    var date = [
-      "12/02/2019",
-      "12/02/2019",
-      "12/02/2019",
-      "04/05/2019",
-      "12/02/2019",
-      "12/02/2019"
-    ];
-    var time = [23.0, 22.0, 22.0, 22.0, 23.0, 23.0];
-    var price = [15.5, 18.75, 19.0, 56.0, 32.5, 29.5];
-    var venue = [
-      "The Hub/dBs",
-      "The Factory",
-      "The Hub/dBs",
-      "Factory",
-      "The Hub/dBs",
-      "The Factory"
-    ];
-    var lats = [
-      50.3681744,
-      50.3687971,
-      50.3672925,
-      50.3696466,
-      50.3802831,
-      50.3804371
-    ];
-    var longs = [
-      -4.1444877,
-      -4.1500989,
-      -4.1494981,
-      -4.1470949,
-      -4.1354273,
-      -4.1352771
-    ];
-    var condition = longs.length.valueOf();
-    var initaliseIndex = 0;
-    for (initaliseIndex < condition; (initaliseIndex = initaliseIndex + 1); ) {
-      if (initaliseIndex > condition) {
-        return false;
-      } else {
-        var selectIndex = initaliseIndex - 1;
-        var currentArtist = artist[selectIndex];
-        var currentDate = date[selectIndex];
-        var currentTime = parseFloat(time[selectIndex].toString()).toPrecision(
-          4
-        );
-        var currentPrice = parseFloat(
-          price[selectIndex].toString()
-        ).toPrecision(4);
-        var currentVenue = venue[selectIndex];
-        var currentLat = lats[selectIndex];
-        var currentLong = longs[selectIndex];
-        let latLng = new google.maps.LatLng(currentLat, currentLong);
-        let marker = new google.maps.Marker({
-          map: this.map,
-          animation: google.maps.Animation.DROP,
-          position: latLng
-        });
-        let content =
-          "Artist:" +
-          " " +
-          currentArtist +
-          "<br>" +
-          "Date:" +
-          " " +
-          currentDate +
-          "<br>" +
-          "Time:" +
-          " " +
-          currentTime +
-          "<br>" +
-          "Price:£" +
-          currentPrice +
-          "<br>" +
-          "Venue:" +
-          " " +
-          currentVenue +
-          "<br>" +
-          '<button class="infoWindowButton" type="button" onclick = "buyTickets()">Buy this ticket?</button>';
-        this.addInfoWindow(marker, content);
-      }
-    }
+  buyTickets() {
+    this.navCtrl.push("BuyPage");
   }
 
   checkOut() {

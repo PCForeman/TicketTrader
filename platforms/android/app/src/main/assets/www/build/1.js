@@ -126,7 +126,6 @@ var SellPage = /** @class */ (function () {
         this.lockTicketButton();
         this.unlockTicketButton();
         this.lockFileUpload();
-        this.unlockFileUpload();
         this.lockLocationButton();
     };
     SellPage.prototype.chooseFile = function () {
@@ -186,6 +185,7 @@ var SellPage = /** @class */ (function () {
             })
                 .present();
             this.unlockLocationButton();
+            this.unlockUploadButton();
         }
         else {
             this.toast
@@ -214,13 +214,9 @@ var SellPage = /** @class */ (function () {
         var disableFileUpload = (document.getElementById("btnUploadTicket"));
         disableFileUpload.disabled = true;
     };
-    SellPage.prototype.unlockFileUpload = function () {
-        document
-            .getElementById("btnCheckPrice")
-            .addEventListener("click", function () {
-            var EnableFileUpload = (document.getElementById("btnUploadTicket"));
-            EnableFileUpload.disabled = false;
-        });
+    SellPage.prototype.unlockUploadButton = function () {
+        var button = (document.getElementById("btnUploadTicket"));
+        button.disabled = false;
     };
     SellPage.prototype.lockTicketButton = function () {
         var disableCreateListing = (document.getElementById("btnCreateListing"));

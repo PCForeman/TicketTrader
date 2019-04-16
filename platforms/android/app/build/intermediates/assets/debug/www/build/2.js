@@ -98,23 +98,23 @@ var SelectLocationModalPage = /** @class */ (function () {
         this.navParams = navParams;
         this.vCtrl = vCtrl;
         this.zone = zone;
-        this.GoogleAutoComplete = new google.maps.places.AutocompleteService();
-        this.autoComplete = { input: '' };
-        this.acItems = [];
+        this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
+        this.autocomplete = { input: '' };
+        this.autocompleteItems = [];
         this.geocoder = new google.maps.Geocoder;
         this.markers = [];
     }
     SelectLocationModalPage.prototype.updateResults = function () {
         var _this = this;
-        if (this.autoComplete.input == '') {
-            this.acItems = [];
+        if (this.autocomplete.input == '') {
+            this.autocompleteItems = [];
             return;
         }
-        this.GoogleAutoComplete.getPlacePredictions({ input: this.autoComplete.input }, function (predictions) {
-            _this.acItems = [];
+        this.GoogleAutocomplete.getPlacePredictions({ input: this.autocomplete.input }, function (places) {
+            _this.autocompleteItems = [];
             _this.zone.run(function () {
-                predictions.forEach(function (prediction) {
-                    _this.acItems.push(prediction);
+                places.forEach(function (places) {
+                    _this.autocompleteItems.push(places);
                 });
             });
         });
@@ -123,7 +123,7 @@ var SelectLocationModalPage = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                this.acItems = [];
+                this.autocompleteItems = [];
                 this.geocoder.geocode({ 'placeId': item.place_id }, function (results, status) { return __awaiter(_this, void 0, void 0, function () {
                     var position, marker, venue, venueData, latData, lngData;
                     return __generator(this, function (_a) {
@@ -142,7 +142,7 @@ var SelectLocationModalPage = /** @class */ (function () {
                             case 1:
                                 _a.sent();
                                 this.map.setCenter(results[0].geometry.location);
-                                venue = this.autoComplete.input.toString().toUpperCase();
+                                venue = this.autocomplete.input.toString().toUpperCase();
                                 console.log(position.lat, position.lng, venue);
                                 venueData = [];
                                 venueData.push(venue);
@@ -186,7 +186,8 @@ var SelectLocationModalPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-select-location-modal',template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\select-location-modal\select-location-modal.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button (click)="close()">Close</button>\n    </ion-buttons>\n    <ion-title position text-center>Locate venue</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-searchbar\n    [(ngModel)]="autocomplete.input"\n    (ionInput)="updateResults()"\n    placeholder="Search for a place"\n  ></ion-searchbar>\n  <ion-list [hidden]="autocompleteItems.length == 0">\n    <ion-item\n      *ngFor="let item of autocompleteItems"\n      tappable\n      (click)="selectSearchResult(item)"\n    >\n      {{ item.description }}\n    </ion-item>\n  </ion-list>\n  <div #map id="map"></div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\select-location-modal\select-location-modal.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */]])
     ], SelectLocationModalPage);
     return SelectLocationModalPage;
 }());

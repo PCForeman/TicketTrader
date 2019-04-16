@@ -188,6 +188,7 @@ export class SellPage {
   async createListing() {
     await this.showSpinner();
     var artist = this.listing.listingName;
+    artist.toUpperCase();
     var startTime = this.listing.listingTime;
     var date = this.listing.listingDate.toString();
     var p3 = date.slice(0, 4);
@@ -219,7 +220,7 @@ export class SellPage {
         this.listing.listingCreationDate = gListingCreationTime;
         this.listing.listingServiceCharge = gListingServiceCharge;
         this.listing.listingCustomerPayout = gListingCustomerPayout;
-        this.listing.lisingLong = gLng[0];
+        this.listing.listingLong = gLng[0];
         this.listing.listingLat = gLat[0];
         this.listing.listingLocation = gVenue[0];
         this.listing.listingSold = false;

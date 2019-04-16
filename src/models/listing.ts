@@ -11,5 +11,5 @@ export interface Listings {
   listingCustomerPayout: number;
   listingServiceCharge: number;
   listingLat: number;
-  lisingLong: number;
+  listingLong: number;
 }

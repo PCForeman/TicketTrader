@@ -9,7 +9,7 @@ webpackJsonp([14],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -225,7 +225,7 @@ var map = {
 		8
 	],
 	"../pages/buy/buy.module": [
-		536,
+		528,
 		7
 	],
 	"../pages/home/home.module": [
@@ -235,11 +235,11 @@ var map = {
 		257
 	],
 	"../pages/modal-account/modal-account.module": [
-		528,
+		529,
 		6
 	],
 	"../pages/order-history/order-history.module": [
-		529,
+		536,
 		5
 	],
 	"../pages/page/page.module": [
@@ -255,11 +255,11 @@ var map = {
 		12
 	],
 	"../pages/select-location-modal/select-location-modal.module": [
-		533,
+		534,
 		2
 	],
 	"../pages/sell/sell.module": [
-		534,
+		533,
 		1
 	],
 	"../pages/tickets/tickets.module": [
@@ -359,7 +359,7 @@ var LoginPageModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(36);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -498,6 +498,8 @@ var AdminPage = /** @class */ (function () {
                     var eventVenue = snapshot.payload.child("listingLocation").val();
                     var eventDate = snapshot.payload.child("listingDate").val();
                     var eventTime = snapshot.payload.child("listingTime").val();
+                    var lats = snapshot.payload.child("listingLat").val();
+                    var longs = snapshot.payload.child("listingLong").val();
                     var eventCreationDate = snapshot.payload
                         .child("listingCreationDate")
                         .val();
@@ -520,7 +522,9 @@ var AdminPage = /** @class */ (function () {
                         Seller: eventSellerUID,
                         Payout: eventCustomerPayout,
                         Charge: eventServiceCharge,
-                        Sold: listingBoolean
+                        Sold: listingBoolean,
+                        lat: lats,
+                        long: longs
                     });
                     x++;
                 });
@@ -550,7 +554,9 @@ var AdminPage = /** @class */ (function () {
                                 Time: v.Time,
                                 Payout: v.Payout,
                                 Creation: v.Creation,
-                                Charge: v.Charge
+                                Charge: v.Charge,
+                                long: v.long,
+                                lat: v.lat
                             }
                         ];
                         this.fbDatabase.list("approvedTickets/").push(temp[0]);
@@ -653,15 +659,10 @@ var AdminPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: "page-admin",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin\admin.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Pending listings</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <ion-list>\n    <div class="ngDivAdmin" [id]="i" ion-item *ngFor="let item of items; let i = index">\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h2 position text-center>{{ item.Key }}</h2>\n      <h3 position text-center>{{ item.Name }}</h3>\n      <h4 position text-center>Venue: {{ item.Venue }}</h4>\n      <h5 position text-center>Price: £{{ item.Price }}</h5>\n      <h6 position text-center>Date: {{ item.Date }}</h6>\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n      <button\n        [id]="i"\n        ion-button\n        class="modalButton"\n        block\n        (click)="accept(index)"\n      >\n        Accept\n      </button>\n      <button\n        [id]="i"\n        ion-button\n        class="modalButton"\n        block\n        (click)="reject(index)"\n      >\n        Reject\n      </button>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin\admin.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["AngularFireAuth"],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["f" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["k" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* App */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["AngularFireAuth"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["AngularFireAuth"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["f" /* LoadingController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["k" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["k" /* ToastController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* App */]) === "function" && _g || Object])
     ], AdminPage);
     return AdminPage;
+    var _a, _b, _c, _d, _e, _f, _g;
 }());
 
 //# sourceMappingURL=admin.js.map
@@ -678,6 +679,8 @@ var AdminPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angularfire2_database__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -726,14 +729,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+
 var userLat;
 var userLong;
 var userPos;
+var markerObject = [];
+var keys = [];
 var HomePage = /** @class */ (function () {
-    function HomePage(afAuth, toast, gLocation, app, navCtrl, navParams) {
+    function HomePage(afAuth, toast, gLocation, afDatabase, app, navCtrl, navParams) {
         this.afAuth = afAuth;
         this.toast = toast;
         this.gLocation = gLocation;
+        this.afDatabase = afDatabase;
         this.app = app;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -741,12 +748,8 @@ var HomePage = /** @class */ (function () {
     HomePage.prototype.ionViewWillLoad = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.loadMap()];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
+                this.loadMap();
+                return [2 /*return*/];
             });
         });
     };
@@ -769,20 +772,18 @@ var HomePage = /** @class */ (function () {
             userPos = latLng;
             var mapOptions = {
                 center: latLng,
-                zoom: 12,
+                zoom: 7,
                 zoomControl: true,
                 disableDefaultUI: true,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             _this.map = new google.maps.Map(_this.mapElement.nativeElement, mapOptions);
             _this.addUserMarker();
-            _this.displayTicketListings();
-            _this.displayMusicVenues();
+            _this.loadListings();
         }, function (err) {
             console.log(err);
         });
     };
-    HomePage.prototype.addTimeStamps = function () { };
     HomePage.prototype.addUserMarker = function () {
         var marker = new google.maps.Marker({
             map: this.map,
@@ -792,125 +793,85 @@ var HomePage = /** @class */ (function () {
         var content = "You are here" + " ";
         this.addInfoWindow(marker, content);
     };
-    HomePage.prototype.displayMusicVenues = function () {
-        var venues = [
-            "Factory",
-            "The Hub/dBs",
-            "The Junction",
-            "Underground",
-            "Theatre Royale"
-        ];
-        var lats = [50.3682295, 50.3688716, 50.3793757, 50.3798821, 50.3718561];
-        var longs = [-4.1444514, -4.1511745, -4.1340133, -4.1337842, -4.1444436];
-        var condition = longs.length.valueOf();
-        var initaliseIndex = 0;
-        for (initaliseIndex < condition; (initaliseIndex = initaliseIndex + 1);) {
-            if (initaliseIndex > condition) {
-                return false;
-            }
-            else {
-                var selectIndex = initaliseIndex - 1;
-                var currentVenue = venues[selectIndex];
-                var currentLat = lats[selectIndex];
-                var currentLong = longs[selectIndex];
-                var latLng = new google.maps.LatLng(currentLat, currentLong);
-                var marker = new google.maps.Marker({
-                    map: this.map,
-                    animation: google.maps.Animation.DROP,
-                    position: latLng
+    HomePage.prototype.loadListings = function () {
+        var _this = this;
+        var ref = this.afDatabase.object("approvedTickets/");
+        ref.snapshotChanges().subscribe(function (snapshot) {
+            var allData = snapshot.payload.val();
+            var array = [];
+            array.push(allData);
+            var value = Object.keys(allData);
+            var keyArray = [];
+            keyArray.push(value);
+            for (var i = 0; i < value.length; i++) {
+                var x = 0;
+                var selectedIndex = i;
+                var keyValue = value[selectedIndex];
+                var indexSelecta = value.length - value.length + i;
+                var id = value[indexSelecta];
+                keys.push(id);
+                var ref = _this.afDatabase.object("approvedTickets/" + keyValue);
+                ref.snapshotChanges().subscribe(function (snapshot) {
+                    var finalKey = keys[keys.length - keys.length + x];
+                    var eventName = snapshot.payload.child("Name").val();
+                    var eventPrice = snapshot.payload.child("Price").val();
+                    var eventVenue = snapshot.payload.child("Venue").val();
+                    var eventDate = snapshot.payload.child("Date").val();
+                    var eventTime = snapshot.payload.child("Time").val();
+                    var eventCreationDate = snapshot.payload.child("Creation").val();
+                    var eventSellerUID = snapshot.payload.child("Seller").val();
+                    var eventCustomerPayout = snapshot.payload.child("Payout").val();
+                    var eventServiceCharge = snapshot.payload.child("Charge").val();
+                    var lats = snapshot.payload.child("lat").val();
+                    var longs = snapshot.payload.child("long").val();
+                    markerObject.push({
+                        Key: finalKey,
+                        Name: eventName,
+                        Venue: eventVenue,
+                        Price: eventPrice,
+                        Date: eventDate,
+                        Time: eventTime,
+                        Creation: eventCreationDate,
+                        Seller: eventSellerUID,
+                        Payout: eventCustomerPayout,
+                        Charge: eventServiceCharge,
+                        Lat: lats,
+                        Long: longs
+                    });
+                    x++;
                 });
-                var content = currentVenue;
-                this.addInfoWindow(marker, content);
+                markerObject.forEach(function (ticket) {
+                    ticket.Lat;
+                    ticket.Long;
+                    ticket.Artist;
+                    var latLng = new google.maps.LatLng(ticket.Lat, ticket.Long);
+                    var marker = new google.maps.Marker({
+                        map: _this.map,
+                        animation: google.maps.Animation.DROP,
+                        position: latLng
+                    });
+                    var content = ticket.Name +
+                        "<br>" +
+                        "Date" + " " +
+                        ticket.Date +
+                        "<br>" +
+                        "Time" + " " +
+                        ticket.Time +
+                        "<br>" +
+                        "Price:" + " " +
+                        "£" +
+                        ticket.Price +
+                        "<br>" +
+                        " " +
+                        "<br>" +
+                        '<button class="infoWindowButton" type="button" onclick = buyTickets()>Buy this ticket?</button>';
+                    _this.addInfoWindow(marker, content);
+                });
             }
-        }
+        });
     };
-    HomePage.prototype.displayTicketListings = function () {
-        var artist = [
-            "AMC & Turno",
-            "Andy C",
-            "Degs",
-            "Hybrid Minds",
-            "Flava D",
-            "Serum"
-        ];
-        var date = [
-            "12/02/2019",
-            "12/02/2019",
-            "12/02/2019",
-            "04/05/2019",
-            "12/02/2019",
-            "12/02/2019"
-        ];
-        var time = [23.0, 22.0, 22.0, 22.0, 23.0, 23.0];
-        var price = [15.5, 18.75, 19.0, 56.0, 32.5, 29.5];
-        var venue = [
-            "The Hub/dBs",
-            "The Factory",
-            "The Hub/dBs",
-            "Factory",
-            "The Hub/dBs",
-            "The Factory"
-        ];
-        var lats = [
-            50.3681744,
-            50.3687971,
-            50.3672925,
-            50.3696466,
-            50.3802831,
-            50.3804371
-        ];
-        var longs = [
-            -4.1444877,
-            -4.1500989,
-            -4.1494981,
-            -4.1470949,
-            -4.1354273,
-            -4.1352771
-        ];
-        var condition = longs.length.valueOf();
-        var initaliseIndex = 0;
-        for (initaliseIndex < condition; (initaliseIndex = initaliseIndex + 1);) {
-            if (initaliseIndex > condition) {
-                return false;
-            }
-            else {
-                var selectIndex = initaliseIndex - 1;
-                var currentArtist = artist[selectIndex];
-                var currentDate = date[selectIndex];
-                var currentTime = parseFloat(time[selectIndex].toString()).toPrecision(4);
-                var currentPrice = parseFloat(price[selectIndex].toString()).toPrecision(4);
-                var currentVenue = venue[selectIndex];
-                var currentLat = lats[selectIndex];
-                var currentLong = longs[selectIndex];
-                var latLng = new google.maps.LatLng(currentLat, currentLong);
-                var marker = new google.maps.Marker({
-                    map: this.map,
-                    animation: google.maps.Animation.DROP,
-                    position: latLng
-                });
-                var content = "Artist:" +
-                    " " +
-                    currentArtist +
-                    "<br>" +
-                    "Date:" +
-                    " " +
-                    currentDate +
-                    "<br>" +
-                    "Time:" +
-                    " " +
-                    currentTime +
-                    "<br>" +
-                    "Price:£" +
-                    currentPrice +
-                    "<br>" +
-                    "Venue:" +
-                    " " +
-                    currentVenue +
-                    "<br>" +
-                    '<button class="infoWindowButton" type="button" onclick = "buyTickets()">Buy this ticket?</button>';
-                this.addInfoWindow(marker, content);
-            }
-        }
+    HomePage.prototype.buyTickets = function () {
+        this.navCtrl.push("BuyPage");
     };
     HomePage.prototype.checkOut = function () {
         this.navCtrl.push("BuyPage");
@@ -942,20 +903,16 @@ var HomePage = /** @class */ (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])("map"),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */]) === "function" && _a || Object)
     ], HomePage.prototype, "mapElement", void 0);
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: "page-home",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="button" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="checkOut()"\n      >\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="orderHistory()"\n      >\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <div #map id="map"></div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\home\home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["AngularFireDatabase"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["AngularFireDatabase"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* App */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _h || Object])
     ], HomePage);
     return HomePage;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -995,7 +952,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angularfire2__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_auth__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_database__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_database__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_angularfire2_storage__ = __webpack_require__(297);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_angularfire2_storage__);
@@ -1051,15 +1008,15 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/admin3/admin3.module#Admin3PageModule', name: 'Admin3Page', segment: 'admin3', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/buy/buy.module#BuyPageModule', name: 'BuyPage', segment: 'buy', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/modal-account/modal-account.module#ModalAccountPageModule', name: 'ModalAccountPage', segment: 'modal-account', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/order-history/order-history.module#OrderHistoryPageModule', name: 'OrderHistoryPage', segment: 'order-history', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/page/page.module#PageModule', name: 'Page', segment: 'page', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/payment-modal/payment-modal.module#PaymentModalPageModule', name: 'PaymentModalPage', segment: 'payment-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/select-location-modal/select-location-modal.module#SelectLocationModalPageModule', name: 'SelectLocationModalPage', segment: 'select-location-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sell/sell.module#SellPageModule', name: 'SellPage', segment: 'sell', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/select-location-modal/select-location-modal.module#SelectLocationModalPageModule', name: 'SelectLocationModalPage', segment: 'select-location-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/tickets/tickets.module#TicketsPageModule', name: 'TicketsPage', segment: 'tickets', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/buy/buy.module#BuyPageModule', name: 'BuyPage', segment: 'buy', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/order-history/order-history.module#OrderHistoryPageModule', name: 'OrderHistoryPage', segment: 'order-history', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_7_angularfire2__["AngularFireModule"].initializeApp(__WEBPACK_IMPORTED_MODULE_18__app_firebase_config__["a" /* FbConfig */]),
@@ -1165,7 +1122,7 @@ var FbConfig = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__register_register__ = __webpack_require__(158);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__admin_admin__ = __webpack_require__(298);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {

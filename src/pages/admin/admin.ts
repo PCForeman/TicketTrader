@@ -104,23 +104,26 @@ export class AdminPage {
         this.kA.push(id);
         var ref = this.fbDatabase.object(`unaprovedTickets/${keyValue}`);
         ref.snapshotChanges().subscribe(snapshot => {
-          var finalKey = this.kA[this.kA.length - this.kA.length + x];
-          var eventName = snapshot.payload.child(`listingName`).val();
-          var eventPrice = snapshot.payload.child(`listingPrice`).val();
-          var eventVenue = snapshot.payload.child(`listingLocation`).val();
-          var eventDate = snapshot.payload.child(`listingDate`).val();
-          var eventTime = snapshot.payload.child(`listingTime`).val();
-          var eventCreationDate = snapshot.payload
+          const finalKey = this.kA[this.kA.length - this.kA.length + x];
+          const eventName = snapshot.payload.child(`listingName`).val();
+          const eventPrice = snapshot.payload.child(`listingPrice`).val();
+          const eventVenue = snapshot.payload.child(`listingLocation`).val();
+          const eventDate = snapshot.payload.child(`listingDate`).val();
+          const eventTime = snapshot.payload.child(`listingTime`).val();
+          const lats = snapshot.payload.child(`listingLat`).val();
+          const longs = snapshot.payload.child(`listingLong`).val();
+          const eventCreationDate = snapshot.payload
             .child(`listingCreationDate`)
             .val();
-          var eventSellerUID = snapshot.payload.child(`listingSellerUID`).val();
-          var eventCustomerPayout = snapshot.payload
+          const eventSellerUID = snapshot.payload.child(`listingSellerUID`).val();
+          const eventCustomerPayout = snapshot.payload
             .child(`listingCustomerPayout`)
             .val();
-          var eventServiceCharge = snapshot.payload
+          const eventServiceCharge = snapshot.payload
             .child(`listingServiceCharge`)
             .val();
-          var listingBoolean = snapshot.payload.child(`listingSold`).val();
+          
+          const listingBoolean = snapshot.payload.child(`listingSold`).val();
           this.items.push({
             Key: finalKey,
             Name: eventName,
@@ -132,7 +135,9 @@ export class AdminPage {
             Seller: eventSellerUID,
             Payout: eventCustomerPayout,
             Charge: eventServiceCharge,
-            Sold: listingBoolean
+            Sold: listingBoolean,
+            lat: lats,
+            long: longs
           });
           x++;
         });
@@ -162,7 +167,9 @@ export class AdminPage {
           Time: v.Time,
           Payout: v.Payout,
           Creation: v.Creation,
-          Charge: v.Charge
+          Charge: v.Charge,
+          long: v.long,
+          lat: v.lat
         }
       ];
 
