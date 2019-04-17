@@ -87,7 +87,7 @@ export class SellPage {
   }
 
   ticketIncomeCalc() {
-    var userMoney = this.listing.listingPrice;
+    var userMoney = this.listing.Price;
     var ticketTraderMoney = Number(((userMoney / 100) * 7 + 0.3).toFixed(2));
     console.log(ticketTraderMoney);
     var userFinal = Number(userMoney - ticketTraderMoney).toFixed(2);
@@ -187,16 +187,16 @@ export class SellPage {
 
   async createListing() {
     await this.showSpinner();
-    var artist = this.listing.listingName;
+    var artist = this.listing.Name;
     artist.toUpperCase();
-    var startTime = this.listing.listingTime;
-    var date = this.listing.listingDate.toString();
+    var startTime = this.listing.Time;
+    var date = this.listing.Date.toString();
     var p3 = date.slice(0, 4);
     var p2 = date.slice(5, 7);
     var p1 = date.slice(8, 11);
     var rDate = p1 + "/" + p2 + "/" + p3;
     console.log(rDate);
-    var price = this.listing.listingPrice;
+    var price = this.listing.Price;
     if (
       artist == "" ||
       (startTime < 0 && startTime > 24) ||
@@ -215,15 +215,15 @@ export class SellPage {
     } else {
       this.generateListingId();
       await this.afAuth.authState.take(1).subscribe(auth => {
-        this.listing.listingDate = rDate;
-        this.listing.listingSellerUID = auth.uid;
-        this.listing.listingCreationDate = gListingCreationTime;
-        this.listing.listingServiceCharge = gListingServiceCharge;
-        this.listing.listingCustomerPayout = gListingCustomerPayout;
-        this.listing.listingLong = gLng[0];
-        this.listing.listingLat = gLat[0];
-        this.listing.listingLocation = gVenue[0];
-        this.listing.listingSold = false;
+        this.listing.Date = rDate;
+        this.listing.Seller = auth.uid;
+        this.listing.CreationDate = gListingCreationTime;
+        this.listing.ServiceCharge = gListingServiceCharge;
+        this.listing.CustomerPayout = gListingCustomerPayout;
+        this.listing.Long = gLng[0];
+        this.listing.Lat = gLat[0];
+        this.listing.Location = gVenue[0];
+        this.listing.Sold = false;
         var ref = this.fbDatabase
           .list(`unaprovedTickets/`)
           .push(this.listing)

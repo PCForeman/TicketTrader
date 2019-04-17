@@ -25,6 +25,7 @@ export class HomePage {
   @ViewChild("map") mapElement: ElementRef;
   map: any;
   markerObject = [];
+  items = [];
   constructor(
     private afAuth: AngularFireAuth,
     private toast: ToastController,
@@ -47,7 +48,7 @@ export class HomePage {
 
   listingData: Observable<any>;
 
-  loadMap() {
+ loadMap() {
     this.gLocation
       .getCurrentPosition()
       .then(resp => {
@@ -66,17 +67,17 @@ export class HomePage {
         userPos = latLng;
         let mapOptions = {
           center: latLng,
-          zoom: 7,
+          zoom: 6,
           zoomControl: true,
           disableDefaultUI: true,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         this.map = new google.maps.Map(
           this.mapElement.nativeElement,
-          mapOptions
+          mapOptions,
+          this.loadListings(),
         );
-        this.addUserMarker();
-        this.loadListings();
+        this.addUserMarker()
       },
       err => {
         console.log(err);
@@ -122,10 +123,10 @@ export class HomePage {
           const eventSellerUID = snapshot.payload.child(`Seller`).val();
           const eventCustomerPayout = snapshot.payload.child(`Payout`).val();
           const eventServiceCharge = snapshot.payload.child(`Charge`).val();
-          const lats = snapshot.payload.child(`lat`).val();
-          const longs = snapshot.payload.child(`long`).val();
-          this.markerObject.push({
-            index: this.markerObject.length,
+          const lats = snapshot.payload.child(`Lat`).val();
+          const longs = snapshot.payload.child(`Long`).val();
+          this.items.push({
+            index: x,
             Key: finalKey,
             Name: eventName,
             Venue: eventVenue,
@@ -141,7 +142,7 @@ export class HomePage {
           });
           x++;
         });
-        this.markerObject.forEach(ticket => {
+        this.items.forEach(ticket => {
           ticket.index;
           ticket.Lat;
           ticket.Long;
@@ -188,79 +189,53 @@ export class HomePage {
   buyTickets() {
     var timeClicked = Date.now();
     var checkOutBy = timeClicked + 600000;
+    const userId = this.afAuth.auth.currentUser.uid;
     var temp = [];
-    var tempArray = [];
     var target = event.srcElement;
-    var ticketId = target.parentElement.children.item(0).innerHTML;
-    var index = target.parentElement.children.item(2).innerHTML.valueOf();
-    var ref = this.afDatabase.object(`approvedTickets/${ticketId}`);
-    ref.snapshotChanges().subscribe(snapshot => {
-      const seller = snapshot.payload.child(`Seller`).val();
-      const eventName = snapshot.payload.child(`Name`).val();
-      const eventPrice = snapshot.payload.child(`Price`).val();
-      const eventVenue = snapshot.payload.child(`Venue`).val();
-      const eventDate = snapshot.payload.child(`Date`).val();
-      const eventTime = snapshot.payload.child(`Time`).val();
-      const eventCreationDate = snapshot.payload.child(`Creation`).val();
-      const eventCustomerPayout = snapshot.payload.child(`Payout`).val();
-      const eventServiceCharge = snapshot.payload.child(`Charge`).val();
-      const lats = snapshot.payload.child(`lat`).val();
-      const longs = snapshot.payload.child(`long`).val();
-      console.log(
-        seller,
-        eventName,
-        eventDate,
-        eventPrice,
-        lats,
-        longs,
-        eventTime,
-        eventCreationDate,
-        eventVenue,
-        eventCustomerPayout,
-        eventServiceCharge
-      );
-      const buyerId = this.afAuth.auth.currentUser.uid;
-      if (buyerId != seller) {
-        temp.push(this.markerObject[index]);
-        temp.filter(v => {
-          tempArray = [
-            {
-              Key: v.Key,
-              Name: v.Name,
-              Venue: v.Venue,
-              Price: v.Price,
-              Date: v.Date,
-              Seller: v.Seller,
-              Time: v.Time,
-              Payout: v.Payout,
-              Creation: v.Creation,
-              Charge: v.Charge,
-              checkOutTime: timeClicked,
-              reservationPerioid: checkOutBy,
-              Lat: lats,
-              Long: longs
-            }
-          ];
-        });
-        console.log(tempArray);
-        tempArray.splice(1, tempArray.length)
+    var ticketClickedId = target.parentElement.children.item(0).innerHTML.toString();
+    var index = target.parentElement.children.item(2).innerHTML.toString();
+
+      console.log(ticketClickedId, index)
+      if (userId == ticketClickedId) {
+      this.toast
+        .create({
+          message: "This is your listing.",
+          duration: 2000,
+          position: "Middle"
+        })
+        .present();
+    } else if (userId != ticketClickedId) {
+      temp.push(this.items[index]);
+      console.log(this.items[index]);
+    }
+      temp.filter(v => {
+        var tempArray = [
+          {
+            Key: v.Key,
+            Name: v.Name,
+            Venue: v.Venue,
+            Price: v.Price,
+            Date: v.Date,
+            Seller: v.Seller,
+            Time: v.Time,
+            Payout: v.Payout,
+            Creation: v.Creation,
+            Charge: v.Charge,
+            checkOutTime: timeClicked,
+            reservationPerioid: checkOutBy,
+            Lat: v.Lat,
+            Long: v.Long
+          }
+        ];
         var checkOutRef = this.afAuth.auth.currentUser.uid;
         this.afDatabase
           .list(`ticketsInBasket/${checkOutRef}`)
           .push(tempArray[0]);
-        this.afDatabase.object(`approvedTickets/${ticketId}`).remove();
-        this.navCtrl.push("BuyPage");
-      } else if (buyerId == seller) {
-        this.toast
-          .create({
-            message: "This is your listing",
-            duration: 2000,
-            position: "top"
-          })
-          .present();
-      }
-    });
-  }
+        this.afDatabase.list(`approvedTickets/${tempArray[0].Key}`).remove();
+       this.loadListings();
+       this.navCtrl.push('BuyPage');
+      });
+    }
 
   refresh(): void {
     window.location.reload();

@@ -1,15 +1,15 @@
 export interface Listings {
-  listingSellerUID: String;
-  listingPrice: number;
-  listingName: String;
-  listingTime: number;
-  listingLocation: String;
-  listingDate: String;
-  listingSold: boolean;
-  listingFile: File;
-  listingCreationDate: String;
-  listingCustomerPayout: number;
-  listingServiceCharge: number;
-  listingLat: number;
-  listingLong: number;
+  Seller: String;
+  Price: number;
+  Name: String;
+  Time: number;
+  Location: String;
+  Date: String;
+  Sold: boolean;
+  File: File;
+  CreationDate: String;
+  CustomerPayout: number;
+  ServiceCharge: number;
+  Lat: number;
+  Long: number;
 }

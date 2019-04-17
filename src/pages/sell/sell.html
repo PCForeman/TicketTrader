@@ -24,23 +24,23 @@
     <ion-list-header text-center>List a ticket</ion-list-header>
     <ion-item>
       <ion-label floating>Event</ion-label>
-      <ion-input id="txtEvent" [(ngModel)]="listing.listingName"></ion-input>
+      <ion-input id="txtEvent" [(ngModel)]="listing.Name"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Start time</ion-label>
-      <ion-input id="txtTime" [(ngModel)]="listing.listingTime"></ion-input>
+      <ion-input id="txtTime" [(ngModel)]="listing.Time"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Date of event</ion-label>
       <ion-datetime
         id="listingDate"
         displayformat="DD/MM/YY"
-        [(ngModel)]="listing.listingDate"
+        [(ngModel)]="listing.Date"
       ></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label floating>Price £</ion-label>
-      <ion-input id="txtPrice" [(ngModel)]="listing.listingPrice"></ion-input>
+      <ion-input id="txtPrice" [(ngModel)]="listing.Price"></ion-input>
       <button
         ion-button
         id="btnCheckPrice"

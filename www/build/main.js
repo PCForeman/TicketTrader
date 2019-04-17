@@ -229,10 +229,10 @@ var map = {
 		7
 	],
 	"../pages/home/home.module": [
-		257
+		256
 	],
 	"../pages/login/login.module": [
-		256
+		257
 	],
 	"../pages/modal-account/modal-account.module": [
 		529,
@@ -288,40 +288,6 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPageModule", function() { return LoginPageModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(93);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-var LoginPageModule = /** @class */ (function () {
-    function LoginPageModule() {
-    }
-    LoginPageModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [__WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]],
-            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */])]
-        })
-    ], LoginPageModule);
-    return LoginPageModule;
-}());
-
-//# sourceMappingURL=login.module.js.map
-
-/***/ }),
-
-/***/ 257:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePageModule", function() { return HomePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
@@ -348,6 +314,40 @@ var HomePageModule = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=home.module.js.map
+
+/***/ }),
+
+/***/ 257:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPageModule", function() { return LoginPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login__ = __webpack_require__(93);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var LoginPageModule = /** @class */ (function () {
+    function LoginPageModule() {
+    }
+    LoginPageModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__login__["a" /* LoginPage */])]
+        })
+    ], LoginPageModule);
+    return LoginPageModule;
+}());
+
+//# sourceMappingURL=login.module.js.map
 
 /***/ }),
 
@@ -493,22 +493,22 @@ var AdminPage = /** @class */ (function () {
                 var ref = _this.fbDatabase.object("unaprovedTickets/" + keyValue);
                 ref.snapshotChanges().subscribe(function (snapshot) {
                     var finalKey = _this.kA[_this.kA.length - _this.kA.length + x];
-                    var eventName = snapshot.payload.child("listingName").val();
-                    var eventPrice = snapshot.payload.child("listingPrice").val();
-                    var eventVenue = snapshot.payload.child("listingLocation").val();
-                    var eventDate = snapshot.payload.child("listingDate").val();
-                    var eventTime = snapshot.payload.child("listingTime").val();
-                    var lats = snapshot.payload.child("listingLat").val();
-                    var longs = snapshot.payload.child("listingLong").val();
+                    var eventName = snapshot.payload.child("Name").val();
+                    var eventPrice = snapshot.payload.child("Price").val();
+                    var eventVenue = snapshot.payload.child("Location").val();
+                    var eventDate = snapshot.payload.child("Date").val();
+                    var eventTime = snapshot.payload.child("Time").val();
+                    var lats = snapshot.payload.child("Lat").val();
+                    var longs = snapshot.payload.child("Long").val();
                     var eventCreationDate = snapshot.payload
-                        .child("listingCreationDate")
+                        .child("CreationDate")
                         .val();
-                    var eventSellerUID = snapshot.payload.child("listingSellerUID").val();
+                    var eventSellerUID = snapshot.payload.child("Seller").val();
                     var eventCustomerPayout = snapshot.payload
-                        .child("listingCustomerPayout")
+                        .child("CustomerPayout")
                         .val();
                     var eventServiceCharge = snapshot.payload
-                        .child("listingServiceCharge")
+                        .child("ServiceCharge")
                         .val();
                     var listingBoolean = snapshot.payload.child("listingSold").val();
                     _this.items.push({
@@ -523,8 +523,8 @@ var AdminPage = /** @class */ (function () {
                         Payout: eventCustomerPayout,
                         Charge: eventServiceCharge,
                         Sold: listingBoolean,
-                        lat: lats,
-                        long: longs
+                        Lat: lats,
+                        Long: longs
                     });
                     x++;
                 });
@@ -555,8 +555,8 @@ var AdminPage = /** @class */ (function () {
                                 Payout: v.Payout,
                                 Creation: v.Creation,
                                 Charge: v.Charge,
-                                long: v.long,
-                                lat: v.lat
+                                Long: v.Long,
+                                Lat: v.Lat
                             }
                         ];
                         this.fbDatabase.list("approvedTickets/").push(temp[0]);
@@ -615,7 +615,9 @@ var AdminPage = /** @class */ (function () {
                                 Time: v.Time,
                                 Payout: v.Payout,
                                 Creation: v.Creation,
-                                Charge: v.Charge
+                                Charge: v.Charge,
+                                Lat: v.Lat,
+                                Long: v.Long
                             }
                         ];
                         this.fbDatabase.list("rejectedTickets/").push(temp[0]);
@@ -750,6 +752,7 @@ var HomePage = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.markerObject = [];
+        this.items = [];
         window.ionicPageRef = {
             zone: this.ngZone,
             component: this
@@ -782,14 +785,13 @@ var HomePage = /** @class */ (function () {
             userPos = latLng;
             var mapOptions = {
                 center: latLng,
-                zoom: 7,
+                zoom: 6,
                 zoomControl: true,
                 disableDefaultUI: true,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
-            _this.map = new google.maps.Map(_this.mapElement.nativeElement, mapOptions);
+            _this.map = new google.maps.Map(_this.mapElement.nativeElement, mapOptions, _this.loadListings());
             _this.addUserMarker();
-            _this.loadListings();
         }, function (err) {
             console.log(err);
         });
@@ -832,10 +834,10 @@ var HomePage = /** @class */ (function () {
                     var eventSellerUID = snapshot.payload.child("Seller").val();
                     var eventCustomerPayout = snapshot.payload.child("Payout").val();
                     var eventServiceCharge = snapshot.payload.child("Charge").val();
-                    var lats = snapshot.payload.child("lat").val();
-                    var longs = snapshot.payload.child("long").val();
-                    _this.markerObject.push({
-                        index: _this.markerObject.length,
+                    var lats = snapshot.payload.child("Lat").val();
+                    var longs = snapshot.payload.child("Long").val();
+                    _this.items.push({
+                        index: x,
                         Key: finalKey,
                         Name: eventName,
                         Venue: eventVenue,
@@ -851,7 +853,7 @@ var HomePage = /** @class */ (function () {
                     });
                     x++;
                 });
-                _this.markerObject.forEach(function (ticket) {
+                _this.items.forEach(function (ticket) {
                     ticket.index;
                     ticket.Lat;
                     ticket.Long;
@@ -897,65 +899,51 @@ var HomePage = /** @class */ (function () {
         var _this = this;
         var timeClicked = Date.now();
         var checkOutBy = timeClicked + 600000;
+        var userId = this.afAuth.auth.currentUser.uid;
         var temp = [];
-        var tempArray = [];
         var target = event.srcElement;
-        var ticketId = target.parentElement.children.item(0).innerHTML;
-        var index = target.parentElement.children.item(2).innerHTML.valueOf();
-        var ref = this.afDatabase.object("approvedTickets/" + ticketId);
-        ref.snapshotChanges().subscribe(function (snapshot) {
-            var seller = snapshot.payload.child("Seller").val();
-            var eventName = snapshot.payload.child("Name").val();
-            var eventPrice = snapshot.payload.child("Price").val();
-            var eventVenue = snapshot.payload.child("Venue").val();
-            var eventDate = snapshot.payload.child("Date").val();
-            var eventTime = snapshot.payload.child("Time").val();
-            var eventCreationDate = snapshot.payload.child("Creation").val();
-            var eventCustomerPayout = snapshot.payload.child("Payout").val();
-            var eventServiceCharge = snapshot.payload.child("Charge").val();
-            var lats = snapshot.payload.child("lat").val();
-            var longs = snapshot.payload.child("long").val();
-            console.log(seller, eventName, eventDate, eventPrice, lats, longs, eventTime, eventCreationDate, eventVenue, eventCustomerPayout, eventServiceCharge);
-            var buyerId = _this.afAuth.auth.currentUser.uid;
-            if (buyerId != seller) {
-                temp.push(_this.markerObject[index]);
-                temp.filter(function (v) {
-                    tempArray = [
-                        {
-                            Key: v.Key,
-                            Name: v.Name,
-                            Venue: v.Venue,
-                            Price: v.Price,
-                            Date: v.Date,
-                            Seller: v.Seller,
-                            Time: v.Time,
-                            Payout: v.Payout,
-                            Creation: v.Creation,
-                            Charge: v.Charge,
-                            checkOutTime: timeClicked,
-                            reservationPerioid: checkOutBy,
-                            Lat: lats,
-                            Long: longs
-                        }
-                    ];
-                });
-                console.log(tempArray);
-                var checkOutRef = _this.afAuth.auth.currentUser.uid;
-                _this.afDatabase
-                    .list("ticketsInBasket/" + checkOutRef)
-                    .push(tempArray[0]);
-                _this.afDatabase.object("approvedTickets/" + ticketId).remove();
-                _this.navCtrl.push("BuyPage");
-            }
-            else if (buyerId == seller) {
-                _this.toast
-                    .create({
-                    message: "This is your listing",
-                    duration: 2000,
-                    position: "top"
-                })
-                    .present();
-            }
+        var ticketClickedId = target.parentElement.children.item(0).innerHTML.toString();
+        var index = target.parentElement.children.item(2).innerHTML.toString();
+        console.log(ticketClickedId, index);
+        if (userId == ticketClickedId) {
+            this.toast
+                .create({
+                message: "This is your listing.",
+                duration: 2000,
+                position: "Middle"
+            })
+                .present();
+        }
+        else if (userId != ticketClickedId) {
+            temp.push(this.items[index]);
+            console.log(this.items[index]);
+        }
+        temp.filter(function (v) {
+            var tempArray = [
+                {
+                    Key: v.Key,
+                    Name: v.Name,
+                    Venue: v.Venue,
+                    Price: v.Price,
+                    Date: v.Date,
+                    Seller: v.Seller,
+                    Time: v.Time,
+                    Payout: v.Payout,
+                    Creation: v.Creation,
+                    Charge: v.Charge,
+                    checkOutTime: timeClicked,
+                    reservationPerioid: checkOutBy,
+                    Lat: v.Lat,
+                    Long: v.Long
+                }
+            ];
+            var checkOutRef = _this.afAuth.auth.currentUser.uid;
+            _this.afDatabase
+                .list("ticketsInBasket/" + checkOutRef)
+                .push(tempArray[0]);
+            _this.afDatabase.list("approvedTickets/" + tempArray[0].Key).remove();
+            _this.loadListings();
+            _this.navCtrl.push('BuyPage');
         });
     };
     HomePage.prototype.refresh = function () {
@@ -1052,9 +1040,9 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_angularfire2_storage__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ionic_angular__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_camera_ngx__ = __webpack_require__(517);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_home_home_module__ = __webpack_require__(257);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_home_home_module__ = __webpack_require__(256);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_login_login__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_login_login_module__ = __webpack_require__(256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_login_login_module__ = __webpack_require__(257);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_register_register__ = __webpack_require__(158);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__app_component__ = __webpack_require__(518);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__app_firebase_config__ = __webpack_require__(519);
@@ -1101,6 +1089,7 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/admin2/admin2.module#Admin2PageModule', name: 'Admin2Page', segment: 'admin2', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin3/admin3.module#Admin3PageModule', name: 'Admin3Page', segment: 'admin3', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/buy/buy.module#BuyPageModule', name: 'BuyPage', segment: 'buy', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/modal-account/modal-account.module#ModalAccountPageModule', name: 'ModalAccountPage', segment: 'modal-account', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/order-history/order-history.module#OrderHistoryPageModule', name: 'OrderHistoryPage', segment: 'order-history', priority: 'low', defaultHistory: [] },
@@ -1109,7 +1098,6 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/select-location-modal/select-location-modal.module#SelectLocationModalPageModule', name: 'SelectLocationModalPage', segment: 'select-location-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sell/sell.module#SellPageModule', name: 'SellPage', segment: 'sell', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/tickets/tickets.module#TicketsPageModule', name: 'TicketsPage', segment: 'tickets', priority: 'low', defaultHistory: [] }
                     ]
                 }),

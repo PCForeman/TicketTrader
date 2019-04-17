@@ -60,7 +60,6 @@ export class BuyPage {
           var eventSellerUID = snapshot.payload.child(`Seller`).val();
           var checkOutTime = snapshot.payload.child(`checkOutTime`).val();
           var timeNow = Date.now();
-          //  console.log(checkOutTime + 450000, timeNow);
           var eventName = snapshot.payload.child(`Name`).val();
           var eventPrice = snapshot.payload.child(`Price`).val();
           var eventVenue = snapshot.payload.child(`Venue`).val();
@@ -69,10 +68,9 @@ export class BuyPage {
           var eventCreationDate = snapshot.payload.child(`Creation`).val();
           var eventCustomerPayout = snapshot.payload.child(`Payout`).val();
           var eventServiceCharge = snapshot.payload.child(`Charge`).val();
-          var lat = snapshot.payload.child(`Lat`).val();
-          var long = snapshot.payload.child(`Long`).val();
+          var lats = snapshot.payload.child(`Lat`).val();
+          var longs = snapshot.payload.child(`Long`).val();
           var maxTime = checkOutTime + 600000;
-          //  console.log(maxTime);
           if (maxTime <= timeNow) {
             this.timedOutListings.push({
               Name: eventName,
@@ -84,23 +82,21 @@ export class BuyPage {
               Seller: eventSellerUID,
               Payout: eventCustomerPayout,
               Charge: eventServiceCharge,
-              Lat: lat,
-              Long: long
+              Lat: lats,
+              Long: longs
             });
             x++;
             count + 1;
-            var indexToPush = count;
-            //  console.log(count, indexToPush)
             this.afDatabase
               .list(`approvedTickets/`)
               .push(this.timedOutListings[0]);
             console.log(this.timedOutListings[0]);
             this.timedOutListings.splice(0, 1);
             this.afDatabase
-              .object(`ticketsInBasket/${currentUser}/${keyValue}`)
+              .list(`ticketsInBasket/${currentUser}/${keyValue}`)
               .remove();
           } else if (maxTime > timeNow) {
-            //  console.log("Hello", maxTime);
+            console.log("Hello");
           }
         });
       }
@@ -125,6 +121,7 @@ export class BuyPage {
     var sDate = target.parentElement.parentElement.children
       .item(6)
       .innerHTML.substr(6, 10);
+      var sTime = target.parentElement.parentElement.children.item(7).innerHTML.substr(5)
     var temp = [];
     var ticketClicked =
       parseInt(
@@ -149,6 +146,7 @@ export class BuyPage {
           Charge: v.Charge
         }
       ];
+      console.log(tempArray);
     });
     const myModalOpts: ModalOptions = {
       cssClass: "modal",
@@ -161,7 +159,9 @@ export class BuyPage {
       sellerId: sId,
       price: sPrice,
       artist: sArtist,
-      date: sDate
+      date: sDate,
+      time: sTime,
+      location: sVenue
     };
     const myModal = this.modal.create(
       "PaymentModalPage",
@@ -205,6 +205,8 @@ export class BuyPage {
           var eventServiceCharge = snapshot.payload.child(`Charge`).val();
           var reserved = snapshot.payload.child(`checkOutTime`).val();
           var timeLeft = snapshot.payload.child(`reservationPerioid`).val();
+          var lats = snapshot.payload.child(`Lat`).val();
+          var longs = snapshot.payload.child(`Long`).val();
           this.items.push({
             Key: finalKey,
             Name: eventName,
@@ -216,7 +218,9 @@ export class BuyPage {
             Seller: eventSellerUID,
             Payout: eventCustomerPayout,
             Charge: eventServiceCharge,
-            CheckoutPeriod: timeLeft
+            CheckoutPeriod: timeLeft,
+            Lat: lats,
+            Long: longs
           });
           x++;
           count + 1;

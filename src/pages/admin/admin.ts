@@ -105,22 +105,22 @@ export class AdminPage {
         var ref = this.fbDatabase.object(`unaprovedTickets/${keyValue}`);
         ref.snapshotChanges().subscribe(snapshot => {
           const finalKey = this.kA[this.kA.length - this.kA.length + x];
-          const eventName = snapshot.payload.child(`listingName`).val();
-          const eventPrice = snapshot.payload.child(`listingPrice`).val();
-          const eventVenue = snapshot.payload.child(`listingLocation`).val();
-          const eventDate = snapshot.payload.child(`listingDate`).val();
-          const eventTime = snapshot.payload.child(`listingTime`).val();
-          const lats = snapshot.payload.child(`listingLat`).val();
-          const longs = snapshot.payload.child(`listingLong`).val();
+          const eventName = snapshot.payload.child(`Name`).val();
+          const eventPrice = snapshot.payload.child(`Price`).val();
+          const eventVenue = snapshot.payload.child(`Location`).val();
+          const eventDate = snapshot.payload.child(`Date`).val();
+          const eventTime = snapshot.payload.child(`Time`).val();
+          const lats = snapshot.payload.child(`Lat`).val();
+          const longs = snapshot.payload.child(`Long`).val();
           const eventCreationDate = snapshot.payload
-            .child(`listingCreationDate`)
+            .child(`CreationDate`)
             .val();
-          const eventSellerUID = snapshot.payload.child(`listingSellerUID`).val();
+          const eventSellerUID = snapshot.payload.child(`Seller`).val();
           const eventCustomerPayout = snapshot.payload
-            .child(`listingCustomerPayout`)
+            .child(`CustomerPayout`)
             .val();
           const eventServiceCharge = snapshot.payload
-            .child(`listingServiceCharge`)
+            .child(`ServiceCharge`)
             .val();
           
           const listingBoolean = snapshot.payload.child(`listingSold`).val();
@@ -136,8 +136,8 @@ export class AdminPage {
             Payout: eventCustomerPayout,
             Charge: eventServiceCharge,
             Sold: listingBoolean,
-            lat: lats,
-            long: longs
+            Lat: lats,
+            Long: longs
           });
           x++;
         });
@@ -168,8 +168,8 @@ export class AdminPage {
           Payout: v.Payout,
           Creation: v.Creation,
           Charge: v.Charge,
-          long: v.long,
-          lat: v.lat
+          Long: v.Long,
+          Lat: v.Lat
         }
       ];
 
@@ -224,7 +224,9 @@ export class AdminPage {
           Time: v.Time,
           Payout: v.Payout,
           Creation: v.Creation,
-          Charge: v.Charge
+          Charge: v.Charge,
+          Lat: v.Lat,
+          Long: v.Long
         }
       ];
 
