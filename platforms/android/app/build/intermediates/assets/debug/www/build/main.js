@@ -761,8 +761,15 @@ var HomePage = /** @class */ (function () {
     HomePage.prototype.ionViewWillLoad = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                this.loadMap();
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.loadMap()];
+                    case 1:
+                        _a.sent();
+                        return [4 /*yield*/, this.loadListings()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
             });
         });
     };
@@ -771,29 +778,23 @@ var HomePage = /** @class */ (function () {
         this.gLocation
             .getCurrentPosition()
             .then(function (resp) {
-            resp.coords.latitude;
-            resp.coords.longitude;
-        })
-            .catch(function (error) {
-            console.log("Cannot locate you", error);
-        });
-        var watch = this.gLocation.watchPosition();
-        watch.subscribe(function (data) {
-            userLat = data.coords.latitude;
-            userLong = data.coords.longitude;
+            userLat = resp.coords.latitude;
+            userLong = resp.coords.longitude;
             var latLng = new google.maps.LatLng(userLat, userLong);
             userPos = latLng;
             var mapOptions = {
                 center: latLng,
-                zoom: 6,
+                zoom: 7,
                 zoomControl: true,
                 disableDefaultUI: true,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
-            _this.map = new google.maps.Map(_this.mapElement.nativeElement, mapOptions, _this.loadListings());
+            _this.map = new google.maps.Map(_this.mapElement.nativeElement, mapOptions);
+            _this.loadListings();
             _this.addUserMarker();
-        }, function (err) {
-            console.log(err);
+        })
+            .catch(function (error) {
+            console.log("Cannot locate you", error);
         });
     };
     HomePage.prototype.addUserMarker = function () {
@@ -903,48 +904,46 @@ var HomePage = /** @class */ (function () {
         var temp = [];
         var target = event.srcElement;
         var ticketClickedId = target.parentElement.children.item(0).innerHTML.toString();
+        console.log(ticketClickedId);
         var index = target.parentElement.children.item(2).innerHTML.toString();
-        console.log(ticketClickedId, index);
         if (userId == ticketClickedId) {
             this.toast
                 .create({
                 message: "This is your listing.",
                 duration: 2000,
                 position: "Middle"
-            })
-                .present();
+            }).present();
         }
         else if (userId != ticketClickedId) {
             temp.push(this.items[index]);
-            console.log(this.items[index]);
+            temp.filter(function (v) {
+                var tempArray = [
+                    {
+                        Key: v.Key,
+                        Name: v.Name,
+                        Venue: v.Venue,
+                        Price: v.Price,
+                        Date: v.Date,
+                        Seller: v.Seller,
+                        Time: v.Time,
+                        Payout: v.Payout,
+                        Creation: v.Creation,
+                        Charge: v.Charge,
+                        checkOutTime: timeClicked,
+                        reservationPerioid: checkOutBy,
+                        Lat: v.Lat,
+                        Long: v.Long
+                    }
+                ];
+                var checkOutRef = _this.afAuth.auth.currentUser.uid;
+                _this.afDatabase
+                    .list("ticketsInBasket/" + checkOutRef)
+                    .push(tempArray[0]);
+                _this.afDatabase.list("approvedTickets/" + tempArray[0].Key).remove();
+                _this.loadListings();
+                _this.navCtrl.push('BuyPage');
+            });
         }
-        temp.filter(function (v) {
-            var tempArray = [
-                {
-                    Key: v.Key,
-                    Name: v.Name,
-                    Venue: v.Venue,
-                    Price: v.Price,
-                    Date: v.Date,
-                    Seller: v.Seller,
-                    Time: v.Time,
-                    Payout: v.Payout,
-                    Creation: v.Creation,
-                    Charge: v.Charge,
-                    checkOutTime: timeClicked,
-                    reservationPerioid: checkOutBy,
-                    Lat: v.Lat,
-                    Long: v.Long
-                }
-            ];
-            var checkOutRef = _this.afAuth.auth.currentUser.uid;
-            _this.afDatabase
-                .list("ticketsInBasket/" + checkOutRef)
-                .push(tempArray[0]);
-            _this.afDatabase.list("approvedTickets/" + tempArray[0].Key).remove();
-            _this.loadListings();
-            _this.navCtrl.push('BuyPage');
-        });
     };
     HomePage.prototype.refresh = function () {
         window.location.reload();

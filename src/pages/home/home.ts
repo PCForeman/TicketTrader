@@ -43,7 +43,9 @@ export class HomePage {
   }
 
   async ionViewWillLoad() {
-    this.loadMap();
+  this.items = [];
+  await  this.loadMap();
+  await this.loadListings();
   }
 
   listingData: Observable<any>;
@@ -52,22 +54,13 @@ export class HomePage {
     this.gLocation
       .getCurrentPosition()
       .then(resp => {
-        resp.coords.latitude;
-        resp.coords.longitude;
-      })
-      .catch(error => {
-        console.log("Cannot locate you", error);
-      });
-    let watch = this.gLocation.watchPosition();
-    watch.subscribe(
-      data => {
-        userLat = data.coords.latitude;
-        userLong = data.coords.longitude;
+       userLat = resp.coords.latitude;
+       userLong = resp.coords.longitude;
         let latLng = new google.maps.LatLng(userLat, userLong);
         userPos = latLng;
         let mapOptions = {
           center: latLng,
-          zoom: 6,
+          zoom: 7,
           zoomControl: true,
           disableDefaultUI: true,
           mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -75,14 +68,13 @@ export class HomePage {
         this.map = new google.maps.Map(
           this.mapElement.nativeElement,
           mapOptions,
-          this.loadListings(),
         );
-        this.addUserMarker()
-      },
-      err => {
-        console.log(err);
-      }
-    );
+        this.loadListings();
+        this.addUserMarker();
+      })
+      .catch(error => {
+        console.log("Cannot locate you", error);
+      });
   }
 
   addUserMarker() {
@@ -193,21 +185,17 @@ export class HomePage {
     var temp = [];
     var target = event.srcElement;
     var ticketClickedId = target.parentElement.children.item(0).innerHTML.toString();
+    console.log(ticketClickedId);
     var index = target.parentElement.children.item(2).innerHTML.toString();
-
-      console.log(ticketClickedId, index)
       if (userId == ticketClickedId) {
       this.toast
         .create({
           message: "This is your listing.",
           duration: 2000,
           position: "Middle"
-        })
-        .present();
-    } else if (userId != ticketClickedId) {
+        }).present();
+      } else if (userId != ticketClickedId) {
       temp.push(this.items[index]);
-      console.log(this.items[index]);
-    }
       temp.filter(v => {
         var tempArray = [
           {
@@ -236,6 +224,7 @@ export class HomePage {
        this.navCtrl.push('BuyPage');
       });
     }
+  }
 
   refresh(): void {
     window.location.reload();
