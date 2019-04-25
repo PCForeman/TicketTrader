@@ -160,7 +160,9 @@ var TicketsPage = /** @class */ (function () {
                         Creation: v.Creation,
                         Charge: v.Charge,
                         checkOutTime: timeClicked,
-                        reservationPerioid: checkOutBy
+                        reservationPerioid: checkOutBy,
+                        Lat: v.Lat,
+                        Long: v.Long
                     }
                 ];
                 var checkOutRef = _this.afAuth.auth.currentUser.uid;
@@ -209,6 +211,8 @@ var TicketsPage = /** @class */ (function () {
                     var eventSellerUID = snapshot.payload.child("Seller").val();
                     var eventCustomerPayout = snapshot.payload.child("Payout").val();
                     var eventServiceCharge = snapshot.payload.child("Charge").val();
+                    var Longs = snapshot.payload.child("long").val();
+                    var Lats = snapshot.payload.child("lat").val();
                     _this.items.push({
                         Key: finalKey,
                         Name: eventName,
@@ -219,7 +223,9 @@ var TicketsPage = /** @class */ (function () {
                         Creation: eventCreationDate,
                         Seller: eventSellerUID,
                         Payout: eventCustomerPayout,
-                        Charge: eventServiceCharge
+                        Charge: eventServiceCharge,
+                        Long: Longs,
+                        Lat: Lats
                     });
                     x++;
                 });

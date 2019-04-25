@@ -16,6 +16,7 @@ var userLat: number;
 var userLong: number;
 var userPos;
 var keys = [];
+
 @IonicPage()
 @Component({
   selector: "page-home",

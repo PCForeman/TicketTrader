@@ -6,7 +6,8 @@ import {
   App,
   ToastController,
   ModalController,
-  ModalOptions
+  ModalOptions,
+  AlertController
 } from "ionic-angular";
 import { AngularFireDatabase, AngularFireObject } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -33,7 +34,8 @@ export class AccountPage {
     private app: App,
     private modal: ModalController,
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    private aCtrl: AlertController
   ) {}
 
   ionViewDidLoad() {
@@ -76,6 +78,72 @@ export class AccountPage {
     );
     myModal.present();
   })
+}
+
+addCard(){
+  const myModalOpts: ModalOptions = {
+    cssClass: "modal",
+    enableBackdropDismiss: true,
+    showBackdrop: true
+  };
+  const listingRef = {
+  };
+  
+  const myModal = this.modal.create(
+    "AddCardModalPage",
+    { ticket: listingRef },
+    myModalOpts
+  );
+  myModal.present();
+}
+
+async deleteAccount(){
+  var ref = this.afDatabase.object(`user/${this.afAuth.auth.currentUser.uid}`);
+  ref.snapshotChanges().subscribe(snapshot => {
+  const pw =  snapshot.payload.child(`password/`).val().toString();
+  console.log(pw);
+  let alert = this.aCtrl.create({
+    title: 'Enter password to delete account',
+    inputs: [
+      {
+        name: 'password',
+        placeholder: 'Password',
+        type: 'password'
+      }
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        handler: cancelled => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Login',
+        handler: data => {
+          console.log(data)
+          if (data.password == pw) {
+          try {
+          var tempKey = this.afAuth.auth.currentUser.uid
+          console.log(tempKey)
+          this.logout()
+           this.app.getRootNav().setRoot(LoginPage);
+           this.afDatabase.object(`user/${tempKey}`).remove();
+          }
+           catch (e) {
+            console.log(e);
+           }
+          } else {
+            console.log('Cancelled')
+            return false;
+          }
+        }
+      }
+    ]
+  });
+  alert.present();
+})
 }
 
   getUserPassword() {
@@ -152,7 +220,7 @@ export class AccountPage {
     });
   }
 
-  logout() {
+ async logout() {
     this.afAuth.auth.signOut().then(() => {
       this.toast
         .create({

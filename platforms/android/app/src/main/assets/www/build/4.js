@@ -24,7 +24,7 @@ var PageModule = /** @class */ (function () {
     PageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [__WEBPACK_IMPORTED_MODULE_2__page__["a" /* Page */]],
-            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__page__["a" /* Page */])]
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__page__["a" /* Page */])]
         })
     ], PageModule);
     return PageModule;
@@ -74,7 +74,7 @@ var Page = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: "page-page",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\page\page.html"*/'<ion-tabs position="centered" color="midnight-blue">\n  <ion-tab\n    color="midnight-blue"\n    [root]="homeRoot"\n    tabTitle="Home"\n    tabIcon="home"\n  ></ion-tab>\n  <ion-tab\n    color="midnight-blue"\n    [root]="ticketsRoot"\n    tabTitle="Listings"\n    tabIcon="search"\n  ></ion-tab>\n  <ion-tab\n    color="midnight-blue"\n    [root]="sellRoot"\n    tabTitle="Sell"\n    tabIcon="cart"\n  ></ion-tab>\n  <ion-tab\n    color="midnight-blue"\n    [root]="accountRoot"\n    tabTitle="Account"\n    tabIcon="settings"\n  ></ion-tab>\n</ion-tabs>\n\n<head>\n  <link\n    href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css"\n    rel="stylesheet"\n  />\n</head>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\page\page.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]])
     ], Page);
     return Page;
 }());

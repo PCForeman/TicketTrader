@@ -24,7 +24,7 @@ var AdminViewPageModule = /** @class */ (function () {
     AdminViewPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [__WEBPACK_IMPORTED_MODULE_2__admin_view__["a" /* AdminViewPage */]],
-            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__admin_view__["a" /* AdminViewPage */])]
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__admin_view__["a" /* AdminViewPage */])]
         })
     ], AdminViewPageModule);
     return AdminViewPageModule;
@@ -63,7 +63,7 @@ var AdminViewPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: "page-admin-view",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin-view\admin-view.html"*/'<ion-tabs position="text-center" color="midnight-blue">\n  <ion-tab\n    color="midnight-blue"\n    [root]="adminRoot"\n    tabTitle="Pending listings"\n    tabIcon="document"\n  ></ion-tab>\n  <ion-tab\n    color="midnight-blue"\n    [root]="admin2Root"\n    tabTitle="Active listings"\n    tabIcon="happy"\n  ></ion-tab>\n  <ion-tab\n    color="midnight-blue"\n    [root]="admin3Root"\n    tabTitle="Rejected listings"\n    tabIcon="sad"\n  ></ion-tab>\n</ion-tabs>\n\n<head>\n  <link\n    href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css"\n    rel="stylesheet"\n  />\n</head>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin-view\admin-view.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]])
     ], AdminViewPage);
     return AdminViewPage;
 }());

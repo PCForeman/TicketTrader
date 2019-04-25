@@ -52,12 +52,27 @@
     </ion-item-group>
     <button
     ion-button
+    id="btnDeleteAcc"
+    class="modalButton"
+    block
+    (click)="addCard()">
+    Add payment details
+  </button>
+    <button
+    ion-button
     id="btnChangePassword"
     class="modalButton"
-    color="midnight-blue"
     block
     (click)="openModal()">
     Update details
   </button>
+  <button
+  ion-button
+  id="btnDeleteAcc"
+  class="modalButton"
+  block
+  (click)="deleteAccount()">
+  Delete Account
+</button>
       </div>
       </ion-content>
