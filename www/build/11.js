@@ -1,6 +1,6 @@
 webpackJsonp([11],{
 
-/***/ 524:
+/***/ 523:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddCardModalPageModule", function() { return AddCardModalPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_card_modal__ = __webpack_require__(539);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_card_modal__ = __webpack_require__(538);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ var AddCardModalPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 539:
+/***/ 538:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -82,7 +82,10 @@ var AddCardModalPage = /** @class */ (function () {
     };
     AddCardModalPage.prototype.addDetails = function () {
         var key = this.afAuth.auth.currentUser.uid;
-        if (this.holderName == undefined || this.holderName == ' ' || this.holderName == null) {
+        if (this.holderName == ' ' && this.cardNo == ' ') {
+            this.toast.create({ message: 'One or more fields are empty', duration: 2000, position: 'middle' }).present();
+        }
+        else if (this.holderName == undefined || this.holderName == ' ' || this.holderName == null) {
             this.toast.create({ message: 'Cardholder cannot be empty.', duration: 2000, position: 'middle' }).present();
         }
         else if (this.cardNo.length != 16) {
@@ -121,10 +124,14 @@ var AddCardModalPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: "page-add-card-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\add-card-modal\add-card-modal.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button (click)="close()">Close</button>\n    </ion-buttons>\n    <ion-title position text-center>Add card</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <div class="ngFor">\n    <ion-item>\n      <ion-label position text-center>Cardholder name</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="holderName" placeholder="Enter cardholder name" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>16 Digit card number</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="cardNo" placeholder="Enter card number" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>Expiry date</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="expiry" id="input" placeholder="Enter expiry date" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>CVC</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="Cvc" placeholder="Enter CVC" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>Sort code</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="sortcode" placeholder="Enter Sortcode" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>Account number</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="accountNumber" placeholder="Enter Account number" position text-center></ion-input>\n    </ion-item>\n\n    <button id="modalButton" (click)="addDetails()" ion-button>Add payment details</button>\n  </div>\n</ion-content>'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\add-card-modal\add-card-modal.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___["AngularFireDatabase"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___["AngularFireDatabase"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___["AngularFireAuth"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___["AngularFireAuth"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */]) === "function" && _f || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___["AngularFireDatabase"],
+            __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___["AngularFireAuth"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */]])
     ], AddCardModalPage);
     return AddCardModalPage;
-    var _a, _b, _c, _d, _e, _f;
 }());
 
 //# sourceMappingURL=add-card-modal.js.map

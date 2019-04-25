@@ -1,4 +1,4 @@
-webpackJsonp([14],{
+webpackJsonp([15],{
 
 /***/ 158:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -206,26 +206,30 @@ webpackEmptyAsyncContext.id = 197;
 var map = {
 	"../pages/account/account.module": [
 		523,
+		12
+	],
+	"../pages/add-card-modal/add-card-modal.module": [
+		524,
 		11
 	],
 	"../pages/admin-view/admin-view.module": [
-		524,
+		525,
 		10
 	],
 	"../pages/admin/admin.module": [
-		525,
-		13
+		526,
+		14
 	],
 	"../pages/admin2/admin2.module": [
-		526,
+		527,
 		9
 	],
 	"../pages/admin3/admin3.module": [
-		527,
+		528,
 		8
 	],
 	"../pages/buy/buy.module": [
-		528,
+		529,
 		7
 	],
 	"../pages/home/home.module": [
@@ -235,35 +239,35 @@ var map = {
 		257
 	],
 	"../pages/modal-account/modal-account.module": [
-		529,
+		530,
 		6
 	],
 	"../pages/order-history/order-history.module": [
-		530,
+		531,
 		5
 	],
 	"../pages/page/page.module": [
-		531,
+		532,
 		4
 	],
 	"../pages/payment-modal/payment-modal.module": [
-		532,
+		533,
 		3
 	],
 	"../pages/register/register.module": [
-		533,
-		12
+		534,
+		13
 	],
 	"../pages/select-location-modal/select-location-modal.module": [
-		534,
+		535,
 		2
 	],
 	"../pages/sell/sell.module": [
-		535,
+		536,
 		1
 	],
 	"../pages/tickets/tickets.module": [
-		536,
+		537,
 		0
 	]
 };
@@ -1085,6 +1089,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_11_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_17__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/account/account.module#AccountPageModule', name: 'AccountPage', segment: 'account', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/add-card-modal/add-card-modal.module#AddCardModalPageModule', name: 'AddCardModalPage', segment: 'add-card-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin-view/admin-view.module#AdminViewPageModule', name: 'AdminViewPage', segment: 'admin-view', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin/admin.module#AdminPageModule', name: 'AdminPage', segment: 'admin', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin2/admin2.module#Admin2PageModule', name: 'Admin2Page', segment: 'admin2', priority: 'low', defaultHistory: [] },

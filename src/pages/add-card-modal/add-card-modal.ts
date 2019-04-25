@@ -44,7 +44,9 @@ export class AddCardModalPage {
 
   addDetails() {
     var key = this.afAuth.auth.currentUser.uid;
-    if (this.holderName == undefined || this.holderName == ' ' || this.holderName == null){
+    if(this.holderName == ' ' && this.cardNo == ' '){
+    this.toast.create({message:'One or more fields are empty', duration:2000, position:'middle'}).present();
+    }else if (this.holderName == undefined || this.holderName == ' ' || this.holderName == null){
     this.toast.create({message: 'Cardholder cannot be empty.', duration:2000, position:'middle'}).present();
     }else if (this.cardNo.length != 16){
     this.toast.create({message: 'Card number Must be 16 digits.', duration:2000, position:'middle'}).present();

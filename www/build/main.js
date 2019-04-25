@@ -205,19 +205,19 @@ webpackEmptyAsyncContext.id = 197;
 
 var map = {
 	"../pages/account/account.module": [
-		523,
+		524,
 		12
 	],
 	"../pages/add-card-modal/add-card-modal.module": [
-		524,
+		523,
 		11
 	],
 	"../pages/admin-view/admin-view.module": [
-		525,
+		526,
 		10
 	],
 	"../pages/admin/admin.module": [
-		526,
+		525,
 		14
 	],
 	"../pages/admin2/admin2.module": [
@@ -1088,10 +1088,10 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_11_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_17__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/account/account.module#AccountPageModule', name: 'AccountPage', segment: 'account', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/add-card-modal/add-card-modal.module#AddCardModalPageModule', name: 'AddCardModalPage', segment: 'add-card-modal', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/admin-view/admin-view.module#AdminViewPageModule', name: 'AdminViewPage', segment: 'admin-view', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/account/account.module#AccountPageModule', name: 'AccountPage', segment: 'account', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin/admin.module#AdminPageModule', name: 'AdminPage', segment: 'admin', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/admin-view/admin-view.module#AdminViewPageModule', name: 'AdminViewPage', segment: 'admin-view', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin2/admin2.module#Admin2PageModule', name: 'Admin2Page', segment: 'admin2', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin3/admin3.module#Admin3PageModule', name: 'Admin3Page', segment: 'admin3', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/buy/buy.module#BuyPageModule', name: 'BuyPage', segment: 'buy', priority: 'low', defaultHistory: [] },
