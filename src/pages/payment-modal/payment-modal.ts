@@ -6,7 +6,6 @@ import {
   AlertController
 } from "ionic-angular";
 import { AngularFireDatabase } from "angularfire2/database";
-import { sharedStylesheetJitUrl } from "@angular/compiler";
 
 @IonicPage()
 @Component({
@@ -93,15 +92,56 @@ export class PaymentModalPage {
 
   processPayment(){
     console.log(this.listingData.userId)
-    var saleRef =
-     [{Seller: this.listingData.sellerId,
+    var transactionRef =
+     [{
+       Seller: this.listingData.sellerId,
        TicketRef: this.listingData.ticketRef,
        Buyer: this.listingData.userId,
-       Price: this.listingData.price
+       Price: this.listingData.price,
+       SellerPayout: this.listingData.payout,
+       ttRevenue: this.listingData.charge,
+       PayeeAccountNo: this.listingData.payoutAccount,
+       Payout: this.listingData.payout
      }]
-     console.log(saleRef);
-    this.afDatabase.list(`transactions`).push(saleRef[0]);
-    this.afDatabase.list(`orderHistory`);
+
+    var transRefNo = this.afDatabase.list(`transactions`).push(transactionRef[0]).key;
+    var buyerRef =
+    [{
+      transactionRef: transRefNo,
+      TicketRef:this.listingData.ticketRef,
+      Paid: this.listingData.price,
+      FileUrl: 'www.firebase.com',
+    }]
+
+    var sellerRef =
+    [{
+      Artist: this.listingData.artist,
+      transactionRef: transRefNo,
+      TicketRef: this.listingData.ticketRef,
+      Payout: this.listingData.payout,
+      Status: 'Pending',
+    }]
+
+    var saleArchive = 
+    [{
+      Seller: this.listingData.sellerId,
+      Event: this.listingData.artist,
+      Location: this.listingData.location,
+      Long: this.listingData.long,
+      Lat: this.listingData.lat,
+      Time: this.listingData.time,
+      Date: this.listingData.date,
+      Buyer: this.listingData.userId,
+      Price: this.listingData.price,
+      Payout: this.listingData.payout,
+      transactionRef: transRefNo
+    }]
+
+    console.log(transactionRef, buyerRef, transRefNo);
+    this.afDatabase.list(`ticketsBought/${this.listingData.userId}`).push(buyerRef[0]);
+    this.afDatabase.list(`ticketsSold/${this.listingData.userId}`).push(sellerRef[0]);
+    this.afDatabase.object(`saleArchive/${this.listingData.ticketRef}`).set(saleArchive[0]);
+    this.close();
   }
 
 }

@@ -1,6 +1,6 @@
 webpackJsonp([3],{
 
-/***/ 533:
+/***/ 534:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -125,23 +125,59 @@ var PaymentModalPage = /** @class */ (function () {
     };
     PaymentModalPage.prototype.processPayment = function () {
         console.log(this.listingData.userId);
-        var saleRef = [{ Seller: this.listingData.sellerId,
+        var transactionRef = [{
+                Seller: this.listingData.sellerId,
                 TicketRef: this.listingData.ticketRef,
                 Buyer: this.listingData.userId,
-                Price: this.listingData.price
+                Price: this.listingData.price,
+                SellerPayout: this.listingData.payout,
+                ttRevenue: this.listingData.charge,
+                PayeeAccountNo: this.listingData.payoutAccount,
+                Payout: this.listingData.payout
             }];
-        console.log(saleRef);
-        this.afDatabase.list("transactions").push(saleRef[0]);
-        this.afDatabase.list("orderHistory");
+        var transRefNo = this.afDatabase.list("transactions").push(transactionRef[0]).key;
+        var buyerRef = [{
+                transactionRef: transRefNo,
+                TicketRef: this.listingData.ticketRef,
+                Paid: this.listingData.price,
+                FileUrl: 'www.firebase.com',
+            }];
+        var sellerRef = [{
+                Artist: this.listingData.artist,
+                transactionRef: transRefNo,
+                TicketRef: this.listingData.ticketRef,
+                Payout: this.listingData.payout,
+                Status: 'Pending',
+            }];
+        var saleArchive = [{
+                Seller: this.listingData.sellerId,
+                Event: this.listingData.artist,
+                Location: this.listingData.location,
+                Long: this.listingData.long,
+                Lat: this.listingData.lat,
+                Time: this.listingData.time,
+                Date: this.listingData.date,
+                Buyer: this.listingData.userId,
+                Price: this.listingData.price,
+                Payout: this.listingData.payout,
+                transactionRef: transRefNo
+            }];
+        console.log(transactionRef, buyerRef, transRefNo);
+        this.afDatabase.list("ticketsBought/" + this.listingData.userId).push(buyerRef[0]);
+        this.afDatabase.list("ticketsSold/" + this.listingData.userId).push(sellerRef[0]);
+        this.afDatabase.object("saleArchive/" + this.listingData.ticketRef).set(saleArchive[0]);
+        this.close();
     };
     PaymentModalPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-payment-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button (click)="close()">Close</button>\n    </ion-buttons>\n    <ion-title position text-center>Pay</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list position text-center>\n    <ion-title>\n      Order Summary\n    </ion-title>\n    {{ listingData.artist }}<br />\n    {{ listingData.location }}<br />\n    {{ listingData.date }}<br />\n    {{ listingData.time }}\n    <div class="ngFor">\n      <ion-item>\n        <ion-label position text-center>Name on card</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-input\n          placeholder="Enter Cardholders name"\n          [(ngModel)]="cardName"\n          position\n          text-center\n        ></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position text-center>16 Digit card number</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-input\n          placeholder="Enter Card Number"\n          [(ngModel)]="cardNo"\n          position\n          text-center\n        ></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position text-center>Expiry date</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-input\n          placeholder="Enter Expiry"\n          [(ngModel)]="expiry"\n          position\n          text-center\n        ></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position text-center>CVC</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-input\n          placeholder="Enter CVC"\n          [(ngModel)]="CVC"\n          position\n          text-center\n        ></ion-input>\n      </ion-item>\n\n      <button id="modalButton"  ion-button (click)="processPayment()">Pay {{ listingData.price }}</button>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/
+            selector: "page-payment-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button (click)="close()">Close</button>\n    </ion-buttons>\n    <ion-title position text-center>Pay</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list position text-center>\n    <ion-title>\n      Order Summary\n    </ion-title>\n    {{ listingData.artist }}<br />\n    {{ listingData.location }}<br />\n    {{ listingData.date }} {{ listingData.time }}\n    <div class="ngFor">\n      <ion-item>\n        <ion-label position text-center>Name on card</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-input\n          placeholder="Enter Cardholders name"\n          [(ngModel)]="cardName"\n          position\n          text-center\n        ></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position text-center>16 Digit card number</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-input\n          placeholder="Enter Card Number"\n          [(ngModel)]="cardNo"\n          position\n          text-center\n        ></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position text-center>Expiry date</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-input\n          placeholder="Enter Expiry"\n          [(ngModel)]="expiry"\n          position\n          text-center\n        ></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position text-center>CVC</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-input\n          placeholder="Enter CVC"\n          [(ngModel)]="CVC"\n          position\n          text-center\n        ></ion-input>\n      </ion-item>\n\n      <button id="modalButton"  ion-button (click)="processPayment()">Pay {{ listingData.price }}</button>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"]])
     ], PaymentModalPage);
     return PaymentModalPage;
-    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=payment-modal.js.map

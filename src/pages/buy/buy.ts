@@ -129,6 +129,12 @@ export class BuyPage {
       var lat = target.parentElement.parentElement.children
       .item(11)
       .innerHTML.substr(0);
+      var sPayout = target.parentElement.parentElement.children
+      .item(12)
+      .innerHTML.substr(0);
+      var sCharge = target.parentElement.parentElement.children
+      .item(13)
+      .innerHTML.substr(0);
       var sAccountNo = target.parentElement.parentElement.children
       .item(8)
       .innerHTML.substr(0);
@@ -184,7 +190,9 @@ export class BuyPage {
       payoutAccount: sAccountNo,
       sortcode: sortCode,
       lat: lat,
-      long: long
+      long: long,
+      payout: sPayout,
+      charge: sCharge
     };
     const myModal = this.modal.create(
       "PaymentModalPage",
