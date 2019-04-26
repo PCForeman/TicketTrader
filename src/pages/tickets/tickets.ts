@@ -127,7 +127,9 @@ export class TicketsPage {
             checkOutTime: timeClicked,
             reservationPerioid: checkOutBy,
             Lat: v.Lat,
-            Long: v.Long
+            Long: v.Long,
+            PayoutAccount: v.PayoutAccount,
+            PayoutSortCode: v.PayoutSortCode
           }
         ];
         var checkOutRef = this.afAuth.auth.currentUser.uid;
@@ -178,8 +180,10 @@ export class TicketsPage {
           const eventSellerUID = snapshot.payload.child(`Seller`).val();
           const eventCustomerPayout = snapshot.payload.child(`Payout`).val();
           const eventServiceCharge = snapshot.payload.child(`Charge`).val();
-          const Longs = snapshot.payload.child(`long`).val();
-          const Lats = snapshot.payload.child(`lat`).val();
+          const Longs = snapshot.payload.child(`Long`).val();
+          const Lats = snapshot.payload.child(`Lat`).val();
+          const payoutAccount = snapshot.payload.child(`PayoutAccount`).val();
+          const payoutSortCode = snapshot.payload.child(`PayoutSortCode`).val();
           this.items.push({
             Key: finalKey,
             Name: eventName,
@@ -192,7 +196,9 @@ export class TicketsPage {
             Payout: eventCustomerPayout,
             Charge: eventServiceCharge,
             Long: Longs,
-            Lat: Lats
+            Lat: Lats,
+            PayoutAccount: payoutAccount,
+            PayoutSortCode: payoutSortCode
           });
           x++;
         });

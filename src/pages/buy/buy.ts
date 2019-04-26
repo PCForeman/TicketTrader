@@ -9,6 +9,7 @@ import {
 } from "ionic-angular";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
+import { SelectLocationModalPage } from "../select-location-modal/select-location-modal";
 
 @IonicPage()
 @Component({
@@ -60,16 +61,18 @@ export class BuyPage {
           var eventSellerUID = snapshot.payload.child(`Seller`).val();
           var checkOutTime = snapshot.payload.child(`checkOutTime`).val();
           var timeNow = Date.now();
-          var eventName = snapshot.payload.child(`Name`).val();
-          var eventPrice = snapshot.payload.child(`Price`).val();
-          var eventVenue = snapshot.payload.child(`Venue`).val();
-          var eventDate = snapshot.payload.child(`Date`).val();
-          var eventTime = snapshot.payload.child(`Time`).val();
-          var eventCreationDate = snapshot.payload.child(`Creation`).val();
-          var eventCustomerPayout = snapshot.payload.child(`Payout`).val();
-          var eventServiceCharge = snapshot.payload.child(`Charge`).val();
-          var lats = snapshot.payload.child(`Lat`).val();
-          var longs = snapshot.payload.child(`Long`).val();
+          const eventName = snapshot.payload.child(`Name`).val();
+          const eventPrice = snapshot.payload.child(`Price`).val();
+          const eventVenue = snapshot.payload.child(`Venue`).val();
+          const eventDate = snapshot.payload.child(`Date`).val();
+          const eventTime = snapshot.payload.child(`Time`).val();
+          const eventCreationDate = snapshot.payload.child(`Creation`).val();
+          const eventCustomerPayout = snapshot.payload.child(`Payout`).val();
+          const eventServiceCharge = snapshot.payload.child(`Charge`).val();
+          const lats = snapshot.payload.child(`Lat`).val();
+          const longs = snapshot.payload.child(`Long`).val();
+          const payoutAccount = snapshot.payload.child(`PayoutAccount`).val();
+          const payoutSortCode = snapshot.payload.child(`PayoutSortCode`).val();
           var maxTime = checkOutTime + 600000;
           if (maxTime <= timeNow) {
             this.timedOutListings.push({
@@ -83,7 +86,9 @@ export class BuyPage {
               Payout: eventCustomerPayout,
               Charge: eventServiceCharge,
               Lat: lats,
-              Long: longs
+              Long: longs,
+              PayoutAccount: payoutAccount,
+              PayoutSortCode: payoutSortCode
             });
             x++;
             count + 1;
@@ -115,9 +120,21 @@ export class BuyPage {
     var sArtist = target.parentElement.parentElement.children
       .item(3)
       .innerHTML.substr(0);
+      var sortCode = target.parentElement.parentElement.children
+      .item(9)
+      .innerHTML.substr(0);
+      var long = target.parentElement.parentElement.children
+      .item(10)
+      .innerHTML.substr(0);
+      var lat = target.parentElement.parentElement.children
+      .item(11)
+      .innerHTML.substr(0);
+      var sAccountNo = target.parentElement.parentElement.children
+      .item(8)
+      .innerHTML.substr(0);
     var sVenue = target.parentElement.parentElement.children
       .item(4)
-      .innerHTML.substr(6);
+      .innerHTML.substr(7);
     var sDate = target.parentElement.parentElement.children
       .item(6)
       .innerHTML.substr(6, 10);
@@ -127,10 +144,8 @@ export class BuyPage {
       parseInt(
         target.parentElement.parentElement.children.item(0).innerHTML.valueOf()
       ) - 1;
-    console.log(uId, ticketId, sId, sPrice, sVenue, sArtist, sDate);
-    console.log(ticketClicked);
     temp.push(this.items[ticketClicked]);
-    console.log(temp);
+    console.log(temp)
     temp.filter(v => {
       var tempArray = [
         {
@@ -142,8 +157,12 @@ export class BuyPage {
           Seller: v.Seller,
           Time: v.Time,
           Payout: v.Payout,
+          Lat: v.Lat,
+          Long: v.Long,
           Creation: v.Creation,
-          Charge: v.Charge
+          Charge: v.Charge,
+          PayoutAccount: v.PayoutAccount,
+          PayoutSortCode: v.PayoutSortCode
         }
       ];
       console.log(tempArray);
@@ -161,7 +180,11 @@ export class BuyPage {
       artist: sArtist,
       date: sDate,
       time: sTime,
-      location: sVenue
+      location: sVenue,
+      payoutAccount: sAccountNo,
+      sortcode: sortCode,
+      lat: lat,
+      long: long
     };
     const myModal = this.modal.create(
       "PaymentModalPage",
@@ -207,6 +230,8 @@ export class BuyPage {
           var timeLeft = snapshot.payload.child(`reservationPerioid`).val();
           var lats = snapshot.payload.child(`Lat`).val();
           var longs = snapshot.payload.child(`Long`).val();
+          const payoutAccount = snapshot.payload.child(`PayoutAccount`).val();
+          const payoutSortCode = snapshot.payload.child(`PayoutSortCode`).val();
           this.items.push({
             Key: finalKey,
             Name: eventName,
@@ -220,7 +245,10 @@ export class BuyPage {
             Charge: eventServiceCharge,
             CheckoutPeriod: timeLeft,
             Lat: lats,
-            Long: longs
+            Long: longs,
+            PayoutAccount: payoutAccount,
+            PayoutSortCode: payoutSortCode
+
           });
           x++;
           count + 1;

@@ -7,7 +7,9 @@ import {
   App,
   LoadingController,
   ModalController,
-  ModalOptions
+  AlertController,
+  ModalOptions,
+
 } from "ionic-angular";
 import { Listings } from "../../models/listing";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -21,12 +23,15 @@ var gListingServiceCharge;
 var gLat;
 var gLng;
 var gVenue;
+
 @IonicPage()
 @Component({
   selector: "page-sell",
   templateUrl: "sell.html"
 })
+
 export class SellPage {
+
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad SellPage");
@@ -35,6 +40,7 @@ export class SellPage {
     this.unlockTicketButton();
     this.lockFileUpload();
     this.lockLocationButton();
+    this.autoFillPaymentDetails();
   }
 
   listing = {} as Listings;
@@ -44,11 +50,12 @@ export class SellPage {
     private app: App,
     private chooser: Chooser,
     private afStorage: AngularFireStorage,
-    private fbDatabase: AngularFireDatabase,
+    private afDatabase: AngularFireDatabase,
     private ldCtrl: LoadingController,
     public navCtrl: NavController,
     public navParams: NavParams,
-    private modal: ModalController
+    private modal: ModalController,
+    private aCtrl: AlertController
   ) {}
 
   async chooseFile() {
@@ -67,12 +74,6 @@ export class SellPage {
 
   orderHistory() {
     this.navCtrl.push("OrderHistoryPage");
-  }
-
-  generateListingId() {
-    var bit1 = Date.now();
-    var bit2 = Math.floor(Math.random() * 99 + 1);
-    var randomID = (bit1 + bit2).toString();
   }
 
   listingTimestamp() {
@@ -184,6 +185,48 @@ export class SellPage {
       loading.dismiss();
     }, 1000);
   }
+autoFillPaymentDetails(){
+  var key = this.afAuth.auth.currentUser.uid;
+  this.afDatabase
+    .object(`user/${key}`)
+    .snapshotChanges()
+    .subscribe(snapshot => {
+      var allData = snapshot.payload.val();
+      var value = Object.keys(allData);
+      var cardKey = value[0];
+      this.afDatabase
+        .object(`user/${key}/${cardKey}`)
+        .snapshotChanges()
+        .subscribe(snapshot => {
+          const accountNo = snapshot.payload.child(`AccountNo`).val();
+          const sortCode = snapshot.payload.child(`Sort`).val();
+          const accountString = accountNo.toString().substr(5, 3);
+          let alert = this.aCtrl.create({
+            title: "Payment",
+            message:
+              "Use saved account ending in" + " " + "XXXXX-"+ accountString + " " + "for payment?",
+            buttons: [
+              {
+                text: "NO",
+                role: "cancel",
+                handler: () => {
+                  console.log("Cancel clicked");
+                }
+              },
+              {
+                text: "YES",
+                handler: () => {
+                  this.listing.PayoutAccount = accountNo;
+                  this.listing.PaySortCode = sortCode;
+                }
+              }
+            ]
+          });
+          alert.present();
+        });
+    });
+  }
+
 
   async createListing() {
     await this.showSpinner();
@@ -213,7 +256,6 @@ export class SellPage {
         })
         .present();
     } else {
-      this.generateListingId();
       await this.afAuth.authState.take(1).subscribe(auth => {
         this.listing.Date = rDate;
         this.listing.Seller = auth.uid;
@@ -224,7 +266,9 @@ export class SellPage {
         this.listing.Lat = gLat[0];
         this.listing.Location = gVenue[0];
         this.listing.Sold = false;
-        var ref = this.fbDatabase
+        this.listing.PaySortCode;
+        this.listing.PayoutAccount;
+        var ref = this.afDatabase
           .list(`unaprovedTickets/`)
           .push(this.listing)
           .orderByKey();

@@ -7,8 +7,10 @@ export interface Listings {
   Date: String;
   Sold: boolean;
   File: File;
-  CreationDate: String;
+  CreationDate: string;
   CustomerPayout: number;
+  PayoutAccount: string;
+  PaySortCode:string;
   ServiceCharge: number;
   Lat: number;
   Long: number;

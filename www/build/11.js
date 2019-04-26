@@ -1,6 +1,6 @@
 webpackJsonp([11],{
 
-/***/ 523:
+/***/ 524:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddCardModalPageModule", function() { return AddCardModalPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_card_modal__ = __webpack_require__(538);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_card_modal__ = __webpack_require__(539);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,16 +38,16 @@ var AddCardModalPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 538:
+/***/ 539:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddCardModalPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database____default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database___);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth____default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -81,6 +81,11 @@ var AddCardModalPage = /** @class */ (function () {
         this.vCtrl.dismiss();
     };
     AddCardModalPage.prototype.addDetails = function () {
+        var formatExpiry = this.expiry.toString().substr(0, 2) + '/' + this.expiry.toString().substr(2, 2);
+        var formatSortCode = this.sortcode.toString().substr(0, 2) + '-' + this.sortcode.toString().substr(2, 2) + '-' + this.sortcode.toString().substr(4, 2);
+        console.log(formatSortCode, formatExpiry);
+        this.sortcode = formatSortCode;
+        this.expiry = formatExpiry;
         var key = this.afAuth.auth.currentUser.uid;
         if (this.holderName == ' ' && this.cardNo == ' ') {
             this.toast.create({ message: 'One or more fields are empty', duration: 2000, position: 'middle' }).present();
@@ -91,7 +96,7 @@ var AddCardModalPage = /** @class */ (function () {
         else if (this.cardNo.length != 16) {
             this.toast.create({ message: 'Card number Must be 16 digits.', duration: 2000, position: 'middle' }).present();
         }
-        else if (this.sortcode.length != 6) {
+        else if (this.sortcode.length != 8) {
             this.toast.create({ message: 'Sortcode Must be 6 digits.', duration: 2000, position: 'middle' }).present();
         }
         else if (this.accountNumber.length != 8) {
@@ -100,7 +105,7 @@ var AddCardModalPage = /** @class */ (function () {
         else if (this.Cvc.length != 3) {
             this.toast.create({ message: 'CVC must be 3 digits', duration: 2000, position: 'middle' }).present();
         }
-        else if (this.expiry.length != 4) {
+        else if (this.expiry.length != 5) {
             this.toast.create({ message: 'Must be MM/YY', duration: 2000, position: 'middle' }).present();
         }
         else {

@@ -22,10 +22,22 @@
 <ion-content padding>
   <div class="ngDivAccount">
     <ion-list-header text-center>List a ticket</ion-list-header>
+
+    <ion-item>
+      <ion-label floating>Account number to pay</ion-label>
+      <ion-input id="txtTime" [(ngModel)]="listing.PayoutAccount"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Sort code</ion-label>
+      <ion-input id="txtTime" [(ngModel)]="listing.PaySortCode"></ion-input>
+    </ion-item>
+
     <ion-item>
       <ion-label floating>Event</ion-label>
       <ion-input id="txtEvent" [(ngModel)]="listing.Name"></ion-input>
     </ion-item>
+
     <ion-item>
       <ion-label floating>Start time</ion-label>
       <ion-input id="txtTime" [(ngModel)]="listing.Time"></ion-input>
@@ -53,7 +65,15 @@
       </button>
     </ion-item>
     <p>
-      <button ion-button id="btnLocation" class="sellButton" block (click)="findVenue()">Find the venue</button>
+      <button
+        ion-button
+        id="btnLocation"
+        class="sellButton"
+        block
+        (click)="findVenue()"
+      >
+        Find the venue
+      </button>
       <img *ngIf="image" [src]="image" />
       <button
         ion-button

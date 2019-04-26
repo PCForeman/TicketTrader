@@ -43,6 +43,11 @@ export class AddCardModalPage {
 
 
   addDetails() {
+    var formatExpiry = this.expiry.toString().substr(0,2)+'/'+this.expiry.toString().substr(2,2)
+    var formatSortCode = this.sortcode.toString().substr(0,2)+'-'+this.sortcode.toString().substr(2,2)+'-'+this.sortcode.toString().substr(4,2);
+    console.log(formatSortCode, formatExpiry);
+    this.sortcode = formatSortCode;
+    this.expiry = formatExpiry;
     var key = this.afAuth.auth.currentUser.uid;
     if(this.holderName == ' ' && this.cardNo == ' '){
     this.toast.create({message:'One or more fields are empty', duration:2000, position:'middle'}).present();
@@ -50,13 +55,13 @@ export class AddCardModalPage {
     this.toast.create({message: 'Cardholder cannot be empty.', duration:2000, position:'middle'}).present();
     }else if (this.cardNo.length != 16){
     this.toast.create({message: 'Card number Must be 16 digits.', duration:2000, position:'middle'}).present();
-    }else if ( this.sortcode.length != 6){
+    }else if ( this.sortcode.length != 8){
     this.toast.create({message:'Sortcode Must be 6 digits.', duration:2000, position:'middle'}).present();
     }else if (this.accountNumber.length != 8){
     this.toast.create({message:'Account number Must be 8 digits.', duration:2000, position:'middle'}).present();
     }else if ( this.Cvc.length != 3){
     this.toast.create({message:'CVC must be 3 digits', duration:2000, position:'middle'}).present();  
-    }else if (this.expiry.length != 4){
+    }else if (this.expiry.length != 5){
     this.toast.create({message:'Must be MM/YY', duration:2000, position:'middle'}).present(); 
     }else{
     var payment = [{
@@ -74,7 +79,6 @@ export class AddCardModalPage {
 }
 
   ionViewDidLoad() {
-
     console.log("ionViewDidLoad AddCardModalPage");
   }
 }

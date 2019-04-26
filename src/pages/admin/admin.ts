@@ -112,6 +112,8 @@ export class AdminPage {
           const eventTime = snapshot.payload.child(`Time`).val();
           const lats = snapshot.payload.child(`Lat`).val();
           const longs = snapshot.payload.child(`Long`).val();
+          const paymentAccount = snapshot.payload.child(`PayoutAccount`).val();
+          const paymentSort = snapshot.payload.child(`PaySortCode`).val();
           const eventCreationDate = snapshot.payload
             .child(`CreationDate`)
             .val();
@@ -137,7 +139,9 @@ export class AdminPage {
             Charge: eventServiceCharge,
             Sold: listingBoolean,
             Lat: lats,
-            Long: longs
+            Long: longs,
+            PayoutAccount: paymentAccount,
+            PayoutSortCode: paymentSort
           });
           x++;
         });
@@ -169,7 +173,9 @@ export class AdminPage {
           Creation: v.Creation,
           Charge: v.Charge,
           Long: v.Long,
-          Lat: v.Lat
+          Lat: v.Lat,
+          PayoutAccount: v.PayoutAccount,
+          PayoutSortCode: v.PayoutSortCode
         }
       ];
 
