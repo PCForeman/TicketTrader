@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaymentModalPageModule", function() { return PaymentModalPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payment_modal__ = __webpack_require__(547);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payment_modal__ = __webpack_require__(548);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,7 +34,7 @@ var PaymentModalPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 547:
+/***/ 548:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -86,7 +86,6 @@ var PaymentModalPage = /** @class */ (function () {
                 .snapshotChanges()
                 .subscribe(function (snapshot) {
                 var CardNo = snapshot.payload.child("Card").val();
-                var CVC = snapshot.payload.child("CVC").val();
                 var cardExpiry = snapshot.payload.child("Expiry").val();
                 var Holder = snapshot.payload.child("Holder").val();
                 var CardSubStr = CardNo.toString().substr(12, 4);
@@ -114,7 +113,6 @@ var PaymentModalPage = /** @class */ (function () {
                                 _this.cardName = Holder;
                                 _this.cardNo = cardNoString;
                                 _this.expiry = cardExpiry;
-                                _this.CVC = CVC;
                             }
                         }
                     ]
@@ -166,6 +164,7 @@ var PaymentModalPage = /** @class */ (function () {
         this.afDatabase.list("ticketsBought/" + this.listingData.userId).push(buyerRef[0]);
         this.afDatabase.list("ticketsSold/" + this.listingData.userId).push(sellerRef[0]);
         this.afDatabase.object("saleArchive/" + this.listingData.ticketRef).set(saleArchive[0]);
+        // Need to remove the ticket from basket after the data has been sent to the other tables. //
         this.close();
     };
     PaymentModalPage = __decorate([

@@ -94,6 +94,7 @@ ext {
 apply from: "../cordova-plugin-googlemaps/starter-tbxml-android.gradle"
 apply from: "../cordova-plugin-telerik-imagepicker/starter-ignorelinterrors.gradle"
 apply from: "../cordova-plugin-telerik-imagepicker/starter-androidtarget.gradle"
+apply from: "../cordova-plugin-aes256-encryption/starter-plugin.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras = file('build-extras.gradle').exists()

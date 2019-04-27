@@ -20,6 +20,7 @@
     "@angular/http": "5.2.11",
     "@angular/platform-browser": "5.2.11",
     "@angular/platform-browser-dynamic": "5.2.11",
+    "@ionic-native/aes-256": "^4.20.0",
     "@ionic-native/camera": "^5.4.0",
     "@ionic-native/chooser": "^4.20.0",
     "@ionic-native/core": "^4.17.0",
@@ -40,6 +41,7 @@
     "com-badrit-base64": "0.2.0",
     "cordova-android": "7.1.1",
     "cordova-browser": "5.0.4",
+    "cordova-plugin-aes256-encryption": "1.2.1",
     "cordova-plugin-camera": "git+https://github.com/apache/cordova-plugin-camera.git",
     "cordova-plugin-chooser": "1.2.4",
     "cordova-plugin-datepicker": "0.9.3",
@@ -99,7 +101,8 @@
       },
       "cordova-plugin-file": {},
       "com-badrit-base64": {},
-      "cordova-plugin-filepath": {}
+      "cordova-plugin-filepath": {},
+      "cordova-plugin-aes256-encryption": {}
     },
     "platforms": [
       "browser",

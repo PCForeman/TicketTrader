@@ -18,6 +18,7 @@ import { RegisterPage } from "../pages/register/register";
 import { MyApp } from "./app.component";
 import { FbConfig } from "./app.firebase.config";
 import { Chooser } from '@ionic-native/chooser/index';
+import { AES256 } from '@ionic-native/aes-256';
 
 @NgModule({
   declarations: [MyApp, RegisterPage],
@@ -31,6 +32,7 @@ import { Chooser } from '@ionic-native/chooser/index';
   bootstrap: [IonicApp],
   entryComponents: [MyApp, LoginPage, RegisterPage],
   providers: [
+    AES256,
     StatusBar,
     Toast,
     Camera,

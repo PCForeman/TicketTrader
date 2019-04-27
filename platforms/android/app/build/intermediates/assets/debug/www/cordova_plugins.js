@@ -543,6 +543,14 @@ module.exports = [
     "clobbers": [
       "window.FilePath"
     ]
+  },
+  {
+    "id": "cordova-plugin-aes256-encryption.AES256",
+    "file": "plugins/cordova-plugin-aes256-encryption/www/AES256.js",
+    "pluginId": "cordova-plugin-aes256-encryption",
+    "clobbers": [
+      "cordova.plugins.AES256"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -564,7 +572,8 @@ module.exports.metadata =
   "cordova-plugin-camera": "4.1.0-dev",
   "cordova-plugin-file": "6.0.1",
   "com-badrit-base64": "0.2.0",
-  "cordova-plugin-filepath": "1.5.1"
+  "cordova-plugin-filepath": "1.5.1",
+  "cordova-plugin-aes256-encryption": "1.2.1"
 };
 // BOTTOM OF METADATA
 });

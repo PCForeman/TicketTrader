@@ -96,6 +96,9 @@
         <param name="android-package" value="com.hiddentao.cordova.filepath.FilePath" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="AES256">
+        <param name="android-package" value="com.ideas2it.aes256.AES256" />
+    </feature>
     <feature name="FileChooser">
         <param name="android-package" value="com.megster.cordova.FileChooser" />
     </feature>

@@ -172,6 +172,10 @@
             {
               "xml": "<feature name=\"FilePath\"><param name=\"android-package\" value=\"com.hiddentao.cordova.filepath.FilePath\" /><param name=\"onload\" value=\"true\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"AES256\"><param name=\"android-package\" value=\"com.ideas2it.aes256.AES256\" /></feature>",
+              "count": 1
             }
           ],
           "/widget": [
@@ -319,6 +323,9 @@
       "PACKAGE_NAME": "io.ionic.starter"
     },
     "cordova-plugin-filepath": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-aes256-encryption": {
       "PACKAGE_NAME": "io.ionic.starter"
     }
   },
@@ -867,6 +874,14 @@
       "clobbers": [
         "window.FilePath"
       ]
+    },
+    {
+      "id": "cordova-plugin-aes256-encryption.AES256",
+      "file": "plugins/cordova-plugin-aes256-encryption/www/AES256.js",
+      "pluginId": "cordova-plugin-aes256-encryption",
+      "clobbers": [
+        "cordova.plugins.AES256"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -886,6 +901,7 @@
     "cordova-plugin-camera": "4.1.0-dev",
     "cordova-plugin-file": "6.0.1",
     "com-badrit-base64": "0.2.0",
-    "cordova-plugin-filepath": "1.5.1"
+    "cordova-plugin-filepath": "1.5.1",
+    "cordova-plugin-aes256-encryption": "1.2.1"
   }
 }

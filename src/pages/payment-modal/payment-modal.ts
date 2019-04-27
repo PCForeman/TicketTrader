@@ -50,7 +50,6 @@ export class PaymentModalPage {
           .snapshotChanges()
           .subscribe(snapshot => {
             const CardNo = snapshot.payload.child(`Card`).val();
-            const CVC = snapshot.payload.child(`CVC`).val();
             const cardExpiry = snapshot.payload.child(`Expiry`).val();
             const Holder = snapshot.payload.child(`Holder`).val();
             var CardSubStr = CardNo.toString().substr(12, 4);
@@ -80,7 +79,6 @@ export class PaymentModalPage {
                     this.cardName = Holder;
                     this.cardNo = cardNoString;
                     this.expiry = cardExpiry;
-                    this.CVC = CVC;
                   }
                 }
               ]
@@ -141,6 +139,7 @@ export class PaymentModalPage {
     this.afDatabase.list(`ticketsBought/${this.listingData.userId}`).push(buyerRef[0]);
     this.afDatabase.list(`ticketsSold/${this.listingData.userId}`).push(sellerRef[0]);
     this.afDatabase.object(`saleArchive/${this.listingData.ticketRef}`).set(saleArchive[0]);
+    // Need to remove the ticket from basket after the data has been sent to the other tables. //
     this.close();
   }
 

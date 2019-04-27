@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 536:
+/***/ 537:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TicketsPageModule", function() { return TicketsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tickets__ = __webpack_require__(548);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tickets__ = __webpack_require__(550);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -24,7 +24,7 @@ var TicketsPageModule = /** @class */ (function () {
     TicketsPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [__WEBPACK_IMPORTED_MODULE_2__tickets__["a" /* TicketsPage */]],
-            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__tickets__["a" /* TicketsPage */])]
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__tickets__["a" /* TicketsPage */])]
         })
     ], TicketsPageModule);
     return TicketsPageModule;
@@ -34,15 +34,15 @@ var TicketsPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 548:
+/***/ 550:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TicketsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(93);
@@ -162,7 +162,9 @@ var TicketsPage = /** @class */ (function () {
                         checkOutTime: timeClicked,
                         reservationPerioid: checkOutBy,
                         Lat: v.Lat,
-                        Long: v.Long
+                        Long: v.Long,
+                        PayoutAccount: v.PayoutAccount,
+                        PayoutSortCode: v.PayoutSortCode
                     }
                 ];
                 var checkOutRef = _this.afAuth.auth.currentUser.uid;
@@ -211,8 +213,10 @@ var TicketsPage = /** @class */ (function () {
                     var eventSellerUID = snapshot.payload.child("Seller").val();
                     var eventCustomerPayout = snapshot.payload.child("Payout").val();
                     var eventServiceCharge = snapshot.payload.child("Charge").val();
-                    var Longs = snapshot.payload.child("long").val();
-                    var Lats = snapshot.payload.child("lat").val();
+                    var Longs = snapshot.payload.child("Long").val();
+                    var Lats = snapshot.payload.child("Lat").val();
+                    var payoutAccount = snapshot.payload.child("PayoutAccount").val();
+                    var payoutSortCode = snapshot.payload.child("PayoutSortCode").val();
                     _this.items.push({
                         Key: finalKey,
                         Name: eventName,
@@ -225,7 +229,9 @@ var TicketsPage = /** @class */ (function () {
                         Payout: eventCustomerPayout,
                         Charge: eventServiceCharge,
                         Long: Longs,
-                        Lat: Lats
+                        Lat: Lats,
+                        PayoutAccount: payoutAccount,
+                        PayoutSortCode: payoutSortCode
                     });
                     x++;
                 });
@@ -254,10 +260,10 @@ var TicketsPage = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["k" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* App */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavParams */]])
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* App */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */]])
     ], TicketsPage);
     return TicketsPage;
 }());
