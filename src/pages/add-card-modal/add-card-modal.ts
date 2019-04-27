@@ -73,7 +73,7 @@ export class AddCardModalPage {
       .catch((error: any) => console.error(error));
     this.aes.encrypt(this.secureKey, this.secureIV, this.sortcode).then(res => (this.eItems.push(res), console.log(res)))
       .catch((error: any) => console.error(error));
-      console.log(this.eItems);
+      console.log(this.eItems.values());
       const cardHash = this.eItems[0].toString();
       const sortHash = this.eItems[1].toString();
       const accountNoHash = this.eItems[2].toString();

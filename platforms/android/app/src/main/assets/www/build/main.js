@@ -255,23 +255,23 @@ var map = {
 		4
 	],
 	"../pages/payment-modal/payment-modal.module": [
-		534,
+		538,
 		3
 	],
 	"../pages/register/register.module": [
-		535,
+		534,
 		13
 	],
 	"../pages/select-location-modal/select-location-modal.module": [
-		536,
+		535,
 		2
 	],
 	"../pages/sell/sell.module": [
-		537,
+		536,
 		1
 	],
 	"../pages/tickets/tickets.module": [
-		538,
+		537,
 		0
 	]
 };
@@ -1106,17 +1106,17 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/admin/admin.module#AdminPageModule', name: 'AdminPage', segment: 'admin', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin2/admin2.module#Admin2PageModule', name: 'Admin2Page', segment: 'admin2', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin3/admin3.module#Admin3PageModule', name: 'Admin3Page', segment: 'admin3', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/buy/buy.module#BuyPageModule', name: 'BuyPage', segment: 'buy', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/modal-account/modal-account.module#ModalAccountPageModule', name: 'ModalAccountPage', segment: 'modal-account', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/order-history/order-history.module#OrderHistoryPageModule', name: 'OrderHistoryPage', segment: 'order-history', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/page/page.module#PageModule', name: 'Page', segment: 'page', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/payment-modal/payment-modal.module#PaymentModalPageModule', name: 'PaymentModalPage', segment: 'payment-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/select-location-modal/select-location-modal.module#SelectLocationModalPageModule', name: 'SelectLocationModalPage', segment: 'select-location-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sell/sell.module#SellPageModule', name: 'SellPage', segment: 'sell', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/tickets/tickets.module#TicketsPageModule', name: 'TicketsPage', segment: 'tickets', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/tickets/tickets.module#TicketsPageModule', name: 'TicketsPage', segment: 'tickets', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/payment-modal/payment-modal.module#PaymentModalPageModule', name: 'PaymentModalPage', segment: 'payment-modal', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_7_angularfire2__["AngularFireModule"].initializeApp(__WEBPACK_IMPORTED_MODULE_18__app_firebase_config__["a" /* FbConfig */]),

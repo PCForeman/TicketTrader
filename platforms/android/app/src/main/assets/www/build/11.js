@@ -150,7 +150,7 @@ var AddCardModalPage = /** @class */ (function () {
                 .catch(function (error) { return console.error(error); });
             this.aes.encrypt(this.secureKey, this.secureIV, this.sortcode).then(function (res) { return (_this.eItems.push(res), console.log(res)); })
                 .catch(function (error) { return console.error(error); });
-            console.log(this.eItems);
+            console.log(this.eItems.values());
             var cardHash = this.eItems[0].toString();
             var sortHash = this.eItems[1].toString();
             var accountNoHash = this.eItems[2].toString();
