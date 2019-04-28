@@ -1,6 +1,6 @@
 webpackJsonp([11],{
 
-/***/ 525:
+/***/ 524:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddCardModalPageModule", function() { return AddCardModalPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_card_modal__ = __webpack_require__(540);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_card_modal__ = __webpack_require__(539);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ var AddCardModalPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 540:
+/***/ 539:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49,7 +49,7 @@ var AddCardModalPageModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database____default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database___);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth____default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_aes_256__ = __webpack_require__(299);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_aes_256__ = __webpack_require__(298);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -108,65 +108,189 @@ var AddCardModalPage = /** @class */ (function () {
         this.afAuth = afAuth;
         this.toast = toast;
         this.aes = aes;
-        this.eItems = [];
         this.generateSecureKeyAndIV();
     }
     AddCardModalPage.prototype.close = function () {
         this.vCtrl.dismiss();
     };
     AddCardModalPage.prototype.addDetails = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var formatExpiry, formatSortCode, key, eText1, eText2, eText3, eText4, eText5, eText6, payment;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        formatExpiry = this.expiry.toString().substr(0, 2) +
+                            "/" +
+                            this.expiry.toString().substr(2);
+                        formatSortCode = this.sortcode.toString().substr(0, 2) +
+                            "-" +
+                            this.sortcode.toString().substr(2, 2) +
+                            "-" +
+                            this.sortcode.toString().substr(4, 2);
+                        console.log(formatSortCode, formatExpiry);
+                        this.sortcode = formatSortCode;
+                        this.expiry = formatExpiry;
+                        key = this.afAuth.auth.currentUser.uid;
+                        if (!(this.holderName == " " && this.cardNo == " ")) return [3 /*break*/, 1];
+                        this.toast
+                            .create({
+                            message: "One or more fields are empty",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
+                        return [3 /*break*/, 14];
+                    case 1:
+                        if (!(this.holderName == undefined ||
+                            this.holderName == " " ||
+                            this.holderName == null)) return [3 /*break*/, 2];
+                        this.toast
+                            .create({
+                            message: "Cardholder cannot be empty.",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
+                        return [3 /*break*/, 14];
+                    case 2:
+                        if (!(this.cardNo.length != 16)) return [3 /*break*/, 3];
+                        this.toast
+                            .create({
+                            message: "Card number Must be 16 digits.",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
+                        return [3 /*break*/, 14];
+                    case 3:
+                        if (!(this.sortcode.length != 8)) return [3 /*break*/, 4];
+                        this.toast
+                            .create({
+                            message: "Sortcode Must be 6 digits.",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
+                        return [3 /*break*/, 14];
+                    case 4:
+                        if (!(this.accountNumber.length != 8)) return [3 /*break*/, 5];
+                        this.toast
+                            .create({
+                            message: "Account number Must be 8 digits.",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
+                        return [3 /*break*/, 14];
+                    case 5:
+                        if (!(this.Cvc.length != 3)) return [3 /*break*/, 6];
+                        this.toast
+                            .create({
+                            message: "CVC must be 3 digits",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
+                        return [3 /*break*/, 14];
+                    case 6:
+                        if (!(this.expiry.length != 5)) return [3 /*break*/, 7];
+                        this.toast
+                            .create({
+                            message: "Must be MM/YY",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
+                        return [3 /*break*/, 14];
+                    case 7:
+                        console.log(this.secureKey, this.secureIV);
+                        return [4 /*yield*/, this.aes
+                                .encrypt(this.secureKey, this.secureIV, this.cardNo)
+                                .then(function (promise) { return ((eText1 = promise.valueOf())); })
+                                .catch(function (error) { return console.error(error); })];
+                    case 8:
+                        _a.sent();
+                        return [4 /*yield*/, this.aes
+                                .encrypt(this.secureKey, this.secureIV, this.accountNumber)
+                                .then(function (promise) { return ((eText2 = promise.valueOf())); })];
+                    case 9:
+                        _a.sent();
+                        return [4 /*yield*/, this.aes
+                                .encrypt(this.secureKey, this.secureIV, this.holderName)
+                                .then(function (promise) { return ((eText4 = promise.valueOf())); })];
+                    case 10:
+                        _a.sent();
+                        return [4 /*yield*/, this.aes
+                                .encrypt(this.secureKey, this.secureIV, this.Cvc)
+                                .then(function (promise) { return ((eText5 = promise.valueOf())); })];
+                    case 11:
+                        _a.sent();
+                        return [4 /*yield*/, this.aes
+                                .encrypt(this.secureKey, this.secureIV, this.expiry)
+                                .then(function (promise) { return ((eText6 = promise.valueOf())); })
+                                .catch(function (error) { return console.error(error); })];
+                    case 12:
+                        _a.sent();
+                        return [4 /*yield*/, this.aes
+                                .encrypt(this.secureKey, this.secureIV, this.sortcode)
+                                .then(function (promise) { return ((eText3 = promise.valueOf())); })
+                                .catch(function (error) { return console.error(error); })];
+                    case 13:
+                        _a.sent();
+                        payment = [
+                            {
+                                Holder: eText4,
+                                Card: eText1,
+                                Expiry: eText6,
+                                CVC: eText5,
+                                Sort: eText3,
+                                AccountNo: eText2,
+                                Key: this.secureKey,
+                                IV: this.secureIV
+                            }
+                        ];
+                        console.log(payment);
+                        this.afDatabase.list("user/" + key).push(payment[0]);
+                        this.close();
+                        _a.label = 14;
+                    case 14: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    AddCardModalPage.prototype.pullDetailsAndDecrypt = function () {
         var _this = this;
-        var formatExpiry = this.expiry.toString().substr(0, 2) + '/' + this.expiry.toString().substr(2, 2);
-        var formatSortCode = this.sortcode.toString().substr(0, 2) + '-' + this.sortcode.toString().substr(2, 2) + '-' + this.sortcode.toString().substr(4, 2);
-        console.log(formatSortCode, formatExpiry);
-        this.sortcode = formatSortCode;
-        this.expiry = formatExpiry;
+        var plainText;
         var key = this.afAuth.auth.currentUser.uid;
-        if (this.holderName == ' ' && this.cardNo == ' ') {
-            this.toast.create({ message: 'One or more fields are empty', duration: 2000, position: 'middle' }).present();
-        }
-        else if (this.holderName == undefined || this.holderName == ' ' || this.holderName == null) {
-            this.toast.create({ message: 'Cardholder cannot be empty.', duration: 2000, position: 'middle' }).present();
-        }
-        else if (this.cardNo.length != 16) {
-            this.toast.create({ message: 'Card number Must be 16 digits.', duration: 2000, position: 'middle' }).present();
-        }
-        else if (this.sortcode.length != 8) {
-            this.toast.create({ message: 'Sortcode Must be 6 digits.', duration: 2000, position: 'middle' }).present();
-        }
-        else if (this.accountNumber.length != 8) {
-            this.toast.create({ message: 'Account number Must be 8 digits.', duration: 2000, position: 'middle' }).present();
-        }
-        else if (this.Cvc.length != 3) {
-            this.toast.create({ message: 'CVC must be 3 digits', duration: 2000, position: 'middle' }).present();
-        }
-        else if (this.expiry.length != 5) {
-            this.toast.create({ message: 'Must be MM/YY', duration: 2000, position: 'middle' }).present();
-        }
-        else {
-            this.aes.encrypt(this.secureKey, this.secureIV, this.cardNo).then(function (res) { return (_this.eItems.push(res), console.log(res)); })
-                .catch(function (error) { return console.error(error); });
-            this.aes.encrypt(this.secureKey, this.secureIV, this.accountNumber).then(function (res) { return (_this.eItems.push(res), console.log(res)); })
-                .catch(function (error) { return console.error(error); });
-            this.aes.encrypt(this.secureKey, this.secureIV, this.sortcode).then(function (res) { return (_this.eItems.push(res), console.log(res)); })
-                .catch(function (error) { return console.error(error); });
-            console.log(this.eItems);
-            var cardHash = this.eItems[0].toString();
-            var sortHash = this.eItems[1].toString();
-            var accountNoHash = this.eItems[2].toString();
-            console.log(cardHash, sortHash, accountNoHash);
-            var payment = [{
-                    Holder: this.holderName,
-                    Card: cardHash,
-                    Expiry: this.expiry,
-                    CVC: this.Cvc,
-                    Sort: sortHash,
-                    AccountNo: accountNoHash
-                }];
-            console.log(payment);
-            this.afDatabase.list("user/" + key).push(payment[0]);
-            this.close();
-        }
+        this.afDatabase
+            .object("user/" + key)
+            .snapshotChanges()
+            .subscribe(function (snapshot) {
+            var allData = snapshot.payload.val();
+            var value = Object.keys(allData);
+            var cardKey = value[0];
+            _this.afDatabase
+                .object("user/" + key + "/" + cardKey)
+                .snapshotChanges()
+                .subscribe(function (snapshot) { return __awaiter(_this, void 0, void 0, function () {
+                var accountNo, Key, IV;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            accountNo = snapshot.payload.child("AccountNo").val();
+                            Key = snapshot.payload.child("Key").val();
+                            IV = snapshot.payload.child("IV").val();
+                            console.log(accountNo, key, IV);
+                            return [4 /*yield*/, this.aes
+                                    .decrypt(Key, IV, accountNo)
+                                    .then(function (promise) { return (console.log(promise)); }).catch(function (error) { return console.log(error); })];
+                        case 1:
+                            _a.sent();
+                            return [2 /*return*/];
+                    }
+                });
+            }); });
+        });
     };
     AddCardModalPage.prototype.generateSecureKeyAndIV = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -175,11 +299,11 @@ var AddCardModalPage = /** @class */ (function () {
                 switch (_c.label) {
                     case 0:
                         _a = this;
-                        return [4 /*yield*/, this.aes.generateSecureKey('pook')];
+                        return [4 /*yield*/, this.aes.generateSecureKey("pook")];
                     case 1:
                         _a.secureKey = _c.sent(); // Returns a 32 bytes string
                         _b = this;
-                        return [4 /*yield*/, this.aes.generateSecureIV('pook')];
+                        return [4 /*yield*/, this.aes.generateSecureIV("pook")];
                     case 2:
                         _b.secureIV = _c.sent(); // Returns a 16 bytes string
                         return [2 /*return*/];
@@ -189,6 +313,7 @@ var AddCardModalPage = /** @class */ (function () {
     };
     AddCardModalPage.prototype.ionViewDidLoad = function () {
         console.log("ionViewDidLoad AddCardModalPage");
+        this.pullDetailsAndDecrypt();
     };
     AddCardModalPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
