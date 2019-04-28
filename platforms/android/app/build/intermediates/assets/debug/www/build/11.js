@@ -1,6 +1,6 @@
 webpackJsonp([11],{
 
-/***/ 524:
+/***/ 525:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddCardModalPageModule", function() { return AddCardModalPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_card_modal__ = __webpack_require__(539);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_card_modal__ = __webpack_require__(540);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ var AddCardModalPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 539:
+/***/ 540:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49,7 +49,7 @@ var AddCardModalPageModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database____default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database___);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth____default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_aes_256__ = __webpack_require__(298);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_aes_256__ = __webpack_require__(297);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -115,7 +115,7 @@ var AddCardModalPage = /** @class */ (function () {
     };
     AddCardModalPage.prototype.addDetails = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var formatExpiry, formatSortCode, key, eText1, eText2, eText3, eText4, eText5, eText6, payment;
+            var formatExpiry, formatSortCode, formatCardNo, key, eText1, eText2, eText3, eText4, eText5, eText6, payment;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -127,9 +127,17 @@ var AddCardModalPage = /** @class */ (function () {
                             this.sortcode.toString().substr(2, 2) +
                             "-" +
                             this.sortcode.toString().substr(4, 2);
+                        formatCardNo = this.cardNo.toString().substr(0, 4) +
+                            "-" +
+                            this.cardNo.toString().substr(4, 4) +
+                            "-" +
+                            this.cardNo.toString().substr(8, 4) +
+                            "-" +
+                            this.cardNo.toString().substr(12, 4);
                         console.log(formatSortCode, formatExpiry);
                         this.sortcode = formatSortCode;
                         this.expiry = formatExpiry;
+                        this.cardNo = formatCardNo;
                         key = this.afAuth.auth.currentUser.uid;
                         if (!(this.holderName == " " && this.cardNo == " ")) return [3 /*break*/, 1];
                         this.toast
@@ -153,7 +161,7 @@ var AddCardModalPage = /** @class */ (function () {
                             .present();
                         return [3 /*break*/, 14];
                     case 2:
-                        if (!(this.cardNo.length != 16)) return [3 /*break*/, 3];
+                        if (!(formatCardNo.length != 19)) return [3 /*break*/, 3];
                         this.toast
                             .create({
                             message: "Card number Must be 16 digits.",
@@ -206,34 +214,34 @@ var AddCardModalPage = /** @class */ (function () {
                         console.log(this.secureKey, this.secureIV);
                         return [4 /*yield*/, this.aes
                                 .encrypt(this.secureKey, this.secureIV, this.cardNo)
-                                .then(function (promise) { return ((eText1 = promise.valueOf())); })
+                                .then(function (promise) { return (eText1 = promise.valueOf()); })
                                 .catch(function (error) { return console.error(error); })];
                     case 8:
                         _a.sent();
                         return [4 /*yield*/, this.aes
                                 .encrypt(this.secureKey, this.secureIV, this.accountNumber)
-                                .then(function (promise) { return ((eText2 = promise.valueOf())); })];
+                                .then(function (promise) { return (eText2 = promise.valueOf()); })];
                     case 9:
                         _a.sent();
                         return [4 /*yield*/, this.aes
                                 .encrypt(this.secureKey, this.secureIV, this.holderName)
-                                .then(function (promise) { return ((eText4 = promise.valueOf())); })];
+                                .then(function (promise) { return (eText4 = promise.valueOf()); })];
                     case 10:
                         _a.sent();
                         return [4 /*yield*/, this.aes
                                 .encrypt(this.secureKey, this.secureIV, this.Cvc)
-                                .then(function (promise) { return ((eText5 = promise.valueOf())); })];
+                                .then(function (promise) { return (eText5 = promise.valueOf()); })];
                     case 11:
                         _a.sent();
                         return [4 /*yield*/, this.aes
                                 .encrypt(this.secureKey, this.secureIV, this.expiry)
-                                .then(function (promise) { return ((eText6 = promise.valueOf())); })
+                                .then(function (promise) { return (eText6 = promise.valueOf()); })
                                 .catch(function (error) { return console.error(error); })];
                     case 12:
                         _a.sent();
                         return [4 /*yield*/, this.aes
                                 .encrypt(this.secureKey, this.secureIV, this.sortcode)
-                                .then(function (promise) { return ((eText3 = promise.valueOf())); })
+                                .then(function (promise) { return (eText3 = promise.valueOf()); })
                                 .catch(function (error) { return console.error(error); })];
                     case 13:
                         _a.sent();
@@ -258,40 +266,6 @@ var AddCardModalPage = /** @class */ (function () {
             });
         });
     };
-    AddCardModalPage.prototype.pullDetailsAndDecrypt = function () {
-        var _this = this;
-        var plainText;
-        var key = this.afAuth.auth.currentUser.uid;
-        this.afDatabase
-            .object("user/" + key)
-            .snapshotChanges()
-            .subscribe(function (snapshot) {
-            var allData = snapshot.payload.val();
-            var value = Object.keys(allData);
-            var cardKey = value[0];
-            _this.afDatabase
-                .object("user/" + key + "/" + cardKey)
-                .snapshotChanges()
-                .subscribe(function (snapshot) { return __awaiter(_this, void 0, void 0, function () {
-                var accountNo, Key, IV;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            accountNo = snapshot.payload.child("AccountNo").val();
-                            Key = snapshot.payload.child("Key").val();
-                            IV = snapshot.payload.child("IV").val();
-                            console.log(accountNo, key, IV);
-                            return [4 /*yield*/, this.aes
-                                    .decrypt(Key, IV, accountNo)
-                                    .then(function (promise) { return (console.log(promise)); }).catch(function (error) { return console.log(error); })];
-                        case 1:
-                            _a.sent();
-                            return [2 /*return*/];
-                    }
-                });
-            }); });
-        });
-    };
     AddCardModalPage.prototype.generateSecureKeyAndIV = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _a, _b;
@@ -313,7 +287,6 @@ var AddCardModalPage = /** @class */ (function () {
     };
     AddCardModalPage.prototype.ionViewDidLoad = function () {
         console.log("ionViewDidLoad AddCardModalPage");
-        this.pullDetailsAndDecrypt();
     };
     AddCardModalPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({

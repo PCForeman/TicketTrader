@@ -9,7 +9,6 @@ import {
 import { AngularFireDatabase } from "angularfire2/database/";
 import { AngularFireAuth } from "angularfire2/auth/";
 import { AES256 } from "@ionic-native/aes-256";
-import { AccountPage } from "../account/account";
 
 @IonicPage()
 @Component({
@@ -55,9 +54,19 @@ export class AddCardModalPage {
       this.sortcode.toString().substr(2, 2) +
       "-" +
       this.sortcode.toString().substr(4, 2);
+
+    var formatCardNo =
+      this.cardNo.toString().substr(0, 4) +
+      "-" +
+      this.cardNo.toString().substr(4, 4) +
+      "-" +
+      this.cardNo.toString().substr(8, 4) +
+      "-" +
+      this.cardNo.toString().substr(12, 4);
     console.log(formatSortCode, formatExpiry);
     this.sortcode = formatSortCode;
     this.expiry = formatExpiry;
+    this.cardNo = formatCardNo;
     var key = this.afAuth.auth.currentUser.uid;
     if (this.holderName == " " && this.cardNo == " ") {
       this.toast
@@ -79,7 +88,7 @@ export class AddCardModalPage {
           position: "middle"
         })
         .present();
-    } else if (this.cardNo.length != 16) {
+    } else if (formatCardNo.length != 19) {
       this.toast
         .create({
           message: "Card number Must be 16 digits.",
@@ -129,48 +138,24 @@ export class AddCardModalPage {
       console.log(this.secureKey, this.secureIV);
       await this.aes
         .encrypt(this.secureKey, this.secureIV, this.cardNo)
-        .then(
-          promise => (
-            (eText1 = promise.valueOf())
-          )
-        )
+        .then(promise => (eText1 = promise.valueOf()))
         .catch((error: any) => console.error(error));
       await this.aes
         .encrypt(this.secureKey, this.secureIV, this.accountNumber)
-        .then(
-          promise => (
-            (eText2 = promise.valueOf())
-          )
-        )
-        await this.aes
+        .then(promise => (eText2 = promise.valueOf()));
+      await this.aes
         .encrypt(this.secureKey, this.secureIV, this.holderName)
-        .then(
-          promise => (
-            (eText4 = promise.valueOf())
-          )
-        )
-        await this.aes
+        .then(promise => (eText4 = promise.valueOf()));
+      await this.aes
         .encrypt(this.secureKey, this.secureIV, this.Cvc)
-        .then(
-          promise => (
-            (eText5 = promise.valueOf())
-          )
-        )
-        await this.aes
+        .then(promise => (eText5 = promise.valueOf()));
+      await this.aes
         .encrypt(this.secureKey, this.secureIV, this.expiry)
-        .then(
-          promise => (
-            (eText6 = promise.valueOf())
-          )
-        )
+        .then(promise => (eText6 = promise.valueOf()))
         .catch((error: any) => console.error(error));
       await this.aes
         .encrypt(this.secureKey, this.secureIV, this.sortcode)
-        .then(
-          promise => (
-            (eText3 = promise.valueOf())
-          )
-        )
+        .then(promise => (eText3 = promise.valueOf()))
         .catch((error: any) => console.error(error));
       var payment = [
         {
@@ -190,32 +175,6 @@ export class AddCardModalPage {
     }
   }
 
-  pullDetailsAndDecrypt(){
-    var plainText: any;
-    var key = this.afAuth.auth.currentUser.uid;
-  this.afDatabase
-    .object(`user/${key}`)
-    .snapshotChanges()
-    .subscribe(snapshot => {
-      var allData = snapshot.payload.val();
-      var value = Object.keys(allData);
-      var cardKey = value[0];
-      this.afDatabase
-        .object(`user/${key}/${cardKey}`)
-        .snapshotChanges()
-        .subscribe(async snapshot => {
-          var accountNo : string = snapshot.payload.child(`AccountNo`).val();
-          var Key : string = snapshot.payload.child(`Key`).val();
-          var IV : string = snapshot.payload.child(`IV`).val();
-          console.log(accountNo, key, IV);
-          await this.aes
-          .decrypt(Key, IV, accountNo)
-          .then(
-            promise => (
-              console.log(promise))).catch((error: any) => console.log(error));
-        })
-      })
-  }
   async generateSecureKeyAndIV() {
     this.secureKey = await this.aes.generateSecureKey("pook"); // Returns a 32 bytes string
     this.secureIV = await this.aes.generateSecureIV("pook"); // Returns a 16 bytes string
@@ -223,6 +182,5 @@ export class AddCardModalPage {
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad AddCardModalPage");
-    this.pullDetailsAndDecrypt();
   }
 }

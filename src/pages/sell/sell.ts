@@ -17,6 +17,7 @@ import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireStorage } from "angularfire2/storage";
 import { HomePage } from "../home/home";
 import { Chooser } from "@ionic-native/chooser/index";
+import { AES256 } from "@ionic-native/aes-256";
 var gListingCreationTime;
 var gListingCustomerPayout;
 var gListingServiceCharge;
@@ -55,7 +56,8 @@ export class SellPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private modal: ModalController,
-    private aCtrl: AlertController
+    private aCtrl: AlertController,
+    private aes: AES256
   ) {}
 
   async chooseFile() {
@@ -187,24 +189,36 @@ export class SellPage {
   }
 autoFillPaymentDetails(){
   var key = this.afAuth.auth.currentUser.uid;
-  this.afDatabase
-    .object(`user/${key}`)
-    .snapshotChanges()
-    .subscribe(snapshot => {
-      var allData = snapshot.payload.val();
-      var value = Object.keys(allData);
-      var cardKey = value[0];
-      this.afDatabase
-        .object(`user/${key}/${cardKey}`)
-        .snapshotChanges()
-        .subscribe(snapshot => {
-          const accountNo = snapshot.payload.child(`AccountNo`).val();
-          const sortCode = snapshot.payload.child(`Sort`).val();
-          const accountString = accountNo.toString().substr(5, 3);
+    this.afDatabase
+      .object(`user/${key}`)
+      .snapshotChanges()
+      .subscribe(snapshot => {
+        var allData = snapshot.payload.val();
+        var value = Object.keys(allData);
+        var cardKey = value[0];
+        this.afDatabase
+          .object(`user/${key}/${cardKey}`)
+          .snapshotChanges()
+          .subscribe(async snapshot => {
+            const accountNo: string = snapshot.payload.child(`AccountNo`).val();
+            const Sortcode: string = snapshot.payload.child(`Sort`).val();
+            const Key: string = snapshot.payload.child(`Key`).val();
+            const IV: string = snapshot.payload.child(`IV`).val();
+            var accNoPlainText: string;
+            var sortCodePlainText:string;
+            await this.aes
+              .decrypt(Key, IV, accountNo)
+              .then(acc => (accNoPlainText = acc))
+              .catch((error: any) => console.log(error));
+            await this.aes
+              .decrypt(Key, IV, Sortcode)
+              .then(sort => (sortCodePlainText = sort))
+              .catch((error: any) => console.log(error));
+              var digits = accNoPlainText.toString().substr(5)
           let alert = this.aCtrl.create({
             title: "Payment",
             message:
-              "Use saved account ending in" + " " + "XXXXX-"+ accountString + " " + "for payment?",
+              "Use saved account ending in" + " " + "XXXXX-"+digits  + " " + "for payment?",
             buttons: [
               {
                 text: "NO",
@@ -216,8 +230,8 @@ autoFillPaymentDetails(){
               {
                 text: "YES",
                 handler: () => {
-                  this.listing.PayoutAccount = accountNo;
-                  this.listing.PaySortCode = sortCode;
+                  this.listing.PayoutAccount = accNoPlainText;
+                  this.listing.PaySortCode = sortCodePlainText;
                 }
               }
             ]

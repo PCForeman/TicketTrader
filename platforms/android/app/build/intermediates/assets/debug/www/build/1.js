@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 536:
+/***/ 537:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SellPageModule", function() { return SellPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sell__ = __webpack_require__(549);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sell__ = __webpack_require__(550);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,7 +34,7 @@ var SellPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 549:
+/***/ 550:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45,10 +45,11 @@ var SellPageModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_storage__ = __webpack_require__(297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_storage__ = __webpack_require__(298);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angularfire2_storage__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home__ = __webpack_require__(300);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_chooser_index__ = __webpack_require__(301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_aes_256__ = __webpack_require__(297);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -100,6 +101,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+
 var gListingCreationTime;
 var gListingCustomerPayout;
 var gListingServiceCharge;
@@ -107,7 +109,7 @@ var gLat;
 var gLng;
 var gVenue;
 var SellPage = /** @class */ (function () {
-    function SellPage(afAuth, toast, app, chooser, afStorage, afDatabase, ldCtrl, navCtrl, navParams, modal, aCtrl) {
+    function SellPage(afAuth, toast, app, chooser, afStorage, afDatabase, ldCtrl, navCtrl, navParams, modal, aCtrl, aes) {
         this.afAuth = afAuth;
         this.toast = toast;
         this.app = app;
@@ -119,6 +121,7 @@ var SellPage = /** @class */ (function () {
         this.navParams = navParams;
         this.modal = modal;
         this.aCtrl = aCtrl;
+        this.aes = aes;
         this.listing = {};
     }
     SellPage.prototype.ionViewDidLoad = function () {
@@ -257,32 +260,54 @@ var SellPage = /** @class */ (function () {
             _this.afDatabase
                 .object("user/" + key + "/" + cardKey)
                 .snapshotChanges()
-                .subscribe(function (snapshot) {
-                var accountNo = snapshot.payload.child("AccountNo").val();
-                var sortCode = snapshot.payload.child("Sort").val();
-                var accountString = accountNo.toString().substr(5, 3);
-                var alert = _this.aCtrl.create({
-                    title: "Payment",
-                    message: "Use saved account ending in" + " " + "XXXXX-" + accountString + " " + "for payment?",
-                    buttons: [
-                        {
-                            text: "NO",
-                            role: "cancel",
-                            handler: function () {
-                                console.log("Cancel clicked");
-                            }
-                        },
-                        {
-                            text: "YES",
-                            handler: function () {
-                                _this.listing.PayoutAccount = accountNo;
-                                _this.listing.PaySortCode = sortCode;
-                            }
-                        }
-                    ]
+                .subscribe(function (snapshot) { return __awaiter(_this, void 0, void 0, function () {
+                var _this = this;
+                var accountNo, Sortcode, Key, IV, accNoPlainText, sortCodePlainText, digits, alert;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            accountNo = snapshot.payload.child("AccountNo").val();
+                            Sortcode = snapshot.payload.child("Sort").val();
+                            Key = snapshot.payload.child("Key").val();
+                            IV = snapshot.payload.child("IV").val();
+                            return [4 /*yield*/, this.aes
+                                    .decrypt(Key, IV, accountNo)
+                                    .then(function (acc) { return (accNoPlainText = acc); })
+                                    .catch(function (error) { return console.log(error); })];
+                        case 1:
+                            _a.sent();
+                            return [4 /*yield*/, this.aes
+                                    .decrypt(Key, IV, Sortcode)
+                                    .then(function (sort) { return (sortCodePlainText = sort); })
+                                    .catch(function (error) { return console.log(error); })];
+                        case 2:
+                            _a.sent();
+                            digits = accNoPlainText.toString().substr(5);
+                            alert = this.aCtrl.create({
+                                title: "Payment",
+                                message: "Use saved account ending in" + " " + "XXXXX-" + digits + " " + "for payment?",
+                                buttons: [
+                                    {
+                                        text: "NO",
+                                        role: "cancel",
+                                        handler: function () {
+                                            console.log("Cancel clicked");
+                                        }
+                                    },
+                                    {
+                                        text: "YES",
+                                        handler: function () {
+                                            _this.listing.PayoutAccount = accNoPlainText;
+                                            _this.listing.PaySortCode = sortCodePlainText;
+                                        }
+                                    }
+                                ]
+                            });
+                            alert.present();
+                            return [2 /*return*/];
+                    }
                 });
-                alert.present();
-            });
+            }); });
         });
     };
     SellPage.prototype.createListing = function () {
@@ -381,7 +406,8 @@ var SellPage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_7__ionic_native_aes_256__["a" /* AES256 */]])
     ], SellPage);
     return SellPage;
 }());
