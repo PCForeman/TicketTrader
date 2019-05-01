@@ -9,7 +9,6 @@ import {
 } from "ionic-angular";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
-import { SelectLocationModalPage } from "../select-location-modal/select-location-modal";
 
 @IonicPage()
 @Component({
@@ -120,22 +119,22 @@ export class BuyPage {
     var sArtist = target.parentElement.parentElement.children
       .item(3)
       .innerHTML.substr(0);
-      var sortCode = target.parentElement.parentElement.children
+    var sortCode = target.parentElement.parentElement.children
       .item(9)
       .innerHTML.substr(0);
-      var long = target.parentElement.parentElement.children
+    var long = target.parentElement.parentElement.children
       .item(10)
       .innerHTML.substr(0);
-      var lat = target.parentElement.parentElement.children
+    var lat = target.parentElement.parentElement.children
       .item(11)
       .innerHTML.substr(0);
-      var sPayout = target.parentElement.parentElement.children
+    var sPayout = target.parentElement.parentElement.children
       .item(12)
       .innerHTML.substr(0);
-      var sCharge = target.parentElement.parentElement.children
+    var sCharge = target.parentElement.parentElement.children
       .item(13)
       .innerHTML.substr(0);
-      var sAccountNo = target.parentElement.parentElement.children
+    var sAccountNo = target.parentElement.parentElement.children
       .item(8)
       .innerHTML.substr(0);
     var sVenue = target.parentElement.parentElement.children
@@ -144,14 +143,16 @@ export class BuyPage {
     var sDate = target.parentElement.parentElement.children
       .item(6)
       .innerHTML.substr(6, 10);
-      var sTime = target.parentElement.parentElement.children.item(7).innerHTML.substr(5)
+    var sTime = target.parentElement.parentElement.children
+      .item(7)
+      .innerHTML.substr(5);
     var temp = [];
     var ticketClicked =
       parseInt(
         target.parentElement.parentElement.children.item(0).innerHTML.valueOf()
       ) - 1;
     temp.push(this.items[ticketClicked]);
-    console.log(temp)
+    console.log(temp);
     temp.filter(v => {
       var tempArray = [
         {
@@ -256,7 +257,6 @@ export class BuyPage {
             Long: longs,
             PayoutAccount: payoutAccount,
             PayoutSortCode: payoutSortCode
-
           });
           x++;
           count + 1;

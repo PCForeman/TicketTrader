@@ -4,7 +4,6 @@ import {
   NavParams,
   ViewController,
   AlertController,
-  Card,
   ToastController
 } from "ionic-angular";
 import { AngularFireDatabase } from "angularfire2/database";
@@ -81,7 +80,11 @@ export class PaymentModalPage {
             let alert = this.aCtrl.create({
               title: "Payment",
               message:
-                "Use card ending in" + " XXXX-X"+CardSubStr+" "+"for payment?",
+                "Use card ending in" +
+                " XXXX-X" +
+                CardSubStr +
+                " " +
+                "for payment?",
               buttons: [
                 {
                   text: "NO",
@@ -106,73 +109,79 @@ export class PaymentModalPage {
   }
 
   processPayment() {
-    if (this.cardNo.length != 19){
-    this.toast.create({message:'Card number should be 16 digits', duration:2000, position:'middle'}).present() 
-    }else{
-    console.log(this.listingData.userId);
-    var transactionRef = [
-      {
-        Seller: this.listingData.sellerId,
-        TicketRef: this.listingData.ticketRef,
-        Buyer: this.listingData.userId,
-        Price: this.listingData.price,
-        SellerPayout: this.listingData.payout,
-        ttRevenue: this.listingData.charge,
-        PayeeAccountNo: this.listingData.payoutAccount,
-        Payout: this.listingData.payout
-      }
-    ];
+    if (this.cardNo.length != 19) {
+      this.toast
+        .create({
+          message: "Card number should be 16 digits",
+          duration: 2000,
+          position: "middle"
+        })
+        .present();
+    } else {
+      console.log(this.listingData.userId);
+      var transactionRef = [
+        {
+          Seller: this.listingData.sellerId,
+          TicketRef: this.listingData.ticketRef,
+          Buyer: this.listingData.userId,
+          Price: this.listingData.price,
+          SellerPayout: this.listingData.payout,
+          ttRevenue: this.listingData.charge,
+          PayeeAccountNo: this.listingData.payoutAccount,
+          Payout: this.listingData.payout
+        }
+      ];
 
-    var transRefNo = this.afDatabase
-      .list(`transactions`)
-      .push(transactionRef[0]).key;
-    var buyerRef = [
-      {
-        transactionRef: transRefNo,
-        TicketRef: this.listingData.ticketRef,
-        Paid: this.listingData.price,
-        FileUrl: "www.firebase.com"
-      }
-    ];
+      var transRefNo = this.afDatabase
+        .list(`transactions`)
+        .push(transactionRef[0]).key;
+      var buyerRef = [
+        {
+          transactionRef: transRefNo,
+          TicketRef: this.listingData.ticketRef,
+          Paid: this.listingData.price,
+          FileUrl: "www.firebase.com"
+        }
+      ];
 
-    var sellerRef = [
-      {
-        Artist: this.listingData.artist,
-        transactionRef: transRefNo,
-        TicketRef: this.listingData.ticketRef,
-        Payout: this.listingData.payout,
-        Status: "Pending"
-      }
-    ];
+      var sellerRef = [
+        {
+          Artist: this.listingData.artist,
+          transactionRef: transRefNo,
+          TicketRef: this.listingData.ticketRef,
+          Payout: this.listingData.payout,
+          Status: "Pending"
+        }
+      ];
 
-    var saleArchive = [
-      {
-        Seller: this.listingData.sellerId,
-        Event: this.listingData.artist,
-        Location: this.listingData.location,
-        Long: this.listingData.long,
-        Lat: this.listingData.lat,
-        Time: this.listingData.time,
-        Date: this.listingData.date,
-        Buyer: this.listingData.userId,
-        Price: this.listingData.price,
-        Payout: this.listingData.payout,
-        transactionRef: transRefNo
-      }
-    ];
+      var saleArchive = [
+        {
+          Seller: this.listingData.sellerId,
+          Event: this.listingData.artist,
+          Location: this.listingData.location,
+          Long: this.listingData.long,
+          Lat: this.listingData.lat,
+          Time: this.listingData.time,
+          Date: this.listingData.date,
+          Buyer: this.listingData.userId,
+          Price: this.listingData.price,
+          Payout: this.listingData.payout,
+          transactionRef: transRefNo
+        }
+      ];
 
-    console.log(transactionRef, buyerRef, transRefNo);
-    this.afDatabase
-      .list(`ticketsBought/${this.listingData.userId}`)
-      .push(buyerRef[0]);
-    this.afDatabase
-      .list(`ticketsSold/${this.listingData.userId}`)
-      .push(sellerRef[0]);
-    this.afDatabase
-      .object(`saleArchive/${this.listingData.ticketRef}`)
-      .set(saleArchive[0]);
-    // Need to remove the ticket from basket after the data has been sent to the other tables. //
-    this.close();
+      console.log(transactionRef, buyerRef, transRefNo);
+      this.afDatabase
+        .list(`ticketsBought/${this.listingData.userId}`)
+        .push(buyerRef[0]);
+      this.afDatabase
+        .list(`ticketsSold/${this.listingData.userId}`)
+        .push(sellerRef[0]);
+      this.afDatabase
+        .object(`saleArchive/${this.listingData.ticketRef}`)
+        .set(saleArchive[0]);
+      // Need to remove the ticket from basket after the data has been sent to the other tables. //
+      this.close();
+    }
   }
-}
 }

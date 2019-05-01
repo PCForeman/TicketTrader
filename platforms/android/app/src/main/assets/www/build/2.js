@@ -23,12 +23,8 @@ var SelectLocationModalPageModule = /** @class */ (function () {
     }
     SelectLocationModalPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__select_location_modal__["a" /* SelectLocationModalPage */],
-            ],
-            imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__select_location_modal__["a" /* SelectLocationModalPage */]),
-            ],
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__select_location_modal__["a" /* SelectLocationModalPage */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__select_location_modal__["a" /* SelectLocationModalPage */])]
         })
     ], SelectLocationModalPageModule);
     return SelectLocationModalPageModule;
@@ -99,14 +95,14 @@ var SelectLocationModalPage = /** @class */ (function () {
         this.vCtrl = vCtrl;
         this.zone = zone;
         this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
-        this.autocomplete = { input: '' };
+        this.autocomplete = { input: "" };
         this.autocompleteItems = [];
-        this.geocoder = new google.maps.Geocoder;
+        this.geocoder = new google.maps.Geocoder();
         this.markers = [];
     }
     SelectLocationModalPage.prototype.updateResults = function () {
         var _this = this;
-        if (this.autocomplete.input == '') {
+        if (this.autocomplete.input == "") {
             this.autocompleteItems = [];
             return;
         }
@@ -124,19 +120,19 @@ var SelectLocationModalPage = /** @class */ (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 this.autocompleteItems = [];
-                this.geocoder.geocode({ 'placeId': item.place_id }, function (results, status) { return __awaiter(_this, void 0, void 0, function () {
+                this.geocoder.geocode({ placeId: item.place_id }, function (results, status) { return __awaiter(_this, void 0, void 0, function () {
                     var position, marker, venue, venueData, latData, lngData;
                     return __generator(this, function (_a) {
                         switch (_a.label) {
                             case 0:
-                                if (!(status === 'OK' && results[0])) return [3 /*break*/, 2];
+                                if (!(status === "OK" && results[0])) return [3 /*break*/, 2];
                                 position = {
                                     lat: results[0].geometry.location.lat(),
                                     lng: results[0].geometry.location.lng()
                                 };
                                 marker = new google.maps.Marker({
                                     position: results[0].geometry.location,
-                                    map: this.map,
+                                    map: this.map
                                 });
                                 return [4 /*yield*/, this.markers.push(marker)];
                             case 1:
@@ -161,11 +157,11 @@ var SelectLocationModalPage = /** @class */ (function () {
         });
     };
     SelectLocationModalPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad SelectLocationModalPage');
+        console.log("ionViewDidLoad SelectLocationModalPage");
         this.loadMap();
     };
     SelectLocationModalPage.prototype.close = function () {
-        this.vCtrl.dismiss();
+        this.vCtrl.dismiss({ venueData: 0, latData: 0, lngData: 0 });
     };
     SelectLocationModalPage.prototype.loadMap = function () {
         var uluru = { lat: -25.344, lng: 131.036 };
@@ -184,10 +180,13 @@ var SelectLocationModalPage = /** @class */ (function () {
     ], SelectLocationModalPage.prototype, "mapElement", void 0);
     SelectLocationModalPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-select-location-modal',template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\select-location-modal\select-location-modal.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button (click)="close()">Close</button>\n    </ion-buttons>\n    <ion-title position text-center>Locate venue</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-searchbar\n    [(ngModel)]="autocomplete.input"\n    (ionInput)="updateResults()"\n    placeholder="Search for a place"\n  ></ion-searchbar>\n  <ion-list [hidden]="autocompleteItems.length == 0">\n    <ion-item\n      *ngFor="let item of autocompleteItems"\n      tappable\n      (click)="selectSearchResult(item)"\n    >\n      {{ item.description }}\n    </ion-item>\n  </ion-list>\n  <div #map id="map"></div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\select-location-modal\select-location-modal.html"*/,
+            selector: "page-select-location-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\select-location-modal\select-location-modal.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button (click)="close()">Close</button>\n    </ion-buttons>\n    <ion-title position text-center>Locate venue</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-searchbar\n    [(ngModel)]="autocomplete.input"\n    (ionInput)="updateResults()"\n    placeholder="Search for a place"\n  ></ion-searchbar>\n  <ion-list [hidden]="autocompleteItems.length == 0">\n    <ion-item\n      *ngFor="let item of autocompleteItems"\n      tappable\n      (click)="selectSearchResult(item)"\n    >\n      {{ item.description }}\n    </ion-item>\n  </ion-list>\n  <div #map id="map"></div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\select-location-modal\select-location-modal.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */]])
     ], SelectLocationModalPage);
     return SelectLocationModalPage;
 }());

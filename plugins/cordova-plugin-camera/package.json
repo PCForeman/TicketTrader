@@ -7,8 +7,8 @@
   "_phantomChildren": {},
   "_requested": {
     "type": "git",
-    "raw": "https://github.com/apache/cordova-plugin-camera",
-    "rawSpec": "https://github.com/apache/cordova-plugin-camera",
+    "raw": "git+https://github.com/apache/cordova-plugin-camera.git",
+    "rawSpec": "git+https://github.com/apache/cordova-plugin-camera.git",
     "saveSpec": "git+https://github.com/apache/cordova-plugin-camera.git",
     "fetchSpec": "https://github.com/apache/cordova-plugin-camera.git",
     "gitCommittish": null
@@ -18,7 +18,7 @@
     "/"
   ],
   "_resolved": "git+https://github.com/apache/cordova-plugin-camera.git#fae190ead2a114dfe63b7045e75c36eb4b34ea00",
-  "_spec": "https://github.com/apache/cordova-plugin-camera",
+  "_spec": "git+https://github.com/apache/cordova-plugin-camera.git",
   "_where": "C:\\Users\\paulf\\Desktop\\TicketTrader\\TicketTrader",
   "author": {
     "name": "Apache Software Foundation"

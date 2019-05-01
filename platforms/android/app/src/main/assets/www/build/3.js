@@ -155,7 +155,11 @@ var PaymentModalPage = /** @class */ (function () {
                             CardSubStr = cardNoPlainText.toString().substr(16);
                             alert = this.aCtrl.create({
                                 title: "Payment",
-                                message: "Use card ending in" + " XXXX-X" + CardSubStr + " " + "for payment?",
+                                message: "Use card ending in" +
+                                    " XXXX-X" +
+                                    CardSubStr +
+                                    " " +
+                                    "for payment?",
                                 buttons: [
                                     {
                                         text: "NO",
@@ -183,7 +187,13 @@ var PaymentModalPage = /** @class */ (function () {
     };
     PaymentModalPage.prototype.processPayment = function () {
         if (this.cardNo.length != 19) {
-            this.toast.create({ message: 'Card number should be 16 digits', duration: 2000, position: 'middle' }).present();
+            this.toast
+                .create({
+                message: "Card number should be 16 digits",
+                duration: 2000,
+                position: "middle"
+            })
+                .present();
         }
         else {
             console.log(this.listingData.userId);
@@ -250,7 +260,7 @@ var PaymentModalPage = /** @class */ (function () {
     };
     PaymentModalPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-payment-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button (click)="close()">Close</button>\n    </ion-buttons>\n    <ion-title position text-center>Pay</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list position text-center>\n    <ion-title>\n      Order Summary\n    </ion-title>\n    {{ listingData.artist }}<br />\n    {{ listingData.location }}<br />\n    {{ listingData.date }} {{ listingData.time }}\n    <div class="ngFor">\n      <ion-item>\n        <ion-label position text-center>Name on card</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-input\n          placeholder="Enter Cardholders name"\n          [(ngModel)]="cardName"\n          position\n          text-center\n        ></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position text-center>16 Digit card number</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-input\n          placeholder="Enter Card Number"\n          [(ngModel)]="cardNo"\n          position\n          text-center\n        ></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position text-center>Expiry date</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-input\n          placeholder="Enter Expiry"\n          [(ngModel)]="expiry"\n          position\n          text-center\n        ></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position text-center>CVC</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-input\n          placeholder="Enter CVC"\n          [(ngModel)]="CVC"\n          position\n          text-center\n        ></ion-input>\n      </ion-item>\n\n      <button id="modalButton"  ion-button (click)="processPayment()">Pay {{ listingData.price }}</button>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/
+            selector: "page-payment-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button (click)="close()">Close</button>\n    </ion-buttons>\n    <ion-title position text-center>Pay</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list position text-center>\n    <ion-title>\n      Order Summary\n    </ion-title>\n    {{ listingData.artist }}<br />\n    {{ listingData.location }}<br />\n    {{ listingData.date }} {{ listingData.time }}\n    <div class="ngFor">\n      <ion-item>\n        <ion-label position text-center>Name on card</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-input\n          placeholder="Enter Cardholders name"\n          [(ngModel)]="cardName"\n          position\n          text-center\n        ></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position text-center>16 Digit card number</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-input\n          placeholder="Enter Card Number"\n          [(ngModel)]="cardNo"\n          position\n          text-center\n        ></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position text-center>Expiry date</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-input\n          placeholder="Enter Expiry"\n          [(ngModel)]="expiry"\n          position\n          text-center\n        ></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position text-center>CVC</ion-label>\n      </ion-item>\n      <ion-item>\n        <ion-input\n          placeholder="Enter CVC"\n          [(ngModel)]="CVC"\n          position\n          text-center\n        ></ion-input>\n      </ion-item>\n\n      <button id="modalButton" ion-button (click)="processPayment()">\n        Pay {{ listingData.price }}\n      </button>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],

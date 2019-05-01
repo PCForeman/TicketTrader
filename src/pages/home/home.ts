@@ -221,7 +221,7 @@ export class HomePage {
           .list(`ticketsInBasket/${checkOutRef}`)
           .push(tempArray[0]);
         this.afDatabase.list(`approvedTickets/${tempArray[0].Key}`).remove();
-       this.loadListings();
+       this.items = [];
        this.navCtrl.push('BuyPage');
       });
     }

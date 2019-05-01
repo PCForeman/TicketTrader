@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+
 import {
   IonicPage,
   NavController,
@@ -8,16 +9,21 @@ import {
   LoadingController,
   ModalController,
   AlertController,
-  ModalOptions,
-
+  ModalOptions
 } from "ionic-angular";
 import { Listings } from "../../models/listing";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireStorage } from "angularfire2/storage";
 import { HomePage } from "../home/home";
-import { Chooser } from "@ionic-native/chooser/index";
-import { AES256 } from "@ionic-native/aes-256";
+import { AES256 } from "@ionic-native/aes-256/";
+import { Camera, CameraOptions } from "@ionic-native/camera/ngx";
+import { ImagePicker } from "@ionic-native/image-picker/ngx";
+
+declare var cordova: any;
+declare var window: any;
+
+
 var gListingCreationTime;
 var gListingCustomerPayout;
 var gListingServiceCharge;
@@ -30,12 +36,10 @@ var gVenue;
   selector: "page-sell",
   templateUrl: "sell.html"
 })
-
 export class SellPage {
-
-
   ionViewDidLoad() {
-    console.log("ionViewDidLoad SellPage");
+    this.cordovaReady();
+    console.log("ionViewDidLoad SellPage", cordova.file);
     this.listingTimestamp();
     this.lockTicketButton();
     this.unlockTicketButton();
@@ -49,7 +53,6 @@ export class SellPage {
     private afAuth: AngularFireAuth,
     private toast: ToastController,
     private app: App,
-    private chooser: Chooser,
     private afStorage: AngularFireStorage,
     private afDatabase: AngularFireDatabase,
     private ldCtrl: LoadingController,
@@ -57,15 +60,67 @@ export class SellPage {
     public navParams: NavParams,
     private modal: ModalController,
     private aCtrl: AlertController,
-    private aes: AES256
+    private aes: AES256,
+    private camera: Camera,
+    private imagePicker: ImagePicker
   ) {}
 
-  async chooseFile() {
-    var res = await this.chooser
-      .getFile("image")
-      .then(file => console.log(file ? file.name : "canceled"))
-      .catch((error: any) => console.error(error));
-    console.log(res);
+  nativepath: any;
+  options:any;
+  imageURI:any;
+  imageResponse:any;
+  cordovaReady() {
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+      console.log(cordova.file.applicationDirectory, "hello");
+    }
+  }
+
+  getImage() {
+    this.options = {
+      // Android only. Max images to be selected, defaults to 15. If this is set to 1, upon
+      // selection of a single image, the plugin will return it.
+      //maximumImagesCount: 3,
+ 
+      // max width and height to allow the images to be.  Will keep aspect
+      // ratio no matter what.  So if both are 800, the returned image
+      // will be at most 800 pixels wide and 800 pixels tall.  If the width is
+      // 800 and height 0 the image will be 800 pixels wide if the source
+      // is at least that wide.
+      width: 200,
+      //height: 200,
+ 
+      // quality of resized image, defaults to 100
+      quality: 25,
+ 
+      // output type, defaults to FILE_URIs.
+      // available options are 
+      // window.imagePicker.OutputType.FILE_URI (0) or 
+      // window.imagePicker.OutputType.BASE64_STRING (1)
+      outputType: 1
+    };
+    this.imageResponse = [];
+    this.imagePicker.getPictures(this.options).then((results) => {
+      for (var i = 0; i < results.length; i++) {
+        this.imageResponse.push('data:image/jpeg;base64,' + results[i]);
+      }
+    }, (err) => {
+      alert(err);
+    });
+  }
+
+  async uploadfn() {
+    const files = await (<any>window).chooser
+      .getFile("image/jpeg")
+      .then(async uri => {
+        console.log(uri.uri, uri.name);
+        this.nativepath = uri.uri;
+        console.log(this.nativepath);
+      })
+  }
+
+  takePhoto(){
+
   }
 
   checkOut() {
@@ -108,8 +163,8 @@ export class SellPage {
           duration: 3500
         })
         .present();
-        this.unlockLocationButton();
-        this.unlockUploadButton();
+      this.unlockLocationButton();
+      this.unlockUploadButton();
     } else {
       this.toast
         .create({
@@ -142,7 +197,7 @@ export class SellPage {
   }
 
   unlockUploadButton() {
-    var button = <HTMLButtonElement>(document.getElementById("btnUploadTicket"));
+    var button = <HTMLButtonElement>document.getElementById("btnUploadTicket");
     button.disabled = false;
   }
 
@@ -161,11 +216,9 @@ export class SellPage {
   }
 
   unlockLocationButton() {
-  var button = <HTMLButtonElement>(document.getElementById("btnLocation"));
-  button.disabled = false;
-
+    var button = <HTMLButtonElement>document.getElementById("btnLocation");
+    button.disabled = false;
   }
-
 
   unlockTicketButton() {
     document
@@ -187,8 +240,8 @@ export class SellPage {
       loading.dismiss();
     }, 1000);
   }
-autoFillPaymentDetails(){
-  var key = this.afAuth.auth.currentUser.uid;
+  autoFillPaymentDetails() {
+    var key = this.afAuth.auth.currentUser.uid;
     this.afDatabase
       .object(`user/${key}`)
       .snapshotChanges()
@@ -205,7 +258,7 @@ autoFillPaymentDetails(){
             const Key: string = snapshot.payload.child(`Key`).val();
             const IV: string = snapshot.payload.child(`IV`).val();
             var accNoPlainText: string;
-            var sortCodePlainText:string;
+            var sortCodePlainText: string;
             await this.aes
               .decrypt(Key, IV, accountNo)
               .then(acc => (accNoPlainText = acc))
@@ -214,33 +267,37 @@ autoFillPaymentDetails(){
               .decrypt(Key, IV, Sortcode)
               .then(sort => (sortCodePlainText = sort))
               .catch((error: any) => console.log(error));
-              var digits = accNoPlainText.toString().substr(5)
-          let alert = this.aCtrl.create({
-            title: "Payment",
-            message:
-              "Use saved account ending in" + " " + "XXXXX-"+digits  + " " + "for payment?",
-            buttons: [
-              {
-                text: "NO",
-                role: "cancel",
-                handler: () => {
-                  console.log("Cancel clicked");
+            var digits = accNoPlainText.toString().substr(5);
+            let alert = this.aCtrl.create({
+              title: "Payment",
+              message:
+                "Use saved account ending in" +
+                " " +
+                "XXXXX-" +
+                digits +
+                " " +
+                "for payment?",
+              buttons: [
+                {
+                  text: "NO",
+                  role: "cancel",
+                  handler: () => {
+                    console.log("Cancel clicked");
+                  }
+                },
+                {
+                  text: "YES",
+                  handler: () => {
+                    this.listing.PayoutAccount = accNoPlainText;
+                    this.listing.PaySortCode = sortCodePlainText;
+                  }
                 }
-              },
-              {
-                text: "YES",
-                handler: () => {
-                  this.listing.PayoutAccount = accNoPlainText;
-                  this.listing.PaySortCode = sortCodePlainText;
-                }
-              }
-            ]
+              ]
+            });
+            alert.present();
           });
-          alert.present();
-        });
-    });
+      });
   }
-
 
   async createListing() {
     await this.showSpinner();
@@ -305,15 +362,18 @@ autoFillPaymentDetails(){
       enableBackdropDismiss: true,
       showBackdrop: true
     };
-    const myModal = this.modal.create("SelectLocationModalPage", {}, myModalOpts);
+    const myModal = this.modal.create(
+      "SelectLocationModalPage",
+      {},
+      myModalOpts
+    );
     myModal.present();
 
-    myModal.onDidDismiss((venueData) => {
-      console.log(venueData.latData, venueData.lngData, venueData.venueData)
+    myModal.onDidDismiss(venueData => {
+      console.log(venueData.latData, venueData.lngData, venueData.venueData);
       gLat = venueData.latData;
       gLng = venueData.lngData;
       gVenue = venueData.venueData;
-    })
+    });
   }
-
 }

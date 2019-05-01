@@ -172,7 +172,7 @@ var TicketsPage = /** @class */ (function () {
                     .list("ticketsInBasket/" + checkOutRef)
                     .push(tempArray[0]);
                 _this.afDatabase.list("approvedTickets/" + tempArray[0].Key).remove();
-                _this.navCtrl.push('BuyPage');
+                _this.navCtrl.push("BuyPage");
                 _this.refresh();
             });
         }

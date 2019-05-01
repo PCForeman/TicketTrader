@@ -183,7 +183,9 @@ var BuyPage = /** @class */ (function () {
         var sDate = target.parentElement.parentElement.children
             .item(6)
             .innerHTML.substr(6, 10);
-        var sTime = target.parentElement.parentElement.children.item(7).innerHTML.substr(5);
+        var sTime = target.parentElement.parentElement.children
+            .item(7)
+            .innerHTML.substr(5);
         var temp = [];
         var ticketClicked = parseInt(target.parentElement.parentElement.children.item(0).innerHTML.valueOf()) - 1;
         temp.push(this.items[ticketClicked]);
