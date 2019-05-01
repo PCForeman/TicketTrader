@@ -18,9 +18,6 @@ import { HomePage } from "../home/home";
 import { AES256 } from "@ionic-native/aes-256/";
 import { File } from "@ionic-native/file"
 
-declare var cordova: any;
-declare var window: any;
-
 
 var gListingCreationTime;
 var gListingCustomerPayout;
