@@ -103,17 +103,15 @@
   "cordova-plugin-telerik-imagepicker": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-telerik-imagepicker"
+      "id": "cordova-plugin-telerik-imagepicker@2.3.2"
     },
     "is_top_level": true,
-    "variables": {
-      "PHOTO_LIBRARY_USAGE_DESCRIPTION": "your usage message"
-    }
+    "variables": {}
   },
   "cordova-plugin-camera": {
     "source": {
       "type": "registry",
-      "id": "https://github.com/apache/cordova-plugin-camera"
+      "id": "git+https://github.com/apache/cordova-plugin-camera.git"
     },
     "is_top_level": true,
     "variables": {}
@@ -146,6 +144,14 @@
     "source": {
       "type": "registry",
       "id": "cordova-plugin-aes256-encryption"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-image-picker": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-image-picker"
     },
     "is_top_level": true,
     "variables": {}

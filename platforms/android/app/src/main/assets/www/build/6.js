@@ -1,6 +1,6 @@
 webpackJsonp([6],{
 
-/***/ 530:
+/***/ 531:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalAccountPageModule", function() { return ModalAccountPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modal_account__ = __webpack_require__(544);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modal_account__ = __webpack_require__(545);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -23,12 +23,8 @@ var ModalAccountPageModule = /** @class */ (function () {
     }
     ModalAccountPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__modal_account__["a" /* ModalAccountPage */],
-            ],
-            imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__modal_account__["a" /* ModalAccountPage */]),
-            ],
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__modal_account__["a" /* ModalAccountPage */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__modal_account__["a" /* ModalAccountPage */])]
         })
     ], ModalAccountPageModule);
     return ModalAccountPageModule;
@@ -38,7 +34,7 @@ var ModalAccountPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 544:
+/***/ 545:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -340,7 +336,7 @@ var ModalAccountPage = /** @class */ (function () {
     };
     ModalAccountPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-modal-account",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\modal-account\modal-account.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-title>Edit account</ion-title\n    ><ion-buttons end>\n      <button ion-button (click)="close()">Close</button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <div class="ngFor">\n    <ion-item>\n      <ion-title>Update Name</ion-title><br />\n      <h1 text-center>{{ userD.firstname }}</h1>\n    </ion-item>\n    <ion-item>\n      <ion-label text-center></ion-label>\n      <ion-input [(ngModel)]="this.uName"></ion-input>\n      <button\n        ion-button\n        icon-only\n        color="dark"\n        (click)="updateName()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n\n    <ion-item>\n      <ion-title>Update Surname</ion-title><br />\n      <h1 text-center>{{ userD.surname }}</h1>\n    </ion-item>\n    <ion-item>\n      <ion-label text-center></ion-label>\n      <ion-input [(ngModel)]="this.uSurname"></ion-input>\n      <button\n        ion-button\n        icon-only\n        color="dark"\n        (click)="updateSurname()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n\n    <ion-item>\n      <ion-title>Update Phone No</ion-title><br />\n      <h1 text-center>{{ userD.phonenumber }}</h1>\n    </ion-item>\n    <ion-item>\n      <ion-label text-center></ion-label>\n      <ion-input [(ngModel)]="this.uPhoneNo"></ion-input>\n      <button\n        ion-button\n        icon-only\n        color="dark"\n        (click)="updatePhoneNo()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n\n    <ion-item>\n      <ion-title>Update Address</ion-title><br />\n      <h1 text-center>{{ userD.adress1 }}</h1>\n    </ion-item>\n    <ion-item>\n      <ion-label text-center></ion-label>\n      <ion-input [(ngModel)]="this.uAddressL1"></ion-input>\n      <button\n        ion-button\n        icon-only\n        color="dark"\n        (click)="updateAddress()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n\n    <ion-item>\n      <ion-title>Update Postcode</ion-title><br />\n      <h1 text-center>{{ userD.adress2 }}</h1>\n    </ion-item>\n    <ion-item>\n      <ion-label text-center></ion-label>\n      <ion-input [(ngModel)]="this.uPC"></ion-input>\n      <button\n        ion-button\n        icon-only\n        color="dark"\n        (click)="updatePostCode()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n\n    <ion-item>\n      <ion-title>Update password</ion-title><br />\n      <h1 text-center>**********</h1>\n    </ion-item>\n    <ion-item>\n      <ion-label text-center></ion-label>\n      <ion-input type="password" [(ngModel)]="this.password"></ion-input>\n      <button\n        ion-button\n        icon-only\n        color="light"\n        (click)="updatePassword()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\modal-account\modal-account.html"*/
+            selector: "page-modal-account",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\modal-account\modal-account.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-title>Edit account</ion-title\n    ><ion-buttons end>\n      <button ion-button (click)="close()">Close</button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <div class="ngFor">\n    <ion-item>\n      <ion-title>Update Name</ion-title><br />\n      <h1 text-center>{{ userD.firstname }}</h1>\n    </ion-item>\n    <ion-item>\n      <ion-label text-center></ion-label>\n      <ion-input [(ngModel)]="this.uName"></ion-input>\n      <button ion-button icon-only color="dark" (click)="updateName()" item-end>\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n\n    <ion-item>\n      <ion-title>Update Surname</ion-title><br />\n      <h1 text-center>{{ userD.surname }}</h1>\n    </ion-item>\n    <ion-item>\n      <ion-label text-center></ion-label>\n      <ion-input [(ngModel)]="this.uSurname"></ion-input>\n      <button\n        ion-button\n        icon-only\n        color="dark"\n        (click)="updateSurname()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n\n    <ion-item>\n      <ion-title>Update Phone No</ion-title><br />\n      <h1 text-center>{{ userD.phonenumber }}</h1>\n    </ion-item>\n    <ion-item>\n      <ion-label text-center></ion-label>\n      <ion-input [(ngModel)]="this.uPhoneNo"></ion-input>\n      <button\n        ion-button\n        icon-only\n        color="dark"\n        (click)="updatePhoneNo()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n\n    <ion-item>\n      <ion-title>Update Address</ion-title><br />\n      <h1 text-center>{{ userD.adress1 }}</h1>\n    </ion-item>\n    <ion-item>\n      <ion-label text-center></ion-label>\n      <ion-input [(ngModel)]="this.uAddressL1"></ion-input>\n      <button\n        ion-button\n        icon-only\n        color="dark"\n        (click)="updateAddress()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n\n    <ion-item>\n      <ion-title>Update Postcode</ion-title><br />\n      <h1 text-center>{{ userD.adress2 }}</h1>\n    </ion-item>\n    <ion-item>\n      <ion-label text-center></ion-label>\n      <ion-input [(ngModel)]="this.uPC"></ion-input>\n      <button\n        ion-button\n        icon-only\n        color="dark"\n        (click)="updatePostCode()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n\n    <ion-item>\n      <ion-title>Update password</ion-title><br />\n      <h1 text-center>**********</h1>\n    </ion-item>\n    <ion-item>\n      <ion-label text-center></ion-label>\n      <ion-input type="password" [(ngModel)]="this.password"></ion-input>\n      <button\n        ion-button\n        icon-only\n        color="light"\n        (click)="updatePassword()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\modal-account\modal-account.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */],

@@ -17,8 +17,8 @@ import { LoginPageModule } from "../pages/login/login.module";
 import { RegisterPage } from "../pages/register/register";
 import { MyApp } from "./app.component";
 import { FbConfig } from "./app.firebase.config";
-import { Chooser } from '@ionic-native/chooser/index';
-import { AES256 } from '@ionic-native/aes-256';
+import { AES256 } from "@ionic-native/aes-256";
+import { ImagePicker } from "@ionic-native/image-picker/ngx";
 
 @NgModule({
   declarations: [MyApp, RegisterPage],
@@ -32,17 +32,17 @@ import { AES256 } from '@ionic-native/aes-256';
   bootstrap: [IonicApp],
   entryComponents: [MyApp, LoginPage, RegisterPage],
   providers: [
-    AES256,
-    StatusBar,
-    Toast,
-    Camera,
-    SplashScreen,
-    Chooser,
-    GoogleMaps,
-    AngularFireAuth,
-    AngularFireDatabase,
-    AngularFireStorage,
-    Geolocation,
+    [AES256],
+    [StatusBar],
+    [Toast],
+    [Camera],
+    [ImagePicker],
+    [SplashScreen],
+    [GoogleMaps],
+    [AngularFireAuth],
+    [AngularFireDatabase],
+    [AngularFireStorage],
+    [Geolocation],
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

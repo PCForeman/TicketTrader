@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 536:
+/***/ 537:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SellPageModule", function() { return SellPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sell__ = __webpack_require__(549);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sell__ = __webpack_require__(550);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,7 +34,7 @@ var SellPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 549:
+/***/ 550:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45,10 +45,12 @@ var SellPageModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_storage__ = __webpack_require__(297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_storage__ = __webpack_require__(298);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angularfire2_storage__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home__ = __webpack_require__(300);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_chooser_index__ = __webpack_require__(301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_aes_256___ = __webpack_require__(297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera_ngx__ = __webpack_require__(301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_image_picker_ngx__ = __webpack_require__(302);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -100,6 +102,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+
+
 var gListingCreationTime;
 var gListingCustomerPayout;
 var gListingServiceCharge;
@@ -107,11 +111,10 @@ var gLat;
 var gLng;
 var gVenue;
 var SellPage = /** @class */ (function () {
-    function SellPage(afAuth, toast, app, chooser, afStorage, afDatabase, ldCtrl, navCtrl, navParams, modal, aCtrl) {
+    function SellPage(afAuth, toast, app, afStorage, afDatabase, ldCtrl, navCtrl, navParams, modal, aCtrl, aes, camera, imagePicker) {
         this.afAuth = afAuth;
         this.toast = toast;
         this.app = app;
-        this.chooser = chooser;
         this.afStorage = afStorage;
         this.afDatabase = afDatabase;
         this.ldCtrl = ldCtrl;
@@ -119,10 +122,14 @@ var SellPage = /** @class */ (function () {
         this.navParams = navParams;
         this.modal = modal;
         this.aCtrl = aCtrl;
+        this.aes = aes;
+        this.camera = camera;
+        this.imagePicker = imagePicker;
         this.listing = {};
     }
     SellPage.prototype.ionViewDidLoad = function () {
-        console.log("ionViewDidLoad SellPage");
+        this.cordovaReady();
+        console.log("ionViewDidLoad SellPage", cordova.file);
         this.listingTimestamp();
         this.lockTicketButton();
         this.unlockTicketButton();
@@ -130,22 +137,36 @@ var SellPage = /** @class */ (function () {
         this.lockLocationButton();
         this.autoFillPaymentDetails();
     };
-    SellPage.prototype.chooseFile = function () {
+    SellPage.prototype.cordovaReady = function () {
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            console.log(cordova.file.applicationDirectory, "hello");
+        }
+    };
+    SellPage.prototype.uploadfn = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var res;
+            var _this = this;
+            var files;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.chooser
-                            .getFile("image")
-                            .then(function (file) { return console.log(file ? file.name : "canceled"); })
-                            .catch(function (error) { return console.error(error); })];
+                    case 0: return [4 /*yield*/, window.chooser
+                            .getFile("image/jpeg")
+                            .then(function (uri) { return __awaiter(_this, void 0, void 0, function () {
+                            return __generator(this, function (_a) {
+                                console.log(uri.uri, uri.name);
+                                this.nativepath = uri.uri;
+                                console.log(this.nativepath);
+                                return [2 /*return*/];
+                            });
+                        }); })];
                     case 1:
-                        res = _a.sent();
-                        console.log(res);
+                        files = _a.sent();
                         return [2 /*return*/];
                 }
             });
         });
+    };
+    SellPage.prototype.takePhoto = function () {
     };
     SellPage.prototype.checkOut = function () {
         this.navCtrl.push("BuyPage");
@@ -212,7 +233,7 @@ var SellPage = /** @class */ (function () {
         disableFileUpload.disabled = true;
     };
     SellPage.prototype.unlockUploadButton = function () {
-        var button = (document.getElementById("btnUploadTicket"));
+        var button = document.getElementById("btnUploadTicket");
         button.disabled = false;
     };
     SellPage.prototype.lockTicketButton = function () {
@@ -224,7 +245,7 @@ var SellPage = /** @class */ (function () {
         disableCreateListing.disabled = true;
     };
     SellPage.prototype.unlockLocationButton = function () {
-        var button = (document.getElementById("btnLocation"));
+        var button = document.getElementById("btnLocation");
         button.disabled = false;
     };
     SellPage.prototype.unlockTicketButton = function () {
@@ -257,32 +278,59 @@ var SellPage = /** @class */ (function () {
             _this.afDatabase
                 .object("user/" + key + "/" + cardKey)
                 .snapshotChanges()
-                .subscribe(function (snapshot) {
-                var accountNo = snapshot.payload.child("AccountNo").val();
-                var sortCode = snapshot.payload.child("Sort").val();
-                var accountString = accountNo.toString().substr(5, 3);
-                var alert = _this.aCtrl.create({
-                    title: "Payment",
-                    message: "Use saved account ending in" + " " + "XXXXX-" + accountString + " " + "for payment?",
-                    buttons: [
-                        {
-                            text: "NO",
-                            role: "cancel",
-                            handler: function () {
-                                console.log("Cancel clicked");
-                            }
-                        },
-                        {
-                            text: "YES",
-                            handler: function () {
-                                _this.listing.PayoutAccount = accountNo;
-                                _this.listing.PaySortCode = sortCode;
-                            }
-                        }
-                    ]
+                .subscribe(function (snapshot) { return __awaiter(_this, void 0, void 0, function () {
+                var _this = this;
+                var accountNo, Sortcode, Key, IV, accNoPlainText, sortCodePlainText, digits, alert;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            accountNo = snapshot.payload.child("AccountNo").val();
+                            Sortcode = snapshot.payload.child("Sort").val();
+                            Key = snapshot.payload.child("Key").val();
+                            IV = snapshot.payload.child("IV").val();
+                            return [4 /*yield*/, this.aes
+                                    .decrypt(Key, IV, accountNo)
+                                    .then(function (acc) { return (accNoPlainText = acc); })
+                                    .catch(function (error) { return console.log(error); })];
+                        case 1:
+                            _a.sent();
+                            return [4 /*yield*/, this.aes
+                                    .decrypt(Key, IV, Sortcode)
+                                    .then(function (sort) { return (sortCodePlainText = sort); })
+                                    .catch(function (error) { return console.log(error); })];
+                        case 2:
+                            _a.sent();
+                            digits = accNoPlainText.toString().substr(5);
+                            alert = this.aCtrl.create({
+                                title: "Payment",
+                                message: "Use saved account ending in" +
+                                    " " +
+                                    "XXXXX-" +
+                                    digits +
+                                    " " +
+                                    "for payment?",
+                                buttons: [
+                                    {
+                                        text: "NO",
+                                        role: "cancel",
+                                        handler: function () {
+                                            console.log("Cancel clicked");
+                                        }
+                                    },
+                                    {
+                                        text: "YES",
+                                        handler: function () {
+                                            _this.listing.PayoutAccount = accNoPlainText;
+                                            _this.listing.PaySortCode = sortCodePlainText;
+                                        }
+                                    }
+                                ]
+                            });
+                            alert.present();
+                            return [2 /*return*/];
+                    }
                 });
-                alert.present();
-            });
+            }); });
         });
     };
     SellPage.prototype.createListing = function () {
@@ -369,19 +417,21 @@ var SellPage = /** @class */ (function () {
     };
     SellPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-sell",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Sell Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <div class="ngDivAccount">\n    <ion-list-header text-center>List a ticket</ion-list-header>\n\n    <ion-item>\n      <ion-label floating>Account number to pay</ion-label>\n      <ion-input id="txtTime" [(ngModel)]="listing.PayoutAccount"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Sort code</ion-label>\n      <ion-input id="txtTime" [(ngModel)]="listing.PaySortCode"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Event</ion-label>\n      <ion-input id="txtEvent" [(ngModel)]="listing.Name"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Start time</ion-label>\n      <ion-input id="txtTime" [(ngModel)]="listing.Time"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Date of event</ion-label>\n      <ion-datetime\n        id="listingDate"\n        displayformat="DD/MM/YY"\n        [(ngModel)]="listing.Date"\n      ></ion-datetime>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Price £</ion-label>\n      <ion-input id="txtPrice" [(ngModel)]="listing.Price"></ion-input>\n      <button\n        ion-button\n        id="btnCheckPrice"\n        icon-only\n        color="light"\n        (click)="ticketIncomeCalc()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n    <p>\n      <button\n        ion-button\n        id="btnLocation"\n        class="sellButton"\n        block\n        (click)="findVenue()"\n      >\n        Find the venue\n      </button>\n      <img *ngIf="image" [src]="image" />\n      <button\n        ion-button\n        id="btnUploadTicket"\n        class="sellButton"\n        block\n        (click)="chooseFile()"\n      >\n        Select Ticket\n      </button>\n      <button\n        ion-button\n        id="btnCreateListing"\n        class="sellButton"\n        block\n        (click)="createListing()"\n      >\n        Create your listing\n      </button>\n    </p>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/
+            selector: "page-sell",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Sell Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <div class="ngDivAccount">\n    <ion-list-header text-center>List a ticket</ion-list-header>\n\n    <ion-item>\n      <ion-label floating>Account number to pay</ion-label>\n      <ion-input id="txtTime" [(ngModel)]="listing.PayoutAccount"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Sort code</ion-label>\n      <ion-input id="txtTime" [(ngModel)]="listing.PaySortCode"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Event</ion-label>\n      <ion-input id="txtEvent" [(ngModel)]="listing.Name"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label floating>Start time</ion-label>\n      <ion-input id="txtTime" [(ngModel)]="listing.Time"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Date of event</ion-label>\n      <ion-datetime\n        id="listingDate"\n        displayformat="DD/MM/YY"\n        [(ngModel)]="listing.Date"\n      ></ion-datetime>\n    </ion-item>\n    <ion-item>\n      <ion-label floating>Price £</ion-label>\n      <ion-input id="txtPrice" [(ngModel)]="listing.Price"></ion-input>\n      <button\n        ion-button\n        id="btnCheckPrice"\n        icon-only\n        color="light"\n        (click)="ticketIncomeCalc()"\n        item-end\n      >\n        <ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n    </ion-item>\n    <p>\n      <button\n        ion-button\n        id="btnLocation"\n        class="sellButton"\n        block\n        (click)="findVenue()"\n      >\n        Find the venue\n      </button>\n\n\n      <button\n        ion-button\n        id="btnUploadTicket"\n        class="sellButton"\n        block\n        (click)="uploadfn()"\n      >\n        Select Ticket\n      </button>\n      <button\n        ion-button\n        id="btnCreateListing"\n        class="sellButton"\n        block\n        (click)="createListing()"\n      >\n        Create your listing\n      </button>\n    </p>\n  </div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_chooser_index__["a" /* Chooser */],
             __WEBPACK_IMPORTED_MODULE_4_angularfire2_storage__["AngularFireStorage"],
             __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_6__ionic_native_aes_256___["a" /* AES256 */],
+            __WEBPACK_IMPORTED_MODULE_7__ionic_native_camera_ngx__["a" /* Camera */],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_native_image_picker_ngx__["a" /* ImagePicker */]])
     ], SellPage);
     return SellPage;
 }());

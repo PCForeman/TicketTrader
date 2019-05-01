@@ -58,8 +58,8 @@ export class RegisterPage {
       vMobile == null ||
       mobileLen < 9 ||
       mobileLen > 10 ||
-      vDoB == null) 
-      {
+      vDoB == null
+    ) {
       this.toast
         .create({
           message: "One or more fields are incorrect, please check them",
@@ -68,8 +68,15 @@ export class RegisterPage {
         })
         .present();
     } else if (vPassword.length < 8) {
-      this.toast.create({message:'Password must be 8 or more characters with a special character', duration:2000, position:'middle'}).present();
-    }else{ 
+      this.toast
+        .create({
+          message:
+            "Password must be 8 or more characters with a special character",
+          duration: 2000,
+          position: "middle"
+        })
+        .present();
+    } else {
       try {
         const result = await this.afAuth.auth.createUserWithEmailAndPassword(
           this.user.email,

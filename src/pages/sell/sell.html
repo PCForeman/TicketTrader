@@ -74,13 +74,14 @@
       >
         Find the venue
       </button>
-      <img *ngIf="image" [src]="image" />
+
+
       <button
         ion-button
         id="btnUploadTicket"
         class="sellButton"
         block
-        (click)="chooseFile()"
+        (click)="getImage()"
       >
         Select Ticket
       </button>
