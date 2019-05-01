@@ -75,6 +75,7 @@ nativepath:any;
         this.nativepath = uri.uri;
         console.log(this.nativepath);
         this.file.resolveLocalFilesystemUrl(this.nativepath).then(entry => {
+            console.log('Hello');
             console.log(entry);
         })
       })
