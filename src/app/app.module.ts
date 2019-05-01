@@ -8,9 +8,8 @@ import { Toast } from "@ionic-native/toast";
 import { AngularFireModule } from "angularfire2";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
-import { AngularFireStorage } from "angularfire2/storage";
 import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
-import { Camera } from "@ionic-native/camera/ngx";
+import { File } from "@ionic-native/file";
 import { HomePageModule } from "../pages/home/home.module";
 import { LoginPage } from "../pages/login/login";
 import { LoginPageModule } from "../pages/login/login.module";
@@ -18,7 +17,6 @@ import { RegisterPage } from "../pages/register/register";
 import { MyApp } from "./app.component";
 import { FbConfig } from "./app.firebase.config";
 import { AES256 } from "@ionic-native/aes-256";
-import { ImagePicker } from "@ionic-native/image-picker/ngx";
 
 @NgModule({
   declarations: [MyApp, RegisterPage],
@@ -35,13 +33,11 @@ import { ImagePicker } from "@ionic-native/image-picker/ngx";
     [AES256],
     [StatusBar],
     [Toast],
-    [Camera],
-    [ImagePicker],
+    [File],
     [SplashScreen],
     [GoogleMaps],
     [AngularFireAuth],
     [AngularFireDatabase],
-    [AngularFireStorage],
     [Geolocation],
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]

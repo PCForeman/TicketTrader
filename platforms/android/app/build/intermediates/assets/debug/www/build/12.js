@@ -7,7 +7,7 @@ webpackJsonp([12],{
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountPageModule", function() { return AccountPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__account__ = __webpack_require__(539);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -40,12 +40,10 @@ var AccountPageModule = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(93);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(90);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -295,8 +293,8 @@ var AccountPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: "page-account",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\account\account.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Account</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-content>\n      <div class="ngDivAccount">\n    <ion-item-group>\n      <ion-list-header position text-center color="white">Account Details</ion-list-header>\n      <ion-label position text-center>First name</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.firstname\n      }}</ion-item>\n      <ion-label position text-center>Surname</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.surname\n      }}</ion-item>\n      <ion-label position text-center>Email Address</ion-label>\n      <ion-item position text-center>{{ (userData | async)?.email }}</ion-item>\n      <ion-label position text-center>Address</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.addressL1\n      }}</ion-item>\n      <ion-label position text-center>Postcode</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.addressPC\n      }}</ion-item>\n      <ion-label position text-center>Phone Number</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.phoneNo\n      }}</ion-item>\n      <ion-label position text-center>Date of birth</ion-label>\n      <ion-item position text-center>{{ (userData | async)?.dOb }}</ion-item>\n      <br />\n    </ion-item-group>\n    <button\n    ion-button\n    id="btnDeleteAcc"\n    class="modalButton"\n    block\n    (click)="addCard()">\n    Add payment details\n  </button>\n    <button\n    ion-button\n    id="btnChangePassword"\n    class="modalButton"\n    block\n    (click)="openModal()">\n    Update details\n  </button>\n  <button\n  ion-button\n  id="btnDeleteAcc"\n  class="modalButton"\n  block\n  (click)="deleteAccount()">\n  Delete Account\n</button>\n      </div>\n      </ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\account\account.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
-            __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */],
+            __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["a" /* AngularFireAuth */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],

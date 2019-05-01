@@ -57,7 +57,6 @@
 
 #include <openssl/bio.h>
 #include <openssl/conf.h>
-#include <openssl/lhash.h>
 #include <openssl/x509.h>
 
 #ifdef __cplusplus

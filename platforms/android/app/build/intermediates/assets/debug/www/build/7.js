@@ -7,7 +7,7 @@ webpackJsonp([7],{
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BuyPageModule", function() { return BuyPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__buy__ = __webpack_require__(544);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -40,11 +40,9 @@ var BuyPageModule = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BuyPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -300,9 +298,9 @@ var BuyPage = /** @class */ (function () {
             selector: "page-buy",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\buy\buy.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n    <ion-buttons right>\n\n      <button\n\n        id="info"\n\n        ion-button\n\n        icon-only\n\n        color="light"\n\n        (click)="ticketTradeInfo()"\n\n      >\n\n        <ion-icon name="information-circle"></ion-icon>\n\n      </button>\n\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n\n        <ion-icon name="log-out"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-buttons left>\n\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n\n        <ion-icon name="clipboard"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <ion-title position text-center>Awaiting payment</ion-title>\n\n  <ion-list>\n\n    <div\n\n      class="ngDiv"\n\n      [id]="i"\n\n      ion-item\n\n      *ngFor="let item of items; let i = index"\n\n    >\n\n      <h1 hidden>{{ i + 1 }}</h1>\n\n      <h1 hidden>{{ item.Key }}</h1>\n\n      <h1 hidden>{{ item.Seller }}</h1>\n\n      <h2 position text-center>{{ item.Name }}</h2>\n\n      <h3 position text-center>Venue: {{ item.Venue }}</h3>\n\n      <h4 position text-center>Price: £{{ item.Price }}</h4>\n\n      <h5 position text-center>Date: {{ item.Date }}</h5>\n\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n\n      <h6 hidden>{{ item.PayoutAccount }}</h6>\n\n      <h6 hidden>{{ item.PayoutSortCode }}</h6>\n\n      <h6 hidden>{{ item.Lat }}</h6>\n\n      <h6 hidden>{{ item.Long }}</h6>\n\n      <h6 hidden>{{ item.Payout }}</h6>\n\n      <h6 hidden>{{ item.Charge }}</h6>\n\n      <button\n\n        class="modalButton"\n\n        [id]="i"\n\n        ion-button\n\n        block\n\n        (click)="checkOut(index)"\n\n      >\n\n        Checkout\n\n      </button>\n\n      <h6></h6>\n\n    </div>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\buy\buy.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
+            __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["a" /* AngularFireAuth */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"],
+            __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["a" /* AngularFireDatabase */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */]])
     ], BuyPage);
