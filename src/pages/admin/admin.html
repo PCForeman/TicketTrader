@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar color="midnight-blue">
+    <ion-buttons right>
+      <button ion-button icon-only color="light" (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title position text-center>Pending listings</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-searchbar
+    [showCancelButton]="ShowCancel"
+    (ionInput)="getItems($event)"
+    (ionCancel)="onCancel()"
+    (ionClear)="initializeItems()"
+  >
+  </ion-searchbar>
+  <ion-list>
+    <div class="ngDivAdmin" [id]="i" ion-item *ngFor="let item of items; let i = index">
+      <h1 hidden>{{ i + 1 }}</h1>
+      <h2 position text-center>{{ item.Key }}</h2>
+      <h3 position text-center>{{ item.Name }}</h3>
+      <h4 position text-center>Venue: {{ item.Venue }}</h4>
+      <h5 position text-center>Price: £{{ item.Price }}</h5>
+      <h6 position text-center>Date: {{ item.Date }}</h6>
+      <h6 position text-center>Time: {{ item.Time }}</h6>
+      <button
+        [id]="i"
+        ion-button
+        class="modalButton"
+        block
+        (click)="accept(index)"
+      >
+        Accept
+      </button>
+      <button
+        [id]="i"
+        ion-button
+        class="modalButton"
+        block
+        (click)="reject(index)"
+      >
+        Reject
+      </button>
+    </div>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-navbar color="midnight-blue">
+    <ion-buttons right>
+      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+      <button ion-button icon-only color="light" (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button ion-button icon-only color="light" (click)="checkOut()">
+        <ion-icon name="basket"></ion-icon>
+      </button>
+      <button ion-button icon-only color="light" (click)="orderHistory()">
+        <ion-icon name="clipboard"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title position text-center>Sell Tickets</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <div class="ngDivAccount">
+    <ion-list-header text-center>List a ticket</ion-list-header>
+
+    <ion-item>
+      <ion-label floating>Account number to pay</ion-label>
+      <ion-input id="txtTime" [(ngModel)]="listing.PayoutAccount"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Sort code</ion-label>
+      <ion-input id="txtTime" [(ngModel)]="listing.PaySortCode"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Event</ion-label>
+      <ion-input id="txtEvent" [(ngModel)]="listing.Name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Start time</ion-label>
+      <ion-input id="txtTime" [(ngModel)]="listing.Time"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Date of event</ion-label>
+      <ion-datetime
+        id="listingDate"
+        displayformat="DD/MM/YY"
+        [(ngModel)]="listing.Date"
+      ></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Price £</ion-label>
+      <ion-input id="txtPrice" [(ngModel)]="listing.Price"></ion-input>
+      <button
+        ion-button
+        id="btnCheckPrice"
+        icon-only
+        color="light"
+        (click)="ticketIncomeCalc()"
+        item-end
+      >
+        <ion-icon name="checkmark-circle"></ion-icon>
+      </button>
+    </ion-item>
+    <p>
+      <button
+        ion-button
+        id="btnLocation"
+        class="sellButton"
+        block
+        (click)="findVenue()"
+      >
+        Find the venue
+      </button>
+
+
+      <button
+        ion-button
+        id="btnUploadTicket"
+        class="sellButton"
+        block
+        (click)="uploadfn()"
+      >
+        Select Ticket
+      </button>
+      <button
+        ion-button
+        id="btnCreateListing"
+        class="sellButton"
+        block
+        (click)="createListing()"
+      >
+        Create your listing
+      </button>
+    </p>
+  </div>
+</ion-content>

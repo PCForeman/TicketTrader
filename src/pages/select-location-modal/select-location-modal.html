@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar color="midnight-blue">
+    <ion-buttons right>
+      <button ion-button (click)="close()">Close</button>
+    </ion-buttons>
+    <ion-title position text-center>Locate venue</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-searchbar
+    [(ngModel)]="autocomplete.input"
+    (ionInput)="updateResults()"
+    placeholder="Search for a place"
+  ></ion-searchbar>
+  <ion-list [hidden]="autocompleteItems.length == 0">
+    <ion-item
+      *ngFor="let item of autocompleteItems"
+      tappable
+      (click)="selectSearchResult(item)"
+    >
+      {{ item.description }}
+    </ion-item>
+  </ion-list>
+  <div #map id="map"></div>
+</ion-content>

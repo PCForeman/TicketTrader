@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar color="midnight-blue">
+    <ion-buttons right>
+      <button
+        id="info"
+        ion-button
+        icon-only
+        color="light"
+        (click)="ticketTradeInfo()"
+      >
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+      <button id="logout" ion-button icon-only color="light" (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button ion-button icon-only color="light" (click)="orderHistory()">
+        <ion-icon name="clipboard"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title position text-center>Tickets</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-searchbar
+    [showCancelButton]="ShowCancel"
+    (ionInput)="getItems($event)"
+    (ionCancel)="onCancel()"
+    (ionClear)="initializeItems()"
+  >
+  </ion-searchbar>
+  <ion-title position text-center>My Active Listings</ion-title>
+  <ion-list>
+    <div
+      class="ngDiv"
+      [id]="i"
+      ion-item
+      *ngFor="let item of items; let i = index"
+    >
+      <h1 hidden>{{ i + 1 }}</h1>
+      <h2 position text-center>{{ item.Name }}</h2>
+      <h3 position text-center>Venue: {{ item.Venue }}</h3>
+      <h4 position text-center>Price: £{{ item.Price }}</h4>
+      <h5 position text-center>Date: {{ item.Date }}</h5>
+      <h6 position text-center>Time: {{ item.Time }}</h6>
+      <button
+        [id]="i"
+        class="modalButton"
+        ion-button
+        block
+        (click)="remove(index)"
+      >
+        Remove Listing
+      </button>
+      <h6></h6>
+    </div>
+  </ion-list>
+</ion-content>
