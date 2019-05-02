@@ -16,9 +16,8 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
 import { HomePage } from "../home/home";
 import { AES256 } from "@ionic-native/aes-256/";
-import { File } from "@ionic-native/file";
-import { FilePath } from "@ionic-native/file-path";
-import { AngularFireStorage } from "angularfire2/storage";
+import { File } from "@ionic-native/file"
+
 
 var gListingCreationTime;
 var gListingCustomerPayout;
@@ -55,12 +54,10 @@ export class SellPage {
     private modal: ModalController,
     private aCtrl: AlertController,
     private aes: AES256,
-    private file: File,
-    private filePath: FilePath,
-    private afStorage: AngularFireStorage
+    private file: File
   ) {}
 
-  nativepath: any;
+nativepath:any;
 
   async uploadfn() {
     const files = await (<any>window).chooser
@@ -70,35 +67,17 @@ export class SellPage {
         this.nativepath = uri.uri;
         console.log(this.nativepath);
         this.file.resolveLocalFilesystemUrl(this.nativepath).then(entry => {
-          console.log(JSON.stringify(entry));
-          let nativeUrl = entry.nativeURL;
-          let nativeUrlSegments = nativeUrl.split('/');
-          nativeUrlSegments.pop()
-          nativeUrl = nativeUrlSegments.join('/')
-          console.log(nativeUrl, entry.name);
-          this.filePath.resolveNativePath(nativeUrl).then(res => {
-          console.log(res)
-          this.file.readAsArrayBuffer(res, entry.name).then((async returnVal => {
-           await this.sendToFirebase(returnVal, name).catch(error => {
-             console.log(error)
-           });
-           console.log('Success');
-          })).catch(error => {
-            console.log(error);
-          })
-        })})})}
-
-
- async sendToFirebase(returnVal, name){
-   console.log(returnVal, name);
-   var blob = new Blob([returnVal], {type: "image/jpeg"});
-    this.afStorage.upload(`tickets/${name}`, blob);
+            console.log('Hello');
+            console.log(entry);
+        })
+      })
   }
 
   checkOut() {
     this.navCtrl.push("BuyPage");
   }
 
+  storageRef() {}
 
   orderHistory() {
     this.navCtrl.push("OrderHistoryPage");
@@ -240,7 +219,7 @@ export class SellPage {
               .catch((error: any) => console.log(error));
             var digits = accNoPlainText.toString().substr(5);
             let alert = this.aCtrl.create({
-              title: "Payment details",
+              title: "Payment",
               message:
                 "Use saved account ending in" +
                 " " +
@@ -248,22 +227,19 @@ export class SellPage {
                 digits +
                 " " +
                 "for payment?",
-                mode: ('ios'),
               buttons: [
                 {
-                  text: "Proceed",
+                  text: "NO",
                   role: "cancel",
                   handler: () => {
-                    this.listing.PayoutAccount = accNoPlainText;
-                    this.listing.PaySortCode = sortCodePlainText;
-                   
+                    console.log("Cancel clicked");
                   }
                 },
                 {
-                  text: "Dismiss",
-                  role: "cancel",
+                  text: "YES",
                   handler: () => {
-                  console.log("Cancel clicked");
+                    this.listing.PayoutAccount = accNoPlainText;
+                    this.listing.PaySortCode = sortCodePlainText;
                   }
                 }
               ]
@@ -274,87 +250,61 @@ export class SellPage {
   }
 
   async createListing() {
-    var startTime = this.listing.Time;
+    await this.showSpinner();
     var artist = this.listing.Name;
-    var price = this.listing.Price;
-    var date = this.listing.Date.toString();
-    if (parseInt(gLat[0]).valueOf() == 0 && parseInt(gLng[0]).valueOf() == 0) {
-      this.toast
-        .create({
-          message: "You must select a location",
-          duration: 2000,
-          position: "middle"
-        })
-        .present();
-      }else if (
-      (startTime < 0 && startTime > 24)
-     ) {
-      this.toast
-        .create({
-          message: "must be a time between 0.00 and 24.00",
-          duration: 2000,
-          position: "middle"
-        })
-        .present();
-    }else if (artist == "" || artist == null) {
-      this.toast
-        .create({
-          message: "Arstist field cannot be empty.",
-          duration: 2000,
-          position: "middle"
-        })
-        .present();
-    }else if (date == null || date == "") {
-      this.toast
-        .create({
-          message: "Date cannot be empty.",
-          duration: 2000,
-          position: "middle"
-        })
-        .present();
-    }else if (price < 0 || price == NaN || price > 100) {
-      this.toast
-        .create({
-          message: "Price must be between £0-100",
-          position: "middle",
-          duration: 2000
-        })
-        .present();
-      }else{ await this.showSpinner();
     artist.toUpperCase();
+    var startTime = this.listing.Time;
+    var date = this.listing.Date.toString();
     var p3 = date.slice(0, 4);
     var p2 = date.slice(5, 7);
     var p1 = date.slice(8, 11);
     var rDate = p1 + "/" + p2 + "/" + p3;
     console.log(rDate);
-    await this.afAuth.authState.take(1).subscribe(auth => {
-      this.listing.Date = rDate;
-      this.listing.Seller = auth.uid;
-      this.listing.CreationDate = gListingCreationTime;
-      this.listing.ServiceCharge = gListingServiceCharge;
-      this.listing.CustomerPayout = gListingCustomerPayout;
-      this.listing.Long = gLng[0];
-      this.listing.Lat = gLat[0];
-      this.listing.Location = gVenue[0];
-      this.listing.Sold = false;
-      this.listing.PaySortCode;
-      this.listing.PayoutAccount;
-      var ref = this.afDatabase
-        .list(`unaprovedTickets/`)
-        .push(this.listing)
-        .orderByKey();
-      console.log(ref);
+    var price = this.listing.Price;
+    if (
+      artist == "" ||
+      (startTime < 0 && startTime > 24) ||
+      date == null ||
+      price == NaN ||
+      price < 0 ||
+      price > 1000
+    ) {
       this.toast
         .create({
-          message: "Listing successfully created.",
-          position: "middle",
-          duration: 2000
+          message: "One or more fields are incorrect, please check them",
+          duration: 3000,
+          position: "bottom"
         })
         .present();
-      this.navCtrl.setRoot(HomePage);
-    });
+    } else {
+      await this.afAuth.authState.take(1).subscribe(auth => {
+        this.listing.Date = rDate;
+        this.listing.Seller = auth.uid;
+        this.listing.CreationDate = gListingCreationTime;
+        this.listing.ServiceCharge = gListingServiceCharge;
+        this.listing.CustomerPayout = gListingCustomerPayout;
+        this.listing.Long = gLng[0];
+        this.listing.Lat = gLat[0];
+        this.listing.Location = gVenue[0];
+        this.listing.Sold = false;
+        this.listing.PaySortCode;
+        this.listing.PayoutAccount;
+        var ref = this.afDatabase
+          .list(`unaprovedTickets/`)
+          .push(this.listing)
+          .orderByKey();
+        console.log(ref);
+        this.toast
+          .create({
+            message: "Listing successfully created.",
+            position: "middle",
+            duration: 2000
+          })
+          .present();
+        this.navCtrl.setRoot(HomePage);
+      });
+    }
   }
-}
 
   findVenue() {
     const myModalOpts: ModalOptions = {

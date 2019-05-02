@@ -27990,6 +27990,21 @@ ion-navbar.toolbar {
   cursor: grabbing;
 }
 
+.alert-button-group {
+  -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: normal !important;
+  -webkit-flex-direction: row !important;
+  -ms-flex-direction: row !important;
+  flex-direction: row !important;
+  text-align: center;
+  color: midnightblue;
+}
+
+.alertButton {
+  background-color: midnightblue;
+  color: black;
+}
+
 .ngDivAccount {
   width: 97.5%;
   border-radius: 20px;
