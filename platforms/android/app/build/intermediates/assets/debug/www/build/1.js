@@ -1,14 +1,14 @@
 webpackJsonp([1],{
 
-/***/ 639:
+/***/ 640:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SellPageModule", function() { return SellPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sell__ = __webpack_require__(652);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sell__ = __webpack_require__(653);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,23 +34,24 @@ var SellPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 652:
+/***/ 653:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SellPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__home_home__ = __webpack_require__(345);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_aes_256___ = __webpack_require__(343);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(346);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_path__ = __webpack_require__(347);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_storage__ = __webpack_require__(348);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_angularfire2_storage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_android_permissions___ = __webpack_require__(346);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_file__ = __webpack_require__(347);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_path__ = __webpack_require__(348);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_storage__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_angularfire2_storage__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -104,6 +105,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+
 var gListingCreationTime;
 var gListingCustomerPayout;
 var gListingServiceCharge;
@@ -111,7 +113,7 @@ var gLat;
 var gLng;
 var gVenue;
 var SellPage = /** @class */ (function () {
-    function SellPage(afAuth, toast, app, afDatabase, ldCtrl, navCtrl, navParams, modal, aCtrl, aes, file, path, afStorage) {
+    function SellPage(afAuth, toast, app, afDatabase, ldCtrl, navCtrl, navParams, modal, aCtrl, aes, file, afStorage, filePath, androidPermissions) {
         this.afAuth = afAuth;
         this.toast = toast;
         this.app = app;
@@ -123,8 +125,9 @@ var SellPage = /** @class */ (function () {
         this.aCtrl = aCtrl;
         this.aes = aes;
         this.file = file;
-        this.path = path;
         this.afStorage = afStorage;
+        this.filePath = filePath;
+        this.androidPermissions = androidPermissions;
         this.listing = {};
     }
     SellPage.prototype.ionViewDidLoad = function () {
@@ -135,6 +138,23 @@ var SellPage = /** @class */ (function () {
         this.lockFileUpload();
         this.lockLocationButton();
         this.autoFillPaymentDetails();
+        this.requestPermissions();
+    };
+    SellPage.prototype.requestPermissions = function () {
+        var result;
+        this.androidPermissions
+            .checkPermission(this.androidPermissions.PERMISSION.CAMERA)
+            .then(function (res) { return (result = res.hasPermission); });
+        if (result == false) {
+            this.androidPermissions
+                .requestPermission(this.androidPermissions.PERMISSION.CAMERA)
+                .then(function (res2) {
+                console.log(res2);
+            })
+                .catch(function (error) {
+                console.log(error);
+            });
+        }
     };
     SellPage.prototype.uploadfn = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -155,9 +175,25 @@ var SellPage = /** @class */ (function () {
                                     var dirPathSplit = dirPath.split("/");
                                     dirPathSplit.pop();
                                     dirPath = dirPathSplit.join("/");
-                                    _this.file.readAsArrayBuffer(dirPath, entry.name).then(function (buffer) {
-                                        console.log(buffer);
-                                        _this.upload(buffer, entry.name);
+                                    _this.file
+                                        .readAsArrayBuffer(dirPath, entry.name)
+                                        .then(function (buffer) { return __awaiter(_this, void 0, void 0, function () {
+                                        return __generator(this, function (_a) {
+                                            switch (_a.label) {
+                                                case 0:
+                                                    console.log(buffer);
+                                                    return [4 /*yield*/, this.upload(buffer, entry.name).catch(function (error) {
+                                                            console.log(error);
+                                                        })];
+                                                case 1:
+                                                    _a.sent();
+                                                    console.log("Success");
+                                                    return [2 /*return*/];
+                                            }
+                                        });
+                                    }); })
+                                        .catch(function (error) {
+                                        console.log(error);
                                     });
                                 });
                                 return [2 /*return*/];
@@ -171,14 +207,20 @@ var SellPage = /** @class */ (function () {
         });
     };
     SellPage.prototype.upload = function (buffer, name) {
-        var blob = new Blob([buffer], { type: "image/jpeg" });
-        var upload = this.afStorage
-            .upload("tickets" + name, blob)
-            .then(function (done) {
-            console.log(JSON.stringify(done));
-        })
-            .catch(function (error) { return console.log(JSON.stringify(error)); });
-        console.log(upload);
+        return __awaiter(this, void 0, void 0, function () {
+            var blob;
+            return __generator(this, function (_a) {
+                blob = new Blob([buffer], { type: "image/jpeg" });
+                console.log(blob);
+                this.afStorage
+                    .upload("tickets" + name, blob)
+                    .then(function (done) {
+                    console.log(done);
+                })
+                    .catch(function (error) { return console.log(error); });
+                return [2 /*return*/];
+            });
+        });
     };
     SellPage.prototype.checkOut = function () {
         this.navCtrl.push("BuyPage");
@@ -443,9 +485,10 @@ var SellPage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_5__ionic_native_aes_256___["a" /* AES256 */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__["a" /* File */],
-            __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_path__["a" /* FilePath */],
-            __WEBPACK_IMPORTED_MODULE_8_angularfire2_storage__["AngularFireStorage"]])
+            __WEBPACK_IMPORTED_MODULE_7__ionic_native_file__["a" /* File */],
+            __WEBPACK_IMPORTED_MODULE_9_angularfire2_storage__["AngularFireStorage"],
+            __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_path__["a" /* FilePath */],
+            __WEBPACK_IMPORTED_MODULE_6__ionic_native_android_permissions___["a" /* AndroidPermissions */]])
     ], SellPage);
     return SellPage;
 }());

@@ -176,6 +176,10 @@
             {
               "xml": "<feature name=\"AES256\"><param name=\"android-package\" value=\"com.ideas2it.aes256.AES256\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"Permissions\"><param name=\"android-package\" value=\"com.android.plugins.Permissions\" /></feature>",
+              "count": 1
             }
           ],
           "/widget": [
@@ -326,6 +330,9 @@
       "PACKAGE_NAME": "io.ionic.starter"
     },
     "cordova-plugin-aes256-encryption": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-android-permissions": {
       "PACKAGE_NAME": "io.ionic.starter"
     }
   },
@@ -882,6 +889,14 @@
       "clobbers": [
         "cordova.plugins.AES256"
       ]
+    },
+    {
+      "id": "cordova-plugin-android-permissions.Permissions",
+      "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
+      "pluginId": "cordova-plugin-android-permissions",
+      "clobbers": [
+        "cordova.plugins.permissions"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -902,6 +917,7 @@
     "cordova-plugin-file": "6.0.1",
     "com-badrit-base64": "0.2.0",
     "cordova-plugin-filepath": "1.5.1",
-    "cordova-plugin-aes256-encryption": "1.2.1"
+    "cordova-plugin-aes256-encryption": "1.2.1",
+    "cordova-plugin-android-permissions": "1.0.0"
   }
 }

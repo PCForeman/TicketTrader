@@ -19,6 +19,8 @@ import { AngularFireModule } from "angularfire2";
 import { AngularFireStorage} from "angularfire2/storage";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
+import { AndroidPermissions } from '@ionic-native/android-permissions/';
+
 @NgModule({
   declarations: [MyApp, RegisterPage],
   imports: [
@@ -35,6 +37,7 @@ import { AngularFireAuth } from "angularfire2/auth";
     [FilePath],
     [StatusBar],
     [AngularFireStorage],
+    [AndroidPermissions],
     [Toast],
     [File],
     [SplashScreen],

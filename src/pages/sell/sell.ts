@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-
 import {
   IonicPage,
   NavController,
@@ -16,6 +15,7 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
 import { HomePage } from "../home/home";
 import { AES256 } from "@ionic-native/aes-256/";
+import { AndroidPermissions } from "@ionic-native/android-permissions/";
 import { File } from "@ionic-native/file";
 import { FilePath } from "@ionic-native/file-path";
 import { AngularFireStorage } from "angularfire2/storage";
@@ -56,11 +56,29 @@ export class SellPage {
     private aCtrl: AlertController,
     private aes: AES256,
     private file: File,
-    private path: FilePath,
-    private afStorage: AngularFireStorage
+    private afStorage: AngularFireStorage,
+    private filePath: FilePath,
+    private androidPermissions: AndroidPermissions
   ) {}
 
   nativepath: any;
+
+  requestPermissions() {
+    var result;
+    this.androidPermissions
+      .checkPermission(this.androidPermissions.PERMISSION.CAMERA)
+      .then(res => (result = res.hasPermission));
+    if (result == false) {
+      this.androidPermissions
+        .requestPermission(this.androidPermissions.PERMISSION.CAMERA)
+        .then(res2 => {
+          console.log(res2);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  }
 
   async uploadfn() {
     const files = await (<any>window).chooser
@@ -74,23 +92,31 @@ export class SellPage {
           let dirPathSplit = dirPath.split("/");
           dirPathSplit.pop();
           dirPath = dirPathSplit.join("/");
-
-          this.file.readAsArrayBuffer(dirPath, entry.name).then(buffer => {
-            console.log(buffer);
-            this.upload(buffer, entry.name);
-          });
+          this.file
+            .readAsArrayBuffer(dirPath, entry.name)
+            .then(async buffer => {
+              console.log(buffer);
+              await this.upload(buffer, entry.name).catch(error => {
+                console.log(error);
+              });
+              console.log("Success");
+            })
+            .catch(error => {
+              console.log(error);
+            });
         });
       });
   }
-  upload(buffer, name) {
+
+  async upload(buffer, name) {
     let blob = new Blob([buffer], { type: "image/jpeg" });
-    var upload = this.afStorage
+    console.log(blob);
+    this.afStorage
       .upload(`tickets${name}`, blob)
       .then(done => {
-        console.log(JSON.stringify(done));
+        console.log(done);
       })
-      .catch(error => console.log(JSON.stringify(error)));
-    console.log(upload);
+      .catch(error => console.log(error));
   }
 
   checkOut() {
@@ -268,6 +294,7 @@ export class SellPage {
             });
             alert.present();
           });
+          this.requestPermissions();
       });
   }
 

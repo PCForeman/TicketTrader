@@ -44,7 +44,6 @@ export class HomePage {
   }
 
   async ionViewWillLoad() {
-  this.items = [];
   await  this.loadMap();
   await this.loadListings();
   }
