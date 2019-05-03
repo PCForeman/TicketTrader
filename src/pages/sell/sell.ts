@@ -19,6 +19,7 @@ import { AndroidPermissions } from "@ionic-native/android-permissions/";
 import { File } from "@ionic-native/file";
 import { FilePath } from "@ionic-native/file-path";
 import { AngularFireStorage } from "angularfire2/storage";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 var gListingCreationTime;
 var gListingCustomerPayout;
@@ -34,13 +35,15 @@ var gVenue;
 })
 export class SellPage {
   ionViewDidLoad() {
+    this.requestPermissions();
     console.log("ionViewDidLoad SellPage");
     this.listingTimestamp();
     this.lockTicketButton();
     this.unlockTicketButton();
     this.lockFileUpload();
     this.lockLocationButton();
-    this.autoFillPaymentDetails();
+    
+  //  this.autoFillPaymentDetails();
   }
 
   listing = {} as Listings;
@@ -64,21 +67,19 @@ export class SellPage {
   nativepath: any;
 
   requestPermissions() {
-    var result;
-    this.androidPermissions
-      .checkPermission(this.androidPermissions.PERMISSION.CAMERA)
-      .then(res => (result = res.hasPermission));
-    if (result == false) {
-      this.androidPermissions
-        .requestPermission(this.androidPermissions.PERMISSION.CAMERA)
-        .then(res2 => {
-          console.log(res2);
-        })
-        .catch(error => {
-          console.log(error);
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
+    .then(status => {
+      if (status.hasPermission) {
+        console.log(status.hasPermission);
+      } else {
+        this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE, this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE, this.androidPermissions.PERMISSION.STORAGE])
+        .then(status =>{
+          if(status.hasPermission) console.log(status.hasPermission);
         });
-    }
+      }
+    })
   }
+  
 
   async uploadfn() {
     const files = await (<any>window).chooser

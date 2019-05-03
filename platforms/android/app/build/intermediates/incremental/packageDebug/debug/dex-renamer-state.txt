@@ -1,4 +1,4 @@
-#Fri May 03 18:43:58 BST 2019
+#Fri May 03 20:41:05 BST 2019
 base.0=C\:\\Users\\paulf\\Desktop\\TicketTrader\\TicketTrader\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex

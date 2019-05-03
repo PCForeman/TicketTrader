@@ -131,30 +131,30 @@ var SellPage = /** @class */ (function () {
         this.listing = {};
     }
     SellPage.prototype.ionViewDidLoad = function () {
+        this.requestPermissions();
         console.log("ionViewDidLoad SellPage");
         this.listingTimestamp();
         this.lockTicketButton();
         this.unlockTicketButton();
         this.lockFileUpload();
         this.lockLocationButton();
-        this.autoFillPaymentDetails();
-        this.requestPermissions();
+        //  this.autoFillPaymentDetails();
     };
     SellPage.prototype.requestPermissions = function () {
-        var result;
-        this.androidPermissions
-            .checkPermission(this.androidPermissions.PERMISSION.CAMERA)
-            .then(function (res) { return (result = res.hasPermission); });
-        if (result == false) {
-            this.androidPermissions
-                .requestPermission(this.androidPermissions.PERMISSION.CAMERA)
-                .then(function (res2) {
-                console.log(res2);
-            })
-                .catch(function (error) {
-                console.log(error);
-            });
-        }
+        var _this = this;
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
+            .then(function (status) {
+            if (status.hasPermission) {
+                console.log(status.hasPermission);
+            }
+            else {
+                _this.androidPermissions.requestPermissions([_this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE, _this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE, _this.androidPermissions.PERMISSION.STORAGE])
+                    .then(function (status) {
+                    if (status.hasPermission)
+                        console.log(status.hasPermission);
+                });
+            }
+        });
     };
     SellPage.prototype.uploadfn = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -387,6 +387,7 @@ var SellPage = /** @class */ (function () {
                     }
                 });
             }); });
+            _this.requestPermissions();
         });
     };
     SellPage.prototype.createListing = function () {
