@@ -16,8 +16,9 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
 import { HomePage } from "../home/home";
 import { AES256 } from "@ionic-native/aes-256/";
-import { File } from "@ionic-native/file"
-
+import { File } from "@ionic-native/file";
+import { FilePath } from "@ionic-native/file-path";
+import { AngularFireStorage } from "angularfire2/storage";
 
 var gListingCreationTime;
 var gListingCustomerPayout;
@@ -54,23 +55,42 @@ export class SellPage {
     private modal: ModalController,
     private aCtrl: AlertController,
     private aes: AES256,
-    private file: File
+    private file: File,
+    private path: FilePath,
+    private afStorage: AngularFireStorage
   ) {}
 
-nativepath:any;
+  nativepath: any;
 
   async uploadfn() {
     const files = await (<any>window).chooser
       .getFile("image/jpeg")
       .then(async uri => {
-        console.log(uri.uri, uri.name);
         this.nativepath = uri.uri;
         console.log(this.nativepath);
         this.file.resolveLocalFilesystemUrl(this.nativepath).then(entry => {
-            console.log('Hello');
-            console.log(entry);
-        })
+          console.log(JSON.stringify(entry));
+          let dirPath = entry.nativeURL;
+          let dirPathSplit = dirPath.split("/");
+          dirPathSplit.pop();
+          dirPath = dirPathSplit.join("/");
+
+          this.file.readAsArrayBuffer(dirPath, entry.name).then(buffer => {
+            console.log(buffer);
+            this.upload(buffer, entry.name);
+          });
+        });
+      });
+  }
+  upload(buffer, name) {
+    let blob = new Blob([buffer], { type: "image/jpeg" });
+    var upload = this.afStorage
+      .upload(`tickets${name}`, blob)
+      .then(done => {
+        console.log(JSON.stringify(done));
       })
+      .catch(error => console.log(JSON.stringify(error)));
+    console.log(upload);
   }
 
   checkOut() {
@@ -220,6 +240,7 @@ nativepath:any;
             var digits = accNoPlainText.toString().substr(5);
             let alert = this.aCtrl.create({
               title: "Payment",
+              mode: "ios",
               message:
                 "Use saved account ending in" +
                 " " +
@@ -229,17 +250,18 @@ nativepath:any;
                 "for payment?",
               buttons: [
                 {
-                  text: "NO",
-                  role: "cancel",
+                  text: "Proceed",
                   handler: () => {
                     console.log("Cancel clicked");
+                    this.listing.PayoutAccount = accNoPlainText;
+                    this.listing.PaySortCode = sortCodePlainText;
                   }
                 },
                 {
-                  text: "YES",
+                  text: "Dismiss",
+                  role: "cancel",
                   handler: () => {
-                    this.listing.PayoutAccount = accNoPlainText;
-                    this.listing.PaySortCode = sortCodePlainText;
+                    console.log("cancelled");
                   }
                 }
               ]

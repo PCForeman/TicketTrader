@@ -48,6 +48,9 @@ var SellPageModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__home_home__ = __webpack_require__(345);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_aes_256___ = __webpack_require__(343);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(346);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_path__ = __webpack_require__(347);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_storage__ = __webpack_require__(348);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_angularfire2_storage__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -99,6 +102,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+
+
 var gListingCreationTime;
 var gListingCustomerPayout;
 var gListingServiceCharge;
@@ -106,7 +111,7 @@ var gLat;
 var gLng;
 var gVenue;
 var SellPage = /** @class */ (function () {
-    function SellPage(afAuth, toast, app, afDatabase, ldCtrl, navCtrl, navParams, modal, aCtrl, aes, file) {
+    function SellPage(afAuth, toast, app, afDatabase, ldCtrl, navCtrl, navParams, modal, aCtrl, aes, file, path, afStorage) {
         this.afAuth = afAuth;
         this.toast = toast;
         this.app = app;
@@ -118,6 +123,8 @@ var SellPage = /** @class */ (function () {
         this.aCtrl = aCtrl;
         this.aes = aes;
         this.file = file;
+        this.path = path;
+        this.afStorage = afStorage;
         this.listing = {};
     }
     SellPage.prototype.ionViewDidLoad = function () {
@@ -138,13 +145,20 @@ var SellPage = /** @class */ (function () {
                     case 0: return [4 /*yield*/, window.chooser
                             .getFile("image/jpeg")
                             .then(function (uri) { return __awaiter(_this, void 0, void 0, function () {
+                            var _this = this;
                             return __generator(this, function (_a) {
-                                console.log(uri.uri, uri.name);
                                 this.nativepath = uri.uri;
                                 console.log(this.nativepath);
                                 this.file.resolveLocalFilesystemUrl(this.nativepath).then(function (entry) {
-                                    console.log('Hello');
-                                    console.log(entry);
+                                    console.log(JSON.stringify(entry));
+                                    var dirPath = entry.nativeURL;
+                                    var dirPathSplit = dirPath.split("/");
+                                    dirPathSplit.pop();
+                                    dirPath = dirPathSplit.join("/");
+                                    _this.file.readAsArrayBuffer(dirPath, entry.name).then(function (buffer) {
+                                        console.log(buffer);
+                                        _this.upload(buffer, entry.name);
+                                    });
                                 });
                                 return [2 /*return*/];
                             });
@@ -155,6 +169,16 @@ var SellPage = /** @class */ (function () {
                 }
             });
         });
+    };
+    SellPage.prototype.upload = function (buffer, name) {
+        var blob = new Blob([buffer], { type: "image/jpeg" });
+        var upload = this.afStorage
+            .upload("tickets" + name, blob)
+            .then(function (done) {
+            console.log(JSON.stringify(done));
+        })
+            .catch(function (error) { return console.log(JSON.stringify(error)); });
+        console.log(upload);
     };
     SellPage.prototype.checkOut = function () {
         this.navCtrl.push("BuyPage");
@@ -291,6 +315,7 @@ var SellPage = /** @class */ (function () {
                             digits = accNoPlainText.toString().substr(5);
                             alert = this.aCtrl.create({
                                 title: "Payment",
+                                mode: "ios",
                                 message: "Use saved account ending in" +
                                     " " +
                                     "XXXXX-" +
@@ -299,17 +324,18 @@ var SellPage = /** @class */ (function () {
                                     "for payment?",
                                 buttons: [
                                     {
-                                        text: "NO",
-                                        role: "cancel",
+                                        text: "Proceed",
                                         handler: function () {
                                             console.log("Cancel clicked");
+                                            _this.listing.PayoutAccount = accNoPlainText;
+                                            _this.listing.PaySortCode = sortCodePlainText;
                                         }
                                     },
                                     {
-                                        text: "YES",
+                                        text: "Dismiss",
+                                        role: "cancel",
                                         handler: function () {
-                                            _this.listing.PayoutAccount = accNoPlainText;
-                                            _this.listing.PaySortCode = sortCodePlainText;
+                                            console.log("cancelled");
                                         }
                                     }
                                 ]
@@ -417,7 +443,9 @@ var SellPage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_5__ionic_native_aes_256___["a" /* AES256 */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__["a" /* File */]])
+            __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__["a" /* File */],
+            __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_path__["a" /* FilePath */],
+            __WEBPACK_IMPORTED_MODULE_8_angularfire2_storage__["AngularFireStorage"]])
     ], SellPage);
     return SellPage;
 }());
