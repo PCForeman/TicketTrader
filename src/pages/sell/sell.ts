@@ -42,8 +42,7 @@ export class SellPage {
     this.unlockTicketButton();
     this.lockFileUpload();
     this.lockLocationButton();
-    
-  //  this.autoFillPaymentDetails();
+    this.autoFillPaymentDetails();
   }
 
   listing = {} as Listings;
@@ -65,46 +64,57 @@ export class SellPage {
   ) {}
 
   nativepath: any;
+  payoutAmount: any;
+  ttPayoutAmount: any;
 
   requestPermissions() {
-    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
-    .then(status => {
-      if (status.hasPermission) {
-        console.log(status.hasPermission);
-      } else {
-        this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE, this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE, this.androidPermissions.PERMISSION.STORAGE])
-        .then(status =>{
-          if(status.hasPermission) console.log(status.hasPermission);
-        });
-      }
-    })
+    this.androidPermissions
+      .checkPermission(
+        this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
+      )
+      .then(status => {
+        if (status.hasPermission == true) {
+          console.log("You already have permissions");
+        } else {
+          this.androidPermissions
+            .requestPermissions([
+              this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE,
+              this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE,
+              this.androidPermissions.PERMISSION.STORAGE
+            ])
+            .then(status => {
+              if (status.hasPermission) console.log(status.hasPermission);
+            });
+        }
+      });
   }
-  
 
   async uploadfn() {
     const files = await (<any>window).chooser
       .getFile("image/jpeg")
       .then(async uri => {
         this.nativepath = uri.uri;
-        console.log(this.nativepath);
-        this.file.resolveLocalFilesystemUrl(this.nativepath).then(entry => {
-          console.log(JSON.stringify(entry));
-          let dirPath = entry.nativeURL;
-          let dirPathSplit = dirPath.split("/");
-          dirPathSplit.pop();
-          dirPath = dirPathSplit.join("/");
-          this.file
-            .readAsArrayBuffer(dirPath, entry.name)
-            .then(async buffer => {
-              console.log(buffer);
-              await this.upload(buffer, entry.name).catch(error => {
+        var path = this.filePath.resolveNativePath(uri.uri).then(res => {
+          console.log(this.nativepath, path);
+          this.file.resolveLocalFilesystemUrl(res).then(entry => {
+            console.log(JSON.stringify(entry));
+            let dirPath = entry.nativeURL;
+            let dirPathSplit = dirPath.split("/");
+            dirPathSplit.pop();
+            dirPath = dirPathSplit.join("/");
+            this.file
+              .readAsArrayBuffer(dirPath, entry.name)
+              .then(async buffer => {
+                console.log(buffer);
+                await this.upload(buffer, entry.name).catch(error => {
+                  console.log(error);
+                });
+                console.log("Success");
+              })
+              .catch(error => {
                 console.log(error);
               });
-              console.log("Success");
-            })
-            .catch(error => {
-              console.log(error);
-            });
+          });
         });
       });
   }
@@ -144,8 +154,10 @@ export class SellPage {
   ticketIncomeCalc() {
     var userMoney = this.listing.Price;
     var ticketTraderMoney = Number(((userMoney / 100) * 7 + 0.3).toFixed(2));
+    this.ttPayoutAmount = ticketTraderMoney;
     console.log(ticketTraderMoney);
     var userFinal = Number(userMoney - ticketTraderMoney).toFixed(2);
+    this.payoutAmount = userFinal;
     console.log(userFinal);
     if (userMoney >= 0 && userMoney <= 1000) {
       gListingCustomerPayout = userFinal;
@@ -295,7 +307,6 @@ export class SellPage {
             });
             alert.present();
           });
-          this.requestPermissions();
       });
   }
 
@@ -354,6 +365,43 @@ export class SellPage {
         this.navCtrl.setRoot(HomePage);
       });
     }
+  }
+
+  createListingConfirmation() {
+    let alert = this.aCtrl.create({
+      title: "Create listing",
+      mode: "ios",
+      message:
+        "Your ticket will be added to listings when it has been confirmed as legitimate." +
+        "<br>" +
+        "You will recieve" +
+        " " +
+        "£" +
+        this.payoutAmount +
+        " " +
+        "upon a successful sale of the ticket," +
+        " " +
+        "£" +
+        this.ttPayoutAmount +
+        " " +
+        "will be deducted from the total price as a service charge.",
+      buttons: [
+        {
+          text: "Proceed",
+          handler: () => {
+            this.createListing();
+          }
+        },
+        {
+          text: "Dismiss",
+          role: "cancel",
+          handler: () => {
+            console.log("cancelled");
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   findVenue() {
