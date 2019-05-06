@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="midnight-blue">
+  <ion-navbar hideBackButton="true" color="midnight-blue">
     <ion-buttons right>
       <button ion-button icon-only color="light" (click)="ticketTradeInfo()">
         <ion-icon name="information-circle"></ion-icon>
@@ -81,7 +81,7 @@
         id="btnUploadTicket"
         class="sellButton"
         block
-        (click)="uploadfn()"
+        (click)="selectTicket()"
       >
         Select Ticket
       </button>

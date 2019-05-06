@@ -45,13 +45,12 @@ var SellPageModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__home_home__ = __webpack_require__(345);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_aes_256___ = __webpack_require__(343);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_android_permissions___ = __webpack_require__(346);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_file__ = __webpack_require__(347);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_path__ = __webpack_require__(348);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_storage__ = __webpack_require__(349);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_angularfire2_storage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_aes_256___ = __webpack_require__(343);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_android_permissions___ = __webpack_require__(345);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__ = __webpack_require__(346);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_path__ = __webpack_require__(347);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_storage__ = __webpack_require__(348);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_angularfire2_storage__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -96,7 +95,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-
 
 
 
@@ -162,7 +160,7 @@ var SellPage = /** @class */ (function () {
             }
         });
     };
-    SellPage.prototype.uploadfn = function () {
+    SellPage.prototype.selectTicket = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             var files;
@@ -171,41 +169,15 @@ var SellPage = /** @class */ (function () {
                     case 0: return [4 /*yield*/, window.chooser
                             .getFile("image/jpeg")
                             .then(function (uri) { return __awaiter(_this, void 0, void 0, function () {
-                            var _this = this;
-                            var path;
                             return __generator(this, function (_a) {
-                                this.nativepath = uri.uri;
-                                path = this.filePath.resolveNativePath(uri.uri).then(function (res) {
-                                    console.log(_this.nativepath, path);
-                                    _this.file.resolveLocalFilesystemUrl(res).then(function (entry) {
-                                        console.log(JSON.stringify(entry));
-                                        var dirPath = entry.nativeURL;
-                                        var dirPathSplit = dirPath.split("/");
-                                        dirPathSplit.pop();
-                                        dirPath = dirPathSplit.join("/");
-                                        _this.file
-                                            .readAsArrayBuffer(dirPath, entry.name)
-                                            .then(function (buffer) { return __awaiter(_this, void 0, void 0, function () {
-                                            return __generator(this, function (_a) {
-                                                switch (_a.label) {
-                                                    case 0:
-                                                        console.log(buffer);
-                                                        return [4 /*yield*/, this.upload(buffer, entry.name).catch(function (error) {
-                                                                console.log(error);
-                                                            })];
-                                                    case 1:
-                                                        _a.sent();
-                                                        console.log("Success");
-                                                        return [2 /*return*/];
-                                                }
-                                            });
-                                        }); })
-                                            .catch(function (error) {
-                                            console.log(error);
-                                        });
-                                    });
-                                });
-                                return [2 /*return*/];
+                                switch (_a.label) {
+                                    case 0:
+                                        this.nativepath = uri.uri;
+                                        return [4 /*yield*/, this.resolvePath(this.nativepath)];
+                                    case 1:
+                                        _a.sent();
+                                        return [2 /*return*/];
+                                }
                             });
                         }); })];
                     case 1:
@@ -215,19 +187,61 @@ var SellPage = /** @class */ (function () {
             });
         });
     };
+    SellPage.prototype.resolvePath = function (nativepath) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var path;
+            return __generator(this, function (_a) {
+                path = this.filePath.resolveNativePath(nativepath).then(function (res) {
+                    console.log(_this.nativepath, path);
+                    _this.file.resolveLocalFilesystemUrl(res).then(function (entry) {
+                        console.log(JSON.stringify(entry));
+                        var dirPath = entry.nativeURL;
+                        var dirPathSplit = dirPath.split("/");
+                        dirPathSplit.pop();
+                        dirPath = dirPathSplit.join("/");
+                        _this.file.readAsArrayBuffer(dirPath, entry.name).then(function (buffer) { return __awaiter(_this, void 0, void 0, function () {
+                            return __generator(this, function (_a) {
+                                this.buffer = buffer;
+                                this.entryname = entry.name;
+                                console.log(buffer);
+                                return [2 /*return*/];
+                            });
+                        }); });
+                    });
+                });
+                return [2 /*return*/];
+            });
+        });
+    };
     SellPage.prototype.upload = function (buffer, name) {
         return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
             var blob;
             return __generator(this, function (_a) {
-                blob = new Blob([buffer], { type: "image/jpeg" });
-                console.log(blob);
-                this.afStorage
-                    .upload("tickets" + name, blob)
-                    .then(function (done) {
-                    console.log(done);
-                })
-                    .catch(function (error) { return console.log(error); });
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        blob = new Blob([buffer], { type: "image/jpeg" });
+                        console.log(blob);
+                        return [4 /*yield*/, this.afStorage
+                                .upload("tickets" + name, blob)
+                                .then(function (done) { return __awaiter(_this, void 0, void 0, function () {
+                                var url;
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0: return [4 /*yield*/, done.ref.getDownloadURL()];
+                                        case 1:
+                                            url = _a.sent();
+                                            this.url = url;
+                                            return [2 /*return*/];
+                                    }
+                                });
+                            }); })
+                                .catch(function (error) { return console.log(error); })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
             });
         });
     };
@@ -247,6 +261,7 @@ var SellPage = /** @class */ (function () {
         var recordListingTime = D + "/" + M + "/" + Y + " " + "At" + " " + H + ":" + MM;
         gListingCreationTime = recordListingTime;
     };
+    SellPage.prototype.downloadTicket = function () { };
     SellPage.prototype.ticketIncomeCalc = function () {
         var userMoney = this.listing.Price;
         var ticketTraderMoney = Number(((userMoney / 100) * 7 + 0.3).toFixed(2));
@@ -400,15 +415,14 @@ var SellPage = /** @class */ (function () {
             }); });
         });
     };
-    SellPage.prototype.createListing = function () {
+    SellPage.prototype.createListing = function (url) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             var artist, startTime, date, p3, p2, p1, rDate, price;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.showSpinner()];
-                    case 1:
-                        _a.sent();
+                    case 0:
+                        this.showSpinner();
                         artist = this.listing.Name;
                         artist.toUpperCase();
                         startTime = this.listing.Time;
@@ -424,7 +438,7 @@ var SellPage = /** @class */ (function () {
                             date == null ||
                             price == NaN ||
                             price < 0 ||
-                            price > 1000)) return [3 /*break*/, 2];
+                            price > 1000)) return [3 /*break*/, 1];
                         this.toast
                             .create({
                             message: "One or more fields are incorrect, please check them",
@@ -432,8 +446,11 @@ var SellPage = /** @class */ (function () {
                             position: "bottom"
                         })
                             .present();
-                        return [3 /*break*/, 4];
-                    case 2: return [4 /*yield*/, this.afAuth.authState.take(1).subscribe(function (auth) {
+                        return [3 /*break*/, 3];
+                    case 1: return [4 /*yield*/, this.upload(this.buffer, this.entryname)];
+                    case 2:
+                        _a.sent();
+                        this.afAuth.authState.take(1).subscribe(function (auth) {
                             _this.listing.Date = rDate;
                             _this.listing.Seller = auth.uid;
                             _this.listing.CreationDate = gListingCreationTime;
@@ -445,6 +462,7 @@ var SellPage = /** @class */ (function () {
                             _this.listing.Sold = false;
                             _this.listing.PaySortCode;
                             _this.listing.PayoutAccount;
+                            _this.listing.downloadURL = _this.url;
                             var ref = _this.afDatabase
                                 .list("unaprovedTickets/")
                                 .push(_this.listing)
@@ -457,49 +475,64 @@ var SellPage = /** @class */ (function () {
                                 duration: 2000
                             })
                                 .present();
-                            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__home_home__["a" /* HomePage */]);
-                        })];
-                    case 3:
-                        _a.sent();
-                        _a.label = 4;
-                    case 4: return [2 /*return*/];
+                            _this.clearSellFields();
+                            _this.navCtrl.setRoot('Page');
+                        });
+                        _a.label = 3;
+                    case 3: return [2 /*return*/];
                 }
             });
         });
     };
+    SellPage.prototype.clearSellFields = function () {
+        this.listing.Name = "";
+        this.listing.Date = "";
+        this.listing.Time = null;
+        this.listing.Price = null;
+        this.listing.PaySortCode = "";
+        this.listing.PayoutAccount = "";
+    };
     SellPage.prototype.createListingConfirmation = function () {
-        var _this = this;
-        var alert = this.aCtrl.create({
-            title: "Create listing",
-            mode: "ios",
-            message: "Your ticket will be added to listings when it has been confirmed as legitimate." +
-                "<br>" +
-                "You will recieve" +
-                " " +
-                "£" + this.payoutAmount +
-                " " +
-                "upon a successful sale of the ticket," +
-                " " +
-                "£" + this.ttPayoutAmount +
-                " " +
-                "will be deducted from the total price as a service charge.",
-            buttons: [
-                {
-                    text: "Proceed",
-                    handler: function () {
-                        _this.createListing();
-                    }
-                },
-                {
-                    text: "Dismiss",
-                    role: "cancel",
-                    handler: function () {
-                        console.log("cancelled");
-                    }
-                }
-            ]
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var alert;
+            return __generator(this, function (_a) {
+                alert = this.aCtrl.create({
+                    title: "Create listing",
+                    mode: "ios",
+                    message: "Your ticket will be added to listings when it has been confirmed as legitimate." +
+                        "<br>" +
+                        "You will recieve" +
+                        " " +
+                        "£" +
+                        this.payoutAmount +
+                        " " +
+                        "upon a successful sale of the ticket," +
+                        " " +
+                        "£" +
+                        this.ttPayoutAmount +
+                        " " +
+                        "will be deducted from the total price as a service charge.",
+                    buttons: [
+                        {
+                            text: "Proceed",
+                            handler: function () {
+                                _this.createListing(_this.url);
+                            }
+                        },
+                        {
+                            text: "Dismiss",
+                            role: "cancel",
+                            handler: function () {
+                                console.log("cancelled");
+                            }
+                        }
+                    ]
+                });
+                alert.present();
+                return [2 /*return*/];
+            });
         });
-        alert.present();
     };
     SellPage.prototype.findVenue = function () {
         var myModalOpts = {
@@ -518,7 +551,7 @@ var SellPage = /** @class */ (function () {
     };
     SellPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-sell",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n    <ion-buttons right>\n\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n\n        <ion-icon name="information-circle"></ion-icon>\n\n      </button>\n\n      <button ion-button icon-only color="light" (click)="logout()">\n\n        <ion-icon name="log-out"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-buttons left>\n\n      <button ion-button icon-only color="light" (click)="checkOut()">\n\n        <ion-icon name="basket"></ion-icon>\n\n      </button>\n\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n\n        <ion-icon name="clipboard"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-title position text-center>Sell Tickets</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <div class="ngDivAccount">\n\n    <ion-list-header text-center>List a ticket</ion-list-header>\n\n\n\n    <ion-item>\n\n      <ion-label floating>Account number to pay</ion-label>\n\n      <ion-input id="txtTime" [(ngModel)]="listing.PayoutAccount"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-label floating>Sort code</ion-label>\n\n      <ion-input id="txtTime" [(ngModel)]="listing.PaySortCode"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-label floating>Event</ion-label>\n\n      <ion-input id="txtEvent" [(ngModel)]="listing.Name"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-label floating>Start time</ion-label>\n\n      <ion-input id="txtTime" [(ngModel)]="listing.Time"></ion-input>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label floating>Date of event</ion-label>\n\n      <ion-datetime\n\n        id="listingDate"\n\n        displayformat="DD/MM/YY"\n\n        [(ngModel)]="listing.Date"\n\n      ></ion-datetime>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label floating>Price £</ion-label>\n\n      <ion-input id="txtPrice" [(ngModel)]="listing.Price"></ion-input>\n\n      <button\n\n        ion-button\n\n        id="btnCheckPrice"\n\n        icon-only\n\n        color="light"\n\n        (click)="ticketIncomeCalc()"\n\n        item-end\n\n      >\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n    <p>\n\n      <button\n\n        ion-button\n\n        id="btnLocation"\n\n        class="sellButton"\n\n        block\n\n        (click)="findVenue()"\n\n      >\n\n        Find the venue\n\n      </button>\n\n\n\n\n\n      <button\n\n        ion-button\n\n        id="btnUploadTicket"\n\n        class="sellButton"\n\n        block\n\n        (click)="uploadfn()"\n\n      >\n\n        Select Ticket\n\n      </button>\n\n      <button\n\n        ion-button\n\n        id="btnCreateListing"\n\n        class="sellButton"\n\n        block\n\n        (click)="createListingConfirmation()"\n\n      >\n\n        Create your listing\n\n      </button>\n\n    </p>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/
+            selector: "page-sell",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/'<ion-header>\n\n  <ion-navbar hideBackButton="true" color="midnight-blue">\n\n    <ion-buttons right>\n\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n\n        <ion-icon name="information-circle"></ion-icon>\n\n      </button>\n\n      <button ion-button icon-only color="light" (click)="logout()">\n\n        <ion-icon name="log-out"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-buttons left>\n\n      <button ion-button icon-only color="light" (click)="checkOut()">\n\n        <ion-icon name="basket"></ion-icon>\n\n      </button>\n\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n\n        <ion-icon name="clipboard"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-title position text-center>Sell Tickets</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <div class="ngDivAccount">\n\n    <ion-list-header text-center>List a ticket</ion-list-header>\n\n\n\n    <ion-item>\n\n      <ion-label floating>Account number to pay</ion-label>\n\n      <ion-input id="txtTime" [(ngModel)]="listing.PayoutAccount"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-label floating>Sort code</ion-label>\n\n      <ion-input id="txtTime" [(ngModel)]="listing.PaySortCode"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-label floating>Event</ion-label>\n\n      <ion-input id="txtEvent" [(ngModel)]="listing.Name"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-label floating>Start time</ion-label>\n\n      <ion-input id="txtTime" [(ngModel)]="listing.Time"></ion-input>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label floating>Date of event</ion-label>\n\n      <ion-datetime\n\n        id="listingDate"\n\n        displayformat="DD/MM/YY"\n\n        [(ngModel)]="listing.Date"\n\n      ></ion-datetime>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label floating>Price £</ion-label>\n\n      <ion-input id="txtPrice" [(ngModel)]="listing.Price"></ion-input>\n\n      <button\n\n        ion-button\n\n        id="btnCheckPrice"\n\n        icon-only\n\n        color="light"\n\n        (click)="ticketIncomeCalc()"\n\n        item-end\n\n      >\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n    <p>\n\n      <button\n\n        ion-button\n\n        id="btnLocation"\n\n        class="sellButton"\n\n        block\n\n        (click)="findVenue()"\n\n      >\n\n        Find the venue\n\n      </button>\n\n\n\n\n\n      <button\n\n        ion-button\n\n        id="btnUploadTicket"\n\n        class="sellButton"\n\n        block\n\n        (click)="selectTicket()"\n\n      >\n\n        Select Ticket\n\n      </button>\n\n      <button\n\n        ion-button\n\n        id="btnCreateListing"\n\n        class="sellButton"\n\n        block\n\n        (click)="createListingConfirmation()"\n\n      >\n\n        Create your listing\n\n      </button>\n\n    </p>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
@@ -529,11 +562,11 @@ var SellPage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_5__ionic_native_aes_256___["a" /* AES256 */],
-            __WEBPACK_IMPORTED_MODULE_7__ionic_native_file__["a" /* File */],
-            __WEBPACK_IMPORTED_MODULE_9_angularfire2_storage__["AngularFireStorage"],
-            __WEBPACK_IMPORTED_MODULE_8__ionic_native_file_path__["a" /* FilePath */],
-            __WEBPACK_IMPORTED_MODULE_6__ionic_native_android_permissions___["a" /* AndroidPermissions */]])
+            __WEBPACK_IMPORTED_MODULE_4__ionic_native_aes_256___["a" /* AES256 */],
+            __WEBPACK_IMPORTED_MODULE_6__ionic_native_file__["a" /* File */],
+            __WEBPACK_IMPORTED_MODULE_8_angularfire2_storage__["AngularFireStorage"],
+            __WEBPACK_IMPORTED_MODULE_7__ionic_native_file_path__["a" /* FilePath */],
+            __WEBPACK_IMPORTED_MODULE_5__ionic_native_android_permissions___["a" /* AndroidPermissions */]])
     ], SellPage);
     return SellPage;
 }());

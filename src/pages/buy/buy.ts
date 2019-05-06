@@ -74,6 +74,7 @@ export class BuyPage {
           const longs = snapshot.payload.child(`Long`).val();
           const payoutAccount = snapshot.payload.child(`PayoutAccount`).val();
           const payoutSortCode = snapshot.payload.child(`PayoutSortCode`).val();
+          const downloadURL = snapshot.payload.child(`downloadURL`).val();
           var maxTime = checkOutTime + 600000;
           if (maxTime <= timeNow) {
             this.timedOutListings.push({
@@ -89,15 +90,16 @@ export class BuyPage {
               Lat: lats,
               Long: longs,
               PayoutAccount: payoutAccount,
-              PayoutSortCode: payoutSortCode
+              PayoutSortCode: payoutSortCode,
+              downloadURL: downloadURL
             });
             x++;
             count + 1;
             this.afDatabase
               .list(`approvedTickets/`)
-              .push(this.timedOutListings[0]);
-            console.log(this.timedOutListings[0]);
-            this.timedOutListings.splice(0, 1);
+              .push(this.timedOutListings);
+            console.log(this.timedOutListings);
+           // this.timedOutListings.splice(0, 1);
             this.afDatabase
               .list(`ticketsInBasket/${currentUser}/${keyValue}`)
               .remove();

@@ -4,11 +4,13 @@ import {
   NavController,
   NavParams,
   ViewController,
-  ToastController
+  ToastController,
+  AlertController
 } from "ionic-angular";
 import { AngularFireDatabase } from "angularfire2/database/";
 import { AngularFireAuth } from "angularfire2/auth/";
 import { AES256 } from "@ionic-native/aes-256";
+import { messaging } from "firebase";
 
 @IonicPage()
 @Component({
@@ -34,7 +36,8 @@ export class AddCardModalPage {
     private afDatabase: AngularFireDatabase,
     private afAuth: AngularFireAuth,
     private toast: ToastController,
-    private aes: AES256
+    private aes: AES256,
+    private aCtrl: AlertController
   ) {
     this.generateSecureKeyAndIV();
   }
@@ -42,6 +45,37 @@ export class AddCardModalPage {
   close() {
     this.vCtrl.dismiss();
   }
+
+
+  addCardAlert(){
+    if (this.cardNo != null && this.expiry != null && this.Cvc != null && this.sortcode != null 
+      && this.accountNumber != null && this.holderName != null){
+    let alert = this.aCtrl.create({
+      title: "Add payment method",
+      mode: "ios",
+      message:
+        "Are you sure you want to add a card?",
+      buttons: [
+        {
+          text: "Proceed",
+          handler: () => {
+            this.addDetails();
+          }
+        },
+        {
+          text: "Dismiss",
+          role: "cancel",
+          handler: () => {
+            console.log("cancelled");
+          }
+        }
+      ]
+    });
+    alert.present();
+  }else{
+    this.toast.create({message:'Ensure fields are filled out', duration:2000, position:'middle'}).present();
+  }
+}
 
   async addDetails() {
     var formatExpiry =
@@ -104,6 +138,7 @@ export class AddCardModalPage {
           position: "middle"
         })
         .present();
+        this.sortcode = "";
     } else if (this.accountNumber.length != 8) {
       this.toast
         .create({
@@ -128,6 +163,7 @@ export class AddCardModalPage {
           position: "middle"
         })
         .present();
+        this.expiry = "";
     } else {
       var eText1: string;
       var eText2: string;

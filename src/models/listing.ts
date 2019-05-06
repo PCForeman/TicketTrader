@@ -14,4 +14,5 @@ export interface Listings {
   ServiceCharge: number;
   Lat: number;
   Long: number;
+  downloadURL:string;
 }

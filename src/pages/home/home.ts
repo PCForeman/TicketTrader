@@ -142,8 +142,8 @@ export class HomePage {
           let latLng = new google.maps.LatLng(ticket.Lat, ticket.Long);
           let marker = new google.maps.Marker({
             map: this.map,
-            animation: google.maps.Animation.DROP,
-            position: latLng
+            position: latLng,
+            icon: 'https://firebasestorage.googleapis.com/v0/b/dissy-c7abe.appspot.com/o/Webp.net-resizeimage%20(1).png?alt=media&token=689f51f3-e576-49bd-abc2-36b892a58fa6'
           });
           let content =
             "<h1 hidden>" +

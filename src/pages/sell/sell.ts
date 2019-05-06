@@ -19,7 +19,6 @@ import { AndroidPermissions } from "@ionic-native/android-permissions/";
 import { File } from "@ionic-native/file";
 import { FilePath } from "@ionic-native/file-path";
 import { AngularFireStorage } from "angularfire2/storage";
-import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 var gListingCreationTime;
 var gListingCustomerPayout;
@@ -66,6 +65,9 @@ export class SellPage {
   nativepath: any;
   payoutAmount: any;
   ttPayoutAmount: any;
+  url: any;
+  buffer: any;
+  entryname: any;
 
   requestPermissions() {
     this.androidPermissions
@@ -89,43 +91,41 @@ export class SellPage {
       });
   }
 
-  async uploadfn() {
+  async selectTicket() {
     const files = await (<any>window).chooser
       .getFile("image/jpeg")
       .then(async uri => {
         this.nativepath = uri.uri;
-        var path = this.filePath.resolveNativePath(uri.uri).then(res => {
-          console.log(this.nativepath, path);
-          this.file.resolveLocalFilesystemUrl(res).then(entry => {
-            console.log(JSON.stringify(entry));
-            let dirPath = entry.nativeURL;
-            let dirPathSplit = dirPath.split("/");
-            dirPathSplit.pop();
-            dirPath = dirPathSplit.join("/");
-            this.file
-              .readAsArrayBuffer(dirPath, entry.name)
-              .then(async buffer => {
-                console.log(buffer);
-                await this.upload(buffer, entry.name).catch(error => {
-                  console.log(error);
-                });
-                console.log("Success");
-              })
-              .catch(error => {
-                console.log(error);
-              });
-          });
+        await this.resolvePath(this.nativepath);
+      });
+  }
+
+  async resolvePath(nativepath) {
+    var path = this.filePath.resolveNativePath(nativepath).then(res => {
+      console.log(this.nativepath, path);
+      this.file.resolveLocalFilesystemUrl(res).then(entry => {
+        console.log(JSON.stringify(entry));
+        let dirPath = entry.nativeURL;
+        let dirPathSplit = dirPath.split("/");
+        dirPathSplit.pop();
+        dirPath = dirPathSplit.join("/");
+        this.file.readAsArrayBuffer(dirPath, entry.name).then(async buffer => {
+          this.buffer = buffer;
+          this.entryname = entry.name;
+          console.log(buffer);
         });
       });
+    });
   }
 
   async upload(buffer, name) {
     let blob = new Blob([buffer], { type: "image/jpeg" });
     console.log(blob);
-    this.afStorage
+    await this.afStorage
       .upload(`tickets${name}`, blob)
-      .then(done => {
-        console.log(done);
+      .then(async done => {
+        const url = await done.ref.getDownloadURL();
+        this.url = url;
       })
       .catch(error => console.log(error));
   }
@@ -150,6 +150,8 @@ export class SellPage {
       D + "/" + M + "/" + Y + " " + "At" + " " + H + ":" + MM;
     gListingCreationTime = recordListingTime;
   }
+
+  downloadTicket() {}
 
   ticketIncomeCalc() {
     var userMoney = this.listing.Price;
@@ -310,8 +312,8 @@ export class SellPage {
       });
   }
 
-  async createListing() {
-    await this.showSpinner();
+  async createListing(url) {
+    this.showSpinner();
     var artist = this.listing.Name;
     artist.toUpperCase();
     var startTime = this.listing.Time;
@@ -338,7 +340,8 @@ export class SellPage {
         })
         .present();
     } else {
-      await this.afAuth.authState.take(1).subscribe(auth => {
+      await this.upload(this.buffer, this.entryname);
+      this.afAuth.authState.take(1).subscribe(auth => {
         this.listing.Date = rDate;
         this.listing.Seller = auth.uid;
         this.listing.CreationDate = gListingCreationTime;
@@ -350,6 +353,7 @@ export class SellPage {
         this.listing.Sold = false;
         this.listing.PaySortCode;
         this.listing.PayoutAccount;
+        this.listing.downloadURL = this.url;
         var ref = this.afDatabase
           .list(`unaprovedTickets/`)
           .push(this.listing)
@@ -362,12 +366,22 @@ export class SellPage {
             duration: 2000
           })
           .present();
-        this.navCtrl.setRoot(HomePage);
+        this.clearSellFields();
+        this.navCtrl.setRoot('Page');
       });
     }
   }
 
-  createListingConfirmation() {
+  clearSellFields() {
+    this.listing.Name = "";
+    this.listing.Date = "";
+    this.listing.Time = null;
+    this.listing.Price = null;
+    this.listing.PaySortCode = "";
+    this.listing.PayoutAccount = "";
+  }
+
+  async createListingConfirmation() {
     let alert = this.aCtrl.create({
       title: "Create listing",
       mode: "ios",
@@ -389,7 +403,7 @@ export class SellPage {
         {
           text: "Proceed",
           handler: () => {
-            this.createListing();
+            this.createListing(this.url);
           }
         },
         {
