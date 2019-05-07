@@ -7,7 +7,9 @@ import {
   LoadingController,
   NavController,
   NavParams,
-  ToastController
+  ToastController,
+  ModalController,
+  ModalOptions
 } from "ionic-angular";
 
 @IonicPage()
@@ -30,12 +32,33 @@ export class AdminPage {
     private ldCtrl: LoadingController,
     private fbDatabase: AngularFireDatabase,
     private toast: ToastController,
-    private app: App
+    private app: App,
+    private modal: ModalController
   ) {}
 
   ionViewDidLoad() {
     this.retrieveUnaprovedTickets();
     this.copyItems();
+  }
+
+  openImage() {
+    var target = event.srcElement;
+    var imageUrl = target.parentElement.parentElement.children.item(7)
+      .innerHTML;
+    console.log(imageUrl);
+    const myModalOpts: ModalOptions = {
+      enableBackdropDismiss: true,
+      showBackdrop: false
+    };
+    const imageToView = {
+      url: imageUrl
+    };
+    const myModal = this.modal.create(
+      "ViewImageModalPage",
+      { image: imageToView },
+      myModalOpts
+    );
+    myModal.present();
   }
 
   refresh(): void {
@@ -117,9 +140,7 @@ export class AdminPage {
           const eventCreationDate = snapshot.payload
             .child(`CreationDate`)
             .val();
-            const downloadURL = snapshot.payload
-            .child(`downloadURL`)
-            .val();
+          const downloadURL = snapshot.payload.child(`downloadURL`).val();
           const eventSellerUID = snapshot.payload.child(`Seller`).val();
           const eventCustomerPayout = snapshot.payload
             .child(`CustomerPayout`)
@@ -127,7 +148,7 @@ export class AdminPage {
           const eventServiceCharge = snapshot.payload
             .child(`ServiceCharge`)
             .val();
-          
+
           const listingBoolean = snapshot.payload.child(`listingSold`).val();
           this.items.push({
             Key: finalKey,
@@ -222,7 +243,6 @@ export class AdminPage {
       ) - 1;
     console.log(ticketClicked);
     temp.push(this.items[ticketClicked]);
-    //this.items.splice(ticketClicked);
     temp.filter(async v => {
       temp = [
         {
@@ -250,7 +270,7 @@ export class AdminPage {
             " " +
             temp[0].Key +
             " " +
-            "has been approved and moved to active listings",
+            "has been rejected.",
           position: "top",
           duration: 2000
         })

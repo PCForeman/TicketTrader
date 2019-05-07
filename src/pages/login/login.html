@@ -14,27 +14,27 @@
     <ion-label floating>Enter your password</ion-label>
     <ion-input type="password" [(ngModel)]="user.password"></ion-input>
   </ion-item>
-
+<br>
   <button
+  class="loginButton"
     ion-button
     id="btnLogin"
-    class="loginButton"
     color="midnight-blue"
-    block
     (click)="loginLogin(user)"
   >
     Login
   </button>
   <button
+    class="loginButton"
     ion-button
     id="btnReg"
-    class="loginButton"
     color="midnight-blue"
-    block
     (click)="loginRegister()"
   >
     Need an account?
   </button>
+
+  <img height="220" src="https://firebasestorage.googleapis.com/v0/b/dissy-c7abe.appspot.com/o/received_1965782907049858.jpeg?alt=media&token=847a23a2-0a59-4698-af2c-5b8bcb7939c0">
 </ion-content>
 
 <div class id="footer">

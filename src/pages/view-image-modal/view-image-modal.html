@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar color="midnight-blue">
+      <ion-buttons left>
+          <button ion-button (click)="displayTicket()">Display</button>
+        </ion-buttons>
+    <ion-buttons right>
+      <button ion-button (click)="close()">Close</button>
+    </ion-buttons>
+    <ion-title position text-center>Verify Ticket</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<div class="ion-canvas">
+<canvas #canvas></canvas>
+</div>
+</ion-content>

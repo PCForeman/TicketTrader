@@ -1,14 +1,14 @@
 webpackJsonp([7],{
 
-/***/ 633:
+/***/ 635:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BuyPageModule", function() { return BuyPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalAccountPageModule", function() { return ModalAccountPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__buy__ = __webpack_require__(647);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modal_account__ = __webpack_require__(650);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,33 +18,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var BuyPageModule = /** @class */ (function () {
-    function BuyPageModule() {
+var ModalAccountPageModule = /** @class */ (function () {
+    function ModalAccountPageModule() {
     }
-    BuyPageModule = __decorate([
+    ModalAccountPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [__WEBPACK_IMPORTED_MODULE_2__buy__["a" /* BuyPage */]],
-            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__buy__["a" /* BuyPage */])]
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__modal_account__["a" /* ModalAccountPage */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__modal_account__["a" /* ModalAccountPage */])]
         })
-    ], BuyPageModule);
-    return BuyPageModule;
+    ], ModalAccountPageModule);
+    return ModalAccountPageModule;
 }());
 
-//# sourceMappingURL=buy.module.js.map
+//# sourceMappingURL=modal-account.module.js.map
 
 /***/ }),
 
-/***/ 647:
+/***/ 650:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BuyPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalAccountPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(45);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -54,265 +54,303 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
-
-var BuyPage = /** @class */ (function () {
-    function BuyPage(navCtrl, afAuth, toast, afDatabase, navParams, modal) {
-        this.navCtrl = navCtrl;
-        this.afAuth = afAuth;
-        this.toast = toast;
-        this.afDatabase = afDatabase;
-        this.navParams = navParams;
-        this.modal = modal;
-        this.items = [];
-        this.kA = [];
-        this.items2 = [];
-        this.itemSearch = [];
-        this.timedOutListings = [];
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
-    BuyPage.prototype.ionViewDidLoad = function () {
-        this.retrieveCheckoutTickets();
-        this.checkOutTimer();
+};
+
+
+
+
+var ModalAccountPage = /** @class */ (function () {
+    function ModalAccountPage(navCtrl, navParams, loader, toast, view, afDatabase, afAuth, Modal) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.loader = loader;
+        this.toast = toast;
+        this.view = view;
+        this.afDatabase = afDatabase;
+        this.afAuth = afAuth;
+        this.Modal = Modal;
+    }
+    ModalAccountPage.prototype.close = function () {
+        var index = this.view.index;
+        this.view.dismiss(index);
     };
-    BuyPage.prototype.checkOutTimer = function () {
-        var _this = this;
-        var currentUser = this.afAuth.auth.currentUser.uid;
-        var ref = this.afDatabase.object("ticketsInBasket/" + currentUser);
-        ref.snapshotChanges().subscribe(function (snapshot) {
-            var allData = snapshot.payload.val();
-            var array = [];
-            array.push(allData);
-            var value = Object.keys(allData);
-            var keyArray = [];
-            console.log('yes');
-            keyArray.push(value);
-            for (var i = 0; i < value.length; i++) {
-                var x = 0;
-                var count = 0;
-                var selectedIndex = i;
-                var keyValue = value[selectedIndex];
-                var indexSelecta = value.length - value.length + i;
-                var id = value[indexSelecta];
-                _this.kA.push(id);
-                var ref = _this.afDatabase.object("ticketsInBasket/" + currentUser + "/" + keyValue);
-                ref.snapshotChanges().subscribe(function (snapshot) {
-                    var eventSellerUID = snapshot.payload.child("Seller").val();
-                    var checkOutTime = snapshot.payload.child("checkOutTime").val();
-                    var timeNow = Date.now();
-                    var eventName = snapshot.payload.child("Name").val();
-                    var eventPrice = snapshot.payload.child("Price").val();
-                    var eventVenue = snapshot.payload.child("Venue").val();
-                    var eventDate = snapshot.payload.child("Date").val();
-                    var eventTime = snapshot.payload.child("Time").val();
-                    var eventCreationDate = snapshot.payload.child("Creation").val();
-                    var eventCustomerPayout = snapshot.payload.child("Payout").val();
-                    var eventServiceCharge = snapshot.payload.child("Charge").val();
-                    var lats = snapshot.payload.child("Lat").val();
-                    var longs = snapshot.payload.child("Long").val();
-                    var payoutAccount = snapshot.payload.child("PayoutAccount").val();
-                    var payoutSortCode = snapshot.payload.child("PayoutSortCode").val();
-                    var downloadURL = snapshot.payload.child("downloadURL").val();
-                    var maxTime = checkOutTime + 600000;
-                    if (maxTime <= timeNow) {
-                        _this.timedOutListings.push({
-                            Name: eventName,
-                            Venue: eventVenue,
-                            Price: eventPrice,
-                            Date: eventDate,
-                            Time: eventTime,
-                            Creation: eventCreationDate,
-                            Seller: eventSellerUID,
-                            Payout: eventCustomerPayout,
-                            Charge: eventServiceCharge,
-                            Lat: lats,
-                            Long: longs,
-                            PayoutAccount: payoutAccount,
-                            PayoutSortCode: payoutSortCode,
-                            downloadURL: downloadURL
-                        });
-                        x++;
-                        count + 1;
-                        _this.afDatabase
-                            .list("approvedTickets/")
-                            .push(_this.timedOutListings);
-                        console.log(_this.timedOutListings);
-                        // this.timedOutListings.splice(0, 1);
-                        _this.afDatabase
-                            .list("ticketsInBasket/" + currentUser + "/" + keyValue)
-                            .remove();
-                    }
-                    else if (maxTime > timeNow) {
-                        console.log("Hello");
-                    }
-                });
-            }
+    ModalAccountPage.prototype.backToAccount = function () {
+        this.navCtrl.setRoot("AccountPage");
+    };
+    ModalAccountPage.prototype.showSpinner = function () {
+        var loading = this.loader.create({
+            content: ""
         });
+        loading.present();
+        setTimeout(function () {
+            loading.dismiss();
+        }, 2000);
     };
-    BuyPage.prototype.checkOut = function () {
-        var target = event.srcElement;
-        var uId = this.afAuth.auth.currentUser.uid;
-        var ticketId = target.parentElement.parentElement.children.item(1)
-            .innerHTML;
-        var sId = target.parentElement.parentElement.children.item(2).innerHTML;
-        var sPrice = target.parentElement.parentElement.children
-            .item(5)
-            .innerHTML.substr(6, 10);
-        var sArtist = target.parentElement.parentElement.children
-            .item(3)
-            .innerHTML.substr(0);
-        var sortCode = target.parentElement.parentElement.children
-            .item(9)
-            .innerHTML.substr(0);
-        var long = target.parentElement.parentElement.children
-            .item(10)
-            .innerHTML.substr(0);
-        var lat = target.parentElement.parentElement.children
-            .item(11)
-            .innerHTML.substr(0);
-        var sPayout = target.parentElement.parentElement.children
-            .item(12)
-            .innerHTML.substr(0);
-        var sCharge = target.parentElement.parentElement.children
-            .item(13)
-            .innerHTML.substr(0);
-        var sAccountNo = target.parentElement.parentElement.children
-            .item(8)
-            .innerHTML.substr(0);
-        var sVenue = target.parentElement.parentElement.children
-            .item(4)
-            .innerHTML.substr(7);
-        var sDate = target.parentElement.parentElement.children
-            .item(6)
-            .innerHTML.substr(6, 10);
-        var sTime = target.parentElement.parentElement.children
-            .item(7)
-            .innerHTML.substr(5);
-        var temp = [];
-        var ticketClicked = parseInt(target.parentElement.parentElement.children.item(0).innerHTML.valueOf()) - 1;
-        temp.push(this.items[ticketClicked]);
-        console.log(temp);
-        temp.filter(function (v) {
-            var tempArray = [
-                {
-                    Key: v.Key,
-                    Name: v.Name,
-                    Venue: v.Venue,
-                    Price: v.Price,
-                    Date: v.Date,
-                    Seller: v.Seller,
-                    Time: v.Time,
-                    Payout: v.Payout,
-                    Lat: v.Lat,
-                    Long: v.Long,
-                    Creation: v.Creation,
-                    Charge: v.Charge,
-                    PayoutAccount: v.PayoutAccount,
-                    PayoutSortCode: v.PayoutSortCode
+    ModalAccountPage.prototype.successMessage = function () {
+        this.toast
+            .create({
+            message: "Successfully updated record.",
+            duration: 1000,
+            position: "middle"
+        })
+            .present();
+    };
+    ModalAccountPage.prototype.emptyStringMessage = function () {
+        this.toast
+            .create({
+            message: "You cannot submit an empty field.",
+            duration: 1000,
+            position: "middle"
+        })
+            .present();
+    };
+    ModalAccountPage.prototype.phoneNoMessage = function () {
+        this.toast
+            .create({
+            message: "Not a valid phone number.",
+            duration: 1000,
+            position: "middle"
+        })
+            .present();
+    };
+    ModalAccountPage.prototype.postCodeMessage = function () {
+        this.toast
+            .create({
+            message: "Not a valid postcode, must be 7 or 8 characters long.",
+            duration: 1000,
+            position: "middle"
+        })
+            .present();
+    };
+    ModalAccountPage.prototype.PasswordTooShortMessage = function () {
+        this.toast
+            .create({
+            message: "New password needs to be 6 or more characters.",
+            duration: 1000,
+            position: "middle"
+        })
+            .present();
+    };
+    ModalAccountPage.prototype.refresh = function () {
+        window.location.reload();
+    };
+    ModalAccountPage.prototype.updateSurname = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var key, ref;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!(this.uSurname == null || this.uSurname == "")) return [3 /*break*/, 1];
+                        this.emptyStringMessage();
+                        return [3 /*break*/, 4];
+                    case 1:
+                        this.close();
+                        key = this.afAuth.auth.currentUser.uid;
+                        ref = this.afDatabase.object("/user/" + key);
+                        ref.update({ surname: this.uSurname });
+                        return [4 /*yield*/, this.showSpinner()];
+                    case 2:
+                        _a.sent();
+                        return [4 /*yield*/, this.successMessage()];
+                    case 3:
+                        _a.sent();
+                        _a.label = 4;
+                    case 4: return [2 /*return*/];
                 }
-            ];
-            console.log(tempArray);
-        });
-        var myModalOpts = {
-            cssClass: "modal",
-            enableBackdropDismiss: true,
-            showBackdrop: true
-        };
-        var listingRef = {
-            userId: uId,
-            ticketRef: ticketId,
-            sellerId: sId,
-            price: sPrice,
-            artist: sArtist,
-            date: sDate,
-            time: sTime,
-            location: sVenue,
-            payoutAccount: sAccountNo,
-            sortcode: sortCode,
-            lat: lat,
-            long: long,
-            payout: sPayout,
-            charge: sCharge
-        };
-        var myModal = this.modal.create("PaymentModalPage", { ticket: listingRef }, myModalOpts);
-        myModal.present();
-    };
-    BuyPage.prototype.retrieveCheckoutTickets = function () {
-        var _this = this;
-        var currentUser = this.afAuth.auth.currentUser.uid;
-        var ref = this.afDatabase.object("ticketsInBasket/" + currentUser);
-        ref.snapshotChanges().subscribe(function (snapshot) {
-            var allData = snapshot.payload.val();
-            var array = [];
-            array.push(allData);
-            var value = Object.keys(allData);
-            var keyArray = [];
-            keyArray.push(value);
-            for (var i = 0; i < value.length; i++) {
-                var x = 0;
-                var count = 0;
-                var selectedIndex = i;
-                var keyValue = value[selectedIndex];
-                var indexSelecta = value.length - value.length + i;
-                var id = value[indexSelecta];
-                _this.kA.push(id);
-                var ref = _this.afDatabase.object("ticketsInBasket/" + currentUser + "/" + keyValue);
-                ref.snapshotChanges().subscribe(function (snapshot) {
-                    var eventSellerUID = snapshot.payload.child("Seller").val();
-                    var finalKey = _this.kA[_this.kA.length - _this.kA.length + x];
-                    var eventName = snapshot.payload.child("Name").val();
-                    var eventPrice = snapshot.payload.child("Price").val();
-                    var eventVenue = snapshot.payload.child("Venue").val();
-                    var eventDate = snapshot.payload.child("Date").val();
-                    var eventTime = snapshot.payload.child("Time").val();
-                    var eventCreationDate = snapshot.payload.child("Creation").val();
-                    var eventCustomerPayout = snapshot.payload.child("Payout").val();
-                    var eventServiceCharge = snapshot.payload.child("Charge").val();
-                    var reserved = snapshot.payload.child("checkOutTime").val();
-                    var timeLeft = snapshot.payload.child("reservationPerioid").val();
-                    var lats = snapshot.payload.child("Lat").val();
-                    var longs = snapshot.payload.child("Long").val();
-                    var payoutAccount = snapshot.payload.child("PayoutAccount").val();
-                    var payoutSortCode = snapshot.payload.child("PayoutSortCode").val();
-                    _this.items.push({
-                        Key: finalKey,
-                        Name: eventName,
-                        Venue: eventVenue,
-                        Price: eventPrice,
-                        Date: eventDate,
-                        Time: eventTime,
-                        Creation: eventCreationDate,
-                        Seller: eventSellerUID,
-                        Payout: eventCustomerPayout,
-                        Charge: eventServiceCharge,
-                        CheckoutPeriod: timeLeft,
-                        Lat: lats,
-                        Long: longs,
-                        PayoutAccount: payoutAccount,
-                        PayoutSortCode: payoutSortCode
-                    });
-                    x++;
-                    count + 1;
-                });
-            }
+            });
         });
     };
-    BuyPage = __decorate([
+    ModalAccountPage.prototype.updateName = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var key, ref;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!(this.uName == null || this.uName == "")) return [3 /*break*/, 1];
+                        this.emptyStringMessage();
+                        return [3 /*break*/, 4];
+                    case 1:
+                        this.close();
+                        key = this.afAuth.auth.currentUser.uid;
+                        ref = this.afDatabase.object("/user/" + key);
+                        ref.update({ firstname: this.uName });
+                        return [4 /*yield*/, this.showSpinner()];
+                    case 2:
+                        _a.sent();
+                        return [4 /*yield*/, this.successMessage()];
+                    case 3:
+                        _a.sent();
+                        _a.label = 4;
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ModalAccountPage.prototype.updateAddress = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var key, ref;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!(this.uAddressL1 == null || this.uAddressL1 == "")) return [3 /*break*/, 1];
+                        this.emptyStringMessage();
+                        return [3 /*break*/, 4];
+                    case 1:
+                        this.close();
+                        key = this.afAuth.auth.currentUser.uid;
+                        ref = this.afDatabase.object("/user/" + key);
+                        ref.update({ addressL1: this.uAddressL1 });
+                        return [4 /*yield*/, this.showSpinner()];
+                    case 2:
+                        _a.sent();
+                        return [4 /*yield*/, this.successMessage()];
+                    case 3:
+                        _a.sent();
+                        _a.label = 4;
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ModalAccountPage.prototype.updatePhoneNo = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var len, key, ref;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        len = this.uPhoneNo.toString();
+                        if (!(len.length < 7 || len.length > 15)) return [3 /*break*/, 1];
+                        this.phoneNoMessage();
+                        return [3 /*break*/, 4];
+                    case 1:
+                        this.close();
+                        key = this.afAuth.auth.currentUser.uid;
+                        ref = this.afDatabase.object("/user/" + key);
+                        ref.update({ phoneNo: this.uPhoneNo });
+                        return [4 /*yield*/, this.showSpinner()];
+                    case 2:
+                        _a.sent();
+                        return [4 /*yield*/, this.successMessage()];
+                    case 3:
+                        _a.sent();
+                        _a.label = 4;
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ModalAccountPage.prototype.updatePostCode = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var pcLen, key, ref;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        pcLen = this.uPC.toString();
+                        console.log(pcLen.length);
+                        if (!(pcLen.length == 7 || pcLen.length == 8)) return [3 /*break*/, 3];
+                        this.close();
+                        key = this.afAuth.auth.currentUser.uid;
+                        ref = this.afDatabase.object("/user/" + key);
+                        ref.update({ addressPC: this.uPC });
+                        return [4 /*yield*/, this.showSpinner()];
+                    case 1:
+                        _a.sent();
+                        return [4 /*yield*/, this.successMessage()];
+                    case 2:
+                        _a.sent();
+                        return [3 /*break*/, 4];
+                    case 3:
+                        this.postCodeMessage();
+                        _a.label = 4;
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ModalAccountPage.prototype.updatePassword = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var newPass, key, ref;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this.close();
+                        newPass = this.password.toString();
+                        if (!(newPass.length < 6)) return [3 /*break*/, 1];
+                        this.PasswordTooShortMessage();
+                        return [3 /*break*/, 4];
+                    case 1:
+                        key = this.afAuth.auth.currentUser.uid;
+                        ref = this.afDatabase.object("/user/" + key);
+                        ref.update({ password: newPass });
+                        this.afAuth.auth.currentUser.updatePassword(newPass);
+                        return [4 /*yield*/, this.showSpinner()];
+                    case 2:
+                        _a.sent();
+                        return [4 /*yield*/, this.successMessage()];
+                    case 3:
+                        _a.sent();
+                        _a.label = 4;
+                    case 4: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ModalAccountPage.prototype.ionViewWillLoad = function () {
+        var ticket = this.navParams.get("ticket");
+        this.userD = ticket;
+        console.log(this.userD);
+    };
+    ModalAccountPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-buy",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\buy\buy.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n    <ion-buttons right>\n\n      <button\n\n        id="info"\n\n        ion-button\n\n        icon-only\n\n        color="light"\n\n        (click)="ticketTradeInfo()"\n\n      >\n\n        <ion-icon name="information-circle"></ion-icon>\n\n      </button>\n\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n\n        <ion-icon name="log-out"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-buttons left>\n\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n\n        <ion-icon name="clipboard"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <ion-title position text-center>Awaiting payment</ion-title>\n\n  <ion-list>\n\n    <div\n\n      class="ngDiv"\n\n      [id]="i"\n\n      ion-item\n\n      *ngFor="let item of items; let i = index"\n\n    >\n\n      <h1 hidden>{{ i + 1 }}</h1>\n\n      <h1 hidden>{{ item.Key }}</h1>\n\n      <h1 hidden>{{ item.Seller }}</h1>\n\n      <h2 position text-center>{{ item.Name }}</h2>\n\n      <h3 position text-center>Venue: {{ item.Venue }}</h3>\n\n      <h4 position text-center>Price: £{{ item.Price }}</h4>\n\n      <h5 position text-center>Date: {{ item.Date }}</h5>\n\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n\n      <h6 hidden>{{ item.PayoutAccount }}</h6>\n\n      <h6 hidden>{{ item.PayoutSortCode }}</h6>\n\n      <h6 hidden>{{ item.Lat }}</h6>\n\n      <h6 hidden>{{ item.Long }}</h6>\n\n      <h6 hidden>{{ item.Payout }}</h6>\n\n      <h6 hidden>{{ item.Charge }}</h6>\n\n      <button\n\n        class="modalButton"\n\n        [id]="i"\n\n        ion-button\n\n        block\n\n        (click)="checkOut(index)"\n\n      >\n\n        Checkout\n\n      </button>\n\n      <h6></h6>\n\n    </div>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\buy\buy.html"*/
+            selector: "page-modal-account",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\modal-account\modal-account.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n    <ion-title>Edit account</ion-title\n\n    ><ion-buttons end>\n\n      <button ion-button (click)="close()">Close</button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <div class="ngFor">\n\n    <ion-item>\n\n      <ion-title>Update Name</ion-title><br />\n\n      <h1 text-center>{{ userD.firstname }}</h1>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label text-center></ion-label>\n\n      <ion-input [(ngModel)]="this.uName"></ion-input>\n\n      <button ion-button icon-only color="dark" (click)="updateName()" item-end>\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-title>Update Surname</ion-title><br />\n\n      <h1 text-center>{{ userD.surname }}</h1>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label text-center></ion-label>\n\n      <ion-input [(ngModel)]="this.uSurname"></ion-input>\n\n      <button\n\n        ion-button\n\n        icon-only\n\n        color="dark"\n\n        (click)="updateSurname()"\n\n        item-end\n\n      >\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-title>Update Phone No</ion-title><br />\n\n      <h1 text-center>{{ userD.phonenumber }}</h1>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label text-center></ion-label>\n\n      <ion-input [(ngModel)]="this.uPhoneNo"></ion-input>\n\n      <button\n\n        ion-button\n\n        icon-only\n\n        color="dark"\n\n        (click)="updatePhoneNo()"\n\n        item-end\n\n      >\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-title>Update Address</ion-title><br />\n\n      <h1 text-center>{{ userD.adress1 }}</h1>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label text-center></ion-label>\n\n      <ion-input [(ngModel)]="this.uAddressL1"></ion-input>\n\n      <button\n\n        ion-button\n\n        icon-only\n\n        color="dark"\n\n        (click)="updateAddress()"\n\n        item-end\n\n      >\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-title>Update Postcode</ion-title><br />\n\n      <h1 text-center>{{ userD.adress2 }}</h1>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label text-center></ion-label>\n\n      <ion-input [(ngModel)]="this.uPC"></ion-input>\n\n      <button\n\n        ion-button\n\n        icon-only\n\n        color="dark"\n\n        (click)="updatePostCode()"\n\n        item-end\n\n      >\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-title>Update password</ion-title><br />\n\n      <h1 text-center>**********</h1>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label text-center></ion-label>\n\n      <ion-input type="password" [(ngModel)]="this.password"></ion-input>\n\n      <button\n\n        ion-button\n\n        icon-only\n\n        color="light"\n\n        (click)="updatePassword()"\n\n        item-end\n\n      >\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\modal-account\modal-account.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */]])
-    ], BuyPage);
-    return BuyPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["m" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
+            __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["AngularFireAuth"],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* ModalController */]])
+    ], ModalAccountPage);
+    return ModalAccountPage;
 }());
 
-//# sourceMappingURL=buy.js.map
+//# sourceMappingURL=modal-account.js.map
 
 /***/ })
 

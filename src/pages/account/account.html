@@ -21,9 +21,7 @@
 </ion-header>
 <ion-content padding>
   <ion-content>
-      <div class="ngDivAccount">
-    <ion-item-group>
-      <ion-list-header position text-center color="white">Account Details</ion-list-header>
+    <div class="ngDivAccount">
       <ion-label position text-center>First name</ion-label>
       <ion-item position text-center>{{
         (userData | async)?.firstname
@@ -49,30 +47,36 @@
       <ion-label position text-center>Date of birth</ion-label>
       <ion-item position text-center>{{ (userData | async)?.dOb }}</ion-item>
       <br />
-    </ion-item-group>
-    <button
-    ion-button
-    id="btnDeleteAcc"
-    class="modalButton"
-    block
-    (click)="addCard()">
-    Add payment details
-  </button>
-    <button
-    ion-button
-    id="btnChangePassword"
-    class="modalButton"
-    block
-    (click)="openModal()">
-    Update details
-  </button>
-  <button
-  ion-button
-  id="btnDeleteAcc"
-  class="modalButton"
-  block
-  (click)="deleteAccount()">
-  Delete Account
-</button>
-      </div>
-      </ion-content>
+      <button
+        ion-button
+        class="sellTicketButtons"
+        icon-only
+        id="btnDeleteAcc"
+        color="midnight-blue"
+        (click)="addCard()"
+      >
+        <ion-icon name="card"></ion-icon>
+      </button>
+      <button
+        ion-button
+        class="sellTicketButtons"
+        icon-only
+        id="btnChangePassword"
+        color="midnight-blue"
+        (click)="openModal()"
+      >
+        <ion-icon name="folder-open"></ion-icon>
+      </button>
+      <button
+        ion-button
+        class="buttonDeleteAccount"
+        color="midnight-blue"
+        id="btnDeleteAcc"
+        block
+        (click)="deleteAccount()"
+      >
+        Delete Account
+      </button>
+    </div>
+  </ion-content>
+</ion-content>

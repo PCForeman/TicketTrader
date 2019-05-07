@@ -1,14 +1,14 @@
 webpackJsonp([3],{
 
-/***/ 637:
+/***/ 640:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaymentModalPageModule", function() { return PaymentModalPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SelectLocationModalPageModule", function() { return SelectLocationModalPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payment_modal__ = __webpack_require__(651);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__select_location_modal__ = __webpack_require__(654);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,32 +18,29 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var PaymentModalPageModule = /** @class */ (function () {
-    function PaymentModalPageModule() {
+var SelectLocationModalPageModule = /** @class */ (function () {
+    function SelectLocationModalPageModule() {
     }
-    PaymentModalPageModule = __decorate([
+    SelectLocationModalPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [__WEBPACK_IMPORTED_MODULE_2__payment_modal__["a" /* PaymentModalPage */]],
-            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__payment_modal__["a" /* PaymentModalPage */])]
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__select_location_modal__["a" /* SelectLocationModalPage */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__select_location_modal__["a" /* SelectLocationModalPage */])]
         })
-    ], PaymentModalPageModule);
-    return PaymentModalPageModule;
+    ], SelectLocationModalPageModule);
+    return SelectLocationModalPageModule;
 }());
 
-//# sourceMappingURL=payment-modal.module.js.map
+//# sourceMappingURL=select-location-modal.module.js.map
 
 /***/ }),
 
-/***/ 651:
+/***/ 654:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PaymentModalPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SelectLocationModalPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_aes_256__ = __webpack_require__(343);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -90,257 +87,111 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 
 
-
-
-var PaymentModalPage = /** @class */ (function () {
-    function PaymentModalPage(navParams, aCtrl, vCtrl, afDatabase, aes, toast, navCtrl) {
-        this.navParams = navParams;
-        this.aCtrl = aCtrl;
-        this.vCtrl = vCtrl;
-        this.afDatabase = afDatabase;
-        this.aes = aes;
-        this.toast = toast;
+var SelectLocationModalPage = /** @class */ (function () {
+    function SelectLocationModalPage(navCtrl, view, navParams, vCtrl, zone) {
         this.navCtrl = navCtrl;
+        this.view = view;
+        this.navParams = navParams;
+        this.vCtrl = vCtrl;
+        this.zone = zone;
+        this.GoogleAutocomplete = new google.maps.places.AutocompleteService();
+        this.autocomplete = { input: "" };
+        this.autocompleteItems = [];
+        this.geocoder = new google.maps.Geocoder();
+        this.markers = [];
     }
-    PaymentModalPage.prototype.ionViewWillLoad = function () {
-        var ticket = this.navParams.get("ticket");
-        this.listingData = ticket;
-        console.log(ticket);
-        this.useExistingCard();
-    };
-    PaymentModalPage.prototype.close = function () {
-        this.vCtrl.dismiss();
-    };
-    PaymentModalPage.prototype.useExistingCard = function () {
+    SelectLocationModalPage.prototype.updateResults = function () {
         var _this = this;
-        var key = this.listingData.userId;
-        this.afDatabase
-            .object("user/" + key)
-            .snapshotChanges()
-            .subscribe(function (snapshot) {
-            var allData = snapshot.payload.val();
-            var value = Object.keys(allData);
-            var cardKey = value[0];
-            _this.afDatabase
-                .object("user/" + key + "/" + cardKey)
-                .snapshotChanges()
-                .subscribe(function (snapshot) { return __awaiter(_this, void 0, void 0, function () {
-                var _this = this;
-                var CardNo, cardExpiry, Holder, Key, IV, cardNoPlainText, cardExpiryPlainText, cardHolderPlainText, CardSubStr, alert;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            CardNo = snapshot.payload.child("Card").val();
-                            cardExpiry = snapshot.payload.child("Expiry").val();
-                            Holder = snapshot.payload.child("Holder").val();
-                            Key = snapshot.payload.child("Key").val();
-                            IV = snapshot.payload.child("IV").val();
-                            return [4 /*yield*/, this.aes
-                                    .decrypt(Key, IV, CardNo)
-                                    .then(function (card) { return (cardNoPlainText = card); })
-                                    .catch(function (error) { return console.log(error); })];
-                        case 1:
-                            _a.sent();
-                            return [4 /*yield*/, this.aes
-                                    .decrypt(Key, IV, cardExpiry)
-                                    .then(function (exp) { return (cardExpiryPlainText = exp); })
-                                    .catch(function (error) { return console.log(error); })];
-                        case 2:
-                            _a.sent();
-                            return [4 /*yield*/, this.aes
-                                    .decrypt(Key, IV, Holder)
-                                    .then(function (holder) { return (cardHolderPlainText = holder); })
-                                    .catch(function (error) { return console.log(error); })];
-                        case 3:
-                            _a.sent();
-                            CardSubStr = cardNoPlainText.toString().substr(16);
-                            alert = this.aCtrl.create({
-                                mode: "ios",
-                                title: "Use saved card to pay?",
-                                message: "Use card ending in" +
-                                    " XXXX-X" +
-                                    CardSubStr +
-                                    " " +
-                                    "for payment?",
-                                cssClass: "alert-button-group",
-                                buttons: [
-                                    {
-                                        text: "Proceed",
-                                        handler: function () {
-                                            _this.cardName = cardHolderPlainText;
-                                            _this.cardNo = cardNoPlainText;
-                                            _this.expiry = cardExpiryPlainText;
-                                        }
-                                    },
-                                    {
-                                        text: "Dismiss",
-                                        role: "cancel",
-                                        handler: function () {
-                                            console.log("Cancel clicked");
-                                        }
-                                    }
-                                ]
-                            });
-                            alert.present();
-                            return [2 /*return*/];
-                    }
+        if (this.autocomplete.input == "") {
+            this.autocompleteItems = [];
+            return;
+        }
+        this.GoogleAutocomplete.getPlacePredictions({ input: this.autocomplete.input }, function (places) {
+            _this.autocompleteItems = [];
+            _this.zone.run(function () {
+                places.forEach(function (places) {
+                    _this.autocompleteItems.push(places);
                 });
-            }); });
+            });
         });
     };
-    PaymentModalPage.prototype.confirmPayment = function () {
-        var _this = this;
-        var alert = this.aCtrl.create({
-            title: "Confirm this payment",
-            subTitle: "This is going to cost" + " " + this.listingData.price + ".",
-            message: "" +
-                this.listingData.artist +
-                " " +
-                "at" +
-                " " +
-                this.listingData.location +
-                "<br>" +
-                this.listingData.date +
-                "<br>" +
-                this.listingData.time,
-            cssClass: "alert-button-group",
-            mode: "ios",
-            buttons: [
-                {
-                    text: "Proceed",
-                    cssClass: "alertButton",
-                    handler: function () {
-                        if (_this.cardName == "" || _this.cardName == null) {
-                            _this.toast
-                                .create({
-                                message: "Card holder field is empty",
-                                duration: 2000,
-                                position: "middle"
-                            })
-                                .present();
+    SelectLocationModalPage.prototype.selectSearchResult = function (item) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                this.autocompleteItems = [];
+                this.geocoder.geocode({ placeId: item.place_id }, function (results, status) { return __awaiter(_this, void 0, void 0, function () {
+                    var position, marker, venue, venueData, latData, lngData;
+                    return __generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                if (!(status === "OK" && results[0])) return [3 /*break*/, 2];
+                                position = {
+                                    lat: results[0].geometry.location.lat(),
+                                    lng: results[0].geometry.location.lng()
+                                };
+                                marker = new google.maps.Marker({
+                                    position: results[0].geometry.location,
+                                    map: this.map
+                                });
+                                return [4 /*yield*/, this.markers.push(marker)];
+                            case 1:
+                                _a.sent();
+                                this.map.setCenter(results[0].geometry.location);
+                                venue = this.autocomplete.input.toString().toUpperCase();
+                                console.log(position.lat, position.lng, venue);
+                                venueData = [];
+                                venueData.push(venue);
+                                latData = [];
+                                latData.push(position.lat);
+                                lngData = [];
+                                lngData.push(position.lng);
+                                this.view.dismiss({ venueData: venueData, latData: latData, lngData: lngData });
+                                _a.label = 2;
+                            case 2: return [2 /*return*/];
                         }
-                        else if (_this.cardNo.length != 19) {
-                            _this.toast
-                                .create({
-                                message: "Card number should be 16 digits",
-                                duration: 2000,
-                                position: "middle"
-                            })
-                                .present();
-                        }
-                        else if (_this.CVC == null ||
-                            _this.CVC == "" ||
-                            _this.CVC.length != 3) {
-                            _this.toast
-                                .create({
-                                message: "CVC field is empty or not 3 characters long",
-                                duration: 2000,
-                                position: "middle"
-                            })
-                                .present();
-                        }
-                        else if (_this.expiry == null ||
-                            _this.expiry == "" ||
-                            _this.expiry.length != 5) {
-                            _this.toast
-                                .create({
-                                message: "Expiry is empty or exceeds reqired length",
-                                duration: 2000,
-                                position: "middle"
-                            })
-                                .present();
-                        }
-                        else {
-                            console.log(_this.listingData.userId);
-                            var transactionRef = [
-                                {
-                                    Seller: _this.listingData.sellerId,
-                                    TicketRef: _this.listingData.ticketRef,
-                                    Buyer: _this.listingData.userId,
-                                    Price: _this.listingData.price,
-                                    SellerPayout: _this.listingData.payout,
-                                    ttRevenue: _this.listingData.charge,
-                                    PayeeAccountNo: _this.listingData.payoutAccount,
-                                    Payout: _this.listingData.payout
-                                }
-                            ];
-                            var transRefNo = _this.afDatabase
-                                .list("transactions")
-                                .push(transactionRef[0]).key;
-                            var buyerRef = [
-                                {
-                                    transactionRef: transRefNo,
-                                    TicketRef: _this.listingData.ticketRef,
-                                    Paid: _this.listingData.price,
-                                    FileUrl: "www.firebase.com"
-                                }
-                            ];
-                            var sellerRef = [
-                                {
-                                    Artist: _this.listingData.artist,
-                                    transactionRef: transRefNo,
-                                    TicketRef: _this.listingData.ticketRef,
-                                    Payout: _this.listingData.payout,
-                                    Status: "Pending"
-                                }
-                            ];
-                            var saleArchive = [
-                                {
-                                    Seller: _this.listingData.sellerId,
-                                    Event: _this.listingData.artist,
-                                    Location: _this.listingData.location,
-                                    Long: _this.listingData.long,
-                                    Lat: _this.listingData.lat,
-                                    Time: _this.listingData.time,
-                                    Date: _this.listingData.date,
-                                    Buyer: _this.listingData.userId,
-                                    Price: _this.listingData.price,
-                                    Payout: _this.listingData.payout,
-                                    transactionRef: transRefNo
-                                }
-                            ];
-                            console.log(transactionRef, buyerRef, transRefNo);
-                            _this.afDatabase
-                                .list("ticketsBought/" + _this.listingData.userId)
-                                .push(buyerRef[0]);
-                            _this.afDatabase
-                                .list("ticketsSold/" + _this.listingData.userId)
-                                .push(sellerRef[0]);
-                            _this.afDatabase
-                                .object("saleArchive/" + _this.listingData.ticketRef)
-                                .set(saleArchive[0]);
-                            _this.close();
-                            _this.navCtrl.setRoot("Page");
-                        }
-                    }
-                },
-                {
-                    text: "Cancel",
-                    cssClass: "alertButton",
-                    handler: function () {
-                        console.log("Cancel clicked");
-                    }
-                }
-            ]
+                    });
+                }); });
+                return [2 /*return*/];
+            });
         });
-        alert.present();
     };
-    PaymentModalPage = __decorate([
+    SelectLocationModalPage.prototype.ionViewDidLoad = function () {
+        console.log("ionViewDidLoad SelectLocationModalPage");
+        this.loadMap();
+    };
+    SelectLocationModalPage.prototype.close = function () {
+        this.vCtrl.dismiss({ venueData: 0, latData: 0, lngData: 0 });
+    };
+    SelectLocationModalPage.prototype.loadMap = function () {
+        var uluru = { lat: -25.344, lng: 131.036 };
+        var mapOptions = {
+            center: uluru,
+            zoom: 1,
+            zoomControl: true,
+            disableDefaultUI: true,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])("map"),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
+    ], SelectLocationModalPage.prototype, "mapElement", void 0);
+    SelectLocationModalPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-payment-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n    <ion-buttons right>\n\n      <button ion-button (click)="close()">Close</button>\n\n    </ion-buttons>\n\n    <ion-title position text-center>Pay</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-list position text-center>\n\n    <ion-title>\n\n      Order Summary\n\n    </ion-title>\n\n    {{ listingData.artist }}<br />\n\n    {{ listingData.location }}<br />\n\n    {{ listingData.date }} {{ listingData.time }}\n\n    <div class="ngFor">\n\n      <ion-item>\n\n        <ion-label position text-center>Name on card</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n          placeholder="Enter Cardholders name"\n\n          [(ngModel)]="cardName"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label position text-center>16 Digit card number</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n          placeholder="Enter Card Number"\n\n          [(ngModel)]="cardNo"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label position text-center>Expiry date</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n          placeholder="Enter Expiry"\n\n          [(ngModel)]="expiry"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label position text-center>CVC</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n          placeholder="Enter CVC"\n\n          [(ngModel)]="CVC"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <button id="modalButton" ion-button (click)="confirmPayment()">\n\n        Pay {{ listingData.price }}\n\n      </button>\n\n    </div>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/
+            selector: "page-select-location-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\select-location-modal\select-location-modal.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button (click)="close()">Close</button>\n    </ion-buttons>\n    <ion-title position text-center>Locate venue</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-searchbar\n    [(ngModel)]="autocomplete.input"\n    (ionInput)="updateResults()"\n    placeholder="Search for a place"\n  ></ion-searchbar>\n  <ion-list [hidden]="autocompleteItems.length == 0">\n    <ion-item\n      *ngFor="let item of autocompleteItems"\n      tappable\n      (click)="selectSearchResult(item)"\n    >\n      {{ item.description }}\n    </ion-item>\n  </ion-list>\n  <div #map id="map"></div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\select-location-modal\select-location-modal.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_aes_256__["a" /* AES256 */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]])
-    ], PaymentModalPage);
-    return PaymentModalPage;
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */]])
+    ], SelectLocationModalPage);
+    return SelectLocationModalPage;
 }());
 
-//# sourceMappingURL=payment-modal.js.map
+//# sourceMappingURL=select-location-modal.js.map
 
 /***/ })
 

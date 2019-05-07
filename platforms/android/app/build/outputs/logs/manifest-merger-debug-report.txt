@@ -11,10 +11,10 @@ INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android
 	android:name
 		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:15:127-180
 manifest
-ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-28:12
-INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-28:12
-INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-28:12
-INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-28:12
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-31:12
 MERGED from [:tbxml-android:] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\tbxml-android.aar\2418b910af895237a3e36d1def86f622\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-maps-15.0.1.aar\13c5b9b4fc39c121d805eee8eda329a6\AndroidManifest.xml:17:1-32:12
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-location-15.0.1.aar\d37bd9da77edc59814920f22ce8fcd79\AndroidManifest.xml:2:1-9:12
@@ -36,9 +36,9 @@ MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\paulf\.gradle\caches
 MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\7807b10f76d79f515507f448b3f098e5\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\7f040dd99ae6a008de01fa6f8dbc4a06\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\a0c14c2f17384ab7936193a23c7d7ec8\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-28:12
-INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-28:12
-INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-28:12
+INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-31:12
+INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:1-31:12
 	package
 		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:2:98-124
 		INJECTED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml
@@ -76,7 +76,7 @@ MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\paulf\.g
 	android:name
 		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:4:22-64
 application
-ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:5:5-18:19
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:5:5-21:19
 MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-maps-15.0.1.aar\13c5b9b4fc39c121d805eee8eda329a6\AndroidManifest.xml:30:5-20
 MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-maps-15.0.1.aar\13c5b9b4fc39c121d805eee8eda329a6\AndroidManifest.xml:30:5-20
 MERGED from [com.google.android.gms:play-services-location:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-location-15.0.1.aar\d37bd9da77edc59814920f22ce8fcd79\AndroidManifest.xml:7:5-20
@@ -153,8 +153,24 @@ ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\ap
 		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:14:113-157
 	android:name
 		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:14:58-112
+provider#de.sitewaerts.cordova.documentviewer.FileProvider
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:18:9-20:20
+	android:grantUriPermissions
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:18:117-151
+	android:authorities
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:18:19-91
+	android:exported
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:18:92-116
+	android:name
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:18:152-216
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:19:13-127
+	android:resource
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:19:75-124
+	android:name
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:19:24-74
 uses-sdk
-ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:19:5-74
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:22:5-74
 MERGED from [:tbxml-android:] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\tbxml-android.aar\2418b910af895237a3e36d1def86f622\AndroidManifest.xml:7:5-9:41
 MERGED from [:tbxml-android:] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\tbxml-android.aar\2418b910af895237a3e36d1def86f622\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-maps-15.0.1.aar\13c5b9b4fc39c121d805eee8eda329a6\AndroidManifest.xml:20:5-44
@@ -200,53 +216,47 @@ MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\paulf\.gradle\cach
 	tools:overrideLibrary
 		ADDED from [com.android.support:appcompat-v7:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\2fa778c77a6bf0dc4bf3d8ff05633e23\AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:19:42-71
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:22:42-71
 	android:minSdkVersion
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:19:15-41
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:22:15-41
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:20:5-79
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:23:5-79
 MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-maps-15.0.1.aar\13c5b9b4fc39c121d805eee8eda329a6\AndroidManifest.xml:23:5-79
 MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-maps-15.0.1.aar\13c5b9b4fc39c121d805eee8eda329a6\AndroidManifest.xml:23:5-79
 	android:name
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:20:22-76
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:23:22-76
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:21:5-81
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:24:5-81
 	android:name
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:21:22-78
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:24:22-78
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:22:5-79
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:25:5-79
 	android:name
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:22:22-76
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:25:22-76
 uses-feature#0x00020000
-ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:23:5-78
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:26:5-78
 MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-maps-15.0.1.aar\13c5b9b4fc39c121d805eee8eda329a6\AndroidManifest.xml:26:5-28:35
 MERGED from [com.google.android.gms:play-services-maps:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-maps-15.0.1.aar\13c5b9b4fc39c121d805eee8eda329a6\AndroidManifest.xml:26:5-28:35
 	android:glEsVersion
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:23:19-51
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:26:19-51
 	android:required
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:23:52-75
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:26:52-75
 uses-feature#android.hardware.location
-ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:24:5-62
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:27:5-62
 	android:name
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:24:19-59
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:27:19-59
 uses-feature#android.hardware.location.gps
-ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:25:5-66
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:28:5-66
 	android:name
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:25:19-63
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:28:19-63
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:26:5-81
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:29:5-81
 	android:name
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:26:22-78
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:29:22-78
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:27:5-80
+ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:30:5-80
 	android:name
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:27:22-77
-meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:16:13-123
-	android:resource
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:16:75-120
-	android:name
-		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:16:24-74
+		ADDED from C:\Users\paulf\Desktop\TicketTrader\TicketTrader\platforms\android\app\src\main\AndroidManifest.xml:30:22-77
 activity#com.google.android.gms.common.api.GoogleApiActivity
 ADDED from [com.google.android.gms:play-services-base:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-base-15.0.1.aar\dcff2c1e9ab027a35969dd2c48a566db\AndroidManifest.xml:23:9-26:75
 	android:exported

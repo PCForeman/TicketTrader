@@ -93,7 +93,7 @@ export class SellPage {
 
   async selectTicket() {
     const files = await (<any>window).chooser
-      .getFile("image/jpeg")
+      .getFile('jpeg/image')
       .then(async uri => {
         this.nativepath = uri.uri;
         await this.resolvePath(this.nativepath);
@@ -119,7 +119,7 @@ export class SellPage {
   }
 
   async upload(buffer, name) {
-    let blob = new Blob([buffer], { type: "image/jpeg" });
+    let blob = new Blob([buffer], { type: "pdf" });
     console.log(blob);
     await this.afStorage
       .upload(`tickets${name}`, blob)

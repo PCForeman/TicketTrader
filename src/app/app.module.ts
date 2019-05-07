@@ -6,6 +6,7 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
 import { Toast } from "@ionic-native/toast";
 import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
+import { DocumentViewer } from "@ionic-native/document-viewer/";
 import { File } from "@ionic-native/file";
 import { FilePath } from "@ionic-native/file-path"
 import { HomePageModule } from "../pages/home/home.module";
@@ -38,6 +39,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/';
     [StatusBar],
     [AngularFireStorage],
     [AndroidPermissions],
+    [DocumentViewer],
     [Toast],
     [File],
     [SplashScreen],

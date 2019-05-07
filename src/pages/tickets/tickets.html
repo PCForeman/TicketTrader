@@ -49,14 +49,32 @@
       <h5 position text-center>Date: {{ item.Date }}</h5>
       <h6 position text-center>Time: {{ item.Time }}</h6>
       <button
-        class="modalButton"
         [id]="i"
         ion-button
-        block
+        class="buyTicketButtons"
         (click)="buy(index)"
+        color="midnight-blue"
       >
         Buy ticket
       </button>
+      <button
+      class="buyTicketButtons"
+      [id]="i"
+      ion-button
+      (click)="click"
+      color="midnight-blue"
+    >
+      Interested?
+    </button>
+
+    <button
+    [id]="i"
+    class="buyTicketButtons"
+    ion-button
+    icon-only
+    color="midnight-blue"
+    (click)="reject"> <ion-icon name="thumbs-up">1</ion-icon>
+  </button>
       <h6></h6>
     </div>
   </ion-list>

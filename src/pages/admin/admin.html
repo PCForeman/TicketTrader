@@ -22,7 +22,12 @@
   >
   </ion-searchbar>
   <ion-list>
-    <div class="ngDivAdmin" [id]="i" ion-item *ngFor="let item of items; let i = index">
+    <div
+      class="ngDivAdmin"
+      [id]="i"
+      ion-item
+      *ngFor="let item of items; let i = index"
+    >
       <h1 hidden>{{ i + 1 }}</h1>
       <h2 position text-center>{{ item.Key }}</h2>
       <h3 position text-center>{{ item.Name }}</h3>
@@ -30,24 +35,34 @@
       <h5 position text-center>Price: £{{ item.Price }}</h5>
       <h6 position text-center>Date: {{ item.Date }}</h6>
       <h6 position text-center>Time: {{ item.Time }}</h6>
+      <h6 hidden>{{ item.downloadURL }}</h6>
       <button
         [id]="i"
+        class="adminButtons"
         ion-button
-        class="modalButton"
-        block
-        (click)="accept(index)"
-      >
-        Accept
+        icon-only
+        color="midnight-blue"
+        size="large"
+        (click)="accept(index)"> <ion-icon name="thumbs-up"></ion-icon>
       </button>
       <button
         [id]="i"
+        class="adminButtons"
         ion-button
-        class="modalButton"
-        block
-        (click)="reject(index)"
-      >
-        Reject
+        icon-only
+        color="midnight-blue"
+        size="large"
+        (click)="reject(index)"> <ion-icon name="thumbs-down"></ion-icon>
       </button>
+      <button
+      [id]="i"
+      class="imageButton"
+      ion-button
+      icon-only
+      color="midnight-blue"
+      size="large"
+      (click)="openImage()"><ion-icon name="image"></ion-icon>
+    </button>
     </div>
   </ion-list>
 </ion-content>

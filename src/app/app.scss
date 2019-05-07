@@ -21,15 +21,62 @@
   color: midnightblue;
 }
 
-.alertButton{
- background-color: midnightblue;
- color: black;
+.alertButton {
+  background-color: midnightblue;
+  color: black;
 }
 
 .ngDivAccount {
   width: 97.5%;
   border-radius: 20px;
   border: 3px solid midnightblue;
+}
+
+.adminButtons {
+  height: 75px;
+  width: 80px;
+  padding: 80px;
+}
+
+.createListingButton {
+  width: 100%;
+  padding: 10px;
+}
+
+.paymentModalButtons{
+  width: 45%;
+  padding: 5px;
+  text-align: center;
+}
+
+.iconButtons {
+  width: 47.8%;
+  padding: 5px;
+  text-align: center;
+}
+
+.imageButton {
+  width: 80px;
+}
+
+.ion-canvas {
+  height: 90%;
+  width: 90%;
+}
+
+.buttonDeleteAccount {
+  width: 100%;
+}
+
+.buyTicketButtons {
+  height: 75px;
+  width: 75px;
+  padding: 80px;
+}
+
+.sellTicketButtons {
+  height: 50px;
+  width: 47.5%;
 }
 
 .ngDivAdmin {
@@ -73,17 +120,8 @@
 }
 
 .loginButton {
-  outline: none;
-  position: center;
-  height: 50px;
-  text-align: center;
-  width: 97.5%;
-  border-radius: 40px;
-  background: midnightblue;
-  border: 2px solid black;
-  color: white;
-  letter-spacing: 1px;
-  text-shadow: 0;
+  width: 48%;
+  height: 75px;
 }
 
 .registerButton {

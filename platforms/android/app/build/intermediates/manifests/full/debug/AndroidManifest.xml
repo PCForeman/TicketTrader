@@ -73,6 +73,15 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/camera_provider_paths" />
         </provider>
+        <provider
+            android:name="de.sitewaerts.cordova.documentviewer.FileProvider"
+            android:authorities="io.ionic.starter.DocumentViewerPlugin.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/documentviewer_file_paths" />
+        </provider>
 
         <activity
             android:name="com.google.android.gms.common.api.GoogleApiActivity"

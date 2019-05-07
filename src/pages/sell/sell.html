@@ -34,7 +34,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Event</ion-label>
+      <ion-label floating>Artist(s)</ion-label>
       <ion-input id="txtEvent" [(ngModel)]="listing.Name"></ion-input>
     </ion-item>
 
@@ -66,33 +66,39 @@
     </ion-item>
     <p>
       <button
+        class="iconButtons"
         ion-button
         id="btnLocation"
-        class="sellButton"
-        block
+        icon-only
+        position="text-center"
         (click)="findVenue()"
+        color="midnight-blue"
       >
-        Find the venue
+        <ion-icon name="search"></ion-icon>Venue
       </button>
-
 
       <button
         ion-button
+        class="iconButtons"
         id="btnUploadTicket"
-        class="sellButton"
-        block
+        icon-only
+        position="text-center"
+        color="midnight-blue"
         (click)="selectTicket()"
       >
-        Select Ticket
+        <ion-icon name="cloud-upload"></ion-icon>Ticket
       </button>
+      <br />
       <button
+        class="createListingButton"
         ion-button
-        id="btnCreateListing"
-        class="sellButton"
         block
+        position="text-center"
+        color="midnight-blue"
+        id="btnCreateListing"
         (click)="createListingConfirmation()"
       >
-        Create your listing
+        Confirm listing
       </button>
     </p>
   </div>

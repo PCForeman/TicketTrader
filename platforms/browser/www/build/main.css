@@ -28011,6 +28011,12 @@ ion-navbar.toolbar {
   border: 3px solid midnightblue;
 }
 
+.adminButtons {
+  height: 75px;
+  width: 100px;
+  padding: 80px;
+}
+
 .ngDivAdmin {
   border-radius: 20px;
   border: 3px solid midnightblue;

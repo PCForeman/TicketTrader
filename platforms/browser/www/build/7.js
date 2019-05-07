@@ -1,14 +1,14 @@
 webpackJsonp([7],{
 
-/***/ 632:
+/***/ 634:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BuyPageModule", function() { return BuyPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__buy__ = __webpack_require__(646);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__buy__ = __webpack_require__(648);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,13 +34,13 @@ var BuyPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 646:
+/***/ 648:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BuyPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(64);
@@ -113,6 +113,7 @@ var BuyPage = /** @class */ (function () {
                     var longs = snapshot.payload.child("Long").val();
                     var payoutAccount = snapshot.payload.child("PayoutAccount").val();
                     var payoutSortCode = snapshot.payload.child("PayoutSortCode").val();
+                    var downloadURL = snapshot.payload.child("downloadURL").val();
                     var maxTime = checkOutTime + 600000;
                     if (maxTime <= timeNow) {
                         _this.timedOutListings.push({
@@ -128,15 +129,16 @@ var BuyPage = /** @class */ (function () {
                             Lat: lats,
                             Long: longs,
                             PayoutAccount: payoutAccount,
-                            PayoutSortCode: payoutSortCode
+                            PayoutSortCode: payoutSortCode,
+                            downloadURL: downloadURL
                         });
                         x++;
                         count + 1;
                         _this.afDatabase
                             .list("approvedTickets/")
-                            .push(_this.timedOutListings[0]);
-                        console.log(_this.timedOutListings[0]);
-                        _this.timedOutListings.splice(0, 1);
+                            .push(_this.timedOutListings);
+                        console.log(_this.timedOutListings);
+                        // this.timedOutListings.splice(0, 1);
                         _this.afDatabase
                             .list("ticketsInBasket/" + currentUser + "/" + keyValue)
                             .remove();

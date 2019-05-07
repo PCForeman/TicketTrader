@@ -1,14 +1,14 @@
 webpackJsonp([0],{
 
-/***/ 640:
+/***/ 642:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TicketsPageModule", function() { return TicketsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tickets__ = __webpack_require__(653);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tickets__ = __webpack_require__(655);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,7 +34,7 @@ var TicketsPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 653:
+/***/ 655:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44,7 +44,7 @@ var TicketsPageModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(121);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -94,25 +94,37 @@ var TicketsPage = /** @class */ (function () {
         this.initializeItems();
         console.log(this.itemSearch);
         // set q to the value of the searchbar
-        var q = searchbar.srcElement.value;
-        console.log(q);
+        var term = searchbar.srcElement.value;
+        console.log(term);
         // if the value is an empty string don't filter the items
-        if (q == undefined || q == "") {
+        if (term == undefined || term == "") {
             this.items = this.items2;
             this.items.splice(this.items.length - 1);
             console.log(this.items);
         }
         else {
             this.itemSearch = this.itemSearch.filter(function (v) {
-                if (v.Name && q) {
-                    if (v.Name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+                if (v.Name && term) {
+                    if (v.Name.toLowerCase().indexOf(term.toLowerCase()) > -1) {
                         _this.items = _this.itemSearch;
                         return true;
                     }
-                    return false;
+                    else if (v.Venue && term) {
+                        if (v.Venue.toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                            _this.items = _this.itemSearch;
+                            return true;
+                        }
+                        else if (v.Date && term) {
+                            if (v.Date.toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                                _this.items = _this.itemSearch;
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
                 }
             });
-            console.log(q, this.itemSearch.length, this.itemSearch);
+            console.log(term, this.itemSearch.length, this.itemSearch);
             this.items.push(this.itemSearch);
             this.reloadData();
         }
@@ -164,7 +176,8 @@ var TicketsPage = /** @class */ (function () {
                         Lat: v.Lat,
                         Long: v.Long,
                         PayoutAccount: v.PayoutAccount,
-                        PayoutSortCode: v.PayoutSortCode
+                        PayoutSortCode: v.PayoutSortCode,
+                        downloadURL: v.downloadURL
                     }
                 ];
                 var checkOutRef = _this.afAuth.auth.currentUser.uid;
@@ -217,6 +230,7 @@ var TicketsPage = /** @class */ (function () {
                     var Lats = snapshot.payload.child("Lat").val();
                     var payoutAccount = snapshot.payload.child("PayoutAccount").val();
                     var payoutSortCode = snapshot.payload.child("PayoutSortCode").val();
+                    var downloadURL = snapshot.payload.child("downloadURL").val();
                     _this.items.push({
                         Key: finalKey,
                         Name: eventName,
@@ -231,7 +245,8 @@ var TicketsPage = /** @class */ (function () {
                         Long: Longs,
                         Lat: Lats,
                         PayoutAccount: payoutAccount,
-                        PayoutSortCode: payoutSortCode
+                        PayoutSortCode: payoutSortCode,
+                        downloadURL: downloadURL
                     });
                     x++;
                 });

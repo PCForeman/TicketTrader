@@ -38,6 +38,13 @@ export class PaymentModalPage {
     this.useExistingCard();
   }
 
+  clearForm(){
+    this.cardName = "";
+    this.CVC = "";
+    this.cardNo = "";
+    this.expiry = "";
+  }
+
   close() {
     this.vCtrl.dismiss();
   }
