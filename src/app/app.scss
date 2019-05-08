@@ -21,6 +21,15 @@
   color: midnightblue;
 }
 
+.canvasButton{
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 100px;
+    margin-left: -50px; 
+    height: 50px;
+    margin-top: -25px;
+  }
+
 .alertButton {
   background-color: midnightblue;
   color: black;
@@ -38,6 +47,12 @@
   padding: 80px;
 }
 
+
+.buyPageButtons {
+  height: 75px;
+  width: 30%;
+  padding: 80px;
+}
 .createListingButton {
   width: 100%;
   padding: 10px;

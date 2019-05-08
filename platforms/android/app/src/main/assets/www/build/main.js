@@ -209,7 +209,7 @@ var LoginPage = /** @class */ (function () {
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-login",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\login\login.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-title position text-center>Login</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-item>\n    <ion-label floating>Enter your email address</ion-label>\n    <ion-input type="text" [(ngModel)]="user.email"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Enter your password</ion-label>\n    <ion-input type="password" [(ngModel)]="user.password"></ion-input>\n  </ion-item>\n\n  <button\n    ion-button\n    id="btnLogin"\n    class="loginButton"\n    color="midnight-blue"\n    block\n    (click)="loginLogin(user)"\n  >\n    Login\n  </button>\n  <button\n    ion-button\n    id="btnReg"\n    class="loginButton"\n    color="midnight-blue"\n    block\n    (click)="loginRegister()"\n  >\n    Need an account?\n  </button>\n</ion-content>\n\n<div class id="footer">\n  <ion-footer>\n    <ion-toolbar color="midnight-blue">\n      <ion-title position text-center>TicketTrader</ion-title>\n    </ion-toolbar>\n  </ion-footer>\n</div>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\login\login.html"*/
+            selector: "page-login",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\login\login.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-title position text-center>Login</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-item>\n    <ion-label floating>Enter your email address</ion-label>\n    <ion-input type="text" [(ngModel)]="user.email"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Enter your password</ion-label>\n    <ion-input type="password" [(ngModel)]="user.password"></ion-input>\n  </ion-item>\n<br>\n  <button\n  class="loginButton"\n    ion-button\n    id="btnLogin"\n    color="midnight-blue"\n    (click)="loginLogin(user)"\n  >\n    Login\n  </button>\n  <button\n    class="loginButton"\n    ion-button\n    id="btnReg"\n    color="midnight-blue"\n    (click)="loginRegister()"\n  >\n    Need an account?\n  </button>\n\n  <img height="220" src="https://firebasestorage.googleapis.com/v0/b/dissy-c7abe.appspot.com/o/received_1965782907049858.jpeg?alt=media&token=847a23a2-0a59-4698-af2c-5b8bcb7939c0">\n</ion-content>\n\n<div class id="footer">\n  <ion-footer>\n    <ion-toolbar color="midnight-blue">\n      <ion-title position text-center>TicketTrader</ion-title>\n    </ion-toolbar>\n  </ion-footer>\n</div>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\login\login.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["AngularFireDatabase"],
@@ -440,11 +440,11 @@ webpackEmptyAsyncContext.id = 230;
 
 var map = {
 	"../pages/account/account.module": [
-		628,
+		629,
 		13
 	],
 	"../pages/add-card-modal/add-card-modal.module": [
-		629,
+		628,
 		12
 	],
 	"../pages/admin-view/admin-view.module": [
@@ -452,15 +452,15 @@ var map = {
 		11
 	],
 	"../pages/admin/admin.module": [
-		631,
+		633,
 		15
 	],
 	"../pages/admin2/admin2.module": [
-		632,
+		631,
 		10
 	],
 	"../pages/admin3/admin3.module": [
-		633,
+		632,
 		9
 	],
 	"../pages/buy/buy.module": [
@@ -478,27 +478,27 @@ var map = {
 		7
 	],
 	"../pages/order-history/order-history.module": [
-		636,
+		638,
 		6
 	],
 	"../pages/page/page.module": [
-		637,
+		636,
 		5
 	],
 	"../pages/payment-modal/payment-modal.module": [
-		638,
+		637,
 		4
 	],
 	"../pages/register/register.module": [
-		639,
+		642,
 		14
 	],
 	"../pages/select-location-modal/select-location-modal.module": [
-		640,
+		639,
 		3
 	],
 	"../pages/sell/sell.module": [
-		642,
+		640,
 		2
 	],
 	"../pages/tickets/tickets.module": [
@@ -679,9 +679,8 @@ var AdminPage = /** @class */ (function () {
             .innerHTML;
         console.log(imageUrl);
         var myModalOpts = {
-            cssClass: "modal",
             enableBackdropDismiss: true,
-            showBackdrop: true
+            showBackdrop: false
         };
         var imageToView = {
             url: imageUrl
@@ -896,7 +895,7 @@ var AdminPage = /** @class */ (function () {
                                     " " +
                                     temp[0].Key +
                                     " " +
-                                    "has been approved and moved to active listings",
+                                    "has been rejected.",
                                 position: "top",
                                 duration: 2000
                             })
@@ -1033,23 +1032,23 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_7_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_15__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/account/account.module#AccountPageModule', name: 'AccountPage', segment: 'account', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/add-card-modal/add-card-modal.module#AddCardModalPageModule', name: 'AddCardModalPage', segment: 'add-card-modal', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/account/account.module#AccountPageModule', name: 'AccountPage', segment: 'account', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin-view/admin-view.module#AdminViewPageModule', name: 'AdminViewPage', segment: 'admin-view', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/admin/admin.module#AdminPageModule', name: 'AdminPage', segment: 'admin', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin2/admin2.module#Admin2PageModule', name: 'Admin2Page', segment: 'admin2', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin3/admin3.module#Admin3PageModule', name: 'Admin3Page', segment: 'admin3', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/buy/buy.module#BuyPageModule', name: 'BuyPage', segment: 'buy', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/admin/admin.module#AdminPageModule', name: 'AdminPage', segment: 'admin', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/buy/buy.module#BuyPageModule', name: 'BuyPage', segment: 'buy', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/modal-account/modal-account.module#ModalAccountPageModule', name: 'ModalAccountPage', segment: 'modal-account', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/order-history/order-history.module#OrderHistoryPageModule', name: 'OrderHistoryPage', segment: 'order-history', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/page/page.module#PageModule', name: 'Page', segment: 'page', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/payment-modal/payment-modal.module#PaymentModalPageModule', name: 'PaymentModalPage', segment: 'payment-modal', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/order-history/order-history.module#OrderHistoryPageModule', name: 'OrderHistoryPage', segment: 'order-history', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/select-location-modal/select-location-modal.module#SelectLocationModalPageModule', name: 'SelectLocationModalPage', segment: 'select-location-modal', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/tickets/tickets.module#TicketsPageModule', name: 'TicketsPage', segment: 'tickets', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sell/sell.module#SellPageModule', name: 'SellPage', segment: 'sell', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/tickets/tickets.module#TicketsPageModule', name: 'TicketsPage', segment: 'tickets', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/view-image-modal/view-image-modal.module#ViewImageModalPageModule', name: 'ViewImageModalPage', segment: 'view-image-modal', priority: 'low', defaultHistory: [] }
                     ]
                 }),

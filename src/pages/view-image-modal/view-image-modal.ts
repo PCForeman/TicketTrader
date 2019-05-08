@@ -36,8 +36,8 @@ export class ViewImageModalPage {
     this.myImg = new Image();
     this.myImg.src = data.url;
     this.canvas = this.canvasEl.nativeElement;
-    this.canvas.width = (window.innerWidth / 100) * 90;
-    this.canvas.height = (window.innerHeight / 100) * 87.5;
+    this.canvas.width = (window.innerWidth / 100) * 100;
+    this.canvas.height = (window.innerHeight / 100) * 100;
     await this.initialiseCanvas();
   }
 
@@ -53,6 +53,8 @@ export class ViewImageModalPage {
       this.canvas.width,
       this.canvas.height
     );
+   var button = document.getElementById('displayButton');
+   button.hidden = true;
   }
 
   initialiseCanvas() {

@@ -45,13 +45,33 @@
       <h6 hidden>{{ item.Payout }}</h6>
       <h6 hidden>{{ item.Charge }}</h6>
       <button
-        class="modalButton"
+        class="buyPageButtons"
         [id]="i"
         ion-button
-        block
+        color="midnight-blue"
         (click)="checkOut(index)"
       >
         Checkout
+      </button>
+
+      <button
+        class="buyPageButtons"
+        [id]="i"
+        ion-button
+        color="midnight-blue"
+        (click)="removeFromBasket()"
+      >
+        Remove
+      </button>
+
+      <button
+        class="buyPageButtons"
+        [id]="i"
+        ion-button
+        color="midnight-blue"
+        (click)="timeLeft()"
+      >
+        Time
       </button>
       <h6></h6>
     </div>

@@ -8,7 +8,8 @@ import {
   ToastController,
   ViewController,
   LoadingController,
-  ModalController
+  ModalController,
+  AlertController
 } from "ionic-angular";
 
 @IonicPage()
@@ -25,7 +26,8 @@ export class ModalAccountPage {
     private view: ViewController,
     private afDatabase: AngularFireDatabase,
     private afAuth: AngularFireAuth,
-    private Modal: ModalController
+    private Modal: ModalController,
+    private aCtrl: AlertController
   ) {}
   uSurname: any;
   uName: any;
@@ -52,6 +54,147 @@ export class ModalAccountPage {
     setTimeout(() => {
       loading.dismiss();
     }, 2000);
+  }
+
+  updateSurnameAlert() {
+    let alert = this.aCtrl.create({
+      mode: "ios",
+      title: "Update name?",
+      message:
+        "from" + " " + this.userD.surname + " " + ", to" + " " + this.uSurname,
+      cssClass: "alert-button-group",
+      buttons: [
+        {
+          text: "Proceed",
+
+          handler: () => {
+            this.updateSurname();
+          }
+        },
+        {
+          text: "Dismiss",
+          role: "cancel",
+          handler: () => {
+            this.uSurname = "";
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  updatePhoneNoAlert() {
+    let alert = this.aCtrl.create({
+      mode: "ios",
+      title: "Update name?",
+      message:
+        "from" + " " + this.userD.phoneNo + " " + ", to" + " " + this.uPhoneNo,
+      cssClass: "alert-button-group",
+      buttons: [
+        {
+          text: "Proceed",
+
+          handler: () => {
+            this.updatePhoneNo();
+          }
+        },
+        {
+          text: "Dismiss",
+          role: "cancel",
+          handler: () => {
+            this.uPhoneNo = "";
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  updateAddressAlert() {
+    let alert = this.aCtrl.create({
+      mode: "ios",
+      title: "Update name?",
+      message:
+        "from" +
+        " " +
+        this.userD.adress1 +
+        " " +
+        ", to" +
+        " " +
+        this.uAddressL1,
+      cssClass: "alert-button-group",
+      buttons: [
+        {
+          text: "Proceed",
+
+          handler: () => {
+            this.updateAddress();
+          }
+        },
+        {
+          text: "Dismiss",
+          role: "cancel",
+          handler: () => {
+            this.uAddressL1 = "";
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  updatePostCodeAlert() {
+    let alert = this.aCtrl.create({
+      mode: "ios",
+      title: "Update name?",
+      message:
+        "from" + " " + this.userD.adress2 + " " + ", to" + " " + this.uPC,
+      cssClass: "alert-button-group",
+      buttons: [
+        {
+          text: "Proceed",
+
+          handler: () => {
+            this.updatePostCode();
+          }
+        },
+        {
+          text: "Dismiss",
+          role: "cancel",
+          handler: () => {
+            this.uPC = "";
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  updateNameAlert() {
+    let alert = this.aCtrl.create({
+      mode: "ios",
+      title: "Update name?",
+      message:
+        "from" + " " + this.userD.firstname + " " + ", to" + " " + this.uName,
+      cssClass: "alert-button-group",
+      buttons: [
+        {
+          text: "Proceed",
+
+          handler: () => {
+            this.updateName();
+          }
+        },
+        {
+          text: "Dismiss",
+          role: "cancel",
+          handler: () => {
+            this.uName = "";
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   successMessage() {
@@ -104,8 +247,58 @@ export class ModalAccountPage {
       .present();
   }
 
+  nameContainsNumerics() {
+    this.toast
+      .create({
+        message: "Field cannot contain numerics",
+        duration: 2000,
+        position: "middle"
+      })
+      .present();
+  }
+
   refresh(): void {
     window.location.reload();
+  }
+
+  checkForNumerics() {
+    var bool = true;
+    var length = this.uName.length;
+    if (this.uName == null || this.uName == "") {
+      this.emptyStringMessage();
+    } else {
+      for (var i = 0; i < length; i++) {
+        var slice = this.uName.slice(i, i + 1);
+        var sliceNo = parseInt(slice);
+        if (sliceNo.valueOf() >= 0) {
+          bool = false;
+          this.nameContainsNumerics();
+        }
+      }
+    }
+    if (bool == true) {
+      this.updateNameAlert();
+    }
+  }
+
+  checkSurnameForNumerics() {
+    var bool = true;
+    var length = this.uSurname.length;
+    if (this.uSurname == null || this.uSurname == "") {
+      this.emptyStringMessage();
+    } else {
+      for (var i = 0; i < length; i++) {
+        var slice = this.uSurname.slice(i, i + 1);
+        var sliceNo = parseInt(slice);
+        if (sliceNo.valueOf() >= 0) {
+          bool = false;
+          this.nameContainsNumerics();
+        }
+      }
+    }
+    if (bool == true) {
+      this.updateSurnameAlert();
+    }
   }
 
   async updateSurname() {
@@ -122,16 +315,12 @@ export class ModalAccountPage {
   }
 
   async updateName() {
-    if (this.uName == null || this.uName == "") {
-      this.emptyStringMessage();
-    } else {
-      this.close();
-      var key = this.afAuth.auth.currentUser.uid;
-      var ref = this.afDatabase.object(`/user/${key}`);
-      ref.update({ firstname: this.uName });
-      await this.showSpinner();
-      await this.successMessage();
-    }
+    var key = this.afAuth.auth.currentUser.uid;
+    var ref = this.afDatabase.object(`/user/${key}`);
+    ref.update({ firstname: this.uName });
+    await this.showSpinner();
+    await this.successMessage();
+    this.close();
   }
 
   async updateAddress() {
@@ -192,8 +381,8 @@ export class ModalAccountPage {
   }
 
   ionViewWillLoad() {
-    const ticket = this.navParams.get("ticket");
-    this.userD = ticket;
+    const userData = this.navParams.get("data");
+    this.userD = userData;
     console.log(this.userD);
   }
 }

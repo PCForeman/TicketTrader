@@ -127,7 +127,7 @@ var AccountPage = /** @class */ (function () {
                 enableBackdropDismiss: true,
                 showBackdrop: true
             };
-            var listingRef = {
+            var accountData = {
                 adress1: ad1,
                 adress2: ad2,
                 dOb: dob,
@@ -137,7 +137,7 @@ var AccountPage = /** @class */ (function () {
                 phonenumber: pn,
                 surname: sn
             };
-            var myModal = _this.modal.create("ModalAccountPage", { ticket: listingRef }, myModalOpts);
+            var myModal = _this.modal.create("ModalAccountPage", { data: accountData }, myModalOpts);
             myModal.present();
         });
     };

@@ -28000,6 +28000,16 @@ ion-navbar.toolbar {
   color: midnightblue;
 }
 
+.canvasButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  margin-left: -50px;
+  height: 50px;
+  margin-top: -25px;
+}
+
 .alertButton {
   background-color: midnightblue;
   color: black;
@@ -28014,6 +28024,12 @@ ion-navbar.toolbar {
 .adminButtons {
   height: 75px;
   width: 80px;
+  padding: 80px;
+}
+
+.buyPageButtons {
+  height: 75px;
+  width: 30%;
   padding: 80px;
 }
 

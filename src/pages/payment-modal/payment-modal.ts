@@ -38,7 +38,7 @@ export class PaymentModalPage {
     this.useExistingCard();
   }
 
-  clearForm(){
+  clearForm() {
     this.cardName = "";
     this.CVC = "";
     this.cardNo = "";

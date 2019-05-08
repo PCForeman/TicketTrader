@@ -494,11 +494,11 @@ var map = {
 		14
 	],
 	"../pages/select-location-modal/select-location-modal.module": [
-		640,
+		641,
 		3
 	],
 	"../pages/sell/sell.module": [
-		641,
+		640,
 		2
 	],
 	"../pages/tickets/tickets.module": [
@@ -1046,8 +1046,8 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/page/page.module#PageModule', name: 'Page', segment: 'page', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/payment-modal/payment-modal.module#PaymentModalPageModule', name: 'PaymentModalPage', segment: 'payment-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/select-location-modal/select-location-modal.module#SelectLocationModalPageModule', name: 'SelectLocationModalPage', segment: 'select-location-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sell/sell.module#SellPageModule', name: 'SellPage', segment: 'sell', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/select-location-modal/select-location-modal.module#SelectLocationModalPageModule', name: 'SelectLocationModalPage', segment: 'select-location-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/tickets/tickets.module#TicketsPageModule', name: 'TicketsPage', segment: 'tickets', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/view-image-modal/view-image-modal.module#ViewImageModalPageModule', name: 'ViewImageModalPage', segment: 'view-image-modal', priority: 'low', defaultHistory: [] }
                     ]

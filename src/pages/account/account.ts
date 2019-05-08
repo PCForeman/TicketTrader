@@ -60,7 +60,7 @@ export class AccountPage {
       enableBackdropDismiss: true,
       showBackdrop: true
     };
-    const listingRef = {
+    const accountData = {
       adress1: ad1,
       adress2: ad2,
       dOb: dob,
@@ -73,7 +73,7 @@ export class AccountPage {
     
     const myModal = this.modal.create(
       "ModalAccountPage",
-      { ticket: listingRef },
+      { data: accountData },
       myModalOpts
     );
     myModal.present();
