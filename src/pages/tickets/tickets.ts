@@ -23,6 +23,7 @@ export class TicketsPage {
   searchTerm: string = "";
   itemSearch = [];
   items2 = [];
+  peopleInterested:number;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -140,7 +141,8 @@ export class TicketsPage {
             Long: v.Long,
             PayoutAccount: v.PayoutAccount,
             PayoutSortCode: v.PayoutSortCode,
-            downloadURL: v.downloadURL
+            downloadURL: v.downloadURL,
+            interested: v.interested
           }
         ];
         var checkOutRef = this.afAuth.auth.currentUser.uid;
@@ -163,6 +165,7 @@ export class TicketsPage {
   }
 
   displayTickets() {
+    this.items = [];
     var ref = this.afDatabase.object(`approvedTickets/`);
     ref.snapshotChanges().subscribe(snapshot => {
       var allData = snapshot.payload.val();
@@ -196,6 +199,7 @@ export class TicketsPage {
           const payoutAccount = snapshot.payload.child(`PayoutAccount`).val();
           const payoutSortCode = snapshot.payload.child(`PayoutSortCode`).val();
           const downloadURL = snapshot.payload.child(`downloadURL`).val();
+          const interested = snapshot.payload.child(`interested`).val();
           this.items.push({
             Key: finalKey,
             Name: eventName,
@@ -211,13 +215,30 @@ export class TicketsPage {
             Lat: Lats,
             PayoutAccount: payoutAccount,
             PayoutSortCode: payoutSortCode,
-            downloadURL: downloadURL
+            downloadURL: downloadURL,
+            interested: interested
           });
           x++;
         });
       }
     });
   }
+
+
+  showInterest(){
+   var splice = this.items.length
+    var target = event.srcElement;
+    var iD = target.parentElement.parentElement.children.item(1).innerHTML;
+     var ref = this.afDatabase.database.ref(`/approvedTickets/${iD}/interested`).transaction(interests => {
+      if (interests === null){
+        return interests = 1;
+      }else{
+        return interests + 1;
+      }
+     })
+     this.refresh();
+     };
+  
 
   logout() {
     this.afAuth.auth.signOut().then(() => {

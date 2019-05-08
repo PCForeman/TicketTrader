@@ -36,9 +36,10 @@ export class ViewImageModalPage {
     this.myImg = new Image();
     this.myImg.src = data.url;
     this.canvas = this.canvasEl.nativeElement;
-    this.canvas.width = (window.innerWidth / 100) * 100;
-    this.canvas.height = (window.innerHeight / 100) * 100;
+    this.canvas.width = (window.innerWidth / 100) * 90;
+    this.canvas.height = (window.innerHeight / 100) * 92.5;
     await this.initialiseCanvas();
+    this.displayTicket();
   }
 
   async displayTicket() {
@@ -67,7 +68,7 @@ export class ViewImageModalPage {
 
     this.context = this.canvas.getContext("2d");
     this.context.fillStyle = "#3e3e3e";
-    this.context.fillRect(0, 0, 500, 500);
+    this.context.fillRect(0, 0, 800, 800);
   }
 
   close() {

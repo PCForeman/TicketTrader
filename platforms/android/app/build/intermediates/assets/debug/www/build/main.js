@@ -440,11 +440,11 @@ webpackEmptyAsyncContext.id = 230;
 
 var map = {
 	"../pages/account/account.module": [
-		629,
+		628,
 		13
 	],
 	"../pages/add-card-modal/add-card-modal.module": [
-		628,
+		629,
 		12
 	],
 	"../pages/admin-view/admin-view.module": [
@@ -452,15 +452,15 @@ var map = {
 		11
 	],
 	"../pages/admin/admin.module": [
-		633,
+		631,
 		15
 	],
 	"../pages/admin2/admin2.module": [
-		631,
+		632,
 		10
 	],
 	"../pages/admin3/admin3.module": [
-		632,
+		633,
 		9
 	],
 	"../pages/buy/buy.module": [
@@ -474,11 +474,11 @@ var map = {
 		299
 	],
 	"../pages/modal-account/modal-account.module": [
-		635,
+		640,
 		7
 	],
 	"../pages/order-history/order-history.module": [
-		638,
+		635,
 		6
 	],
 	"../pages/page/page.module": [
@@ -490,7 +490,7 @@ var map = {
 		4
 	],
 	"../pages/register/register.module": [
-		642,
+		638,
 		14
 	],
 	"../pages/select-location-modal/select-location-modal.module": [
@@ -498,7 +498,7 @@ var map = {
 		3
 	],
 	"../pages/sell/sell.module": [
-		640,
+		642,
 		2
 	],
 	"../pages/tickets/tickets.module": [
@@ -761,6 +761,7 @@ var AdminPage = /** @class */ (function () {
                     var longs = snapshot.payload.child("Long").val();
                     var paymentAccount = snapshot.payload.child("PayoutAccount").val();
                     var paymentSort = snapshot.payload.child("PaySortCode").val();
+                    var interested = snapshot.payload.child("interested").val();
                     var eventCreationDate = snapshot.payload
                         .child("CreationDate")
                         .val();
@@ -789,7 +790,8 @@ var AdminPage = /** @class */ (function () {
                         Long: longs,
                         PayoutAccount: paymentAccount,
                         PayoutSortCode: paymentSort,
-                        downloadURL: downloadURL
+                        downloadURL: downloadURL,
+                        interested: interested
                     });
                     x++;
                 });
@@ -824,7 +826,8 @@ var AdminPage = /** @class */ (function () {
                                 Lat: v.Lat,
                                 PayoutAccount: v.PayoutAccount,
                                 PayoutSortCode: v.PayoutSortCode,
-                                downloadURL: v.downloadURL
+                                downloadURL: v.downloadURL,
+                                interested: v.interested
                             }
                         ];
                         this.fbDatabase.list("approvedTickets/").push(temp[0]);
@@ -1032,23 +1035,23 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_7_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_15__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/add-card-modal/add-card-modal.module#AddCardModalPageModule', name: 'AddCardModalPage', segment: 'add-card-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/account/account.module#AccountPageModule', name: 'AccountPage', segment: 'account', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/add-card-modal/add-card-modal.module#AddCardModalPageModule', name: 'AddCardModalPage', segment: 'add-card-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin-view/admin-view.module#AdminViewPageModule', name: 'AdminViewPage', segment: 'admin-view', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/admin/admin.module#AdminPageModule', name: 'AdminPage', segment: 'admin', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin2/admin2.module#Admin2PageModule', name: 'Admin2Page', segment: 'admin2', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin3/admin3.module#Admin3PageModule', name: 'Admin3Page', segment: 'admin3', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/admin/admin.module#AdminPageModule', name: 'AdminPage', segment: 'admin', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/buy/buy.module#BuyPageModule', name: 'BuyPage', segment: 'buy', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/buy/buy.module#BuyPageModule', name: 'BuyPage', segment: 'buy', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/modal-account/modal-account.module#ModalAccountPageModule', name: 'ModalAccountPage', segment: 'modal-account', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/order-history/order-history.module#OrderHistoryPageModule', name: 'OrderHistoryPage', segment: 'order-history', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/page/page.module#PageModule', name: 'Page', segment: 'page', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/payment-modal/payment-modal.module#PaymentModalPageModule', name: 'PaymentModalPage', segment: 'payment-modal', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/order-history/order-history.module#OrderHistoryPageModule', name: 'OrderHistoryPage', segment: 'order-history', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/select-location-modal/select-location-modal.module#SelectLocationModalPageModule', name: 'SelectLocationModalPage', segment: 'select-location-modal', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/sell/sell.module#SellPageModule', name: 'SellPage', segment: 'sell', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/tickets/tickets.module#TicketsPageModule', name: 'TicketsPage', segment: 'tickets', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/select-location-modal/select-location-modal.module#SelectLocationModalPageModule', name: 'SelectLocationModalPage', segment: 'select-location-modal', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/modal-account/modal-account.module#ModalAccountPageModule', name: 'ModalAccountPage', segment: 'modal-account', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/tickets/tickets.module#TicketsPageModule', name: 'TicketsPage', segment: 'tickets', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/sell/sell.module#SellPageModule', name: 'SellPage', segment: 'sell', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/view-image-modal/view-image-modal.module#ViewImageModalPageModule', name: 'ViewImageModalPage', segment: 'view-image-modal', priority: 'low', defaultHistory: [] }
                     ]
                 }),
@@ -1244,6 +1247,7 @@ var HomePage = /** @class */ (function () {
                     var eventServiceCharge = snapshot.payload.child("Charge").val();
                     var lats = snapshot.payload.child("Lat").val();
                     var longs = snapshot.payload.child("Long").val();
+                    var interested = snapshot.payload.child("interested").val();
                     _this.items.push({
                         index: x,
                         Key: finalKey,
@@ -1257,7 +1261,8 @@ var HomePage = /** @class */ (function () {
                         Payout: eventCustomerPayout,
                         Charge: eventServiceCharge,
                         Lat: lats,
-                        Long: longs
+                        Long: longs,
+                        interested: interested
                     });
                     x++;
                 });
@@ -1297,6 +1302,10 @@ var HomePage = /** @class */ (function () {
                         "<br>" +
                         " " +
                         "<br>" +
+                        "People interested:" + " " +
+                        ticket.interested +
+                        "<br>" +
+                        " " +
                         '<button class="infoWindowButton" <button onClick="window.ionicPageRef.zone.run(function () { window.ionicPageRef.component.buyTickets()})">Buy this ticket?</button>';
                     _this.addInfoWindow(marker, content);
                 });
@@ -1339,7 +1348,8 @@ var HomePage = /** @class */ (function () {
                         checkOutTime: timeClicked,
                         reservationPerioid: checkOutBy,
                         Lat: v.Lat,
-                        Long: v.Long
+                        Long: v.Long,
+                        interested: v.interested
                     }
                 ];
                 var checkOutRef = _this.afAuth.auth.currentUser.uid;

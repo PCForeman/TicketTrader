@@ -117,6 +117,7 @@ export class HomePage {
           const eventServiceCharge = snapshot.payload.child(`Charge`).val();
           const lats = snapshot.payload.child(`Lat`).val();
           const longs = snapshot.payload.child(`Long`).val();
+          const interested = snapshot.payload.child(`interested`).val();
           this.items.push({
             index: x,
             Key: finalKey,
@@ -130,7 +131,8 @@ export class HomePage {
             Payout: eventCustomerPayout,
             Charge: eventServiceCharge,
             Lat: lats,
-            Long: longs
+            Long: longs,
+            interested: interested
           });
           x++;
         });
@@ -170,7 +172,11 @@ export class HomePage {
             ticket.Price +
             "<br>" +
             " " +
+            "<br>" + 
+            "People interested:" + " " +
+            ticket.interested +
             "<br>" +
+            " " +
             '<button class="infoWindowButton" <button onClick="window.ionicPageRef.zone.run(function () { window.ionicPageRef.component.buyTickets()})">Buy this ticket?</button>';
           this.addInfoWindow(marker, content);
         });
@@ -212,7 +218,8 @@ export class HomePage {
             checkOutTime: timeClicked,
             reservationPerioid: checkOutBy,
             Lat: v.Lat,
-            Long: v.Long
+            Long: v.Long,
+            interested: v.interested
           }
         ];
         var checkOutRef = this.afAuth.auth.currentUser.uid;

@@ -137,6 +137,7 @@ export class AdminPage {
           const longs = snapshot.payload.child(`Long`).val();
           const paymentAccount = snapshot.payload.child(`PayoutAccount`).val();
           const paymentSort = snapshot.payload.child(`PaySortCode`).val();
+          const interested = snapshot.payload.child(`interested`).val();
           const eventCreationDate = snapshot.payload
             .child(`CreationDate`)
             .val();
@@ -166,7 +167,8 @@ export class AdminPage {
             Long: longs,
             PayoutAccount: paymentAccount,
             PayoutSortCode: paymentSort,
-            downloadURL: downloadURL
+            downloadURL: downloadURL,
+            interested: interested
           });
           x++;
         });
@@ -201,7 +203,8 @@ export class AdminPage {
           Lat: v.Lat,
           PayoutAccount: v.PayoutAccount,
           PayoutSortCode: v.PayoutSortCode,
-          downloadURL: v.downloadURL
+          downloadURL: v.downloadURL,
+          interested: v.interested
         }
       ];
 

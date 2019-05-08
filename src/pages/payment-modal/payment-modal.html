@@ -64,13 +64,10 @@
         ></ion-input>
       </ion-item>
 
-      <button class="paymentModalButtons" color="midnight-blue" ion-button (click)="confirmPayment()">
+      <button class="paymentModalButtons" block color="midnight-blue" ion-button (click)="confirmPayment()">
         Pay {{ listingData.price }}
       </button>
 
-      <button class="paymentModalButtons" color="midnight-blue"  ion-button (click)="clearForm()">
-          Clear fields
-        </button>
     </div>
   </ion-list>
 </ion-content>

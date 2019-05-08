@@ -1,9 +1,12 @@
 <ion-header>
   <ion-navbar color="midnight-blue">
-    <ion-buttons right>
+      <ion-buttons left>
+          <button ion-button (click)="close()">Info</button>
+        </ion-buttons>
+      <ion-buttons right>
       <button ion-button (click)="close()">Close</button>
     </ion-buttons>
-    <ion-title position text-center>Add card</ion-title>
+    <ion-title position text-center>Card</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -51,6 +54,7 @@
       <ion-input [(ngModel)]="accountNumber" placeholder="Enter Account number" position text-center></ion-input>
     </ion-item>
 
-    <button id="modalButton" (click)="addCardAlert()" ion-button>Add payment details</button>
+    <button class="addCardButtons" color="midnight-blue"  (click)="addCardAlert()" ion-button>Add details</button>
+    <button class="addCardButtons" color="midnight-blue" (click)="clearInputs()" ion-button>Clear form</button>
   </div>
 </ion-content>

@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TicketsPageModule", function() { return TicketsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tickets__ = __webpack_require__(656);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tickets__ = __webpack_require__(655);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,7 +34,7 @@ var TicketsPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 656:
+/***/ 655:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -177,7 +177,8 @@ var TicketsPage = /** @class */ (function () {
                         Long: v.Long,
                         PayoutAccount: v.PayoutAccount,
                         PayoutSortCode: v.PayoutSortCode,
-                        downloadURL: v.downloadURL
+                        downloadURL: v.downloadURL,
+                        interested: v.interested
                     }
                 ];
                 var checkOutRef = _this.afAuth.auth.currentUser.uid;
@@ -198,6 +199,7 @@ var TicketsPage = /** @class */ (function () {
     };
     TicketsPage.prototype.displayTickets = function () {
         var _this = this;
+        this.items = [];
         var ref = this.afDatabase.object("approvedTickets/");
         ref.snapshotChanges().subscribe(function (snapshot) {
             var allData = snapshot.payload.val();
@@ -231,6 +233,7 @@ var TicketsPage = /** @class */ (function () {
                     var payoutAccount = snapshot.payload.child("PayoutAccount").val();
                     var payoutSortCode = snapshot.payload.child("PayoutSortCode").val();
                     var downloadURL = snapshot.payload.child("downloadURL").val();
+                    var interested = snapshot.payload.child("interested").val();
                     _this.items.push({
                         Key: finalKey,
                         Name: eventName,
@@ -246,13 +249,29 @@ var TicketsPage = /** @class */ (function () {
                         Lat: Lats,
                         PayoutAccount: payoutAccount,
                         PayoutSortCode: payoutSortCode,
-                        downloadURL: downloadURL
+                        downloadURL: downloadURL,
+                        interested: interested
                     });
                     x++;
                 });
             }
         });
     };
+    TicketsPage.prototype.showInterest = function () {
+        var splice = this.items.length;
+        var target = event.srcElement;
+        var iD = target.parentElement.parentElement.children.item(1).innerHTML;
+        var ref = this.afDatabase.database.ref("/approvedTickets/" + iD + "/interested").transaction(function (interests) {
+            if (interests === null) {
+                return interests = 1;
+            }
+            else {
+                return interests + 1;
+            }
+        });
+        this.refresh();
+    };
+    ;
     TicketsPage.prototype.logout = function () {
         var _this = this;
         this.afAuth.auth.signOut().then(function () {
@@ -271,7 +290,7 @@ var TicketsPage = /** @class */ (function () {
     };
     TicketsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-tickets",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\tickets\tickets.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="info"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Buy Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <br />\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h1 hidden>{{ item.Seller }}</h1>\n      <h2 position text-center>{{ item.Name }}</h2>\n      <h3 position text-center>Venue: {{ item.Venue }}</h3>\n      <h4 position text-center>Price: £{{ item.Price }}</h4>\n      <h5 position text-center>Date: {{ item.Date }}</h5>\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n      <button\n        [id]="i"\n        ion-button\n        class="buyTicketButtons"\n        (click)="buy(index)"\n        color="midnight-blue"\n      >\n        Buy ticket\n      </button>\n      <button\n      class="buyTicketButtons"\n      [id]="i"\n      ion-button\n      (click)="click"\n      color="midnight-blue"\n    >\n      Interested?\n    </button>\n\n    <button\n    [id]="i"\n    class="buyTicketButtons"\n    ion-button\n    icon-only\n    color="midnight-blue"\n    (click)="reject"> <ion-icon name="thumbs-up">1</ion-icon>\n  </button>\n      <h6></h6>\n    </div>\n  </ion-list>\n  <br />\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\tickets\tickets.html"*/
+            selector: "page-tickets",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\tickets\tickets.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="info"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Buy Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <br />\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h1 hidden>{{ item.Key }}</h1>\n      <h2 position text-center>{{ item.Name }}</h2>\n      <h3 position text-center>Venue: {{ item.Venue }}</h3>\n      <h4 position text-center>Price: £{{ item.Price }}</h4>\n      <h5 position text-center>Date: {{ item.Date }}</h5>\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n      <button\n        [id]="i"\n        ion-button\n        class="buyTicketButtons"\n        (click)="buy(index)"\n        color="midnight-blue"\n      >\n        Buy ticket\n      </button>\n      <button\n      class="buyTicketButtons"\n      [id]="i"\n      ion-button\n      (click)="showInterest()"\n      color="midnight-blue"\n    >\n      Interested?\n    </button>\n\n    <button\n    [id]="i"\n    class="buyTicketButtons"\n    ion-button\n    icon-only\n    color="midnight-blue"\n     > <ion-icon name="thumbs-up">{{item.interested}}</ion-icon>\n  </button>\n      <h6></h6>\n    </div>\n  </ion-list>\n  <br />\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\tickets\tickets.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],

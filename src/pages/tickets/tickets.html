@@ -42,7 +42,7 @@
       *ngFor="let item of items; let i = index"
     >
       <h1 hidden>{{ i + 1 }}</h1>
-      <h1 hidden>{{ item.Seller }}</h1>
+      <h1 hidden>{{ item.Key }}</h1>
       <h2 position text-center>{{ item.Name }}</h2>
       <h3 position text-center>Venue: {{ item.Venue }}</h3>
       <h4 position text-center>Price: £{{ item.Price }}</h4>
@@ -61,7 +61,7 @@
       class="buyTicketButtons"
       [id]="i"
       ion-button
-      (click)="click"
+      (click)="showInterest()"
       color="midnight-blue"
     >
       Interested?
@@ -73,7 +73,7 @@
     ion-button
     icon-only
     color="midnight-blue"
-    (click)="reject"> <ion-icon name="thumbs-up">1</ion-icon>
+     > <ion-icon name="thumbs-up">{{item.interested}}</ion-icon>
   </button>
       <h6></h6>
     </div>

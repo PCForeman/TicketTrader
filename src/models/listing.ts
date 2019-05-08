@@ -15,4 +15,5 @@ export interface Listings {
   Lat: number;
   Long: number;
   downloadURL:string;
+  interested:number;
 }

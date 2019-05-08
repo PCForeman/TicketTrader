@@ -13,7 +13,6 @@ import {
 import { Listings } from "../../models/listing";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
-import { HomePage } from "../home/home";
 import { AES256 } from "@ionic-native/aes-256/";
 import { AndroidPermissions } from "@ionic-native/android-permissions/";
 import { File } from "@ionic-native/file";
@@ -354,6 +353,7 @@ export class SellPage {
         this.listing.PaySortCode;
         this.listing.PayoutAccount;
         this.listing.downloadURL = this.url;
+        this.listing.interested = 0;
         var ref = this.afDatabase
           .list(`unaprovedTickets/`)
           .push(this.listing)

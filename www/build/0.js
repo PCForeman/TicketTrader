@@ -114,11 +114,12 @@ var ViewImageModalPage = /** @class */ (function () {
                         this.myImg = new Image();
                         this.myImg.src = data.url;
                         this.canvas = this.canvasEl.nativeElement;
-                        this.canvas.width = (window.innerWidth / 100) * 100;
-                        this.canvas.height = (window.innerHeight / 100) * 100;
+                        this.canvas.width = (window.innerWidth / 100) * 90;
+                        this.canvas.height = (window.innerHeight / 100) * 92.5;
                         return [4 /*yield*/, this.initialiseCanvas()];
                     case 1:
                         _a.sent();
+                        this.displayTicket();
                         return [2 /*return*/];
                 }
             });
@@ -145,7 +146,7 @@ var ViewImageModalPage = /** @class */ (function () {
             return __generator(this, function (_a) {
                 this.context = this.canvas.getContext("2d");
                 this.context.fillStyle = "#3e3e3e";
-                this.context.fillRect(0, 0, 500, 500);
+                this.context.fillRect(0, 0, 800, 800);
                 return [2 /*return*/];
             });
         });
@@ -155,16 +156,17 @@ var ViewImageModalPage = /** @class */ (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])("canvas"),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
     ], ViewImageModalPage.prototype, "canvasEl", void 0);
     ViewImageModalPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: "page-view-image-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\view-image-modal\view-image-modal.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n      <ion-buttons left>\n\n          <button ion-button (click)="displayTicket()">Display</button>\n\n        </ion-buttons>\n\n    <ion-buttons right>\n\n      <button ion-button (click)="close()">Close</button>\n\n    </ion-buttons>\n\n    <ion-title position text-center>Verify Ticket</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n<div class="ion-canvas">\n\n\n\n<canvas #canvas></canvas>\n\n</div>\n\n<button id="displayButton" ion-button color="midnight-blue" icon-only class="canvasButton" (click)="displayTicket()"><ion-icon name="checkmark-circle"></ion-icon>\n\n</button>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\view-image-modal\view-image-modal.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], ViewImageModalPage);
     return ViewImageModalPage;
-    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=view-image-modal.js.map
