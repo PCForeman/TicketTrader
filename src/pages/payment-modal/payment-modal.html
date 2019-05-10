@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list position text-center>
-    <ion-title>
+  <ion-list class="paymentList" position text-center>
+    <ion-title text-center>
       Order Summary
     </ion-title>
     {{ listingData.artist }}<br />
@@ -21,6 +21,7 @@
       </ion-item>
       <ion-item>
         <ion-input
+          text-center
           placeholder="Enter Cardholders name"
           [(ngModel)]="cardName"
           position
@@ -33,6 +34,7 @@
       </ion-item>
       <ion-item>
         <ion-input
+        text-center
           placeholder="Enter Card Number"
           [(ngModel)]="cardNo"
           position
@@ -45,6 +47,7 @@
       </ion-item>
       <ion-item>
         <ion-input
+        text-center
           placeholder="Enter Expiry"
           [(ngModel)]="expiry"
           position
@@ -57,6 +60,7 @@
       </ion-item>
       <ion-item>
         <ion-input
+        text-center
           placeholder="Enter CVC"
           [(ngModel)]="CVC"
           position

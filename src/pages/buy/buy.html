@@ -59,7 +59,7 @@
         [id]="i"
         ion-button
         color="midnight-blue"
-        (click)="removeFromBasket()"
+        (click)="remove()"
       >
         Remove
       </button>
@@ -69,9 +69,8 @@
         [id]="i"
         ion-button
         color="midnight-blue"
-        (click)="timeLeft()"
       >
-        Time
+      {{this.minutesLeft}}:{{this.belowTen}}{{this.secondsLeft}}
       </button>
       <h6></h6>
     </div>

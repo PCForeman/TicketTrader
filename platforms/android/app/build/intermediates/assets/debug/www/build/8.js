@@ -73,8 +73,10 @@ var BuyPage = /** @class */ (function () {
         this.timedOutListings = [];
     }
     BuyPage.prototype.ionViewDidLoad = function () {
+        this.currentUser = this.afAuth.auth.currentUser.uid;
         this.retrieveCheckoutTickets();
         this.checkOutTimer();
+        this.displayTimer();
     };
     BuyPage.prototype.checkOutTimer = function () {
         var _this = this;
@@ -86,10 +88,11 @@ var BuyPage = /** @class */ (function () {
             array.push(allData);
             var value = Object.keys(allData);
             var keyArray = [];
-            console.log('yes');
+            console.log("yes");
             keyArray.push(value);
             for (var i = 0; i < value.length; i++) {
                 var x = 0;
+                console.log(x);
                 var count = 0;
                 var selectedIndex = i;
                 var keyValue = value[selectedIndex];
@@ -136,7 +139,7 @@ var BuyPage = /** @class */ (function () {
                         count + 1;
                         _this.afDatabase
                             .list("approvedTickets/")
-                            .push(_this.timedOutListings);
+                            .push(_this.timedOutListings[0]);
                         console.log(_this.timedOutListings);
                         // this.timedOutListings.splice(0, 1);
                         _this.afDatabase
@@ -149,6 +152,50 @@ var BuyPage = /** @class */ (function () {
                 });
             }
         });
+    };
+    BuyPage.prototype.displayTimer = function () {
+        var _this = this;
+        var currentUser = this.afAuth.auth.currentUser.uid;
+        var ref = this.afDatabase.object("ticketsInBasket/" + currentUser);
+        ref.snapshotChanges().subscribe(function (snapshot) {
+            var allData = snapshot.payload.val();
+            var array = [];
+            array.push(allData);
+            var value = Object.keys(allData);
+            _this.afDatabase
+                .object("ticketsInBasket/" + currentUser + "/" + value)
+                .snapshotChanges()
+                .subscribe(function (checkout) {
+                var checkOutTime = checkout.payload.child("checkOutTime").val();
+                var reservationTime = checkout.payload
+                    .child("reservationPerioid")
+                    .val();
+                var timeNow = Date.now();
+                var removalTime = (reservationTime - timeNow);
+                _this.secondsLeft = Math.floor((removalTime / 1000) % 60);
+                _this.minutesLeft = Math.floor((removalTime / 1000 / 60) % 60);
+                _this.timer = setInterval(function () { return _this.updateSeconds(_this.minutesLeft, _this.secondsLeft = _this.secondsLeft - 1); }, 1000);
+                console.log({ minutes: _this.minutesLeft, seconds: _this.secondsLeft });
+            });
+        });
+    };
+    BuyPage.prototype.updateSeconds = function (minutes, seconds) {
+        var belowTen = "0";
+        if (this.secondsLeft < 10) {
+            this.belowTen = belowTen;
+            if (this.secondsLeft <= 0) {
+                this.secondsLeft = this.secondsLeft + 60;
+                this.minutesLeft = this.minutesLeft - 1;
+                this.belowTen = "";
+            }
+            else if (this.minutesLeft == 0 && this.secondsLeft <= 1) {
+                this.timeIsUp();
+            }
+            console.log(minutes, seconds);
+        }
+    };
+    BuyPage.prototype.timeIsUp = function () {
+        clearInterval(this.timer);
     };
     BuyPage.prototype.checkOut = function () {
         var target = event.srcElement;
@@ -298,9 +345,55 @@ var BuyPage = /** @class */ (function () {
             }
         });
     };
+    BuyPage.prototype.remove = function () {
+        var _this = this;
+        var target = event.srcElement;
+        var ticketId = target.parentElement.parentElement.children.item(1).innerHTML;
+        console.log(ticketId);
+        var ref = this.afDatabase.object("ticketsInBasket/" + this.currentUser + "/" + ticketId);
+        ref.snapshotChanges().subscribe(function (snapshot) {
+            var eventSellerUID = snapshot.payload.child("Seller").val();
+            var eventName = snapshot.payload.child("Name").val();
+            var eventPrice = snapshot.payload.child("Price").val();
+            var eventVenue = snapshot.payload.child("Venue").val();
+            var eventDate = snapshot.payload.child("Date").val();
+            var eventTime = snapshot.payload.child("Time").val();
+            var eventCreationDate = snapshot.payload.child("Creation").val();
+            var eventCustomerPayout = snapshot.payload.child("Payout").val();
+            var eventServiceCharge = snapshot.payload.child("Charge").val();
+            var lats = snapshot.payload.child("Lat").val();
+            var longs = snapshot.payload.child("Long").val();
+            var payoutAccount = snapshot.payload.child("PayoutAccount").val();
+            var payoutSortCode = snapshot.payload.child("PayoutSortCode").val();
+            var downloadURL = snapshot.payload.child("downloadURL").val();
+            var interests = snapshot.payload.child("interests").val();
+            _this.timedOutListings.push({
+                Name: eventName,
+                Venue: eventVenue,
+                Price: eventPrice,
+                Date: eventDate,
+                Time: eventTime,
+                Creation: eventCreationDate,
+                Seller: eventSellerUID,
+                Payout: eventCustomerPayout,
+                Charge: eventServiceCharge,
+                Lat: lats,
+                Long: longs,
+                PayoutAccount: payoutAccount,
+                PayoutSortCode: payoutSortCode,
+                downloadURL: downloadURL,
+                interests: interests
+            });
+            _this.afDatabase.database.ref("approvedTickets/").push(_this.timedOutListings[0]);
+            console.log(_this.timedOutListings);
+            _this.afDatabase
+                .list("ticketsInBasket/" + _this.currentUser + "/" + ticketId)
+                .remove();
+        });
+    };
     BuyPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-buy",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\buy\buy.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n    <ion-buttons right>\n\n      <button\n\n        id="info"\n\n        ion-button\n\n        icon-only\n\n        color="light"\n\n        (click)="ticketTradeInfo()"\n\n      >\n\n        <ion-icon name="information-circle"></ion-icon>\n\n      </button>\n\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n\n        <ion-icon name="log-out"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-buttons left>\n\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n\n        <ion-icon name="clipboard"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <ion-title position text-center>Awaiting payment</ion-title>\n\n  <ion-list>\n\n    <div\n\n      class="ngDiv"\n\n      [id]="i"\n\n      ion-item\n\n      *ngFor="let item of items; let i = index"\n\n    >\n\n      <h1 hidden>{{ i + 1 }}</h1>\n\n      <h1 hidden>{{ item.Key }}</h1>\n\n      <h1 hidden>{{ item.Seller }}</h1>\n\n      <h2 position text-center>{{ item.Name }}</h2>\n\n      <h3 position text-center>Venue: {{ item.Venue }}</h3>\n\n      <h4 position text-center>Price: £{{ item.Price }}</h4>\n\n      <h5 position text-center>Date: {{ item.Date }}</h5>\n\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n\n      <h6 hidden>{{ item.PayoutAccount }}</h6>\n\n      <h6 hidden>{{ item.PayoutSortCode }}</h6>\n\n      <h6 hidden>{{ item.Lat }}</h6>\n\n      <h6 hidden>{{ item.Long }}</h6>\n\n      <h6 hidden>{{ item.Payout }}</h6>\n\n      <h6 hidden>{{ item.Charge }}</h6>\n\n      <button\n\n        class="buyPageButtons"\n\n        [id]="i"\n\n        ion-button\n\n        color="midnight-blue"\n\n        (click)="checkOut(index)"\n\n      >\n\n        Checkout\n\n      </button>\n\n\n\n      <button\n\n        class="buyPageButtons"\n\n        [id]="i"\n\n        ion-button\n\n        color="midnight-blue"\n\n        (click)="removeFromBasket()"\n\n      >\n\n        Remove\n\n      </button>\n\n\n\n      <button\n\n        class="buyPageButtons"\n\n        [id]="i"\n\n        ion-button\n\n        color="midnight-blue"\n\n        (click)="timeLeft()"\n\n      >\n\n        Time\n\n      </button>\n\n      <h6></h6>\n\n    </div>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\buy\buy.html"*/
+            selector: "page-buy",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\buy\buy.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n    <ion-buttons right>\n\n      <button\n\n        id="info"\n\n        ion-button\n\n        icon-only\n\n        color="light"\n\n        (click)="ticketTradeInfo()"\n\n      >\n\n        <ion-icon name="information-circle"></ion-icon>\n\n      </button>\n\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n\n        <ion-icon name="log-out"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-buttons left>\n\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n\n        <ion-icon name="clipboard"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <ion-title position text-center>Awaiting payment</ion-title>\n\n  <ion-list>\n\n    <div\n\n      class="ngDiv"\n\n      [id]="i"\n\n      ion-item\n\n      *ngFor="let item of items; let i = index"\n\n    >\n\n      <h1 hidden>{{ i + 1 }}</h1>\n\n      <h1 hidden>{{ item.Key }}</h1>\n\n      <h1 hidden>{{ item.Seller }}</h1>\n\n      <h2 position text-center>{{ item.Name }}</h2>\n\n      <h3 position text-center>Venue: {{ item.Venue }}</h3>\n\n      <h4 position text-center>Price: £{{ item.Price }}</h4>\n\n      <h5 position text-center>Date: {{ item.Date }}</h5>\n\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n\n      <h6 hidden>{{ item.PayoutAccount }}</h6>\n\n      <h6 hidden>{{ item.PayoutSortCode }}</h6>\n\n      <h6 hidden>{{ item.Lat }}</h6>\n\n      <h6 hidden>{{ item.Long }}</h6>\n\n      <h6 hidden>{{ item.Payout }}</h6>\n\n      <h6 hidden>{{ item.Charge }}</h6>\n\n      <button\n\n        class="buyPageButtons"\n\n        [id]="i"\n\n        ion-button\n\n        color="midnight-blue"\n\n        (click)="checkOut(index)"\n\n      >\n\n        Checkout\n\n      </button>\n\n\n\n      <button\n\n        class="buyPageButtons"\n\n        [id]="i"\n\n        ion-button\n\n        color="midnight-blue"\n\n        (click)="remove()"\n\n      >\n\n        Remove\n\n      </button>\n\n\n\n      <button\n\n        class="buyPageButtons"\n\n        [id]="i"\n\n        ion-button\n\n        color="midnight-blue"\n\n      >\n\n      {{this.minutesLeft}}:{{this.belowTen}}{{this.secondsLeft}}\n\n      </button>\n\n      <h6></h6>\n\n    </div>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\buy\buy.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],

@@ -23,7 +23,7 @@ export class TicketsPage {
   searchTerm: string = "";
   itemSearch = [];
   items2 = [];
-  peopleInterested:number;
+  peopleInterested: number;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -33,6 +33,9 @@ export class TicketsPage {
     public navCtrl: NavController,
     public navParams: NavParams
   ) {}
+
+  timeData: any;
+
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad TicketsPage");
@@ -224,21 +227,20 @@ export class TicketsPage {
     });
   }
 
-
-  showInterest(){
-   var splice = this.items.length
+  showInterest() {
     var target = event.srcElement;
     var iD = target.parentElement.parentElement.children.item(1).innerHTML;
-     var ref = this.afDatabase.database.ref(`/approvedTickets/${iD}/interested`).transaction(interests => {
-      if (interests === null){
-        return interests = 1;
-      }else{
-        return interests + 1;
-      }
-     })
-     this.refresh();
-     };
-  
+    var ref = this.afDatabase.database
+      .ref(`/approvedTickets/${iD}/interested`)
+      .transaction(interests => {
+        if (interests === null) {
+          return (interests = 1);
+        } else {
+          return interests + 1;
+        }
+      });
+    this.refresh();
+  }
 
   logout() {
     this.afAuth.auth.signOut().then(() => {

@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 641:
+/***/ 642:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TicketsPageModule", function() { return TicketsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tickets__ = __webpack_require__(655);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tickets__ = __webpack_require__(656);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,7 +34,7 @@ var TicketsPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 655:
+/***/ 656:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -258,12 +258,13 @@ var TicketsPage = /** @class */ (function () {
         });
     };
     TicketsPage.prototype.showInterest = function () {
-        var splice = this.items.length;
         var target = event.srcElement;
         var iD = target.parentElement.parentElement.children.item(1).innerHTML;
-        var ref = this.afDatabase.database.ref("/approvedTickets/" + iD + "/interested").transaction(function (interests) {
+        var ref = this.afDatabase.database
+            .ref("/approvedTickets/" + iD + "/interested")
+            .transaction(function (interests) {
             if (interests === null) {
-                return interests = 1;
+                return (interests = 1);
             }
             else {
                 return interests + 1;
@@ -271,7 +272,6 @@ var TicketsPage = /** @class */ (function () {
         });
         this.refresh();
     };
-    ;
     TicketsPage.prototype.logout = function () {
         var _this = this;
         this.afAuth.auth.signOut().then(function () {

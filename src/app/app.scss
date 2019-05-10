@@ -59,15 +59,19 @@
   padding: 80px;
 }
 .createListingButton {
+  width: 80%;
+  padding-right:10px;
+}
+
+.paymentList{
   width: 100%;
-  padding: 10px;
 }
 
 .paymentModalButtons{
-  width: 97.5%;
-  height: 100px;
-  padding: 5px;
+  width: 102.5%;
+  height: 50px;
   text-align: center;
+  position: center;
 }
 
 .iconButtons {
