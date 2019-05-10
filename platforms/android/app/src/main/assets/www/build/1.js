@@ -77,7 +77,11 @@ var TicketsPage = /** @class */ (function () {
     TicketsPage.prototype.ionViewDidLoad = function () {
         console.log("ionViewDidLoad TicketsPage");
         this.displayTickets();
-        this.copyItems();
+        this.fetchTickets();
+    };
+    TicketsPage.prototype.fetchTickets = function () {
+        var _this = this;
+        setInterval(function () { return _this.displayTickets(); }, 15000);
     };
     TicketsPage.prototype.initializeItems = function () {
         this.itemSearch = this.items;
@@ -137,26 +141,23 @@ var TicketsPage = /** @class */ (function () {
     };
     TicketsPage.prototype.buy = function () {
         var _this = this;
-        var timeClicked = Date.now();
-        var checkOutBy = timeClicked + 600000;
-        console.log(timeClicked);
-        var userId = this.afAuth.auth.currentUser.uid;
-        var temp = [];
         var target = event.srcElement;
-        var ticketClicked = parseInt(target.parentElement.parentElement.children.item(0).innerHTML.valueOf()) - 1;
-        var checkId = target.parentElement.parentElement.children
-            .item(1)
-            .innerHTML.valueOf();
+        var checkId = target.parentElement.parentElement.children.item(2).innerHTML;
+        console.log(checkId);
+        var userId = this.afAuth.auth.currentUser.uid;
+        var timeClicked = Date.now();
         if (userId == checkId) {
             this.toast
                 .create({
                 message: "This is your listing.",
                 duration: 2000,
                 position: "Middle"
-            })
-                .present();
+            }).present();
         }
-        else if (userId != checkId) {
+        else {
+            var checkOutBy = timeClicked + 600000;
+            var temp = [];
+            var ticketClicked = parseInt(target.parentElement.parentElement.children.item(0).innerHTML.valueOf()) - 1;
             temp.push(this.items[ticketClicked]);
             temp.filter(function (v) {
                 var tempArray = [
@@ -187,12 +188,9 @@ var TicketsPage = /** @class */ (function () {
                     .push(tempArray[0]);
                 _this.afDatabase.list("approvedTickets/" + tempArray[0].Key).remove();
                 _this.navCtrl.push("BuyPage");
-                _this.refresh();
             });
+            this.items = [];
         }
-    };
-    TicketsPage.prototype.refresh = function () {
-        window.location.reload();
     };
     TicketsPage.prototype.reloadData = function () {
         this.items = this.itemSearch;
@@ -258,6 +256,7 @@ var TicketsPage = /** @class */ (function () {
         });
     };
     TicketsPage.prototype.showInterest = function () {
+        var _this = this;
         var target = event.srcElement;
         var iD = target.parentElement.parentElement.children.item(1).innerHTML;
         var ref = this.afDatabase.database
@@ -269,8 +268,14 @@ var TicketsPage = /** @class */ (function () {
             else {
                 return interests + 1;
             }
+        })
+            .then(function (res) {
+            _this.items = [];
+            _this.displayTickets();
+        })
+            .catch(function (error) {
+            console.log(error);
         });
-        this.refresh();
     };
     TicketsPage.prototype.logout = function () {
         var _this = this;
@@ -290,7 +295,7 @@ var TicketsPage = /** @class */ (function () {
     };
     TicketsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-tickets",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\tickets\tickets.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="info"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Buy Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <br />\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h1 hidden>{{ item.Key }}</h1>\n      <h2 position text-center>{{ item.Name }}</h2>\n      <h3 position text-center>Venue: {{ item.Venue }}</h3>\n      <h4 position text-center>Price: £{{ item.Price }}</h4>\n      <h5 position text-center>Date: {{ item.Date }}</h5>\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n      <button\n        [id]="i"\n        ion-button\n        class="buyTicketButtons"\n        (click)="buy(index)"\n        color="midnight-blue"\n      >\n        Buy ticket\n      </button>\n      <button\n      class="buyTicketButtons"\n      [id]="i"\n      ion-button\n      (click)="showInterest()"\n      color="midnight-blue"\n    >\n      Interested?\n    </button>\n\n    <button\n    [id]="i"\n    class="buyTicketButtons"\n    ion-button\n    icon-only\n    color="midnight-blue"\n     > <ion-icon name="thumbs-up">{{item.interested}}</ion-icon>\n  </button>\n      <h6></h6>\n    </div>\n  </ion-list>\n  <br />\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\tickets\tickets.html"*/
+            selector: "page-tickets",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\tickets\tickets.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="info"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Buy Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <br />\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h1 hidden>{{ item.Key }}</h1>\n      <h1 hidden>{{ item.Seller }}</h1>\n      <h2 position text-center>{{ item.Name }}</h2>\n      <h3 position text-center>Venue: {{ item.Venue }}</h3>\n      <h4 position text-center>Price: £{{ item.Price }}</h4>\n      <h5 position text-center>Date: {{ item.Date }}</h5>\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n      <button\n        [id]="i"\n        ion-button\n        class="buyTicketButtons"\n        (click)="buy(index)"\n        color="midnight-blue"\n      >\n        Buy ticket\n      </button>\n      <button\n      class="buyTicketButtons"\n      [id]="i"\n      ion-button\n      (click)="showInterest()"\n      color="midnight-blue"\n    >\n      Interested?\n    </button>\n\n    <button\n    [id]="i"\n    class="buyTicketButtons"\n    ion-button\n    icon-only\n    color="midnight-blue"\n     > <ion-icon name="thumbs-up">{{item.interested}}</ion-icon>\n  </button>\n      <h6></h6>\n    </div>\n  </ion-list>\n  <br />\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\tickets\tickets.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],

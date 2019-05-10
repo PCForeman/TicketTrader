@@ -36,11 +36,14 @@ export class TicketsPage {
 
   timeData: any;
 
-
   ionViewDidLoad() {
     console.log("ionViewDidLoad TicketsPage");
     this.displayTickets();
-    this.copyItems();
+    this.fetchTickets();
+  }
+
+  fetchTickets() {
+    setInterval(() => this.displayTickets(), 15000);
   }
 
   initializeItems(): void {
@@ -102,28 +105,26 @@ export class TicketsPage {
   }
 
   buy() {
-    var timeClicked = Date.now();
-    var checkOutBy = timeClicked + 600000;
-    console.log(timeClicked);
+    var target = event.srcElement
+    const checkId = target.parentElement.parentElement.children.item(2).innerHTML;
+    console.log(checkId);
     const userId = this.afAuth.auth.currentUser.uid;
-    var temp = [];
-    var target = event.srcElement;
-    var ticketClicked =
-      parseInt(
-        target.parentElement.parentElement.children.item(0).innerHTML.valueOf()
-      ) - 1;
-    const checkId = target.parentElement.parentElement.children
-      .item(1)
-      .innerHTML.valueOf();
+    var timeClicked = Date.now();
     if (userId == checkId) {
       this.toast
         .create({
           message: "This is your listing.",
           duration: 2000,
           position: "Middle"
-        })
-        .present();
-    } else if (userId != checkId) {
+        }).present();
+
+      }else{
+    var checkOutBy = timeClicked + 600000;
+    var temp = [];
+    var ticketClicked =
+      parseInt(
+        target.parentElement.parentElement.children.item(0).innerHTML.valueOf()
+      ) - 1;
       temp.push(this.items[ticketClicked]);
       temp.filter(v => {
         var tempArray = [
@@ -154,13 +155,9 @@ export class TicketsPage {
           .push(tempArray[0]);
         this.afDatabase.list(`approvedTickets/${tempArray[0].Key}`).remove();
         this.navCtrl.push("BuyPage");
-        this.refresh();
       });
+      this.items = [];
     }
-  }
-
-  refresh(): void {
-    window.location.reload();
   }
 
   reloadData() {
@@ -238,8 +235,14 @@ export class TicketsPage {
         } else {
           return interests + 1;
         }
+      })
+      .then(res => {
+        this.items = [];
+        this.displayTickets();
+      })
+      .catch(error => {
+        console.log(error);
       });
-    this.refresh();
   }
 
   logout() {

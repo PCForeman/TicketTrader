@@ -21,11 +21,12 @@ export class BuyPage {
   items2 = [];
   itemSearch = [];
   timedOutListings = [];
-  minutesLeft:any;
-  secondsLeft:any;
-  timer:any;
-  belowTen:any;
-  currentUser:any;
+  minutesLeft: any;
+  secondsLeft: any;
+  timer: any;
+  belowTen: any;
+  belowTenMin:any;
+  currentUser: any;
 
   constructor(
     public navCtrl: NavController,
@@ -39,7 +40,6 @@ export class BuyPage {
   ionViewDidLoad() {
     this.currentUser = this.afAuth.auth.currentUser.uid;
     this.retrieveCheckoutTickets();
-    this.checkOutTimer();
     this.displayTimer();
   }
 
@@ -51,41 +51,31 @@ export class BuyPage {
       var array = [];
       array.push(allData);
       var value = Object.keys(allData);
-      var keyArray = [];
-      console.log("yes");
-      keyArray.push(value);
-      for (var i = 0; i < value.length; i++) {
-        var x = 0;
-        console.log(x);
-        var count = 0;
-        var selectedIndex = i;
-        var keyValue = value[selectedIndex];
-        var indexSelecta = value.length - value.length + i;
-        var id = value[indexSelecta];
-        this.kA.push(id);
-        var ref = this.afDatabase.object(
-          `ticketsInBasket/${currentUser}/${keyValue}`
-        );
-        ref.snapshotChanges().subscribe(snapshot => {
-          var eventSellerUID = snapshot.payload.child(`Seller`).val();
-          var checkOutTime = snapshot.payload.child(`checkOutTime`).val();
-          var timeNow = Date.now();
-          const eventName = snapshot.payload.child(`Name`).val();
-          const eventPrice = snapshot.payload.child(`Price`).val();
-          const eventVenue = snapshot.payload.child(`Venue`).val();
-          const eventDate = snapshot.payload.child(`Date`).val();
-          const eventTime = snapshot.payload.child(`Time`).val();
-          const eventCreationDate = snapshot.payload.child(`Creation`).val();
-          const eventCustomerPayout = snapshot.payload.child(`Payout`).val();
-          const eventServiceCharge = snapshot.payload.child(`Charge`).val();
-          const lats = snapshot.payload.child(`Lat`).val();
-          const longs = snapshot.payload.child(`Long`).val();
-          const payoutAccount = snapshot.payload.child(`PayoutAccount`).val();
-          const payoutSortCode = snapshot.payload.child(`PayoutSortCode`).val();
-          const downloadURL = snapshot.payload.child(`downloadURL`).val();
-          var maxTime = checkOutTime + 600000;
-          if (maxTime <= timeNow) {
-            this.timedOutListings.push({
+      var ref = this.afDatabase.object(
+        `ticketsInBasket/${currentUser}/${value}`
+      );
+      ref.snapshotChanges().subscribe(snapshot => {
+        const eventSellerUID = snapshot.payload.child(`Seller`).val();
+        const eventName = snapshot.payload.child(`Name`).val();
+        const eventPrice = snapshot.payload.child(`Price`).val();
+        const eventVenue = snapshot.payload.child(`Venue`).val();
+        const eventDate = snapshot.payload.child(`Date`).val();
+        const eventTime = snapshot.payload.child(`Time`).val();
+        const eventCreationDate = snapshot.payload.child(`Creation`).val();
+        const eventCustomerPayout = snapshot.payload.child(`Payout`).val();
+        const eventServiceCharge = snapshot.payload.child(`Charge`).val();
+        const lats = snapshot.payload.child(`Lat`).val();
+        const longs = snapshot.payload.child(`Long`).val();
+        const payoutAccount = snapshot.payload.child(`PayoutAccount`).val();
+        const payoutSortCode = snapshot.payload.child(`PayoutSortCode`).val();
+        const downloadURL = snapshot.payload.child(`downloadURL`).val();
+        const interested = snapshot.payload.child(`interested`).val();
+        this.afDatabase
+          .list(`ticketsInBasket/${this.currentUser}/${value}`)
+          .remove()
+          .then(res => {
+            console.log(res);
+            this.afDatabase.database.ref(`approvedTickets`).push({
               Name: eventName,
               Venue: eventVenue,
               Price: eventPrice,
@@ -99,23 +89,14 @@ export class BuyPage {
               Long: longs,
               PayoutAccount: payoutAccount,
               PayoutSortCode: payoutSortCode,
-              downloadURL: downloadURL
+              downloadURL: downloadURL,
+              interested: interested
+            }).catch(error => {
+              console.log(error);
             });
-            x++;
-            count + 1;
-            this.afDatabase
-              .list(`approvedTickets/`)
-              .push(this.timedOutListings[0]);
-            console.log(this.timedOutListings);
-            // this.timedOutListings.splice(0, 1);
-            this.afDatabase
-              .list(`ticketsInBasket/${currentUser}/${keyValue}`)
-              .remove();
-          } else if (maxTime > timeNow) {
-            console.log("Hello");
-          }
-        });
-      }
+          });
+          this.items = [];
+      });
     });
   }
 
@@ -131,40 +112,46 @@ export class BuyPage {
         .object(`ticketsInBasket/${currentUser}/${value}`)
         .snapshotChanges()
         .subscribe(checkout => {
-          var checkOutTime = checkout.payload.child(`checkOutTime`).val();
           var reservationTime = checkout.payload
             .child(`reservationPerioid`)
             .val();
-          var timeNow = Date.now()
-          var removalTime = (reservationTime - timeNow);
-          this.secondsLeft  = Math.floor((removalTime / 1000) % 60);
+          var timeNow = Date.now();
+          var removalTime = reservationTime - timeNow;
+          this.secondsLeft = Math.floor((removalTime / 1000) % 60);
           this.minutesLeft = Math.floor((removalTime / 1000 / 60) % 60);
-         this.timer = setInterval(() => this.updateSeconds(this.minutesLeft, this.secondsLeft = this.secondsLeft - 1), 1000);
-          console.log({minutes: this.minutesLeft, seconds: this.secondsLeft})
-         
+          this.timer = setInterval(
+            () =>
+              this.updateSeconds(
+                this.minutesLeft,
+                (this.secondsLeft = this.secondsLeft - 1)
+              ),
+            1000
+          );
+          console.log({ minutes: this.minutesLeft, seconds: this.secondsLeft });
         });
     });
   }
-  updateSeconds(minutes:number, seconds:number) {
-    var belowTen = "0";
-    if (this.secondsLeft < 10){
-    this.belowTen = belowTen
-    if (this.secondsLeft <= 0){
-    this.secondsLeft = this.secondsLeft + 60;
-    this.minutesLeft = this.minutesLeft - 1;
-    this.belowTen = "";
-    }else if (this.minutesLeft == 0 && this.secondsLeft <= 1){
-    this.timeIsUp();
-
+  updateSeconds(minutes: number, seconds: number) {
+     if (this.secondsLeft < 10){
+     this.belowTen = "0" }
+     if (this.minutesLeft < 10){
+     this.belowTenMin = "0"
+     if (this.secondsLeft <= 0) {
+     this.secondsLeft = this.secondsLeft + 59;
+     this.minutesLeft = this.minutesLeft - 1;
+     this.belowTen = "";
+     if (this.minutesLeft <= 0 && this.secondsLeft <= 1) {
+     this.timeIsUp();
+      this.checkOutTimer();
     }
     console.log(minutes, seconds);
+  }
 }
   }
 
- timeIsUp(){
-  clearInterval(this.timer);
+  timeIsUp() {
+    clearInterval(this.timer);
   }
-
 
   checkOut() {
     var target = event.srcElement;
@@ -284,20 +271,19 @@ export class BuyPage {
           `ticketsInBasket/${currentUser}/${keyValue}`
         );
         ref.snapshotChanges().subscribe(snapshot => {
-          var eventSellerUID = snapshot.payload.child(`Seller`).val();
-          var finalKey = this.kA[this.kA.length - this.kA.length + x];
-          var eventName = snapshot.payload.child(`Name`).val();
-          var eventPrice = snapshot.payload.child(`Price`).val();
-          var eventVenue = snapshot.payload.child(`Venue`).val();
-          var eventDate = snapshot.payload.child(`Date`).val();
-          var eventTime = snapshot.payload.child(`Time`).val();
-          var eventCreationDate = snapshot.payload.child(`Creation`).val();
-          var eventCustomerPayout = snapshot.payload.child(`Payout`).val();
-          var eventServiceCharge = snapshot.payload.child(`Charge`).val();
-          var reserved = snapshot.payload.child(`checkOutTime`).val();
-          var timeLeft = snapshot.payload.child(`reservationPerioid`).val();
-          var lats = snapshot.payload.child(`Lat`).val();
-          var longs = snapshot.payload.child(`Long`).val();
+          const eventSellerUID = snapshot.payload.child(`Seller`).val();
+          const finalKey = this.kA[this.kA.length - this.kA.length + x];
+          const eventName = snapshot.payload.child(`Name`).val();
+          const eventPrice = snapshot.payload.child(`Price`).val();
+          const eventVenue = snapshot.payload.child(`Venue`).val();
+          const eventDate = snapshot.payload.child(`Date`).val();
+          const eventTime = snapshot.payload.child(`Time`).val();
+          const eventCreationDate = snapshot.payload.child(`Creation`).val();
+          const eventCustomerPayout = snapshot.payload.child(`Payout`).val();
+          const eventServiceCharge = snapshot.payload.child(`Charge`).val();
+          const timeLeft = snapshot.payload.child(`reservationPerioid`).val();
+          const lats = snapshot.payload.child(`Lat`).val();
+          const longs = snapshot.payload.child(`Long`).val();
           const payoutAccount = snapshot.payload.child(`PayoutAccount`).val();
           const payoutSortCode = snapshot.payload.child(`PayoutSortCode`).val();
           this.items.push({
@@ -324,51 +310,51 @@ export class BuyPage {
     });
   }
 
-
-
-remove(){  
-var target = event.srcElement;
-var ticketId = target.parentElement.parentElement.children.item(1).innerHTML;
-console.log(ticketId);
-var ref = this.afDatabase.object(
-`ticketsInBasket/${this.currentUser}/${ticketId}`);
-ref.snapshotChanges().subscribe(snapshot => {
-  var eventSellerUID = snapshot.payload.child(`Seller`).val();
-  const eventName = snapshot.payload.child(`Name`).val();
-  const eventPrice = snapshot.payload.child(`Price`).val();
-  const eventVenue = snapshot.payload.child(`Venue`).val();
-  const eventDate = snapshot.payload.child(`Date`).val();
-  const eventTime = snapshot.payload.child(`Time`).val();
-  const eventCreationDate = snapshot.payload.child(`Creation`).val();
-  const eventCustomerPayout = snapshot.payload.child(`Payout`).val();
-  const eventServiceCharge = snapshot.payload.child(`Charge`).val();
-  const lats = snapshot.payload.child(`Lat`).val();
-  const longs = snapshot.payload.child(`Long`).val();
-  const payoutAccount = snapshot.payload.child(`PayoutAccount`).val();
-  const payoutSortCode = snapshot.payload.child(`PayoutSortCode`).val();
-  const downloadURL = snapshot.payload.child(`downloadURL`).val();
-  const interests = snapshot.payload.child(`interests`).val();
-    this.timedOutListings.push({
-      Name: eventName,
-      Venue: eventVenue,
-      Price: eventPrice,
-      Date: eventDate,
-      Time: eventTime,
-      Creation: eventCreationDate,
-      Seller: eventSellerUID,
-      Payout: eventCustomerPayout,
-      Charge: eventServiceCharge,
-      Lat: lats,
-      Long: longs,
-      PayoutAccount: payoutAccount,
-      PayoutSortCode: payoutSortCode,
-      downloadURL: downloadURL,
-      interests: interests
+  remove() {
+    var target = event.srcElement;
+    var ticketId = target.parentElement.parentElement.children.item(1)
+      .innerHTML;
+    console.log(ticketId);
+    var ref = this.afDatabase.object(
+      `ticketsInBasket/${this.currentUser}/${ticketId}`
+    );
+    ref.snapshotChanges().subscribe(snapshot => {
+      const eventSellerUID = snapshot.payload.child(`Seller`).val();
+      const eventName = snapshot.payload.child(`Name`).val();
+      const eventPrice = snapshot.payload.child(`Price`).val();
+      const eventVenue = snapshot.payload.child(`Venue`).val();
+      const eventDate = snapshot.payload.child(`Date`).val();
+      const eventTime = snapshot.payload.child(`Time`).val();
+      const eventCreationDate = snapshot.payload.child(`Creation`).val();
+      const eventCustomerPayout = snapshot.payload.child(`Payout`).val();
+      const eventServiceCharge = snapshot.payload.child(`Charge`).val();
+      const lats = snapshot.payload.child(`Lat`).val();
+      const longs = snapshot.payload.child(`Long`).val();
+      const payoutAccount = snapshot.payload.child(`PayoutAccount`).val();
+      const payoutSortCode = snapshot.payload.child(`PayoutSortCode`).val();
+      const downloadURL = snapshot.payload.child(`downloadURL`).val();
+      const interested = snapshot.payload.child(`interested`).val();
+      ref.remove().then(push => {
+        console.log(push);
+        this.afDatabase.list(`approvedTickets`).push({
+          Name: eventName,
+          Venue: eventVenue,
+          Price: eventPrice,
+          Date: eventDate,
+          Time: eventTime,
+          Creation: eventCreationDate,
+          Seller: eventSellerUID,
+          Payout: eventCustomerPayout,
+          Charge: eventServiceCharge,
+          Lat: lats,
+          Long: longs,
+          PayoutAccount: payoutAccount,
+          PayoutSortCode: payoutSortCode,
+          downloadURL: downloadURL,
+          interested:interested
+        });
+        this.items = [];
+      });
     });
-    this.afDatabase.database.ref(`approvedTickets/`).push(this.timedOutListings[0]);
-    console.log(this.timedOutListings);
-    this.afDatabase
-      .list(`ticketsInBasket/${this.currentUser}/${ticketId}`)
-      .remove();}
-)}
+  }
 }
