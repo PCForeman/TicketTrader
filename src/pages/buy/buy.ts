@@ -142,7 +142,7 @@ export class BuyPage {
      this.belowTen = "";
      if (this.minutesLeft <= 0 && this.secondsLeft <= 1) {
      this.timeIsUp();
-      this.checkOutTimer();
+     this.checkOutTimer();
     }
     console.log(minutes, seconds);
   }
