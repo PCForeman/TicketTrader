@@ -44,6 +44,9 @@ var PaymentModalPageModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_aes_256__ = __webpack_require__(343);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_stripe__ = __webpack_require__(345);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -92,8 +95,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
+
+
 var PaymentModalPage = /** @class */ (function () {
-    function PaymentModalPage(navParams, aCtrl, vCtrl, afDatabase, aes, toast, navCtrl) {
+    function PaymentModalPage(navParams, aCtrl, vCtrl, afDatabase, aes, toast, navCtrl, stripe, auth) {
         this.navParams = navParams;
         this.aCtrl = aCtrl;
         this.vCtrl = vCtrl;
@@ -101,21 +106,68 @@ var PaymentModalPage = /** @class */ (function () {
         this.aes = aes;
         this.toast = toast;
         this.navCtrl = navCtrl;
+        this.stripe = stripe;
+        this.auth = auth;
     }
     PaymentModalPage.prototype.ionViewWillLoad = function () {
+        this.userId = this.auth.auth.currentUser.uid;
+        var paymentApiKey = this.stripe.setPublishableKey('pk_test_1bm2qsK0nhDrUlYHBhwITuLc003SgctrKa');
         var ticket = this.navParams.get("ticket");
         this.listingData = ticket;
+        this.minutes = this.listingData.mins;
+        this.seconds = this.listingData.seconds;
         console.log(ticket);
         this.useExistingCard();
     };
+    PaymentModalPage.prototype.validateCard = function () {
+        var _this = this;
+        var card = {
+            number: '4242424242424242',
+            expMonth: 12,
+            expYear: 2020,
+            cvc: '220'
+        };
+        console.log(card);
+        this.stripe.createCardToken(card).then(function (payment) {
+            console.log(payment.card, payment.created, payment.id, payment.type);
+            var paymentObj = {
+                card: payment.card,
+                created: payment.created,
+                paymentId: payment.id,
+                type: payment.type,
+                amount: _this.listingData.payout,
+                account: _this.listingData.payoutAccount,
+                sortcode: _this.listingData.sortcode,
+                seller: _this.listingData.sellerId,
+                buyer: _this.userId
+            };
+            console.log(paymentObj);
+            _this.afDatabase.list("payments/" + _this.listingData.ticketRef).push(paymentObj)
+                .then(function (buyer) {
+                console.log(buyer);
+                _this.afDatabase.list("bought/" + _this.userId).push(_this.listingData);
+            }).then(function (seller) {
+                _this.afDatabase.list("sold/" + _this.listingData.sellerId).push(_this.listingData);
+                console.log(seller);
+            });
+        }).catch(function (error) {
+            console.log(error);
+        });
+    };
     PaymentModalPage.prototype.clearForm = function () {
-        this.cardName = "";
-        this.CVC = "";
-        this.cardNo = "";
-        this.expiry = "";
+        this.cardName = null;
+        this.CVC = null;
+        this.cardNo = null;
+        this.expiry = null;
     };
     PaymentModalPage.prototype.close = function () {
         this.vCtrl.dismiss();
+    };
+    PaymentModalPage.prototype.onSuccess = function (tokenId) {
+        console.log('Success', tokenId);
+    };
+    PaymentModalPage.prototype.onFailure = function (error) {
+        console.log('Error getting card token', error);
     };
     PaymentModalPage.prototype.useExistingCard = function () {
         var _this = this;
@@ -333,7 +385,7 @@ var PaymentModalPage = /** @class */ (function () {
     };
     PaymentModalPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-payment-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n    <ion-buttons right>\n\n      <button ion-button (click)="close()">Close</button>\n\n    </ion-buttons>\n\n    <ion-title position text-center>Pay</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-list class="paymentList" position text-center>\n\n    <ion-title text-center>\n\n      Order Summary\n\n    </ion-title>\n\n    {{ listingData.artist }}<br />\n\n    {{ listingData.location }}<br />\n\n    {{ listingData.date }} {{ listingData.time }}\n\n    <div class="ngFor">\n\n      <ion-item>\n\n        <ion-label position text-center>Name on card</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n          text-center\n\n          placeholder="Enter Cardholders name"\n\n          [(ngModel)]="cardName"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label position text-center>16 Digit card number</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n        text-center\n\n          placeholder="Enter Card Number"\n\n          [(ngModel)]="cardNo"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label position text-center>Expiry date</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n        text-center\n\n          placeholder="Enter Expiry"\n\n          [(ngModel)]="expiry"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label position text-center>CVC</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n        text-center\n\n          placeholder="Enter CVC"\n\n          [(ngModel)]="CVC"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <button class="paymentModalButtons" block color="midnight-blue" ion-button (click)="confirmPayment()">\n\n        Pay {{ listingData.price }}\n\n      </button>\n\n\n\n    </div>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/
+            selector: "page-payment-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n      <ion-buttons left>\n\n          <button ion-button>{{this.minutes}}:{{this.seconds}}</button>\n\n        </ion-buttons>\n\n    <ion-buttons right>\n\n      <button ion-button (click)="close()">Close</button>\n\n    </ion-buttons>\n\n    <ion-title position text-center>Pay</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-list class="paymentList" position text-center>\n\n    <ion-title text-center>\n\n      Order Summary\n\n    </ion-title>\n\n    {{ listingData.artist }}<br />\n\n    {{ listingData.location }}<br />\n\n    {{ listingData.date }} {{ listingData.time }}\n\n    <div class="ngFor">\n\n      <ion-item>\n\n        <ion-label position text-center>Name on card</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n          text-center\n\n          placeholder="Enter Cardholders name"\n\n          [(ngModel)]="cardName"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label position text-center>16 Digit card number</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n        text-center\n\n          placeholder="Enter Card Number"\n\n          [(ngModel)]="cardNo"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label position text-center>Expiry date</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n        text-center\n\n          placeholder="Enter Expiry"\n\n          [(ngModel)]="expiry"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label position text-center>CVC</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n        text-center\n\n          placeholder="Enter CVC"\n\n          [(ngModel)]="CVC"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <button class="paymentModalButtons" block color="midnight-blue" ion-button (click)="validateCard()">\n\n        Pay {{ listingData.price }}\n\n      </button>\n\n\n\n    </div>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
@@ -341,7 +393,9 @@ var PaymentModalPage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_aes_256__["a" /* AES256 */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]])
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_4__ionic_native_stripe__["a" /* Stripe */],
+            __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["AngularFireAuth"]])
     ], PaymentModalPage);
     return PaymentModalPage;
 }());

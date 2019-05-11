@@ -148,12 +148,16 @@ export class HomePage {
             icon: 'https://firebasestorage.googleapis.com/v0/b/dissy-c7abe.appspot.com/o/Webp.net-resizeimage%20(1).png?alt=media&token=689f51f3-e576-49bd-abc2-36b892a58fa6'
           });
           let content =
+            "<div class='infoWindowDiv'>" +           
             "<h1 hidden>" +
             ticket.Key +
             "</h1>" +
             "<br>" +
             " " +
             ("<h2 hidden>" + ticket.index + "</h2>") +
+            "<br>" +
+            " " +
+            ("<h3 hidden>" + ticket.Seller + "</h3>") +
             "<br>" +
             " " +
             ticket.Name +
@@ -171,13 +175,11 @@ export class HomePage {
             "£" +
             ticket.Price +
             "<br>" +
-            " " +
-            "<br>" + 
             "People interested:" + " " +
             ticket.interested +
             "<br>" +
             " " +
-            '<button class="infoWindowButton" <button onClick="window.ionicPageRef.zone.run(function () { window.ionicPageRef.component.buyTickets()})">Buy this ticket?</button>';
+            '<button class="infoWindowButton" <button onClick="window.ionicPageRef.zone.run(function () { window.ionicPageRef.component.buyTickets()})">Buy this ticket?</button></div>';
           this.addInfoWindow(marker, content);
         });
       }
@@ -185,22 +187,18 @@ export class HomePage {
   }
 
   buyTickets() {
-    var timeClicked = Date.now();
-    var checkOutBy = timeClicked + 600000;
+    const temp = [];
+    const target = event.srcElement;
     const userId = this.afAuth.auth.currentUser.uid;
-    var temp = [];
-    var target = event.srcElement;
-    var ticketClickedId = target.parentElement.children.item(0).innerHTML.toString();
-    console.log(ticketClickedId);
-    var index = target.parentElement.children.item(2).innerHTML.toString();
-      if (userId == ticketClickedId) {
-      this.toast
-        .create({
-          message: "This is your listing.",
-          duration: 2000,
-          position: "Middle"
-        }).present();
-      } else if (userId != ticketClickedId) {
+    const sellerId = target.parentElement.children.item(4).innerHTML;
+    const ticketClickedId = target.parentElement.children.item(0).innerHTML.toString();
+    const index = target.parentElement.children.item(2).innerHTML.toString();
+    console.log(userId, sellerId, ticketClickedId, index);
+      if (userId == sellerId) {
+      this.yourTicketMessage();  
+      }else{
+      const timeClicked = Date.now()
+      const checkOutBy = timeClicked + 600000;
       temp.push(this.items[index]);
       temp.filter(v => {
         var tempArray = [
@@ -231,6 +229,15 @@ export class HomePage {
        this.navCtrl.push('BuyPage');
       });
     }
+  }
+
+  yourTicketMessage() {
+    this.toast
+    .create({
+      message: "This is your listing.",
+      duration: 2000,
+      position: "Middle"
+    }).present();
   }
 
   refresh(): void {

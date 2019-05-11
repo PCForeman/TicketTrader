@@ -24,6 +24,7 @@ MERGED from [com.google.android.gms:play-services-tasks:15.0.1] C:\Users\paulf\.
 MERGED from [com.google.android.gms:play-services-basement:15.0.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\play-services-basement-15.0.1.aar\8705f2ac1036969c94e7de53ffa442c8\AndroidManifest.xml:17:1-28:12
 MERGED from [com.android.support:support-v4:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\a6693fc40f026e1a878f16354737ecec\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\1d2300b0ea2d4d6740761cac27d6af3e\AndroidManifest.xml:17:1-22:12
+MERGED from [com.stripe:stripe-android:4.1.2] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\stripe-android-4.1.2.aar\09de41bfe49df713dfdb044ca21fada4\AndroidManifest.xml:2:1-11:12
 MERGED from [com.android.support:appcompat-v7:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\2fa778c77a6bf0dc4bf3d8ff05633e23\AndroidManifest.xml:17:1-31:12
 MERGED from [com.android.support:animated-vector-drawable:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.4.0.aar\36988c4368e835d272ad2a9870bf0478\AndroidManifest.xml:17:1-28:12
 MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\87670be3c912d8fe91e6b518596933de\AndroidManifest.xml:17:1-22:12
@@ -189,6 +190,8 @@ MERGED from [com.android.support:support-v4:27.1.1] C:\Users\paulf\.gradle\cache
 MERGED from [com.android.support:support-v4:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\a6693fc40f026e1a878f16354737ecec\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\1d2300b0ea2d4d6740761cac27d6af3e\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\1d2300b0ea2d4d6740761cac27d6af3e\AndroidManifest.xml:20:5-44
+MERGED from [com.stripe:stripe-android:4.1.2] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\stripe-android-4.1.2.aar\09de41bfe49df713dfdb044ca21fada4\AndroidManifest.xml:7:5-9:41
+MERGED from [com.stripe:stripe-android:4.1.2] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\stripe-android-4.1.2.aar\09de41bfe49df713dfdb044ca21fada4\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\2fa778c77a6bf0dc4bf3d8ff05633e23\AndroidManifest.xml:21:5-23:78
 MERGED from [com.android.support:appcompat-v7:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.4.0.aar\2fa778c77a6bf0dc4bf3d8ff05633e23\AndroidManifest.xml:21:5-23:78
 MERGED from [com.android.support:animated-vector-drawable:25.4.0] C:\Users\paulf\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.4.0.aar\36988c4368e835d272ad2a9870bf0478\AndroidManifest.xml:20:5-44

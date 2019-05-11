@@ -584,6 +584,14 @@ module.exports = [
       "cordova.plugins.SitewaertsDocumentViewer",
       "SitewaertsDocumentViewer"
     ]
+  },
+  {
+    "id": "cordova-plugin-stripe.stripe",
+    "file": "plugins/cordova-plugin-stripe/www/CordovaStripe.js",
+    "pluginId": "cordova-plugin-stripe",
+    "clobbers": [
+      "cordova.plugins.stripe"
+    ]
   }
 ];
 module.exports.metadata = 
@@ -609,7 +617,8 @@ module.exports.metadata =
   "cordova-plugin-aes256-encryption": "1.2.1",
   "cordova-plugin-android-permissions": "1.0.0",
   "cordova-plugin-file-transfer": "1.7.1",
-  "cordova-plugin-document-viewer": "0.9.10"
+  "cordova-plugin-document-viewer": "0.9.10",
+  "cordova-plugin-stripe": "1.5.3"
 };
 // BOTTOM OF METADATA
 });

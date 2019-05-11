@@ -188,6 +188,10 @@
             {
               "xml": "<feature name=\"SitewaertsDocumentViewer\"><param name=\"android-package\" value=\"de.sitewaerts.cordova.documentviewer.DocumentViewerPlugin\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"CordovaStripe\"><param name=\"android-package\" value=\"com.zyramedia.cordova.stripe.CordovaStripe\" /></feature>",
+              "count": 1
             }
           ],
           "/widget": [
@@ -355,6 +359,9 @@
       "PACKAGE_NAME": "io.ionic.starter"
     },
     "cordova-plugin-document-viewer": {
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-stripe": {
       "PACKAGE_NAME": "io.ionic.starter"
     }
   },
@@ -944,6 +951,14 @@
         "cordova.plugins.SitewaertsDocumentViewer",
         "SitewaertsDocumentViewer"
       ]
+    },
+    {
+      "id": "cordova-plugin-stripe.stripe",
+      "file": "plugins/cordova-plugin-stripe/www/CordovaStripe.js",
+      "pluginId": "cordova-plugin-stripe",
+      "clobbers": [
+        "cordova.plugins.stripe"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -967,6 +982,7 @@
     "cordova-plugin-aes256-encryption": "1.2.1",
     "cordova-plugin-android-permissions": "1.0.0",
     "cordova-plugin-file-transfer": "1.7.1",
-    "cordova-plugin-document-viewer": "0.9.10"
+    "cordova-plugin-document-viewer": "0.9.10",
+    "cordova-plugin-stripe": "1.5.3"
   }
 }

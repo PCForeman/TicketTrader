@@ -1,4 +1,4 @@
-webpackJsonp([15],{
+webpackJsonp([16],{
 
 /***/ 121:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -209,7 +209,7 @@ var LoginPage = /** @class */ (function () {
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-login",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\login\login.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-title position text-center>Login</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-item>\n    <ion-label floating>Enter your email address</ion-label>\n    <ion-input type="text" [(ngModel)]="user.email"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Enter your password</ion-label>\n    <ion-input type="password" [(ngModel)]="user.password"></ion-input>\n  </ion-item>\n\n  <button\n    ion-button\n    id="btnLogin"\n    class="loginButton"\n    color="midnight-blue"\n    block\n    (click)="loginLogin(user)"\n  >\n    Login\n  </button>\n  <button\n    ion-button\n    id="btnReg"\n    class="loginButton"\n    color="midnight-blue"\n    block\n    (click)="loginRegister()"\n  >\n    Need an account?\n  </button>\n</ion-content>\n\n<div class id="footer">\n  <ion-footer>\n    <ion-toolbar color="midnight-blue">\n      <ion-title position text-center>TicketTrader</ion-title>\n    </ion-toolbar>\n  </ion-footer>\n</div>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\login\login.html"*/
+            selector: "page-login",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\login\login.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-title position text-center>Login</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-item>\n    <ion-label floating>Enter your email address</ion-label>\n    <ion-input type="text" [(ngModel)]="user.email"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Enter your password</ion-label>\n    <ion-input type="password" [(ngModel)]="user.password"></ion-input>\n  </ion-item>\n<br>\n  <button\n  class="loginButton"\n    ion-button\n    id="btnLogin"\n    color="midnight-blue"\n    (click)="loginLogin(user)"\n  >\n    Login\n  </button>\n  <button\n    class="loginButton"\n    ion-button\n    id="btnReg"\n    color="midnight-blue"\n    (click)="loginRegister()"\n  >\n    Need an account?\n  </button>\n\n  <img height="220" src="https://firebasestorage.googleapis.com/v0/b/dissy-c7abe.appspot.com/o/received_1965782907049858.jpeg?alt=media&token=847a23a2-0a59-4698-af2c-5b8bcb7939c0">\n</ion-content>\n\n<div class id="footer">\n  <ion-footer>\n    <ion-toolbar color="midnight-blue">\n      <ion-title position text-center>TicketTrader</ion-title>\n    </ion-toolbar>\n  </ion-footer>\n</div>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\login\login.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["AngularFireDatabase"],
@@ -441,31 +441,31 @@ webpackEmptyAsyncContext.id = 230;
 var map = {
 	"../pages/account/account.module": [
 		630,
-		12
+		13
 	],
 	"../pages/add-card-modal/add-card-modal.module": [
+		628,
+		12
+	],
+	"../pages/admin-view/admin-view.module": [
 		629,
 		11
 	],
-	"../pages/admin-view/admin-view.module": [
-		628,
-		10
-	],
 	"../pages/admin/admin.module": [
-		631,
-		14
+		632,
+		15
 	],
 	"../pages/admin2/admin2.module": [
-		632,
-		9
+		631,
+		10
 	],
 	"../pages/admin3/admin3.module": [
 		633,
-		8
+		9
 	],
 	"../pages/buy/buy.module": [
 		634,
-		7
+		8
 	],
 	"../pages/home/home.module": [
 		298
@@ -474,35 +474,39 @@ var map = {
 		299
 	],
 	"../pages/modal-account/modal-account.module": [
+		635,
+		7
+	],
+	"../pages/order-history/order-history.module": [
 		636,
 		6
 	],
-	"../pages/order-history/order-history.module": [
+	"../pages/page/page.module": [
 		637,
 		5
 	],
-	"../pages/page/page.module": [
-		635,
+	"../pages/payment-modal/payment-modal.module": [
+		638,
 		4
 	],
-	"../pages/payment-modal/payment-modal.module": [
+	"../pages/register/register.module": [
+		639,
+		14
+	],
+	"../pages/select-location-modal/select-location-modal.module": [
 		640,
 		3
 	],
-	"../pages/register/register.module": [
-		638,
-		13
-	],
-	"../pages/select-location-modal/select-location-modal.module": [
-		639,
-		2
-	],
 	"../pages/sell/sell.module": [
 		641,
-		1
+		2
 	],
 	"../pages/tickets/tickets.module": [
 		642,
+		1
+	],
+	"../pages/view-image-modal/view-image-modal.module": [
+		643,
 		0
 	]
 };
@@ -650,7 +654,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 var AdminPage = /** @class */ (function () {
-    function AdminPage(navCtrl, navParams, afAuth, ldCtrl, fbDatabase, toast, app) {
+    function AdminPage(navCtrl, navParams, afAuth, ldCtrl, fbDatabase, toast, app, modal) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.afAuth = afAuth;
@@ -658,6 +662,7 @@ var AdminPage = /** @class */ (function () {
         this.fbDatabase = fbDatabase;
         this.toast = toast;
         this.app = app;
+        this.modal = modal;
         this.items = [];
         this.kA = [];
         this.itemSearch = [];
@@ -667,6 +672,21 @@ var AdminPage = /** @class */ (function () {
     AdminPage.prototype.ionViewDidLoad = function () {
         this.retrieveUnaprovedTickets();
         this.copyItems();
+    };
+    AdminPage.prototype.openImage = function () {
+        var target = event.srcElement;
+        var imageUrl = target.parentElement.parentElement.children.item(7)
+            .innerHTML;
+        console.log(imageUrl);
+        var myModalOpts = {
+            enableBackdropDismiss: true,
+            showBackdrop: false
+        };
+        var imageToView = {
+            url: imageUrl
+        };
+        var myModal = this.modal.create("ViewImageModalPage", { image: imageToView }, myModalOpts);
+        myModal.present();
     };
     AdminPage.prototype.refresh = function () {
         window.location.reload();
@@ -741,6 +761,7 @@ var AdminPage = /** @class */ (function () {
                     var longs = snapshot.payload.child("Long").val();
                     var paymentAccount = snapshot.payload.child("PayoutAccount").val();
                     var paymentSort = snapshot.payload.child("PaySortCode").val();
+                    var interested = snapshot.payload.child("interested").val();
                     var eventCreationDate = snapshot.payload
                         .child("CreationDate")
                         .val();
@@ -769,7 +790,8 @@ var AdminPage = /** @class */ (function () {
                         Long: longs,
                         PayoutAccount: paymentAccount,
                         PayoutSortCode: paymentSort,
-                        downloadURL: downloadURL
+                        downloadURL: downloadURL,
+                        interested: interested
                     });
                     x++;
                 });
@@ -804,7 +826,8 @@ var AdminPage = /** @class */ (function () {
                                 Lat: v.Lat,
                                 PayoutAccount: v.PayoutAccount,
                                 PayoutSortCode: v.PayoutSortCode,
-                                downloadURL: v.downloadURL
+                                downloadURL: v.downloadURL,
+                                interested: v.interested
                             }
                         ];
                         this.fbDatabase.list("approvedTickets/").push(temp[0]);
@@ -847,7 +870,6 @@ var AdminPage = /** @class */ (function () {
         var ticketClicked = parseInt(target.parentElement.parentElement.children.item(0).innerHTML.valueOf()) - 1;
         console.log(ticketClicked);
         temp.push(this.items[ticketClicked]);
-        //this.items.splice(ticketClicked);
         temp.filter(function (v) { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -876,7 +898,7 @@ var AdminPage = /** @class */ (function () {
                                     " " +
                                     temp[0].Key +
                                     " " +
-                                    "has been approved and moved to active listings",
+                                    "has been rejected.",
                                 position: "top",
                                 duration: 2000
                             })
@@ -907,7 +929,7 @@ var AdminPage = /** @class */ (function () {
     };
     AdminPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-admin",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin\admin.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Pending listings</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <ion-list>\n    <div\n      class="ngDivAdmin"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h2 position text-center>{{ item.Key }}</h2>\n      <h3 position text-center>{{ item.Name }}</h3>\n      <h4 position text-center>Venue: {{ item.Venue }}</h4>\n      <h5 position text-center>Price: £{{ item.Price }}</h5>\n      <h6 position text-center>Date: {{ item.Date }}</h6>\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n      <h6 hidden>{{ item.downloadURL }}</h6>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="light"\n        size="large"\n        (click)="accept(index)"> <ion-icon name="thumbs-up"></ion-icon>\n      </button>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="light"\n        size="large"\n        (click)="reject(index)"> <ion-icon name="thumbs-down"></ion-icon>\n      </button>\n      <button\n      [id]="i"\n      class="adminButtons"\n      ion-button\n      icon-only\n      color="dark"\n      size="large"\n      (click)="viewTicket()"><ion-icon name="image"></ion-icon>\n    </button>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin\admin.html"*/
+            selector: "page-admin",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin\admin.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Pending listings</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <ion-list>\n    <div\n      class="ngDivAdmin"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h2 position text-center>{{ item.Key }}</h2>\n      <h3 position text-center>{{ item.Name }}</h3>\n      <h4 position text-center>Venue: {{ item.Venue }}</h4>\n      <h5 position text-center>Price: £{{ item.Price }}</h5>\n      <h6 position text-center>Date: {{ item.Date }}</h6>\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n      <h6 hidden>{{ item.downloadURL }}</h6>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="midnight-blue"\n        size="large"\n        (click)="accept(index)"> <ion-icon name="thumbs-up"></ion-icon>\n      </button>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="midnight-blue"\n        size="large"\n        (click)="reject(index)"> <ion-icon name="thumbs-down"></ion-icon>\n      </button>\n      <button\n      [id]="i"\n      class="imageButton"\n      ion-button\n      icon-only\n      color="midnight-blue"\n      size="large"\n      (click)="openImage()"><ion-icon name="image"></ion-icon>\n    </button>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin\admin.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */],
@@ -915,7 +937,8 @@ var AdminPage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* LoadingController */],
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* App */]])
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* App */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* ModalController */]])
     ], AdminPage);
     return AdminPage;
 }());
@@ -1012,23 +1035,24 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_7_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_15__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/admin-view/admin-view.module#AdminViewPageModule', name: 'AdminViewPage', segment: 'admin-view', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/add-card-modal/add-card-modal.module#AddCardModalPageModule', name: 'AddCardModalPage', segment: 'add-card-modal', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/admin-view/admin-view.module#AdminViewPageModule', name: 'AdminViewPage', segment: 'admin-view', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/account/account.module#AccountPageModule', name: 'AccountPage', segment: 'account', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/admin/admin.module#AdminPageModule', name: 'AdminPage', segment: 'admin', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin2/admin2.module#Admin2PageModule', name: 'Admin2Page', segment: 'admin2', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/admin/admin.module#AdminPageModule', name: 'AdminPage', segment: 'admin', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/admin3/admin3.module#Admin3PageModule', name: 'Admin3Page', segment: 'admin3', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/buy/buy.module#BuyPageModule', name: 'BuyPage', segment: 'buy', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/page/page.module#PageModule', name: 'Page', segment: 'page', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/modal-account/modal-account.module#ModalAccountPageModule', name: 'ModalAccountPage', segment: 'modal-account', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/order-history/order-history.module#OrderHistoryPageModule', name: 'OrderHistoryPage', segment: 'order-history', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/page/page.module#PageModule', name: 'Page', segment: 'page', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/payment-modal/payment-modal.module#PaymentModalPageModule', name: 'PaymentModalPage', segment: 'payment-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/select-location-modal/select-location-modal.module#SelectLocationModalPageModule', name: 'SelectLocationModalPage', segment: 'select-location-modal', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/payment-modal/payment-modal.module#PaymentModalPageModule', name: 'PaymentModalPage', segment: 'payment-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sell/sell.module#SellPageModule', name: 'SellPage', segment: 'sell', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/tickets/tickets.module#TicketsPageModule', name: 'TicketsPage', segment: 'tickets', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/tickets/tickets.module#TicketsPageModule', name: 'TicketsPage', segment: 'tickets', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/view-image-modal/view-image-modal.module#ViewImageModalPageModule', name: 'ViewImageModalPage', segment: 'view-image-modal', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_18_angularfire2__["AngularFireModule"].initializeApp(__WEBPACK_IMPORTED_MODULE_16__app_firebase_config__["a" /* FbConfig */]),
@@ -1223,6 +1247,7 @@ var HomePage = /** @class */ (function () {
                     var eventServiceCharge = snapshot.payload.child("Charge").val();
                     var lats = snapshot.payload.child("Lat").val();
                     var longs = snapshot.payload.child("Long").val();
+                    var interested = snapshot.payload.child("interested").val();
                     _this.items.push({
                         index: x,
                         Key: finalKey,
@@ -1236,7 +1261,8 @@ var HomePage = /** @class */ (function () {
                         Payout: eventCustomerPayout,
                         Charge: eventServiceCharge,
                         Lat: lats,
-                        Long: longs
+                        Long: longs,
+                        interested: interested
                     });
                     x++;
                 });
@@ -1251,12 +1277,16 @@ var HomePage = /** @class */ (function () {
                         position: latLng,
                         icon: 'https://firebasestorage.googleapis.com/v0/b/dissy-c7abe.appspot.com/o/Webp.net-resizeimage%20(1).png?alt=media&token=689f51f3-e576-49bd-abc2-36b892a58fa6'
                     });
-                    var content = "<h1 hidden>" +
+                    var content = "<div class='infoWindowDiv'>" +
+                        "<h1 hidden>" +
                         ticket.Key +
                         "</h1>" +
                         "<br>" +
                         " " +
                         ("<h2 hidden>" + ticket.index + "</h2>") +
+                        "<br>" +
+                        " " +
+                        ("<h3 hidden>" + ticket.Seller + "</h3>") +
                         "<br>" +
                         " " +
                         ticket.Name +
@@ -1274,9 +1304,11 @@ var HomePage = /** @class */ (function () {
                         "£" +
                         ticket.Price +
                         "<br>" +
-                        " " +
+                        "People interested:" + " " +
+                        ticket.interested +
                         "<br>" +
-                        '<button class="infoWindowButton" <button onClick="window.ionicPageRef.zone.run(function () { window.ionicPageRef.component.buyTickets()})">Buy this ticket?</button>';
+                        " " +
+                        '<button class="infoWindowButton" <button onClick="window.ionicPageRef.zone.run(function () { window.ionicPageRef.component.buyTickets()})">Buy this ticket?</button></div>';
                     _this.addInfoWindow(marker, content);
                 });
             }
@@ -1284,23 +1316,19 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.buyTickets = function () {
         var _this = this;
-        var timeClicked = Date.now();
-        var checkOutBy = timeClicked + 600000;
-        var userId = this.afAuth.auth.currentUser.uid;
         var temp = [];
         var target = event.srcElement;
+        var userId = this.afAuth.auth.currentUser.uid;
+        var sellerId = target.parentElement.children.item(4).innerHTML;
         var ticketClickedId = target.parentElement.children.item(0).innerHTML.toString();
-        console.log(ticketClickedId);
         var index = target.parentElement.children.item(2).innerHTML.toString();
-        if (userId == ticketClickedId) {
-            this.toast
-                .create({
-                message: "This is your listing.",
-                duration: 2000,
-                position: "Middle"
-            }).present();
+        console.log(userId, sellerId, ticketClickedId, index);
+        if (userId == sellerId) {
+            this.yourTicketMessage();
         }
-        else if (userId != ticketClickedId) {
+        else {
+            var timeClicked_1 = Date.now();
+            var checkOutBy_1 = timeClicked_1 + 600000;
             temp.push(this.items[index]);
             temp.filter(function (v) {
                 var tempArray = [
@@ -1315,10 +1343,11 @@ var HomePage = /** @class */ (function () {
                         Payout: v.Payout,
                         Creation: v.Creation,
                         Charge: v.Charge,
-                        checkOutTime: timeClicked,
-                        reservationPerioid: checkOutBy,
+                        checkOutTime: timeClicked_1,
+                        reservationPerioid: checkOutBy_1,
                         Lat: v.Lat,
-                        Long: v.Long
+                        Long: v.Long,
+                        interested: v.interested
                     }
                 ];
                 var checkOutRef = _this.afAuth.auth.currentUser.uid;
@@ -1330,6 +1359,14 @@ var HomePage = /** @class */ (function () {
                 _this.navCtrl.push('BuyPage');
             });
         }
+    };
+    HomePage.prototype.yourTicketMessage = function () {
+        this.toast
+            .create({
+            message: "This is your listing.",
+            duration: 2000,
+            position: "Middle"
+        }).present();
     };
     HomePage.prototype.refresh = function () {
         window.location.reload();

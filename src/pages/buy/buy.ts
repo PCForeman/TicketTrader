@@ -75,7 +75,7 @@ export class BuyPage {
           .remove()
           .then(res => {
             console.log(res);
-            this.afDatabase.database.ref(`approvedTickets`).push({
+            this.afDatabase.list(`approvedTickets`).push({
               Name: eventName,
               Venue: eventVenue,
               Price: eventPrice,
@@ -140,7 +140,7 @@ export class BuyPage {
      this.secondsLeft = this.secondsLeft + 59;
      this.minutesLeft = this.minutesLeft - 1;
      this.belowTen = "";
-     if (this.minutesLeft <= 0 && this.secondsLeft <= 1) {
+     if (this.minutesLeft < 0 && this.secondsLeft < 2) {
      this.timeIsUp();
      this.checkOutTimer();
     }
@@ -192,6 +192,9 @@ export class BuyPage {
     var sTime = target.parentElement.parentElement.children
       .item(7)
       .innerHTML.substr(5);
+      var sURL = target.parentElement.parentElement.children
+      .item(14)
+      .innerHTML.substr(0);
     var temp = [];
     var ticketClicked =
       parseInt(
@@ -215,7 +218,8 @@ export class BuyPage {
           Creation: v.Creation,
           Charge: v.Charge,
           PayoutAccount: v.PayoutAccount,
-          PayoutSortCode: v.PayoutSortCode
+          PayoutSortCode: v.PayoutSortCode,
+          downloadURL: sURL
         }
       ];
       console.log(tempArray);
@@ -239,7 +243,10 @@ export class BuyPage {
       lat: lat,
       long: long,
       payout: sPayout,
-      charge: sCharge
+      charge: sCharge,
+      downloadURL: sURL,
+      mins: this.minutesLeft,
+      seconds: this.secondsLeft
     };
     const myModal = this.modal.create(
       "PaymentModalPage",

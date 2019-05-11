@@ -272,6 +272,7 @@ dependencies {
     compile "com.android.support:support-v4:25.+"
     compile "com.android.support:appcompat-v7:25.+"
     compile "com.android.support:support-v4:27+"
+    compile "com.stripe:stripe-android:4.1.2"
     // SUB-PROJECT DEPENDENCIES END
 }
 

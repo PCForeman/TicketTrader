@@ -498,11 +498,11 @@ var map = {
 		3
 	],
 	"../pages/sell/sell.module": [
-		641,
+		642,
 		2
 	],
 	"../pages/tickets/tickets.module": [
-		642,
+		641,
 		1
 	],
 	"../pages/view-image-modal/view-image-modal.module": [
@@ -534,7 +534,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePageModule", function() { return HomePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home__ = __webpack_require__(598);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home__ = __webpack_require__(599);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -947,13 +947,13 @@ var AdminPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 349:
+/***/ 350:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(350);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(470);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(351);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(471);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_take__ = __webpack_require__(625);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_take___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_take__);
 
@@ -964,7 +964,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 470:
+/***/ 471:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -972,30 +972,30 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__ = __webpack_require__(231);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_google_maps__ = __webpack_require__(478);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_google_maps__ = __webpack_require__(479);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__ = __webpack_require__(233);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(234);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_toast__ = __webpack_require__(481);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_toast__ = __webpack_require__(482);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_document_viewer___ = __webpack_require__(621);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_file__ = __webpack_require__(346);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_file_path__ = __webpack_require__(347);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_home_home_module__ = __webpack_require__(298);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_login_login__ = __webpack_require__(121);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_login_login_module__ = __webpack_require__(299);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_register_register__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__app_component__ = __webpack_require__(622);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__app_firebase_config__ = __webpack_require__(623);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_aes_256__ = __webpack_require__(343);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_angularfire2__ = __webpack_require__(624);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18_angularfire2__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angularfire2_storage__ = __webpack_require__(348);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19_angularfire2_storage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_angularfire2_database__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_angularfire2_auth__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_native_android_permissions___ = __webpack_require__(345);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_file__ = __webpack_require__(347);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_file_path__ = __webpack_require__(348);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_home_home_module__ = __webpack_require__(298);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_login_login__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_login_login_module__ = __webpack_require__(299);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_register_register__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__app_component__ = __webpack_require__(622);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__app_firebase_config__ = __webpack_require__(623);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_aes_256__ = __webpack_require__(343);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angularfire2__ = __webpack_require__(624);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17_angularfire2__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_angularfire2_storage__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18_angularfire2_storage__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angularfire2_database__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19_angularfire2_database__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_angularfire2_auth__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20_angularfire2_auth__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_android_permissions___ = __webpack_require__(346);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_native_stripe__ = __webpack_require__(345);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1030,10 +1030,10 @@ var AppModule = /** @class */ (function () {
     }
     AppModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [__WEBPACK_IMPORTED_MODULE_15__app_component__["a" /* MyApp */], __WEBPACK_IMPORTED_MODULE_14__pages_register_register__["a" /* RegisterPage */]],
+            declarations: [__WEBPACK_IMPORTED_MODULE_14__app_component__["a" /* MyApp */], __WEBPACK_IMPORTED_MODULE_13__pages_register_register__["a" /* RegisterPage */]],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
-                __WEBPACK_IMPORTED_MODULE_7_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_15__app_component__["a" /* MyApp */], {}, {
+                __WEBPACK_IMPORTED_MODULE_7_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_14__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/account/account.module#AccountPageModule', name: 'AccountPage', segment: 'account', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/add-card-modal/add-card-modal.module#AddCardModalPageModule', name: 'AddCardModalPage', segment: 'add-card-modal', priority: 'low', defaultHistory: [] },
@@ -1050,30 +1050,30 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/payment-modal/payment-modal.module#PaymentModalPageModule', name: 'PaymentModalPage', segment: 'payment-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/register/register.module#RegisterPageModule', name: 'RegisterPage', segment: 'register', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/select-location-modal/select-location-modal.module#SelectLocationModalPageModule', name: 'SelectLocationModalPage', segment: 'select-location-modal', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/sell/sell.module#SellPageModule', name: 'SellPage', segment: 'sell', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/tickets/tickets.module#TicketsPageModule', name: 'TicketsPage', segment: 'tickets', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/sell/sell.module#SellPageModule', name: 'SellPage', segment: 'sell', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/view-image-modal/view-image-modal.module#ViewImageModalPageModule', name: 'ViewImageModalPage', segment: 'view-image-modal', priority: 'low', defaultHistory: [] }
                     ]
                 }),
-                __WEBPACK_IMPORTED_MODULE_18_angularfire2__["AngularFireModule"].initializeApp(__WEBPACK_IMPORTED_MODULE_16__app_firebase_config__["a" /* FbConfig */]),
-                __WEBPACK_IMPORTED_MODULE_13__pages_login_login_module__["LoginPageModule"],
-                __WEBPACK_IMPORTED_MODULE_11__pages_home_home_module__["HomePageModule"]
+                __WEBPACK_IMPORTED_MODULE_17_angularfire2__["AngularFireModule"].initializeApp(__WEBPACK_IMPORTED_MODULE_15__app_firebase_config__["a" /* FbConfig */]),
+                __WEBPACK_IMPORTED_MODULE_12__pages_login_login_module__["LoginPageModule"],
+                __WEBPACK_IMPORTED_MODULE_10__pages_home_home_module__["HomePageModule"]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_7_ionic_angular__["c" /* IonicApp */]],
-            entryComponents: [__WEBPACK_IMPORTED_MODULE_15__app_component__["a" /* MyApp */], __WEBPACK_IMPORTED_MODULE_12__pages_login_login__["a" /* LoginPage */], __WEBPACK_IMPORTED_MODULE_14__pages_register_register__["a" /* RegisterPage */]],
+            entryComponents: [__WEBPACK_IMPORTED_MODULE_14__app_component__["a" /* MyApp */], __WEBPACK_IMPORTED_MODULE_11__pages_login_login__["a" /* LoginPage */], __WEBPACK_IMPORTED_MODULE_13__pages_register_register__["a" /* RegisterPage */]],
             providers: [
-                [__WEBPACK_IMPORTED_MODULE_17__ionic_native_aes_256__["a" /* AES256 */]],
-                [__WEBPACK_IMPORTED_MODULE_10__ionic_native_file_path__["a" /* FilePath */]],
+                [__WEBPACK_IMPORTED_MODULE_16__ionic_native_aes_256__["a" /* AES256 */]],
+                [__WEBPACK_IMPORTED_MODULE_9__ionic_native_file_path__["a" /* FilePath */]],
                 [__WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__["a" /* StatusBar */]],
-                [__WEBPACK_IMPORTED_MODULE_19_angularfire2_storage__["AngularFireStorage"]],
-                [__WEBPACK_IMPORTED_MODULE_22__ionic_native_android_permissions___["a" /* AndroidPermissions */]],
-                [__WEBPACK_IMPORTED_MODULE_8__ionic_native_document_viewer___["a" /* DocumentViewer */]],
+                [__WEBPACK_IMPORTED_MODULE_18_angularfire2_storage__["AngularFireStorage"]],
+                [__WEBPACK_IMPORTED_MODULE_21__ionic_native_android_permissions___["a" /* AndroidPermissions */]],
+                [__WEBPACK_IMPORTED_MODULE_22__ionic_native_stripe__["a" /* Stripe */]],
                 [__WEBPACK_IMPORTED_MODULE_6__ionic_native_toast__["a" /* Toast */]],
-                [__WEBPACK_IMPORTED_MODULE_9__ionic_native_file__["a" /* File */]],
+                [__WEBPACK_IMPORTED_MODULE_8__ionic_native_file__["a" /* File */]],
                 [__WEBPACK_IMPORTED_MODULE_4__ionic_native_splash_screen__["a" /* SplashScreen */]],
                 [__WEBPACK_IMPORTED_MODULE_3__ionic_native_google_maps__["a" /* GoogleMaps */]],
-                [__WEBPACK_IMPORTED_MODULE_21_angularfire2_auth__["AngularFireAuth"]],
-                [__WEBPACK_IMPORTED_MODULE_20_angularfire2_database__["AngularFireDatabase"]],
+                [__WEBPACK_IMPORTED_MODULE_20_angularfire2_auth__["AngularFireAuth"]],
+                [__WEBPACK_IMPORTED_MODULE_19_angularfire2_database__["AngularFireDatabase"]],
                 [__WEBPACK_IMPORTED_MODULE_2__ionic_native_geolocation__["a" /* Geolocation */]],
                 { provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_7_ionic_angular__["d" /* IonicErrorHandler */] }
             ]
@@ -1086,7 +1086,7 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 598:
+/***/ 599:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1277,12 +1277,16 @@ var HomePage = /** @class */ (function () {
                         position: latLng,
                         icon: 'https://firebasestorage.googleapis.com/v0/b/dissy-c7abe.appspot.com/o/Webp.net-resizeimage%20(1).png?alt=media&token=689f51f3-e576-49bd-abc2-36b892a58fa6'
                     });
-                    var content = "<h1 hidden>" +
+                    var content = "<div class='infoWindowDiv'>" +
+                        "<h1 hidden>" +
                         ticket.Key +
                         "</h1>" +
                         "<br>" +
                         " " +
                         ("<h2 hidden>" + ticket.index + "</h2>") +
+                        "<br>" +
+                        " " +
+                        ("<h3 hidden>" + ticket.Seller + "</h3>") +
                         "<br>" +
                         " " +
                         ticket.Name +
@@ -1300,13 +1304,11 @@ var HomePage = /** @class */ (function () {
                         "£" +
                         ticket.Price +
                         "<br>" +
-                        " " +
-                        "<br>" +
                         "People interested:" + " " +
                         ticket.interested +
                         "<br>" +
                         " " +
-                        '<button class="infoWindowButton" <button onClick="window.ionicPageRef.zone.run(function () { window.ionicPageRef.component.buyTickets()})">Buy this ticket?</button>';
+                        '<button class="infoWindowButton" <button onClick="window.ionicPageRef.zone.run(function () { window.ionicPageRef.component.buyTickets()})">Buy this ticket?</button></div>';
                     _this.addInfoWindow(marker, content);
                 });
             }
@@ -1314,23 +1316,19 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.buyTickets = function () {
         var _this = this;
-        var timeClicked = Date.now();
-        var checkOutBy = timeClicked + 600000;
-        var userId = this.afAuth.auth.currentUser.uid;
         var temp = [];
         var target = event.srcElement;
+        var userId = this.afAuth.auth.currentUser.uid;
+        var sellerId = target.parentElement.children.item(4).innerHTML;
         var ticketClickedId = target.parentElement.children.item(0).innerHTML.toString();
-        console.log(ticketClickedId);
         var index = target.parentElement.children.item(2).innerHTML.toString();
-        if (userId == ticketClickedId) {
-            this.toast
-                .create({
-                message: "This is your listing.",
-                duration: 2000,
-                position: "Middle"
-            }).present();
+        console.log(userId, sellerId, ticketClickedId, index);
+        if (userId == sellerId) {
+            this.yourTicketMessage();
         }
-        else if (userId != ticketClickedId) {
+        else {
+            var timeClicked_1 = Date.now();
+            var checkOutBy_1 = timeClicked_1 + 600000;
             temp.push(this.items[index]);
             temp.filter(function (v) {
                 var tempArray = [
@@ -1345,8 +1343,8 @@ var HomePage = /** @class */ (function () {
                         Payout: v.Payout,
                         Creation: v.Creation,
                         Charge: v.Charge,
-                        checkOutTime: timeClicked,
-                        reservationPerioid: checkOutBy,
+                        checkOutTime: timeClicked_1,
+                        reservationPerioid: checkOutBy_1,
                         Lat: v.Lat,
                         Long: v.Long,
                         interested: v.interested
@@ -1361,6 +1359,14 @@ var HomePage = /** @class */ (function () {
                 _this.navCtrl.push('BuyPage');
             });
         }
+    };
+    HomePage.prototype.yourTicketMessage = function () {
+        this.toast
+            .create({
+            message: "This is your listing.",
+            duration: 2000,
+            position: "Middle"
+        }).present();
     };
     HomePage.prototype.refresh = function () {
         window.location.reload();
@@ -1482,5 +1488,5 @@ var FbConfig = {
 
 /***/ })
 
-},[349]);
+},[350]);
 //# sourceMappingURL=main.js.map

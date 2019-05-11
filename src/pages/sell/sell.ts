@@ -92,7 +92,7 @@ export class SellPage {
 
   async selectTicket() {
     const files = await (<any>window).chooser
-      .getFile('jpeg/image')
+      .getFile('images/jpeg')
       .then(async uri => {
         this.nativepath = uri.uri;
         await this.resolvePath(this.nativepath);
@@ -313,8 +313,7 @@ export class SellPage {
 
   async createListing(url) {
     this.showSpinner();
-    var artist = this.listing.Name;
-    artist.toUpperCase();
+    var artist = this.listing.Name.toUpperCase();
     var startTime = this.listing.Time;
     var date = this.listing.Date.toString();
     var p3 = date.slice(0, 4);
@@ -352,6 +351,7 @@ export class SellPage {
         this.listing.Sold = false;
         this.listing.PaySortCode;
         this.listing.PayoutAccount;
+        this.listing.Name = artist;
         this.listing.downloadURL = this.url;
         this.listing.interested = 0;
         var ref = this.afDatabase

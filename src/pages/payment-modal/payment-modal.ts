@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, } from "@angular/core";
 import {
   IonicPage,
   NavParams,
@@ -9,7 +9,8 @@ import {
 } from "ionic-angular";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AES256 } from "@ionic-native/aes-256";
-
+import { Stripe } from "@ionic-native/stripe";
+import { AngularFireAuth } from "angularfire2/auth";
 @IonicPage()
 @Component({
   selector: "page-payment-modal",
@@ -23,31 +24,87 @@ export class PaymentModalPage {
     private afDatabase: AngularFireDatabase,
     private aes: AES256,
     private toast: ToastController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private stripe: Stripe,
+    private auth: AngularFireAuth
   ) {}
   listingData: any;
   cardName: any;
   CVC: any;
   cardNo: any;
   expiry: any;
-
+  userId:any;
+  seconds:any;
+  minutes:any;
   ionViewWillLoad() {
+    this.userId = this.auth.auth.currentUser.uid;
+    const paymentApiKey = this.stripe.setPublishableKey('pk_test_1bm2qsK0nhDrUlYHBhwITuLc003SgctrKa');
     const ticket = this.navParams.get("ticket");
     this.listingData = ticket;
+    this.minutes = this.listingData.mins;
+    this.seconds = this.listingData.seconds;
     console.log(ticket);
     this.useExistingCard();
   }
 
+  validateCard(){
+    let card = {
+      number: '4242424242424242',
+      expMonth: 12,
+      expYear: 2020,
+      cvc: '220'
+    }
+    console.log(card);
+    this.stripe.createCardToken(card).then(payment => {
+      console.log(payment.card, payment.created, payment.id, payment.type);
+      var paymentObj = {
+      card: payment.card,
+      created: payment.created,
+      paymentId: payment.id,
+      type: payment.type,
+      amount: this.listingData.payout,
+      account: this.listingData.payoutAccount,
+      sortcode: this.listingData.sortcode,
+      seller: this.listingData.sellerId,
+      buyer:this.userId
+      }
+      console.log(paymentObj);
+      this.afDatabase.list(`payments/`).push(paymentObj)
+      .then(buyer => {
+        console.log(buyer)
+        this.afDatabase.list(`bought/${this.userId}`).push(this.listingData);
+      }).then(seller => {
+        this.afDatabase.list(`sold/${this.listingData.sellerId}`).push(this.listingData);
+        console.log(seller)
+      })
+    }).catch(error => {
+      console.log(error);
+    })
+  }
+
   clearForm() {
-    this.cardName = "";
-    this.CVC = "";
-    this.cardNo = "";
-    this.expiry = "";
+    this.cardName = null;
+    this.CVC = null;
+    this.cardNo = null;
+    this.expiry = null;
   }
 
   close() {
     this.vCtrl.dismiss();
   }
+
+
+  onSuccess(tokenId){
+    console.log('Success', tokenId);
+  }
+
+onFailure(error){
+  console.log('Error getting card token', error);
+}
+
+
+
+
 
   useExistingCard() {
     var key = this.listingData.userId;

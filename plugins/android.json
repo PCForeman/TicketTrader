@@ -74,6 +74,9 @@
     },
     "cordova-plugin-document-viewer": {
       "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-stripe": {
+      "PACKAGE_NAME": "io.ionic.starter"
     }
   },
   "dependent_plugins": {}

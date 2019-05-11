@@ -6,7 +6,6 @@ import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
 import { Toast } from "@ionic-native/toast";
 import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
-import { DocumentViewer } from "@ionic-native/document-viewer/";
 import { File } from "@ionic-native/file";
 import { FilePath } from "@ionic-native/file-path"
 import { HomePageModule } from "../pages/home/home.module";
@@ -21,7 +20,7 @@ import { AngularFireStorage} from "angularfire2/storage";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AndroidPermissions } from '@ionic-native/android-permissions/';
-
+import { Stripe } from '@ionic-native/stripe';
 @NgModule({
   declarations: [MyApp, RegisterPage],
   imports: [
@@ -39,7 +38,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/';
     [StatusBar],
     [AngularFireStorage],
     [AndroidPermissions],
-    [DocumentViewer],
+    [Stripe],
     [Toast],
     [File],
     [SplashScreen],

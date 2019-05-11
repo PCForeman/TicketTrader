@@ -46,7 +46,9 @@
       <ion-label floating>Date of event</ion-label>
       <ion-datetime
         id="listingDate"
-        displayformat="DD/MM/YY"
+        displayFormat="DD/MM/YY"
+        min="2019-05-16"
+        max="2020-05-23"
         [(ngModel)]="listing.Date"
       ></ion-datetime>
     </ion-item>

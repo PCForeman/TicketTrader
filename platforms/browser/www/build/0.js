@@ -1,14 +1,14 @@
 webpackJsonp([0],{
 
-/***/ 642:
+/***/ 643:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TicketsPageModule", function() { return TicketsPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewImageModalPageModule", function() { return ViewImageModalPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tickets__ = __webpack_require__(655);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__view_image_modal__ = __webpack_require__(657);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +18,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var TicketsPageModule = /** @class */ (function () {
-    function TicketsPageModule() {
+var ViewImageModalPageModule = /** @class */ (function () {
+    function ViewImageModalPageModule() {
     }
-    TicketsPageModule = __decorate([
+    ViewImageModalPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [__WEBPACK_IMPORTED_MODULE_2__tickets__["a" /* TicketsPage */]],
-            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__tickets__["a" /* TicketsPage */])]
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__view_image_modal__["a" /* ViewImageModalPage */],
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__view_image_modal__["a" /* ViewImageModalPage */]),
+            ],
         })
-    ], TicketsPageModule);
-    return TicketsPageModule;
+    ], ViewImageModalPageModule);
+    return ViewImageModalPageModule;
 }());
 
-//# sourceMappingURL=tickets.module.js.map
+//# sourceMappingURL=view-image-modal.module.js.map
 
 /***/ }),
 
-/***/ 655:
+/***/ 657:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TicketsPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewImageModalPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -55,235 +54,122 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
-
-
-
-var TicketsPage = /** @class */ (function () {
-    function TicketsPage(afAuth, afDatabase, toast, app, navCtrl, navParams) {
-        this.afAuth = afAuth;
-        this.afDatabase = afDatabase;
-        this.toast = toast;
-        this.app = app;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.items = [];
-        this.kA = [];
-        this.searchTerm = "";
-        this.itemSearch = [];
-        this.items2 = [];
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
-    TicketsPage.prototype.ionViewDidLoad = function () {
-        console.log("ionViewDidLoad TicketsPage");
-        this.displayTickets();
-        this.copyItems();
-    };
-    TicketsPage.prototype.initializeItems = function () {
-        this.itemSearch = this.items;
-    };
-    TicketsPage.prototype.copyItems = function () {
-        this.items2 = this.items;
-    };
-    TicketsPage.prototype.onCancel = function () {
-        this.itemSearch = this.items2;
-    };
-    TicketsPage.prototype.getItems = function (searchbar) {
-        var _this = this;
-        // Reset items back to all of the items
-        this.initializeItems();
-        console.log(this.itemSearch);
-        // set q to the value of the searchbar
-        var term = searchbar.srcElement.value;
-        console.log(term);
-        // if the value is an empty string don't filter the items
-        if (term == undefined || term == "") {
-            this.items = this.items2;
-            this.items.splice(this.items.length - 1);
-            console.log(this.items);
-        }
-        else {
-            this.itemSearch = this.itemSearch.filter(function (v) {
-                if (v.Name && term) {
-                    if (v.Name.toLowerCase().indexOf(term.toLowerCase()) > -1) {
-                        _this.items = _this.itemSearch;
-                        return true;
-                    }
-                    else if (v.Venue && term) {
-                        if (v.Venue.toLowerCase().indexOf(term.toLowerCase()) > -1) {
-                            _this.items = _this.itemSearch;
-                            return true;
-                        }
-                        else if (v.Date && term) {
-                            if (v.Date.toLowerCase().indexOf(term.toLowerCase()) > -1) {
-                                _this.items = _this.itemSearch;
-                                return true;
-                            }
-                        }
-                        return false;
-                    }
+};
+
+
+/**
+ * Generated class for the ViewImageModalPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var ViewImageModalPage = /** @class */ (function () {
+    function ViewImageModalPage(navCtrl, vCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.vCtrl = vCtrl;
+        this.navParams = navParams;
+    }
+    ViewImageModalPage.prototype.ionViewDidLoad = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var data;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        data = this.navParams.get('image');
+                        console.log(data);
+                        this.myImg = new Image();
+                        this.myImg.src = data.url;
+                        this.canvas = this.canvasEl.nativeElement;
+                        this.canvas.width = (window.innerWidth / 100) * 90;
+                        this.canvas.height = (window.innerHeight / 100) * 92.5;
+                        return [4 /*yield*/, this.initialiseCanvas()];
+                    case 1:
+                        _a.sent();
+                        this.displayTicket();
+                        return [2 /*return*/];
                 }
             });
-            console.log(term, this.itemSearch.length, this.itemSearch);
-            this.items.push(this.itemSearch);
-            this.reloadData();
-        }
+        });
     };
-    TicketsPage.prototype.checkOut = function () {
-        this.navCtrl.push("BuyPage");
-    };
-    TicketsPage.prototype.orderHistory = function () {
-        this.navCtrl.push("OrderHistoryPage");
-    };
-    TicketsPage.prototype.buy = function () {
-        var _this = this;
-        var timeClicked = Date.now();
-        var checkOutBy = timeClicked + 600000;
-        console.log(timeClicked);
-        var userId = this.afAuth.auth.currentUser.uid;
-        var temp = [];
-        var target = event.srcElement;
-        var ticketClicked = parseInt(target.parentElement.parentElement.children.item(0).innerHTML.valueOf()) - 1;
-        var checkId = target.parentElement.parentElement.children
-            .item(1)
-            .innerHTML.valueOf();
-        if (userId == checkId) {
-            this.toast
-                .create({
-                message: "This is your listing.",
-                duration: 2000,
-                position: "Middle"
-            })
-                .present();
-        }
-        else if (userId != checkId) {
-            temp.push(this.items[ticketClicked]);
-            temp.filter(function (v) {
-                var tempArray = [
-                    {
-                        Key: v.Key,
-                        Name: v.Name,
-                        Venue: v.Venue,
-                        Price: v.Price,
-                        Date: v.Date,
-                        Seller: v.Seller,
-                        Time: v.Time,
-                        Payout: v.Payout,
-                        Creation: v.Creation,
-                        Charge: v.Charge,
-                        checkOutTime: timeClicked,
-                        reservationPerioid: checkOutBy,
-                        Lat: v.Lat,
-                        Long: v.Long,
-                        PayoutAccount: v.PayoutAccount,
-                        PayoutSortCode: v.PayoutSortCode,
-                        downloadURL: v.downloadURL
-                    }
-                ];
-                var checkOutRef = _this.afAuth.auth.currentUser.uid;
-                _this.afDatabase
-                    .list("ticketsInBasket/" + checkOutRef)
-                    .push(tempArray[0]);
-                _this.afDatabase.list("approvedTickets/" + tempArray[0].Key).remove();
-                _this.navCtrl.push("BuyPage");
-                _this.refresh();
+    ViewImageModalPage.prototype.displayTicket = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var button;
+            return __generator(this, function (_a) {
+                this.context.drawImage(this.myImg, 0, 0, this.myImg.width, this.myImg.height, 0, 0, this.canvas.width, this.canvas.height);
+                button = document.getElementById('displayButton');
+                button.hidden = true;
+                return [2 /*return*/];
             });
+        });
+    };
+    ViewImageModalPage.prototype.initialiseCanvas = function () {
+        if (this.canvas.getContext) {
+            this.setupCanvas();
         }
     };
-    TicketsPage.prototype.refresh = function () {
-        window.location.reload();
-    };
-    TicketsPage.prototype.reloadData = function () {
-        this.items = this.itemSearch;
-    };
-    TicketsPage.prototype.displayTickets = function () {
-        var _this = this;
-        var ref = this.afDatabase.object("approvedTickets/");
-        ref.snapshotChanges().subscribe(function (snapshot) {
-            var allData = snapshot.payload.val();
-            var array = [];
-            array.push(allData);
-            var value = Object.keys(allData);
-            var keyArray = [];
-            keyArray.push(value);
-            for (var i = 0; i < value.length; i++) {
-                var x = 0;
-                var selectedIndex = i;
-                var keyValue = value[selectedIndex];
-                var indexSelecta = value.length - value.length + i;
-                var id = value[indexSelecta];
-                _this.kA.push(id);
-                var ref = _this.afDatabase.object("approvedTickets/" + keyValue);
-                ref.snapshotChanges().subscribe(function (snapshot) {
-                    var finalKey = _this.kA[_this.kA.length - _this.kA.length + x];
-                    console.log(finalKey);
-                    var eventName = snapshot.payload.child("Name").val();
-                    var eventPrice = snapshot.payload.child("Price").val();
-                    var eventVenue = snapshot.payload.child("Venue").val();
-                    var eventDate = snapshot.payload.child("Date").val();
-                    var eventTime = snapshot.payload.child("Time").val();
-                    var eventCreationDate = snapshot.payload.child("Creation").val();
-                    var eventSellerUID = snapshot.payload.child("Seller").val();
-                    var eventCustomerPayout = snapshot.payload.child("Payout").val();
-                    var eventServiceCharge = snapshot.payload.child("Charge").val();
-                    var Longs = snapshot.payload.child("Long").val();
-                    var Lats = snapshot.payload.child("Lat").val();
-                    var payoutAccount = snapshot.payload.child("PayoutAccount").val();
-                    var payoutSortCode = snapshot.payload.child("PayoutSortCode").val();
-                    var downloadURL = snapshot.payload.child("downloadURL").val();
-                    _this.items.push({
-                        Key: finalKey,
-                        Name: eventName,
-                        Venue: eventVenue,
-                        Price: eventPrice,
-                        Date: eventDate,
-                        Time: eventTime,
-                        Creation: eventCreationDate,
-                        Seller: eventSellerUID,
-                        Payout: eventCustomerPayout,
-                        Charge: eventServiceCharge,
-                        Long: Longs,
-                        Lat: Lats,
-                        PayoutAccount: payoutAccount,
-                        PayoutSortCode: payoutSortCode,
-                        downloadURL: downloadURL
-                    });
-                    x++;
-                });
-            }
+    ViewImageModalPage.prototype.setupCanvas = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                this.context = this.canvas.getContext("2d");
+                this.context.fillStyle = "#3e3e3e";
+                this.context.fillRect(0, 0, 800, 800);
+                return [2 /*return*/];
+            });
         });
     };
-    TicketsPage.prototype.logout = function () {
-        var _this = this;
-        this.afAuth.auth.signOut().then(function () {
-            _this.toast
-                .create({
-                message: "Signed out",
-                position: "middle",
-                duration: 3500
-            })
-                .present();
-            _this.app.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_4__login_login__["a" /* LoginPage */]);
-        });
+    ViewImageModalPage.prototype.close = function () {
+        this.vCtrl.dismiss();
     };
-    TicketsPage.prototype.navMakeListing = function () {
-        this.navCtrl.setRoot("MakeListingPage");
-    };
-    TicketsPage = __decorate([
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])("canvas"),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
+    ], ViewImageModalPage.prototype, "canvasEl", void 0);
+    ViewImageModalPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-tickets",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\tickets\tickets.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="info"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Buy Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <br />\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h1 hidden>{{ item.Seller }}</h1>\n      <h2 position text-center>{{ item.Name }}</h2>\n      <h3 position text-center>Venue: {{ item.Venue }}</h3>\n      <h4 position text-center>Price: £{{ item.Price }}</h4>\n      <h5 position text-center>Date: {{ item.Date }}</h5>\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n      <button\n        class="modalButton"\n        [id]="i"\n        ion-button\n        block\n        (click)="buy(index)"\n      >\n        Buy ticket\n      </button>\n      <h6></h6>\n    </div>\n  </ion-list>\n  <br />\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\tickets\tickets.html"*/
+            selector: "page-view-image-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\view-image-modal\view-image-modal.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n      <ion-buttons left>\n\n          <button ion-button (click)="displayTicket()">Display</button>\n\n        </ion-buttons>\n\n    <ion-buttons right>\n\n      <button ion-button (click)="close()">Close</button>\n\n    </ion-buttons>\n\n    <ion-title position text-center>Verify Ticket</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n<div class="ion-canvas">\n\n\n\n<canvas #canvas></canvas>\n\n</div>\n\n<button id="displayButton" ion-button color="midnight-blue" icon-only class="canvasButton" (click)="displayTicket()"><ion-icon name="checkmark-circle"></ion-icon>\n\n</button>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\view-image-modal\view-image-modal.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["AngularFireAuth"],
-            __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* App */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */]])
-    ], TicketsPage);
-    return TicketsPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+    ], ViewImageModalPage);
+    return ViewImageModalPage;
 }());
 
-//# sourceMappingURL=tickets.js.map
+//# sourceMappingURL=view-image-modal.js.map
 
 /***/ })
 
