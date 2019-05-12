@@ -108,10 +108,11 @@ var PaymentModalPage = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.stripe = stripe;
         this.auth = auth;
+        this.generateSecureKeyAndIV();
     }
     PaymentModalPage.prototype.ionViewWillLoad = function () {
         this.userId = this.auth.auth.currentUser.uid;
-        var paymentApiKey = this.stripe.setPublishableKey('pk_test_1bm2qsK0nhDrUlYHBhwITuLc003SgctrKa');
+        var paymentApiKey = this.stripe.setPublishableKey("pk_test_1bm2qsK0nhDrUlYHBhwITuLc003SgctrKa");
         var ticket = this.navParams.get("ticket");
         this.listingData = ticket;
         this.minutes = this.listingData.mins;
@@ -119,38 +120,105 @@ var PaymentModalPage = /** @class */ (function () {
         console.log(ticket);
         this.useExistingCard();
     };
-    PaymentModalPage.prototype.validateCard = function () {
+    PaymentModalPage.prototype.generateSecureKeyAndIV = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _a = this;
+                        return [4 /*yield*/, this.aes.generateSecureKey("at1x3fcaq")];
+                    case 1:
+                        _a.secureKey = _c.sent(); // Returns a 32 bytes string
+                        _b = this;
+                        return [4 /*yield*/, this.aes.generateSecureIV("at1x3fcaq")];
+                    case 2:
+                        _b.secureIV = _c.sent(); // Returns a 16 bytes string
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PaymentModalPage.prototype.proccessCard = function () {
         var _this = this;
         var card = {
-            number: '4242424242424242',
+            number: "4242424242424242",
             expMonth: 12,
             expYear: 2020,
-            cvc: '220'
+            cvc: "220"
         };
         console.log(card);
-        this.stripe.createCardToken(card).then(function (payment) {
-            console.log(payment.card, payment.created, payment.id, payment.type);
-            var paymentObj = {
-                card: payment.card,
-                created: payment.created,
-                paymentId: payment.id,
-                type: payment.type,
-                amount: _this.listingData.payout,
-                account: _this.listingData.payoutAccount,
-                sortcode: _this.listingData.sortcode,
-                seller: _this.listingData.sellerId,
-                buyer: _this.userId
-            };
-            console.log(paymentObj);
-            _this.afDatabase.list("payments/" + _this.listingData.ticketRef).push(paymentObj)
-                .then(function (buyer) {
-                console.log(buyer);
-                _this.afDatabase.list("bought/" + _this.userId).push(_this.listingData);
-            }).then(function (seller) {
-                _this.afDatabase.list("sold/" + _this.listingData.sellerId).push(_this.listingData);
-                console.log(seller);
+        this.stripe
+            .createCardToken(card)
+            .then(function (payment) { return __awaiter(_this, void 0, void 0, function () {
+            var _this = this;
+            var paymentObj, buyerObj, sellerObj;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log(payment.card, payment.created, payment.id, payment.type);
+                        paymentObj = {
+                            card: payment.card,
+                            created: payment.created,
+                            paymentId: payment.id,
+                            type: payment.type,
+                            amount: this.listingData.payout,
+                            account: this.listingData.payoutAccount,
+                            sortcode: this.listingData.sortcode,
+                            seller: this.listingData.sellerId,
+                            buyer: this.userId,
+                            ticketRef: this.listingData.ticketRef
+                        };
+                        return [4 /*yield*/, this.aes
+                                .encrypt(this.secureKey, this.secureIV, this.cardNo)
+                                .then(function (promise) { return (_this.encryptedText = promise.valueOf()); })
+                                .catch(function (error) { return console.error(error); })];
+                    case 1:
+                        _a.sent();
+                        buyerObj = {
+                            Artist: this.listingData.artist,
+                            Venue: this.listingData.location,
+                            Date: this.listingData.date,
+                            Price: this.listingData.price,
+                            Card: this.encryptedText,
+                            eKey: this.secureKey,
+                            eIV: this.secureIV,
+                            Ticket: this.listingData.downloadURL,
+                            Time: this.listingData.time
+                        };
+                        sellerObj = {
+                            Artist: this.listingData.artist,
+                            Venue: this.listingData.location,
+                            Date: this.listingData.date,
+                            Price: this.listingData.price,
+                            Status: 'Pending',
+                            AccountNo: this.listingData.payoutAccount,
+                            SortCode: this.listingData.sortcode,
+                            FundRelease: (Date.now() + 86400000),
+                        };
+                        this.afDatabase
+                            .list("payments/")
+                            .push(paymentObj)
+                            .then(function (buyer) {
+                            _this.afDatabase
+                                .list("bought/" + _this.userId)
+                                .push(buyerObj);
+                        })
+                            .then(function (seller) {
+                            _this.afDatabase
+                                .list("sold/" + _this.listingData.sellerId)
+                                .push(sellerObj);
+                        })
+                            .then(function (basket) {
+                            _this.afDatabase
+                                .list("ticketsInBasket/" + _this.userId + "/" + _this.listingData.ticketRef)
+                                .remove();
+                        });
+                        return [2 /*return*/];
+                }
             });
-        }).catch(function (error) {
+        }); })
+            .catch(function (error) {
             console.log(error);
         });
     };
@@ -162,12 +230,6 @@ var PaymentModalPage = /** @class */ (function () {
     };
     PaymentModalPage.prototype.close = function () {
         this.vCtrl.dismiss();
-    };
-    PaymentModalPage.prototype.onSuccess = function (tokenId) {
-        console.log('Success', tokenId);
-    };
-    PaymentModalPage.prototype.onFailure = function (error) {
-        console.log('Error getting card token', error);
     };
     PaymentModalPage.prototype.useExistingCard = function () {
         var _this = this;
@@ -385,7 +447,7 @@ var PaymentModalPage = /** @class */ (function () {
     };
     PaymentModalPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-payment-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n      <ion-buttons left>\n\n          <button ion-button>{{this.minutes}}:{{this.seconds}}</button>\n\n        </ion-buttons>\n\n    <ion-buttons right>\n\n      <button ion-button (click)="close()">Close</button>\n\n    </ion-buttons>\n\n    <ion-title position text-center>Pay</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-list class="paymentList" position text-center>\n\n    <ion-title text-center>\n\n      Order Summary\n\n    </ion-title>\n\n    {{ listingData.artist }}<br />\n\n    {{ listingData.location }}<br />\n\n    {{ listingData.date }} {{ listingData.time }}\n\n    <div class="ngFor">\n\n      <ion-item>\n\n        <ion-label position text-center>Name on card</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n          text-center\n\n          placeholder="Enter Cardholders name"\n\n          [(ngModel)]="cardName"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label position text-center>16 Digit card number</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n        text-center\n\n          placeholder="Enter Card Number"\n\n          [(ngModel)]="cardNo"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label position text-center>Expiry date</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n        text-center\n\n          placeholder="Enter Expiry"\n\n          [(ngModel)]="expiry"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label position text-center>CVC</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n        text-center\n\n          placeholder="Enter CVC"\n\n          [(ngModel)]="CVC"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <button class="paymentModalButtons" block color="midnight-blue" ion-button (click)="validateCard()">\n\n        Pay {{ listingData.price }}\n\n      </button>\n\n\n\n    </div>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/
+            selector: "page-payment-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n      <ion-buttons left>\n\n          <button ion-button>{{this.minutes}}:{{this.seconds}}</button>\n\n        </ion-buttons>\n\n    <ion-buttons right>\n\n      <button ion-button (click)="close()">Close</button>\n\n    </ion-buttons>\n\n    <ion-title position text-center>Pay</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-list class="paymentList" position text-center>\n\n    <ion-title text-center>\n\n      Order Summary\n\n    </ion-title>\n\n    {{ listingData.artist }}<br />\n\n    {{ listingData.location }}<br />\n\n    {{ listingData.date }} {{ listingData.time }}\n\n    <div class="ngFor">\n\n      <ion-item>\n\n        <ion-label position text-center>Name on card</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n          text-center\n\n          placeholder="Enter Cardholders name"\n\n          [(ngModel)]="cardName"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label position text-center>16 Digit card number</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n        text-center\n\n          placeholder="Enter Card Number"\n\n          [(ngModel)]="cardNo"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label position text-center>Expiry date</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n        text-center\n\n          placeholder="Enter Expiry"\n\n          [(ngModel)]="expiry"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <ion-item>\n\n        <ion-label position text-center>CVC</ion-label>\n\n      </ion-item>\n\n      <ion-item>\n\n        <ion-input\n\n        text-center\n\n          placeholder="Enter CVC"\n\n          [(ngModel)]="CVC"\n\n          position\n\n          text-center\n\n        ></ion-input>\n\n      </ion-item>\n\n\n\n      <button class="paymentModalButtons" block color="midnight-blue" ion-button (click)="proccessCard()">\n\n        Pay {{ listingData.price }}\n\n      </button>\n\n\n\n    </div>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\payment-modal\payment-modal.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],

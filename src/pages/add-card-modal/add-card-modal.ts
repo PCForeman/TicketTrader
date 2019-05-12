@@ -10,7 +10,6 @@ import {
 import { AngularFireDatabase } from "angularfire2/database/";
 import { AngularFireAuth } from "angularfire2/auth/";
 import { AES256 } from "@ionic-native/aes-256";
-import { messaging } from "firebase";
 
 @IonicPage()
 @Component({

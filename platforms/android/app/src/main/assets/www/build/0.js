@@ -119,7 +119,6 @@ var ViewImageModalPage = /** @class */ (function () {
                         return [4 /*yield*/, this.initialiseCanvas()];
                     case 1:
                         _a.sent();
-                        this.displayTicket();
                         return [2 /*return*/];
                 }
             });

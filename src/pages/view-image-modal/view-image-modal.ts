@@ -39,7 +39,6 @@ export class ViewImageModalPage {
     this.canvas.width = (window.innerWidth / 100) * 90;
     this.canvas.height = (window.innerHeight / 100) * 92.5;
     await this.initialiseCanvas();
-    this.displayTicket();
   }
 
   async displayTicket() {

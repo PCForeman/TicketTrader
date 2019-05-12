@@ -3,10 +3,13 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  ToastController
+  ToastController,
+  ModalController,
+  ModalOptions
 } from "ionic-angular";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
+import { AES256 } from "@ionic-native/aes-256";
 
 @IonicPage()
 @Component({
@@ -18,16 +21,19 @@ export class OrderHistoryPage {
   kA = [];
   items2 = [];
   itemSearch = [];
+  plainTextCard:any;
   constructor(
     public navCtrl: NavController,
     private afAuth: AngularFireAuth,
     private afDatabase: AngularFireDatabase,
     private toast: ToastController,
+    private aes: AES256,
+    private modal: ModalController,
     public navParams: NavParams
   ) {}
 
   ionViewDidLoad() {
-    this.retrieveLiveListings();
+    this.retrieveBoughtListings();
   }
 
   remove() {
@@ -77,54 +83,69 @@ export class OrderHistoryPage {
     window.location.reload();
   }
 
-  retrieveLiveListings() {
-    var currentUser = this.afAuth.auth.currentUser.uid;
-    var ref = this.afDatabase.object(`approvedTickets/`);
-    ref.snapshotChanges().subscribe(snapshot => {
-      var allData = snapshot.payload.val();
-      var array = [];
-      array.push(allData);
-      var value = Object.keys(allData);
-      var keyArray = [];
-      keyArray.push(value);
-      for (var i = 0; i < value.length; i++) {
-        var x = 0;
-        var count = 0;
-        var selectedIndex = i;
-        var keyValue = value[selectedIndex];
-        var indexSelecta = value.length - value.length + i;
-        var id = value[indexSelecta];
-        this.kA.push(id);
-        var ref = this.afDatabase.object(`approvedTickets/${keyValue}`);
-        ref.snapshotChanges().subscribe(snapshot => {
-          var eventSellerUID = snapshot.payload.child(`Seller`).val();
-          if (eventSellerUID == currentUser) {
-            var finalKey = this.kA[this.kA.length - this.kA.length + x];
-            var eventName = snapshot.payload.child(`Name`).val();
-            var eventPrice = snapshot.payload.child(`Price`).val();
-            var eventVenue = snapshot.payload.child(`Venue`).val();
-            var eventDate = snapshot.payload.child(`Date`).val();
-            var eventTime = snapshot.payload.child(`Time`).val();
-            var eventCreationDate = snapshot.payload.child(`Creation`).val();
-            var eventCustomerPayout = snapshot.payload.child(`Payout`).val();
-            var eventServiceCharge = snapshot.payload.child(`Charge`).val();
-            this.items.push({
-              Key: finalKey,
-              Name: eventName,
-              Venue: eventVenue,
-              Price: eventPrice,
-              Date: eventDate,
-              Time: eventTime,
-              Creation: eventCreationDate,
-              Seller: eventSellerUID,
-              Payout: eventCustomerPayout,
-              Charge: eventServiceCharge
-            });
-            x++;
-            count + 1;
-          }
-        });
-      }
-    });
+
+  async viewTicket(){
+  const button = event.srcElement
+  var url = button.parentElement.parentElement.children.item(5).innerHTML;
+  console.log(url)
+  const myModalOpts: ModalOptions = {
+    enableBackdropDismiss: true,
+    showBackdrop: false
+  };
+  const imageToView = {
+    url: url
+  };
+  const myModal = this.modal.create(
+    "ViewImageModalPage",
+    { image: imageToView },
+    myModalOpts
+  );
+  myModal.present();
+}
+  
+  async retrieveSoldListings(){
+  
   }
+
+  async retrieveBoughtListings() {
+    var keyArray = [];
+    const currentUser = this.afAuth.auth.currentUser.uid;
+    const ref = this.afDatabase.object(`bought/${currentUser}`);
+    ref.snapshotChanges().subscribe(snapshot => {
+    var allData = snapshot.payload.val();
+    var keyValues = Object.keys(allData);
+    keyArray.push(keyValues);
+    console.log(keyArray.length);
+    for (var i = -1; i < keyArray.length;){
+    this.afDatabase.object(`bought/${currentUser}/${keyValues[i + 1]}`).snapshotChanges().subscribe(async data => {
+    const Artist = data.payload.child(`Artist`).val();
+    var Card = data.payload.child(`Card`).val();
+    const Date = data.payload.child(`Date`).val();
+    const Time = data.payload.child(`Time`).val();
+    const Price = data.payload.child(`Price`).val();
+    const Ticket = data.payload.child(`Ticket`).val();
+    const Venue = data.payload.child( `Venue`).val();
+    const eIV = data.payload.child(`eIV`).val();
+    const eKey = data.payload.child(`eKey`).val();
+    console.log(Card);
+    await this.aes  
+    .decrypt(eKey, eIV, Card)
+    .then(acc => this.plainTextCard = acc)
+    .catch((error: any) => console.log(error));
+    var ticketObject = {
+    Artist: Artist,
+    Card: this.plainTextCard.substr(15),
+    Date: Date,
+    Time: Time,
+    Price: Price,
+    Ticket: Ticket,
+    Venue: Venue,
+    }
+    this.items.push(ticketObject)
+    console.log(this.items);
+    })
+    i++;
+    }
+  });
+} 
 }

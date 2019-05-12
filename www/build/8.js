@@ -194,7 +194,7 @@ var BuyPage = /** @class */ (function () {
             .innerHTML.substr(0);
         var sortCode = target.parentElement.parentElement.children
             .item(9)
-            .innerHTML.substr(0);
+            .innerHTML;
         var long = target.parentElement.parentElement.children
             .item(10)
             .innerHTML.substr(0);
@@ -209,7 +209,7 @@ var BuyPage = /** @class */ (function () {
             .innerHTML.substr(0);
         var sAccountNo = target.parentElement.parentElement.children
             .item(8)
-            .innerHTML.substr(0);
+            .innerHTML;
         var sVenue = target.parentElement.parentElement.children
             .item(4)
             .innerHTML.substr(7);
@@ -241,8 +241,8 @@ var BuyPage = /** @class */ (function () {
                     Long: v.Long,
                     Creation: v.Creation,
                     Charge: v.Charge,
-                    PayoutAccount: v.PayoutAccount,
-                    PayoutSortCode: v.PayoutSortCode,
+                    PayoutAccount: sAccountNo,
+                    PayoutSortCode: sortCode,
                     downloadURL: sURL
                 }
             ];
@@ -311,6 +311,7 @@ var BuyPage = /** @class */ (function () {
                     var longs = snapshot.payload.child("Long").val();
                     var payoutAccount = snapshot.payload.child("PayoutAccount").val();
                     var payoutSortCode = snapshot.payload.child("PayoutSortCode").val();
+                    var downloadURL = snapshot.payload.child("downloadURL").val();
                     _this.items.push({
                         Key: finalKey,
                         Name: eventName,
@@ -326,7 +327,8 @@ var BuyPage = /** @class */ (function () {
                         Lat: lats,
                         Long: longs,
                         PayoutAccount: payoutAccount,
-                        PayoutSortCode: payoutSortCode
+                        PayoutSortCode: payoutSortCode,
+                        downloadURL: downloadURL
                     });
                     x++;
                     count + 1;

@@ -167,7 +167,7 @@ export class BuyPage {
       .innerHTML.substr(0);
     var sortCode = target.parentElement.parentElement.children
       .item(9)
-      .innerHTML.substr(0);
+      .innerHTML
     var long = target.parentElement.parentElement.children
       .item(10)
       .innerHTML.substr(0);
@@ -182,7 +182,7 @@ export class BuyPage {
       .innerHTML.substr(0);
     var sAccountNo = target.parentElement.parentElement.children
       .item(8)
-      .innerHTML.substr(0);
+      .innerHTML;
     var sVenue = target.parentElement.parentElement.children
       .item(4)
       .innerHTML.substr(7);
@@ -217,8 +217,8 @@ export class BuyPage {
           Long: v.Long,
           Creation: v.Creation,
           Charge: v.Charge,
-          PayoutAccount: v.PayoutAccount,
-          PayoutSortCode: v.PayoutSortCode,
+          PayoutAccount: sAccountNo,
+          PayoutSortCode: sortCode,
           downloadURL: sURL
         }
       ];
@@ -293,6 +293,7 @@ export class BuyPage {
           const longs = snapshot.payload.child(`Long`).val();
           const payoutAccount = snapshot.payload.child(`PayoutAccount`).val();
           const payoutSortCode = snapshot.payload.child(`PayoutSortCode`).val();
+          const downloadURL = snapshot.payload.child(`downloadURL`).val();
           this.items.push({
             Key: finalKey,
             Name: eventName,
@@ -308,7 +309,8 @@ export class BuyPage {
             Lat: lats,
             Long: longs,
             PayoutAccount: payoutAccount,
-            PayoutSortCode: payoutSortCode
+            PayoutSortCode: payoutSortCode,
+            downloadURL: downloadURL
           });
           x++;
           count + 1;

@@ -1,4 +1,4 @@
-import { Component, } from "@angular/core";
+import { Component } from "@angular/core";
 import {
   IonicPage,
   NavParams,
@@ -11,6 +11,7 @@ import { AngularFireDatabase } from "angularfire2/database";
 import { AES256 } from "@ionic-native/aes-256";
 import { Stripe } from "@ionic-native/stripe";
 import { AngularFireAuth } from "angularfire2/auth";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 @IonicPage()
 @Component({
   selector: "page-payment-modal",
@@ -27,18 +28,23 @@ export class PaymentModalPage {
     private navCtrl: NavController,
     private stripe: Stripe,
     private auth: AngularFireAuth
-  ) {}
+  ) { this.generateSecureKeyAndIV()}
+  private secureKey: string;
+  private secureIV: string;
+  private encryptedText: string
   listingData: any;
   cardName: any;
   CVC: any;
   cardNo: any;
   expiry: any;
-  userId:any;
-  seconds:any;
-  minutes:any;
+  userId: any;
+  seconds: any;
+  minutes: any;
   ionViewWillLoad() {
     this.userId = this.auth.auth.currentUser.uid;
-    const paymentApiKey = this.stripe.setPublishableKey('pk_test_1bm2qsK0nhDrUlYHBhwITuLc003SgctrKa');
+    const paymentApiKey = this.stripe.setPublishableKey(
+      "pk_test_1bm2qsK0nhDrUlYHBhwITuLc003SgctrKa"
+    );
     const ticket = this.navParams.get("ticket");
     this.listingData = ticket;
     this.minutes = this.listingData.mins;
@@ -47,39 +53,84 @@ export class PaymentModalPage {
     this.useExistingCard();
   }
 
-  validateCard(){
+  async generateSecureKeyAndIV() {
+    this.secureKey = await this.aes.generateSecureKey("at1x3fcaq"); // Returns a 32 bytes string
+    this.secureIV = await this.aes.generateSecureIV("at1x3fcaq"); // Returns a 16 bytes string
+  }
+
+  proccessCard() {
     let card = {
-      number: '4242424242424242',
+      number: "4242424242424242",
       expMonth: 12,
       expYear: 2020,
-      cvc: '220'
-    }
+      cvc: "220"
+    };
     console.log(card);
-    this.stripe.createCardToken(card).then(payment => {
-      console.log(payment.card, payment.created, payment.id, payment.type);
-      var paymentObj = {
-      card: payment.card,
-      created: payment.created,
-      paymentId: payment.id,
-      type: payment.type,
-      amount: this.listingData.payout,
-      account: this.listingData.payoutAccount,
-      sortcode: this.listingData.sortcode,
-      seller: this.listingData.sellerId,
-      buyer:this.userId
-      }
-      console.log(paymentObj);
-      this.afDatabase.list(`payments/`).push(paymentObj)
-      .then(buyer => {
-        console.log(buyer)
-        this.afDatabase.list(`bought/${this.userId}`).push(this.listingData);
-      }).then(seller => {
-        this.afDatabase.list(`sold/${this.listingData.sellerId}`).push(this.listingData);
-        console.log(seller)
+    this.stripe
+      .createCardToken(card)
+      .then(async payment => {
+        console.log(payment.card, payment.created, payment.id, payment.type);
+        const paymentObj = {
+          card: payment.card,
+          created: payment.created,
+          paymentId: payment.id,
+          type: payment.type,
+          amount: this.listingData.payout,
+          account: this.listingData.payoutAccount,
+          sortcode: this.listingData.sortcode,
+          seller: this.listingData.sellerId,
+          buyer: this.userId,
+          ticketRef: this.listingData.ticketRef
+        };
+        await this.aes
+        .encrypt(this.secureKey, this.secureIV, this.cardNo)
+        .then(promise => (this.encryptedText = promise.valueOf()))
+        .catch((error: any) => console.error(error));
+        const buyerObj = {
+        Artist: this.listingData.artist,
+        Venue: this.listingData.location,
+        Date: this.listingData.date,
+        Price: this.listingData.price,
+        Card: this.encryptedText,
+        eKey: this.secureKey,
+        eIV: this.secureIV,
+        Ticket: this.listingData.downloadURL,
+        Time: this.listingData.time
+        }
+        const sellerObj = {
+        Artist: this.listingData.artist,
+        Venue: this.listingData.location,
+        Date: this.listingData.date,
+        Price: this.listingData.price,
+        Status: 'Pending',
+        AccountNo: this.listingData.payoutAccount,
+        SortCode: this.listingData.sortcode,
+        FundRelease: (Date.now() + 86400000),
+        }
+        this.afDatabase
+          .list(`payments/`)
+          .push(paymentObj)
+          .then(buyer => {
+            this.afDatabase
+              .list(`bought/${this.userId}`)
+              .push(buyerObj);
+          })
+          .then(seller => {
+            this.afDatabase
+              .list(`sold/${this.listingData.sellerId}`)
+              .push(sellerObj);
+          })
+          .then(basket => {
+            this.afDatabase
+              .list(
+                `ticketsInBasket/${this.userId}/${this.listingData.ticketRef}`
+              )
+              .remove();
+          });
       })
-    }).catch(error => {
-      console.log(error);
-    })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   clearForm() {
@@ -92,19 +143,6 @@ export class PaymentModalPage {
   close() {
     this.vCtrl.dismiss();
   }
-
-
-  onSuccess(tokenId){
-    console.log('Success', tokenId);
-  }
-
-onFailure(error){
-  console.log('Error getting card token', error);
-}
-
-
-
-
 
   useExistingCard() {
     var key = this.listingData.userId;

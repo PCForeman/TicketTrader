@@ -185,7 +185,6 @@ export class AdminPage {
       ) - 1;
     console.log(ticketClicked);
     temp.push(this.items[ticketClicked]);
-    //this.items.splice(ticketClicked);
     temp.filter(async v => {
       temp = [
         {

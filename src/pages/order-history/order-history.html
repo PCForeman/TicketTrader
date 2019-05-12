@@ -23,14 +23,8 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-searchbar
-    [showCancelButton]="ShowCancel"
-    (ionInput)="getItems($event)"
-    (ionCancel)="onCancel()"
-    (ionClear)="initializeItems()"
-  >
-  </ion-searchbar>
-  <ion-title position text-center>My Active Listings</ion-title>
+
+  <ion-title position text-center>Purchased Tickets</ion-title>
   <ion-list>
     <div
       class="ngDiv"
@@ -39,20 +33,38 @@
       *ngFor="let item of items; let i = index"
     >
       <h1 hidden>{{ i + 1 }}</h1>
-      <h2 position text-center>{{ item.Name }}</h2>
-      <h3 position text-center>Venue: {{ item.Venue }}</h3>
-      <h4 position text-center>Price: £{{ item.Price }}</h4>
-      <h5 position text-center>Date: {{ item.Date }}</h5>
-      <h6 position text-center>Time: {{ item.Time }}</h6>
+      <h2 position text-center>{{ item.Artist }}</h2>
+      <h3 position text-center>{{ item.Venue }}</h3>
+      <h4 position text-center>{{ item.Date }} AT {{item.Time}}</h4>
+      <h5 position text-center>{{ item.Price }} paid with card ending in {{item.Card}}</h5>
+      <h6 hidden>{{ item.Ticket }}</h6>
       <button
         [id]="i"
-        class="modalButton"
+        class="adminButtons"
         ion-button
-        block
-        (click)="remove(index)"
-      >
-        Remove Listing
+        icon-only
+        color="midnight-blue"
+        (click)="attended()"
+      ><ion-icon name="thumbs-up"></ion-icon>
       </button>
+      <button
+      [id]="i"
+      class="adminButtons"
+      ion-button
+      icon-only
+      color="midnight-blue"
+      (click)="remove()"
+    ><ion-icon name="thumbs-down"></ion-icon>
+    </button>
+    <button
+    [id]="i"
+    class="adminButtons"
+    ion-button
+    icon-only
+    color="midnight-blue"
+    (click)="viewTicket()"
+  ><ion-icon name="images"></ion-icon>
+  </button>
       <h6></h6>
     </div>
   </ion-list>
