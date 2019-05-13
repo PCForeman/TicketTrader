@@ -105,12 +105,14 @@ var OrderHistoryPage = /** @class */ (function () {
         this.modal = modal;
         this.navParams = navParams;
         this.items = [];
+        this.itemSold = [];
         this.kA = [];
         this.items2 = [];
         this.itemSearch = [];
     }
     OrderHistoryPage.prototype.ionViewDidLoad = function () {
         this.retrieveBoughtListings();
+        this.retrieveSoldListings();
     };
     OrderHistoryPage.prototype.remove = function () {
         var _this = this;
@@ -176,7 +178,47 @@ var OrderHistoryPage = /** @class */ (function () {
     };
     OrderHistoryPage.prototype.retrieveSoldListings = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var keyArray, currentUser, ref;
             return __generator(this, function (_a) {
+                keyArray = [];
+                currentUser = this.afAuth.auth.currentUser.uid;
+                ref = this.afDatabase.object("sold/" + currentUser);
+                ref.snapshotChanges().subscribe(function (snapshot) {
+                    var allData = snapshot.payload.val();
+                    var keyValues = Object.keys(allData);
+                    keyArray.push(keyValues);
+                    console.log(keyArray.length);
+                    for (var i = -1; i < keyArray.length;) {
+                        _this.afDatabase.object("sold/" + currentUser + "/" + keyValues[i + 1]).snapshotChanges().subscribe(function (data) { return __awaiter(_this, void 0, void 0, function () {
+                            var Artist, AccountNo, Date, FundRelease, Price, SortCode, Venue, Status, ticketObject;
+                            return __generator(this, function (_a) {
+                                Artist = data.payload.child("Artist").val();
+                                AccountNo = data.payload.child("AccountNo").val();
+                                Date = data.payload.child("Date").val();
+                                FundRelease = data.payload.child("FundRelease").val();
+                                Price = data.payload.child("Price").val();
+                                SortCode = data.payload.child("SortCode").val();
+                                Venue = data.payload.child("Venue").val();
+                                Status = data.payload.child("Status").val();
+                                ticketObject = {
+                                    Artist: Artist,
+                                    Venue: Venue,
+                                    Date: Date,
+                                    Price: Price,
+                                    AccountNo: AccountNo,
+                                    FundRelease: FundRelease,
+                                    SortCode: SortCode,
+                                    Status: Status
+                                };
+                                this.itemSold.push(ticketObject);
+                                console.log(this.itemSold);
+                                return [2 /*return*/];
+                            });
+                        }); });
+                        i++;
+                    }
+                });
                 return [2 /*return*/];
             });
         });
@@ -241,7 +283,7 @@ var OrderHistoryPage = /** @class */ (function () {
     };
     OrderHistoryPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-order-history",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="info"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n\n  <ion-title position text-center>Purchased Tickets</ion-title>\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h2 position text-center>{{ item.Artist }}</h2>\n      <h3 position text-center>{{ item.Venue }}</h3>\n      <h4 position text-center>{{ item.Date }} AT {{item.Time}}</h4>\n      <h5 position text-center>{{ item.Price }} paid with card ending in {{item.Card}}</h5>\n      <h6 hidden>{{ item.Ticket }}</h6>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="midnight-blue"\n        (click)="attended()"\n      ><ion-icon name="thumbs-up"></ion-icon>\n      </button>\n      <button\n      [id]="i"\n      class="adminButtons"\n      ion-button\n      icon-only\n      color="midnight-blue"\n      (click)="remove()"\n    ><ion-icon name="thumbs-down"></ion-icon>\n    </button>\n    <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    icon-only\n    color="midnight-blue"\n    (click)="viewTicket()"\n  ><ion-icon name="images"></ion-icon>\n  </button>\n      <h6></h6>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/
+            selector: "page-order-history",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="info"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n\n  <ion-title position text-center>Purchased Tickets</ion-title>\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h2 position text-center>{{ item.Artist }}</h2>\n      <h3 position text-center>{{ item.Venue }}</h3>\n      <h4 position text-center>{{ item.Date }} AT {{item.Time}}</h4>\n      <h5 position text-center>{{ item.Price }} paid with card ending in {{item.Card}}</h5>\n      <h6 hidden>{{ item.Ticket }}</h6>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="midnight-blue"\n        (click)="attended()"\n      ><ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n      <button\n      [id]="i"\n      class="adminButtons"\n      ion-button\n      icon-only\n      color="midnight-blue"\n      (click)="remove()"\n    ><ion-icon name="close-circle"></ion-icon>\n    </button>\n    <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    icon-only\n    color="midnight-blue"\n    (click)="viewTicket()"\n  ><ion-icon name="images"></ion-icon>\n  </button>\n      <h6></h6>\n    </div>\n  </ion-list>\n\n  <ion-title position text-center>Tickets Sold</ion-title>\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of itemSold; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h2 position text-center>{{ item.Artist }}</h2>\n      <h3 position text-center>{{ item.Venue }}</h3>\n      <h4 position text-center>{{ item.Date }}</h4>\n      <h5 position text-center>{{ item.Price }} {{item.AccountNo}} {{ item.SortCode }}</h5>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="midnight-blue"\n        (click)="attended()"\n      ><ion-icon name="checkmark-circle"></ion-icon>\n      </button>\n      <button\n      [id]="i"\n      class="adminButtons"\n      ion-button\n      icon-only\n      color="midnight-blue"\n      (click)="remove()"\n    ><ion-icon name="close-circle"></ion-icon>\n    </button>\n    <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    color="midnight-blue"\n  >{{item.Status}}\n  </button>\n      <h6></h6>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"],

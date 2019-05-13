@@ -45,7 +45,7 @@
         icon-only
         color="midnight-blue"
         (click)="attended()"
-      ><ion-icon name="thumbs-up"></ion-icon>
+      ><ion-icon name="checkmark-circle"></ion-icon>
       </button>
       <button
       [id]="i"
@@ -54,7 +54,7 @@
       icon-only
       color="midnight-blue"
       (click)="remove()"
-    ><ion-icon name="thumbs-down"></ion-icon>
+    ><ion-icon name="close-circle"></ion-icon>
     </button>
     <button
     [id]="i"
@@ -64,6 +64,48 @@
     color="midnight-blue"
     (click)="viewTicket()"
   ><ion-icon name="images"></ion-icon>
+  </button>
+      <h6></h6>
+    </div>
+  </ion-list>
+
+  <ion-title position text-center>Tickets Sold</ion-title>
+  <ion-list>
+    <div
+      class="ngDiv"
+      [id]="i"
+      ion-item
+      *ngFor="let item of itemSold; let i = index"
+    >
+      <h1 hidden>{{ i + 1 }}</h1>
+      <h2 position text-center>{{ item.Artist }}</h2>
+      <h3 position text-center>{{ item.Venue }}</h3>
+      <h4 position text-center>{{ item.Date }}</h4>
+      <h5 position text-center>{{ item.Price }} {{item.AccountNo}} {{ item.SortCode }}</h5>
+      <button
+        [id]="i"
+        class="adminButtons"
+        ion-button
+        icon-only
+        color="midnight-blue"
+        (click)="attended()"
+      ><ion-icon name="checkmark-circle"></ion-icon>
+      </button>
+      <button
+      [id]="i"
+      class="adminButtons"
+      ion-button
+      icon-only
+      color="midnight-blue"
+      (click)="remove()"
+    ><ion-icon name="close-circle"></ion-icon>
+    </button>
+    <button
+    [id]="i"
+    class="adminButtons"
+    ion-button
+    color="midnight-blue"
+  >{{item.Status}}
   </button>
       <h6></h6>
     </div>

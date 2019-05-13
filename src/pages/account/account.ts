@@ -220,7 +220,7 @@ async deleteAccount(){
     });
   }
 
- async logout() {
+  logout() {
     this.afAuth.auth.signOut().then(() => {
       this.toast
         .create({
@@ -229,7 +229,7 @@ async deleteAccount(){
           duration: 3500
         })
         .present();
-      this.app.getRootNav().setRoot(LoginPage);
+      this.app.getRootNav().setRoot('LoginPage');
     });
   }
 }

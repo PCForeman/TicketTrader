@@ -92,7 +92,7 @@ export class SellPage {
 
   async selectTicket() {
     const files = await (<any>window).chooser
-      .getFile('images/jpeg')
+      .getFile("Images/png")
       .then(async uri => {
         this.nativepath = uri.uri;
         await this.resolvePath(this.nativepath);
@@ -195,7 +195,7 @@ export class SellPage {
           duration: 3500
         })
         .present();
-      this.app.getRootNav().setRoot("LoginPage");
+      this.app.getRootNav().setRoot('LoginPage');
     });
   }
 

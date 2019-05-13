@@ -5,13 +5,14 @@ import {
   ViewController,
   AlertController,
   ToastController,
-  NavController
+  NavController,
+  LoadingController,
+
 } from "ionic-angular";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AES256 } from "@ionic-native/aes-256";
 import { Stripe } from "@ionic-native/stripe";
 import { AngularFireAuth } from "angularfire2/auth";
-import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 @IonicPage()
 @Component({
   selector: "page-payment-modal",
@@ -27,7 +28,8 @@ export class PaymentModalPage {
     private toast: ToastController,
     private navCtrl: NavController,
     private stripe: Stripe,
-    private auth: AngularFireAuth
+    private auth: AngularFireAuth,
+    private ldCtrl: LoadingController
   ) { this.generateSecureKeyAndIV()}
   private secureKey: string;
   private secureIV: string;
@@ -58,7 +60,22 @@ export class PaymentModalPage {
     this.secureIV = await this.aes.generateSecureIV("at1x3fcaq"); // Returns a 16 bytes string
   }
 
-  proccessCard() {
+displayLoader(){
+  let loading = this.ldCtrl.create({
+    content: 'Processing',
+    spinner: 'ios',
+    duration: 2500
+  });
+
+  loading.present();
+
+  setTimeout(() => {
+    loading.dismiss();
+  }, 5000);
+}
+
+ async proccessCard() {
+   await this.displayLoader();
     let card = {
       number: "4242424242424242",
       expMonth: 12,
@@ -125,7 +142,14 @@ export class PaymentModalPage {
               .list(
                 `ticketsInBasket/${this.userId}/${this.listingData.ticketRef}`
               )
-              .remove();
+              .remove().then(navigation => {
+                this.toast.create({message: 'Payment successful', duration:2000, position:'middle'}).present();
+                this.close();
+                this.navCtrl.setRoot('Page');
+                this.navCtrl.push('OrderHistoryPage').catch(error => {
+                console.log(error);
+                })
+              })
           });
       })
       .catch(error => {

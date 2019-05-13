@@ -98,7 +98,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 var PaymentModalPage = /** @class */ (function () {
-    function PaymentModalPage(navParams, aCtrl, vCtrl, afDatabase, aes, toast, navCtrl, stripe, auth) {
+    function PaymentModalPage(navParams, aCtrl, vCtrl, afDatabase, aes, toast, navCtrl, stripe, auth, ldCtrl) {
         this.navParams = navParams;
         this.aCtrl = aCtrl;
         this.vCtrl = vCtrl;
@@ -108,6 +108,7 @@ var PaymentModalPage = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.stripe = stripe;
         this.auth = auth;
+        this.ldCtrl = ldCtrl;
         this.generateSecureKeyAndIV();
     }
     PaymentModalPage.prototype.ionViewWillLoad = function () {
@@ -139,87 +140,116 @@ var PaymentModalPage = /** @class */ (function () {
             });
         });
     };
+    PaymentModalPage.prototype.displayLoader = function () {
+        var loading = this.ldCtrl.create({
+            content: 'Processing',
+            spinner: 'ios',
+            duration: 2500
+        });
+        loading.present();
+        setTimeout(function () {
+            loading.dismiss();
+        }, 5000);
+    };
     PaymentModalPage.prototype.proccessCard = function () {
-        var _this = this;
-        var card = {
-            number: "4242424242424242",
-            expMonth: 12,
-            expYear: 2020,
-            cvc: "220"
-        };
-        console.log(card);
-        this.stripe
-            .createCardToken(card)
-            .then(function (payment) { return __awaiter(_this, void 0, void 0, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var _this = this;
-            var paymentObj, buyerObj, sellerObj;
+            var card;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        console.log(payment.card, payment.created, payment.id, payment.type);
-                        paymentObj = {
-                            card: payment.card,
-                            created: payment.created,
-                            paymentId: payment.id,
-                            type: payment.type,
-                            amount: this.listingData.payout,
-                            account: this.listingData.payoutAccount,
-                            sortcode: this.listingData.sortcode,
-                            seller: this.listingData.sellerId,
-                            buyer: this.userId,
-                            ticketRef: this.listingData.ticketRef
-                        };
-                        return [4 /*yield*/, this.aes
-                                .encrypt(this.secureKey, this.secureIV, this.cardNo)
-                                .then(function (promise) { return (_this.encryptedText = promise.valueOf()); })
-                                .catch(function (error) { return console.error(error); })];
+                    case 0: return [4 /*yield*/, this.displayLoader()];
                     case 1:
                         _a.sent();
-                        buyerObj = {
-                            Artist: this.listingData.artist,
-                            Venue: this.listingData.location,
-                            Date: this.listingData.date,
-                            Price: this.listingData.price,
-                            Card: this.encryptedText,
-                            eKey: this.secureKey,
-                            eIV: this.secureIV,
-                            Ticket: this.listingData.downloadURL,
-                            Time: this.listingData.time
+                        card = {
+                            number: "4242424242424242",
+                            expMonth: 12,
+                            expYear: 2020,
+                            cvc: "220"
                         };
-                        sellerObj = {
-                            Artist: this.listingData.artist,
-                            Venue: this.listingData.location,
-                            Date: this.listingData.date,
-                            Price: this.listingData.price,
-                            Status: 'Pending',
-                            AccountNo: this.listingData.payoutAccount,
-                            SortCode: this.listingData.sortcode,
-                            FundRelease: (Date.now() + 86400000),
-                        };
-                        this.afDatabase
-                            .list("payments/")
-                            .push(paymentObj)
-                            .then(function (buyer) {
-                            _this.afDatabase
-                                .list("bought/" + _this.userId)
-                                .push(buyerObj);
-                        })
-                            .then(function (seller) {
-                            _this.afDatabase
-                                .list("sold/" + _this.listingData.sellerId)
-                                .push(sellerObj);
-                        })
-                            .then(function (basket) {
-                            _this.afDatabase
-                                .list("ticketsInBasket/" + _this.userId + "/" + _this.listingData.ticketRef)
-                                .remove();
+                        console.log(card);
+                        this.stripe
+                            .createCardToken(card)
+                            .then(function (payment) { return __awaiter(_this, void 0, void 0, function () {
+                            var _this = this;
+                            var paymentObj, buyerObj, sellerObj;
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        console.log(payment.card, payment.created, payment.id, payment.type);
+                                        paymentObj = {
+                                            card: payment.card,
+                                            created: payment.created,
+                                            paymentId: payment.id,
+                                            type: payment.type,
+                                            amount: this.listingData.payout,
+                                            account: this.listingData.payoutAccount,
+                                            sortcode: this.listingData.sortcode,
+                                            seller: this.listingData.sellerId,
+                                            buyer: this.userId,
+                                            ticketRef: this.listingData.ticketRef
+                                        };
+                                        return [4 /*yield*/, this.aes
+                                                .encrypt(this.secureKey, this.secureIV, this.cardNo)
+                                                .then(function (promise) { return (_this.encryptedText = promise.valueOf()); })
+                                                .catch(function (error) { return console.error(error); })];
+                                    case 1:
+                                        _a.sent();
+                                        buyerObj = {
+                                            Artist: this.listingData.artist,
+                                            Venue: this.listingData.location,
+                                            Date: this.listingData.date,
+                                            Price: this.listingData.price,
+                                            Card: this.encryptedText,
+                                            eKey: this.secureKey,
+                                            eIV: this.secureIV,
+                                            Ticket: this.listingData.downloadURL,
+                                            Time: this.listingData.time
+                                        };
+                                        sellerObj = {
+                                            Artist: this.listingData.artist,
+                                            Venue: this.listingData.location,
+                                            Date: this.listingData.date,
+                                            Price: this.listingData.price,
+                                            Status: 'Pending',
+                                            AccountNo: this.listingData.payoutAccount,
+                                            SortCode: this.listingData.sortcode,
+                                            FundRelease: (Date.now() + 86400000),
+                                        };
+                                        this.afDatabase
+                                            .list("payments/")
+                                            .push(paymentObj)
+                                            .then(function (buyer) {
+                                            _this.afDatabase
+                                                .list("bought/" + _this.userId)
+                                                .push(buyerObj);
+                                        })
+                                            .then(function (seller) {
+                                            _this.afDatabase
+                                                .list("sold/" + _this.listingData.sellerId)
+                                                .push(sellerObj);
+                                        })
+                                            .then(function (basket) {
+                                            _this.afDatabase
+                                                .list("ticketsInBasket/" + _this.userId + "/" + _this.listingData.ticketRef)
+                                                .remove().then(function (navigation) {
+                                                _this.toast.create({ message: 'Payment successful', duration: 2000, position: 'middle' }).present();
+                                                _this.close();
+                                                _this.navCtrl.setRoot('Page');
+                                                _this.navCtrl.push('OrderHistoryPage').catch(function (error) {
+                                                    console.log(error);
+                                                });
+                                            });
+                                        });
+                                        return [2 /*return*/];
+                                }
+                            });
+                        }); })
+                            .catch(function (error) {
+                            console.log(error);
                         });
                         return [2 /*return*/];
                 }
             });
-        }); })
-            .catch(function (error) {
-            console.log(error);
         });
     };
     PaymentModalPage.prototype.clearForm = function () {
@@ -457,7 +487,8 @@ var PaymentModalPage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_4__ionic_native_stripe__["a" /* Stripe */],
-            __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["AngularFireAuth"]])
+            __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["AngularFireAuth"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]])
     ], PaymentModalPage);
     return PaymentModalPage;
 }());

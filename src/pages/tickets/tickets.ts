@@ -254,7 +254,7 @@ export class TicketsPage {
           duration: 3500
         })
         .present();
-      this.app.getRootNav().setRoot(LoginPage);
+      this.app.getRootNav().setRoot('LoginPage');
     });
   }
 

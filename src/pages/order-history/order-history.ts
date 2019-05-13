@@ -18,6 +18,7 @@ import { AES256 } from "@ionic-native/aes-256";
 })
 export class OrderHistoryPage {
   items = [];
+  itemSold = [];
   kA = [];
   items2 = [];
   itemSearch = [];
@@ -34,6 +35,7 @@ export class OrderHistoryPage {
 
   ionViewDidLoad() {
     this.retrieveBoughtListings();
+    this.retrieveSoldListings();
   }
 
   remove() {
@@ -104,7 +106,40 @@ export class OrderHistoryPage {
 }
   
   async retrieveSoldListings(){
-  
+    var keyArray = [];
+    const currentUser = this.afAuth.auth.currentUser.uid;
+    const ref = this.afDatabase.object(`sold/${currentUser}`);
+    ref.snapshotChanges().subscribe(snapshot => {
+    var allData = snapshot.payload.val();
+    var keyValues = Object.keys(allData);
+    keyArray.push(keyValues);
+    console.log(keyArray.length);
+    for (var i = -1; i < keyArray.length;){
+    this.afDatabase.object(`sold/${currentUser}/${keyValues[i + 1]}`).snapshotChanges().subscribe(async data => {
+    const Artist = data.payload.child(`Artist`).val();
+    const AccountNo = data.payload.child(`AccountNo`).val();
+    const Date = data.payload.child(`Date`).val();
+    const FundRelease = data.payload.child(`FundRelease`).val();
+    const Price = data.payload.child(`Price`).val();
+    const SortCode = data.payload.child(`SortCode`).val();
+    const Venue = data.payload.child( `Venue`).val();
+    const Status = data.payload.child(`Status`).val();
+    var ticketObject = {
+    Artist: Artist,
+    Venue: Venue,
+    Date: Date,
+    Price: Price,
+    AccountNo: AccountNo,
+    FundRelease: FundRelease,
+    SortCode: SortCode,
+    Status: Status
+    }
+    this.itemSold.push(ticketObject)
+    console.log(this.itemSold);
+    })
+    i++;
+    }
+  });
   }
 
   async retrieveBoughtListings() {
