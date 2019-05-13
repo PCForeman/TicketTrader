@@ -13,7 +13,7 @@
         <ion-icon name="basket"></ion-icon>
       </button>
       <button ion-button icon-only color="light" (click)="orderHistory()">
-        <ion-icon name="clipboard"></ion-icon>
+        <ion-icon name="cloud-download"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title position text-center>Sell Tickets</ion-title>
@@ -58,12 +58,13 @@
       <button
         ion-button
         id="btnCheckPrice"
+        class="priceButton"
         icon-only
-        color="light"
+        color="midnight-blue"
         (click)="ticketIncomeCalc()"
         item-end
       >
-        <ion-icon name="checkmark-circle"></ion-icon>
+        <ion-icon name="checkmark-circle">Calculate</ion-icon>
       </button>
     </ion-item>
     <p>

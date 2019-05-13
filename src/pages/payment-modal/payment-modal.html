@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="midnight-blue">
       <ion-buttons left>
-          <button ion-button>{{this.minutes}}:{{this.seconds}}</button>
+          <button ion-button>{{this.belowTenMin}}{{this.minutes}}:{{this.belowTen}}{{this.seconds}}</button>
         </ion-buttons>
     <ion-buttons right>
       <button ion-button (click)="close()">Close</button>

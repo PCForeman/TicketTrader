@@ -92,7 +92,7 @@ export class SellPage {
 
   async selectTicket() {
     const files = await (<any>window).chooser
-      .getFile("Images/png")
+      .getFile('image/jpeg/png')
       .then(async uri => {
         this.nativepath = uri.uri;
         await this.resolvePath(this.nativepath);

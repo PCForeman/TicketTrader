@@ -9,7 +9,6 @@ import {
 import { User } from "../../models/user";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
-import { v } from "@angular/core/src/render3";
 
 @IonicPage()
 @Component({
@@ -38,45 +37,28 @@ export class RegisterPage {
     var vPostCode = this.user.addressPC;
     var vPCL = vPostCode.length;
     var vMobile = this.user.phoneNo;
-    var mobileLen = vMobile.length;
     var vDoB = this.user.dOb;
-    if (
-      vfirstname == "" ||
-      vfirstname == null ||
-      vPassword == "" ||
-      vPassword == null ||
-      vSurname == "" ||
-      vSurname == null ||
-      vEmail == "" ||
-      vEmail == null ||
-      vAdress1 == "" ||
-      vAdress1 == null ||
-      vPostCode == "" ||
-      vPCL != 8 ||
-      vPostCode == null ||
-      vMobile == "" ||
-      vMobile == null ||
-      mobileLen < 9 ||
-      mobileLen > 10 ||
-      vDoB == null
-    ) {
-      this.toast
-        .create({
-          message: "One or more fields are incorrect, please check them",
-          duration: 3000,
-          position: "bottom"
-        })
-        .present();
-    } else if (vPassword.length < 8) {
-      this.toast
-        .create({
-          message:
-            "Password must be 8 or more characters with a special character",
-          duration: 2000,
-          position: "middle"
-        })
-        .present();
-    } else {
+    if (vfirstname == "" || vfirstname == null){
+    this.toast.create({message: 'First name is empty', duration:2000}).present();
+    }else if (vSurname == "" || vSurname == null){
+    this.toast.create({message: 'Surname is empty', duration:2000}).present();
+    }else if (vEmail == "" || vEmail == null){
+    this.toast.create({message: 'email is empty', duration:2000}).present();
+    }else if (vAdress1 == "" || vAdress1 == null){
+    this.toast.create({message: 'adress is empty', duration:2000}).present();
+    }else if (vPostCode == "" || null){
+    this.toast.create({message: 'Postcode is empty', duration:2000}).present();
+    }else if (vPCL < 7 || vPCL > 8){
+    this.toast.create({message: 'Postcode should be a max of 8 characters', duration:2000}).present();
+    }else if (vMobile == "" || null){
+    this.toast.create({message: 'mobile field is empty', duration:2000}).present();
+    }else if (vMobile.length < 9){
+    this.toast.create({message: 'Phone number should have a minimum of 9 characters', duration:2000}).present();
+    }else if (vDoB == null) {
+    this.toast.create({message: 'First name is empty', duration:2000}).present();
+    }else if (vPassword.length < 8) {
+    this.toast.create({message:"Password must be 8 or more characters with a special character",duration: 2000,position: "middle"}).present();
+    }else{
       try {
         const result = await this.afAuth.auth.createUserWithEmailAndPassword(
           this.user.email,

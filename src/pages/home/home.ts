@@ -4,12 +4,14 @@ import {
   NavController,
   App,
   NavParams,
-  ToastController
+  ToastController,
+  AlertController
 } from "ionic-angular";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Observable } from "rxjs";
 import { Geolocation } from "@ionic-native/geolocation";
 import { AngularFireDatabase } from "angularfire2/database";
+
 
 declare var google;
 var userLat: number;
@@ -33,6 +35,7 @@ export class HomePage {
     private gLocation: Geolocation,
     private afDatabase: AngularFireDatabase,
     private app: App,
+    private aCtrl: AlertController,
     private ngZone: NgZone,
     public navCtrl: NavController,
     public navParams: NavParams
@@ -179,20 +182,44 @@ export class HomePage {
             ticket.interested +
             "<br>" +
             " " +
-            '<button class="infoWindowButton" <button onClick="window.ionicPageRef.zone.run(function () { window.ionicPageRef.component.buyTickets()})">Buy this ticket?</button></div>';
+            '<button class="infoWindowButton" <button onClick="window.ionicPageRef.zone.run(function () { window.ionicPageRef.component.buyTicketAlert()})">Buy this ticket?</button></div>';
           this.addInfoWindow(marker, content);
         });
       }
     });
   }
 
-  buyTickets() {
-    const temp = [];
+  buyTicketAlert(){
     const target = event.srcElement;
     const userId = this.afAuth.auth.currentUser.uid;
     const sellerId = target.parentElement.children.item(4).innerHTML;
     const ticketClickedId = target.parentElement.children.item(0).innerHTML.toString();
     const index = target.parentElement.children.item(2).innerHTML.toString();
+    let alert = this.aCtrl.create({
+      title: "Payment",
+      mode: "ios",
+      message:'Do you want to buy this ticket? The ticket will be reserved for 10 minutes.',
+      buttons: [
+        {
+          text: "Proceed",
+          handler: () => {
+          this.buyTickets(userId, sellerId, ticketClickedId, index)
+          }
+        },
+        {
+          text: "Dismiss",
+          role: "cancel",
+          handler: () => {
+          console.log('No thank you')
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  buyTickets(userId, sellerId, ticketClickedId, index) {
+    const temp = [];
     console.log(userId, sellerId, ticketClickedId, index);
       if (userId == sellerId) {
       this.yourTicketMessage();  

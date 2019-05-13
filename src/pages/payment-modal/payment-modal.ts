@@ -42,6 +42,9 @@ export class PaymentModalPage {
   userId: any;
   seconds: any;
   minutes: any;
+  timer: any;
+  belowTen: any;
+  belowTenMin: any
   ionViewWillLoad() {
     this.userId = this.auth.auth.currentUser.uid;
     const paymentApiKey = this.stripe.setPublishableKey(
@@ -53,6 +56,7 @@ export class PaymentModalPage {
     this.seconds = this.listingData.seconds;
     console.log(ticket);
     this.useExistingCard();
+    this.checkOutTimer();
   }
 
   async generateSecureKeyAndIV() {
@@ -163,6 +167,40 @@ displayLoader(){
     this.cardNo = null;
     this.expiry = null;
   }
+
+checkOutTimer(){
+  this.timer = setInterval(
+    () =>
+      this.updateSeconds(
+        this.minutes,
+        (this.seconds = this.seconds - 1)
+      ),
+    1000
+  );
+  console.log({ minutes: this.minutes, seconds: this.seconds});
+}
+
+updateSeconds(minutes: number, seconds: number) {
+if (this.seconds < 10){
+this.belowTen = "0" }
+if (this.minutes< 10){
+this.belowTenMin = "0"
+if (this.seconds <= 0) {
+this.seconds = this.seconds + 59;
+this.minutes = this.minutes - 1;
+this.belowTen = "";
+if (this.minutes < 0 && this.seconds < 2) {
+this.timeIsUp();
+this.checkOutTimer();
+}
+console.log(minutes, seconds);
+}
+}
+}
+
+timeIsUp() {
+clearInterval(this.timer);
+}
 
   close() {
     this.vCtrl.dismiss();

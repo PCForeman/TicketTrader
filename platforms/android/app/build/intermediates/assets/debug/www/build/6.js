@@ -179,18 +179,19 @@ var OrderHistoryPage = /** @class */ (function () {
     OrderHistoryPage.prototype.retrieveSoldListings = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
-            var keyArray, currentUser, ref;
+            var currentUser, ref;
             return __generator(this, function (_a) {
-                keyArray = [];
                 currentUser = this.afAuth.auth.currentUser.uid;
                 ref = this.afDatabase.object("sold/" + currentUser);
                 ref.snapshotChanges().subscribe(function (snapshot) {
                     var allData = snapshot.payload.val();
                     var keyValues = Object.keys(allData);
-                    keyArray.push(keyValues);
-                    console.log(keyArray.length);
-                    for (var i = -1; i < keyArray.length;) {
-                        _this.afDatabase.object("sold/" + currentUser + "/" + keyValues[i + 1]).snapshotChanges().subscribe(function (data) { return __awaiter(_this, void 0, void 0, function () {
+                    console.log(keyValues);
+                    for (var i = 0; i < keyValues.length;) {
+                        _this.afDatabase
+                            .object("sold/" + currentUser + "/" + keyValues[i])
+                            .snapshotChanges()
+                            .subscribe(function (data) { return __awaiter(_this, void 0, void 0, function () {
                             var Artist, AccountNo, Date, FundRelease, Price, SortCode, Venue, Status, ticketObject;
                             return __generator(this, function (_a) {
                                 Artist = data.payload.child("Artist").val();
@@ -226,18 +227,18 @@ var OrderHistoryPage = /** @class */ (function () {
     OrderHistoryPage.prototype.retrieveBoughtListings = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
-            var keyArray, currentUser, ref;
+            var currentUser, ref;
             return __generator(this, function (_a) {
-                keyArray = [];
                 currentUser = this.afAuth.auth.currentUser.uid;
                 ref = this.afDatabase.object("bought/" + currentUser);
                 ref.snapshotChanges().subscribe(function (snapshot) {
                     var allData = snapshot.payload.val();
                     var keyValues = Object.keys(allData);
-                    keyArray.push(keyValues);
-                    console.log(keyArray.length);
-                    for (var i = -1; i < keyArray.length;) {
-                        _this.afDatabase.object("bought/" + currentUser + "/" + keyValues[i + 1]).snapshotChanges().subscribe(function (data) { return __awaiter(_this, void 0, void 0, function () {
+                    for (var i = 0; i < keyValues.length;) {
+                        _this.afDatabase
+                            .object("bought/" + currentUser + "/" + keyValues[i])
+                            .snapshotChanges()
+                            .subscribe(function (data) { return __awaiter(_this, void 0, void 0, function () {
                             var _this = this;
                             var Artist, Card, Date, Time, Price, Ticket, Venue, eIV, eKey, ticketObject;
                             return __generator(this, function (_a) {
@@ -252,10 +253,9 @@ var OrderHistoryPage = /** @class */ (function () {
                                         Venue = data.payload.child("Venue").val();
                                         eIV = data.payload.child("eIV").val();
                                         eKey = data.payload.child("eKey").val();
-                                        console.log(Card);
                                         return [4 /*yield*/, this.aes
                                                 .decrypt(eKey, eIV, Card)
-                                                .then(function (acc) { return _this.plainTextCard = acc; })
+                                                .then(function (acc) { return (_this.plainTextCard = acc); })
                                                 .catch(function (error) { return console.log(error); })];
                                     case 1:
                                         _a.sent();
@@ -266,7 +266,7 @@ var OrderHistoryPage = /** @class */ (function () {
                                             Time: Time,
                                             Price: Price,
                                             Ticket: Ticket,
-                                            Venue: Venue,
+                                            Venue: Venue
                                         };
                                         this.items.push(ticketObject);
                                         console.log(this.items);

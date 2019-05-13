@@ -109,7 +109,7 @@ export class LoginPage {
                 " " +
                 "click on the info button in the top left corner to help get you started.",
               position: "middle",
-              duration: 1000
+              duration: 5000
             })
             .present();
           this.navCtrl.setRoot("Page");

@@ -161,7 +161,7 @@ var LoginPage = /** @class */ (function () {
                                         " " +
                                         "click on the info button in the top left corner to help get you started.",
                                     position: "middle",
-                                    duration: 1000
+                                    duration: 5000
                                 })
                                     .present();
                                 _this.navCtrl.setRoot("Page");
@@ -297,7 +297,7 @@ var RegisterPage = /** @class */ (function () {
     RegisterPage.prototype.rRegister = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
-            var vfirstname, vSurname, vEmail, vAdress1, vPassword, vPostCode, vPCL, vMobile, mobileLen, vDoB, result, e_1;
+            var vfirstname, vSurname, vEmail, vAdress1, vPassword, vPostCode, vPCL, vMobile, vDoB, result, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.showSpinner()];
@@ -311,48 +311,50 @@ var RegisterPage = /** @class */ (function () {
                         vPostCode = this.user.addressPC;
                         vPCL = vPostCode.length;
                         vMobile = this.user.phoneNo;
-                        mobileLen = vMobile.length;
                         vDoB = this.user.dOb;
-                        if (!(vfirstname == "" ||
-                            vfirstname == null ||
-                            vPassword == "" ||
-                            vPassword == null ||
-                            vSurname == "" ||
-                            vSurname == null ||
-                            vEmail == "" ||
-                            vEmail == null ||
-                            vAdress1 == "" ||
-                            vAdress1 == null ||
-                            vPostCode == "" ||
-                            vPCL != 8 ||
-                            vPostCode == null ||
-                            vMobile == "" ||
-                            vMobile == null ||
-                            mobileLen < 9 ||
-                            mobileLen > 10 ||
-                            vDoB == null)) return [3 /*break*/, 2];
-                        this.toast
-                            .create({
-                            message: "One or more fields are incorrect, please check them",
-                            duration: 3000,
-                            position: "bottom"
-                        })
-                            .present();
-                        return [3 /*break*/, 6];
+                        if (!(vfirstname == "" || vfirstname == null)) return [3 /*break*/, 2];
+                        this.toast.create({ message: 'First name is empty', duration: 2000 }).present();
+                        return [3 /*break*/, 14];
                     case 2:
-                        if (!(vPassword.length < 8)) return [3 /*break*/, 3];
-                        this.toast
-                            .create({
-                            message: "Password must be 8 or more characters with a special character",
-                            duration: 2000,
-                            position: "middle"
-                        })
-                            .present();
-                        return [3 /*break*/, 6];
+                        if (!(vSurname == "" || vSurname == null)) return [3 /*break*/, 3];
+                        this.toast.create({ message: 'Surname is empty', duration: 2000 }).present();
+                        return [3 /*break*/, 14];
                     case 3:
-                        _a.trys.push([3, 5, , 6]);
-                        return [4 /*yield*/, this.afAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password)];
+                        if (!(vEmail == "" || vEmail == null)) return [3 /*break*/, 4];
+                        this.toast.create({ message: 'email is empty', duration: 2000 }).present();
+                        return [3 /*break*/, 14];
                     case 4:
+                        if (!(vAdress1 == "" || vAdress1 == null)) return [3 /*break*/, 5];
+                        this.toast.create({ message: 'adress is empty', duration: 2000 }).present();
+                        return [3 /*break*/, 14];
+                    case 5:
+                        if (!(vPostCode == "" || null)) return [3 /*break*/, 6];
+                        this.toast.create({ message: 'Postcode is empty', duration: 2000 }).present();
+                        return [3 /*break*/, 14];
+                    case 6:
+                        if (!(vPCL < 7 || vPCL > 8)) return [3 /*break*/, 7];
+                        this.toast.create({ message: 'Postcode should be a max of 8 characters', duration: 2000 }).present();
+                        return [3 /*break*/, 14];
+                    case 7:
+                        if (!(vMobile == "" || null)) return [3 /*break*/, 8];
+                        this.toast.create({ message: 'mobile field is empty', duration: 2000 }).present();
+                        return [3 /*break*/, 14];
+                    case 8:
+                        if (!(vMobile.length < 9)) return [3 /*break*/, 9];
+                        this.toast.create({ message: 'Phone number should have a minimum of 9 characters', duration: 2000 }).present();
+                        return [3 /*break*/, 14];
+                    case 9:
+                        if (!(vDoB == null)) return [3 /*break*/, 10];
+                        this.toast.create({ message: 'First name is empty', duration: 2000 }).present();
+                        return [3 /*break*/, 14];
+                    case 10:
+                        if (!(vPassword.length < 8)) return [3 /*break*/, 11];
+                        this.toast.create({ message: "Password must be 8 or more characters with a special character", duration: 2000, position: "middle" }).present();
+                        return [3 /*break*/, 14];
+                    case 11:
+                        _a.trys.push([11, 13, , 14]);
+                        return [4 /*yield*/, this.afAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password)];
+                    case 12:
                         result = _a.sent();
                         console.log(result);
                         this.afAuth.authState.take(1).subscribe(function (auth) {
@@ -366,12 +368,12 @@ var RegisterPage = /** @class */ (function () {
                         })
                             .present();
                         this.navCtrl.setRoot("LoginPage");
-                        return [3 /*break*/, 6];
-                    case 5:
+                        return [3 /*break*/, 14];
+                    case 13:
                         e_1 = _a.sent();
                         console.log(e_1);
-                        return [3 /*break*/, 6];
-                    case 6: return [2 /*return*/];
+                        return [3 /*break*/, 14];
+                    case 14: return [2 /*return*/];
                 }
             });
         });
@@ -1151,12 +1153,13 @@ var userLong;
 var userPos;
 var keys = [];
 var HomePage = /** @class */ (function () {
-    function HomePage(afAuth, toast, gLocation, afDatabase, app, ngZone, navCtrl, navParams) {
+    function HomePage(afAuth, toast, gLocation, afDatabase, app, aCtrl, ngZone, navCtrl, navParams) {
         this.afAuth = afAuth;
         this.toast = toast;
         this.gLocation = gLocation;
         this.afDatabase = afDatabase;
         this.app = app;
+        this.aCtrl = aCtrl;
         this.ngZone = ngZone;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
@@ -1307,20 +1310,44 @@ var HomePage = /** @class */ (function () {
                         ticket.interested +
                         "<br>" +
                         " " +
-                        '<button class="infoWindowButton" <button onClick="window.ionicPageRef.zone.run(function () { window.ionicPageRef.component.buyTickets()})">Buy this ticket?</button></div>';
+                        '<button class="infoWindowButton" <button onClick="window.ionicPageRef.zone.run(function () { window.ionicPageRef.component.buyTicketAlert()})">Buy this ticket?</button></div>';
                     _this.addInfoWindow(marker, content);
                 });
             }
         });
     };
-    HomePage.prototype.buyTickets = function () {
+    HomePage.prototype.buyTicketAlert = function () {
         var _this = this;
-        var temp = [];
         var target = event.srcElement;
         var userId = this.afAuth.auth.currentUser.uid;
         var sellerId = target.parentElement.children.item(4).innerHTML;
         var ticketClickedId = target.parentElement.children.item(0).innerHTML.toString();
         var index = target.parentElement.children.item(2).innerHTML.toString();
+        var alert = this.aCtrl.create({
+            title: "Payment",
+            mode: "ios",
+            message: 'Do you want to buy this ticket? The ticket will be reserved for 10 minutes.',
+            buttons: [
+                {
+                    text: "Proceed",
+                    handler: function () {
+                        _this.buyTickets(userId, sellerId, ticketClickedId, index);
+                    }
+                },
+                {
+                    text: "Dismiss",
+                    role: "cancel",
+                    handler: function () {
+                        console.log('No thank you');
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    HomePage.prototype.buyTickets = function (userId, sellerId, ticketClickedId, index) {
+        var _this = this;
+        var temp = [];
         console.log(userId, sellerId, ticketClickedId, index);
         if (userId == sellerId) {
             this.yourTicketMessage();
@@ -1400,16 +1427,23 @@ var HomePage = /** @class */ (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])("map"),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
     ], HomePage.prototype, "mapElement", void 0);
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-home",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="button" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="checkOut()"\n      >\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="orderHistory()"\n      >\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <div #map id="map"></div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\home\home.html"*/
+            selector: "page-home",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="button" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="checkOut()"\n      >\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="orderHistory()"\n      >\n      <ion-icon name="cloud-download"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <div #map id="map"></div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\home\home.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["AngularFireDatabase"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["AngularFireDatabase"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _j || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */],
+            __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["AngularFireDatabase"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], HomePage);
     return HomePage;
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 }());
 
 //# sourceMappingURL=home.js.map
