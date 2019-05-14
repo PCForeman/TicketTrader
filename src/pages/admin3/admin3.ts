@@ -50,13 +50,10 @@ export class Admin3Page {
   }
 
   getItems(searchbar) {
-    // Reset items back to all of the items
     this.initializeItems();
     console.log(this.itemSearch);
-    // set q to the value of the searchbar
     var q = searchbar.srcElement.value;
     console.log(q);
-    // if the value is an empty string don't filter the items
     if (q == undefined || q == "") {
       this.items = this.items2;
       this.items.splice(this.items.length - 1);
@@ -77,7 +74,7 @@ export class Admin3Page {
     }
   }
 
-  remove() {
+  remove() { // removes a ticket from the table
     var temp = [];
     var target = event.srcElement;
     var ticketClicked =
@@ -138,7 +135,7 @@ export class Admin3Page {
     this.items = this.itemSearch;
   }
 
-  retrieveRejectedTickets() {
+  retrieveRejectedTickets() { // Retrieve all of the rejected tickets from the rejected tickets table.
     var ref = this.fbDatabase.object(`rejectedTickets/`);
     ref.snapshotChanges().subscribe(snapshot => {
       var allData = snapshot.payload.val();
@@ -184,7 +181,7 @@ export class Admin3Page {
     });
   }
 
-  logout() {
+  logout() { // Logs user out and redirects
     this.afAuth.auth.signOut().then(() => {
       this.toast
         .create({

@@ -44,12 +44,12 @@ var AddCardModalPageModule = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddCardModalPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database____default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database___);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth____default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_aes_256__ = __webpack_require__(343);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_aes_256__ = __webpack_require__(343);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth____default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database____default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database___);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_angular__ = __webpack_require__(45);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -112,12 +112,16 @@ var AddCardModalPage = /** @class */ (function () {
         this.generateSecureKeyAndIV();
     }
     AddCardModalPage.prototype.close = function () {
-        this.vCtrl.dismiss();
+        this.vCtrl.dismiss(); //The view controller dismisses the display view
     };
     AddCardModalPage.prototype.addCardAlert = function () {
         var _this = this;
-        if (this.cardNo != null && this.expiry != null && this.Cvc != null && this.sortcode != null
-            && this.accountNumber != null && this.holderName != null) {
+        if (this.cardNo != null &&
+            this.expiry != null &&
+            this.Cvc != null &&
+            this.sortcode != null &&
+            this.accountNumber != null &&
+            this.holderName != null) {
             var alert_1 = this.aCtrl.create({
                 title: "Add payment method",
                 mode: "ios",
@@ -141,7 +145,13 @@ var AddCardModalPage = /** @class */ (function () {
             alert_1.present();
         }
         else {
-            this.toast.create({ message: 'Ensure fields are filled out', duration: 2000, position: 'middle' }).present();
+            this.toast
+                .create({
+                message: "Ensure fields are filled out",
+                duration: 2000,
+                position: "middle"
+            })
+                .present();
         }
     };
     AddCardModalPage.prototype.addDetails = function () {
@@ -244,36 +254,36 @@ var AddCardModalPage = /** @class */ (function () {
                         this.expiry = "";
                         return [3 /*break*/, 14];
                     case 7:
-                        console.log(this.secureKey, this.secureIV);
+                        console.log(this.thrtyTwoBit, this.sixteenBit);
                         return [4 /*yield*/, this.aes
-                                .encrypt(this.secureKey, this.secureIV, this.cardNo)
+                                .encrypt(this.thrtyTwoBit, this.sixteenBit, this.cardNo)
                                 .then(function (promise) { return (eText1 = promise.valueOf()); })
                                 .catch(function (error) { return console.error(error); })];
                     case 8:
                         _a.sent();
                         return [4 /*yield*/, this.aes
-                                .encrypt(this.secureKey, this.secureIV, this.accountNumber)
+                                .encrypt(this.thrtyTwoBit, this.sixteenBit, this.accountNumber)
                                 .then(function (promise) { return (eText2 = promise.valueOf()); })];
                     case 9:
                         _a.sent();
                         return [4 /*yield*/, this.aes
-                                .encrypt(this.secureKey, this.secureIV, this.holderName)
+                                .encrypt(this.thrtyTwoBit, this.sixteenBit, this.holderName)
                                 .then(function (promise) { return (eText4 = promise.valueOf()); })];
                     case 10:
                         _a.sent();
                         return [4 /*yield*/, this.aes
-                                .encrypt(this.secureKey, this.secureIV, this.Cvc)
+                                .encrypt(this.thrtyTwoBit, this.sixteenBit, this.Cvc)
                                 .then(function (promise) { return (eText5 = promise.valueOf()); })];
                     case 11:
                         _a.sent();
                         return [4 /*yield*/, this.aes
-                                .encrypt(this.secureKey, this.secureIV, this.expiry)
+                                .encrypt(this.thrtyTwoBit, this.sixteenBit, this.expiry)
                                 .then(function (promise) { return (eText6 = promise.valueOf()); })
                                 .catch(function (error) { return console.error(error); })];
                     case 12:
                         _a.sent();
                         return [4 /*yield*/, this.aes
-                                .encrypt(this.secureKey, this.secureIV, this.sortcode)
+                                .encrypt(this.thrtyTwoBit, this.sixteenBit, this.sortcode)
                                 .then(function (promise) { return (eText3 = promise.valueOf()); })
                                 .catch(function (error) { return console.error(error); })];
                     case 13:
@@ -286,8 +296,8 @@ var AddCardModalPage = /** @class */ (function () {
                                 CVC: eText5,
                                 Sort: eText3,
                                 AccountNo: eText2,
-                                Key: this.secureKey,
-                                IV: this.secureIV
+                                Key: this.thrtyTwoBit,
+                                IV: this.sixteenBit
                             }
                         ];
                         console.log(payment);
@@ -308,11 +318,11 @@ var AddCardModalPage = /** @class */ (function () {
                         _a = this;
                         return [4 /*yield*/, this.aes.generateSecureKey("pook")];
                     case 1:
-                        _a.secureKey = _c.sent(); // Returns a 32 bytes string
+                        _a.thrtyTwoBit = _c.sent(); // Returns a 32 bytes string
                         _b = this;
                         return [4 /*yield*/, this.aes.generateSecureIV("pook")];
                     case 2:
-                        _b.secureIV = _c.sent(); // Returns a 16 bytes string
+                        _b.sixteenBit = _c.sent(); // Returns a 16 bytes string
                         return [2 /*return*/];
                 }
             });
@@ -325,14 +335,14 @@ var AddCardModalPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: "page-add-card-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\add-card-modal\add-card-modal.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n      <ion-buttons left>\n          <button ion-button (click)="close()">Info</button>\n        </ion-buttons>\n      <ion-buttons right>\n      <button ion-button (click)="close()">Close</button>\n    </ion-buttons>\n    <ion-title position text-center>Card</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <div class="ngFor">\n    <ion-item>\n      <ion-label position text-center>Cardholder name</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="holderName" placeholder="Enter cardholder name" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>16 Digit card number</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="cardNo" placeholder="Enter card number" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>Expiry date</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="expiry" id="input" placeholder="Enter expiry date" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>CVC</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="Cvc" placeholder="Enter CVC" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>Sort code</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="sortcode" placeholder="Enter Sortcode" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>Account number</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="accountNumber" placeholder="Enter Account number" position text-center></ion-input>\n    </ion-item>\n\n    <button class="addCardButtons" color="midnight-blue"  (click)="addCardAlert()" ion-button>Add details</button>\n    <button class="addCardButtons" color="midnight-blue" (click)="clearInputs()" ion-button>Clear form</button>\n  </div>\n</ion-content>'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\add-card-modal\add-card-modal.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___["AngularFireDatabase"],
-            __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___["AngularFireAuth"],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_4__ionic_native_aes_256__["a" /* AES256 */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["m" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___["AngularFireDatabase"],
+            __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___["AngularFireAuth"],
+            __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_1__ionic_native_aes_256__["a" /* AES256 */],
+            __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["a" /* AlertController */]])
     ], AddCardModalPage);
     return AddCardModalPage;
 }());

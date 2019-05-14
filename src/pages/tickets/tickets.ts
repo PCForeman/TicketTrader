@@ -200,7 +200,7 @@ export class TicketsPage {
           const payoutSortCode = snapshot.payload.child(`PayoutSortCode`).val();
           const downloadURL = snapshot.payload.child(`downloadURL`).val();
           const interested = snapshot.payload.child(`interested`).val();
-          this.items.push({
+          const itemObj = {
             Key: finalKey,
             Name: eventName,
             Venue: eventVenue,
@@ -217,7 +217,8 @@ export class TicketsPage {
             PayoutSortCode: payoutSortCode,
             downloadURL: downloadURL,
             interested: interested
-          });
+          }
+          this.items.push(itemObj);
           x++;
         });
       }

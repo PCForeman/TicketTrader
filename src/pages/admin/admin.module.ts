@@ -1,6 +1,7 @@
-import { NgModule } from "@angular/core";
-import { IonicPageModule } from "ionic-angular";
-import { AdminPage } from "./admin";
+import { NgModule } from '@angular/core';
+import { IonicPageModule } from 'ionic-angular';
+
+import { AdminPage } from './admin';
 
 @NgModule({
   declarations: [AdminPage],

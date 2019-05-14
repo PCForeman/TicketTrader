@@ -118,7 +118,7 @@ export class SellPage {
   }
 
   async upload(buffer, name) {
-    let blob = new Blob([buffer], { type: "pdf" });
+    let blob = new Blob([buffer], { type: "image" });
     console.log(blob);
     await this.afStorage
       .upload(`tickets${name}`, blob)
@@ -243,7 +243,8 @@ export class SellPage {
 
   showSpinner() {
     let loading = this.ldCtrl.create({
-      content: ""
+      content: "Processing",
+      spinner: 'bubble'
     });
     loading.present();
     setTimeout(() => {

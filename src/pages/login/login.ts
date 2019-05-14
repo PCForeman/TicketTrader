@@ -43,12 +43,12 @@ export class LoginPage {
     }, 250);
   }
 
-  async loginRegister() {
+  async loginRegister() { // Redirects user to registration page
     await this.showSpinner();
     await this.navCtrl.setRoot(RegisterPage);
   }
 
-  adminLogin(user: User) {
+  adminLogin(user: User) { // Checks if the user is an admin, Otherwise calls the normal user login
     var adminCredential1 = user.email;
     var adminCredential2 = user.password;
     if (
@@ -61,7 +61,7 @@ export class LoginPage {
     }
   }
 
-  async loginLogin(user: User) {
+  async loginLogin(user: User) { // Validates a user and logs them into the system, directs them passed on different variables
     await this.showSpinner();
     try {
       const result = await this.afAuth.auth.signInWithEmailAndPassword(

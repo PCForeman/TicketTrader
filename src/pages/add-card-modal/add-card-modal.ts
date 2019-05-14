@@ -1,15 +1,15 @@
 import { Component } from "@angular/core";
+import { AES256 } from "@ionic-native/aes-256";
+import { AngularFireAuth } from "angularfire2/auth/";
+import { AngularFireDatabase } from "angularfire2/database/";
 import {
+  AlertController,
   IonicPage,
   NavController,
   NavParams,
-  ViewController,
   ToastController,
-  AlertController
+  ViewController
 } from "ionic-angular";
-import { AngularFireDatabase } from "angularfire2/database/";
-import { AngularFireAuth } from "angularfire2/auth/";
-import { AES256 } from "@ionic-native/aes-256";
 
 @IonicPage()
 @Component({
@@ -17,8 +17,8 @@ import { AES256 } from "@ionic-native/aes-256";
   templateUrl: "add-card-modal.html"
 })
 export class AddCardModalPage {
-  private secureKey: string;
-  private secureIV: string;
+  private thrtyTwoBit: string;
+  private sixteenBit: string;
   cardNo: any;
   expiry: any;
   Cvc: any;
@@ -42,41 +42,51 @@ export class AddCardModalPage {
   }
 
   close() {
-    this.vCtrl.dismiss();
+    this.vCtrl.dismiss(); //The view controller dismisses the display view
   }
 
-
-  addCardAlert(){
-    if (this.cardNo != null && this.expiry != null && this.Cvc != null && this.sortcode != null 
-      && this.accountNumber != null && this.holderName != null){
-    let alert = this.aCtrl.create({
-      title: "Add payment method",
-      mode: "ios",
-      message:
-        "Are you sure you want to add a card?",
-      buttons: [
-        {
-          text: "Proceed",
-          handler: () => {
-            this.addDetails();
+  addCardAlert() { // Creates an alert, if conditions are met. Then calls a function based on user interaction
+    if (
+      this.cardNo != null &&
+      this.expiry != null &&
+      this.Cvc != null &&
+      this.sortcode != null &&
+      this.accountNumber != null &&
+      this.holderName != null
+    ) {
+      let alert = this.aCtrl.create({
+        title: "Add payment method",
+        mode: "ios",
+        message: "Are you sure you want to add a card?",
+        buttons: [
+          {
+            text: "Proceed",
+            handler: () => {
+              this.addDetails();
+            }
+          },
+          {
+            text: "Dismiss",
+            role: "cancel",
+            handler: () => {
+              console.log("cancelled");
+            }
           }
-        },
-        {
-          text: "Dismiss",
-          role: "cancel",
-          handler: () => {
-            console.log("cancelled");
-          }
-        }
-      ]
-    });
-    alert.present();
-  }else{
-    this.toast.create({message:'Ensure fields are filled out', duration:2000, position:'middle'}).present();
+        ]
+      });
+      alert.present();
+    } else {
+      this.toast
+        .create({
+          message: "Ensure fields are filled out",
+          duration: 2000,
+          position: "middle"
+        })
+        .present();
+    }
   }
-}
 
-  async addDetails() {
+  async addDetails() { // Validates the card details, on success encrypts them and stores them in the database
     var formatExpiry =
       this.expiry.toString().substr(0, 2) +
       "/" +
@@ -137,7 +147,7 @@ export class AddCardModalPage {
           position: "middle"
         })
         .present();
-        this.sortcode = "";
+      this.sortcode = "";
     } else if (this.accountNumber.length != 8) {
       this.toast
         .create({
@@ -162,7 +172,7 @@ export class AddCardModalPage {
           position: "middle"
         })
         .present();
-        this.expiry = "";
+      this.expiry = "";
     } else {
       var eText1: string;
       var eText2: string;
@@ -170,26 +180,26 @@ export class AddCardModalPage {
       var eText4: string;
       var eText5: string;
       var eText6: string;
-      console.log(this.secureKey, this.secureIV);
+      console.log(this.thrtyTwoBit, this.sixteenBit);
       await this.aes
-        .encrypt(this.secureKey, this.secureIV, this.cardNo)
+        .encrypt(this.thrtyTwoBit, this.sixteenBit, this.cardNo)
         .then(promise => (eText1 = promise.valueOf()))
         .catch((error: any) => console.error(error));
       await this.aes
-        .encrypt(this.secureKey, this.secureIV, this.accountNumber)
+        .encrypt(this.thrtyTwoBit, this.sixteenBit, this.accountNumber)
         .then(promise => (eText2 = promise.valueOf()));
       await this.aes
-        .encrypt(this.secureKey, this.secureIV, this.holderName)
+        .encrypt(this.thrtyTwoBit, this.sixteenBit, this.holderName)
         .then(promise => (eText4 = promise.valueOf()));
       await this.aes
-        .encrypt(this.secureKey, this.secureIV, this.Cvc)
+        .encrypt(this.thrtyTwoBit, this.sixteenBit, this.Cvc)
         .then(promise => (eText5 = promise.valueOf()));
       await this.aes
-        .encrypt(this.secureKey, this.secureIV, this.expiry)
+        .encrypt(this.thrtyTwoBit, this.sixteenBit, this.expiry)
         .then(promise => (eText6 = promise.valueOf()))
         .catch((error: any) => console.error(error));
       await this.aes
-        .encrypt(this.secureKey, this.secureIV, this.sortcode)
+        .encrypt(this.thrtyTwoBit, this.sixteenBit, this.sortcode)
         .then(promise => (eText3 = promise.valueOf()))
         .catch((error: any) => console.error(error));
       var payment = [
@@ -200,8 +210,8 @@ export class AddCardModalPage {
           CVC: eText5,
           Sort: eText3,
           AccountNo: eText2,
-          Key: this.secureKey,
-          IV: this.secureIV
+          Key: this.thrtyTwoBit,
+          IV: this.sixteenBit
         }
       ];
       console.log(payment);
@@ -210,9 +220,9 @@ export class AddCardModalPage {
     }
   }
 
-  async generateSecureKeyAndIV() {
-    this.secureKey = await this.aes.generateSecureKey("pook"); // Returns a 32 bytes string
-    this.secureIV = await this.aes.generateSecureIV("pook"); // Returns a 16 bytes string
+  async generateSecureKeyAndIV() { // Use the Ionic AES26 plugin to generate two keys.
+    this.thrtyTwoBit = await this.aes.generateSecureKey("pook"); // Returns a 32 bytes string
+    this.sixteenBit = await this.aes.generateSecureIV("pook"); // Returns a 16 bytes string
   }
 
   ionViewDidLoad() {

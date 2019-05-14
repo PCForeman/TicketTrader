@@ -25,7 +25,7 @@ export class BuyPage {
   secondsLeft: any;
   timer: any;
   belowTen: any;
-  belowTenMin:any;
+  belowTenMin: any;
   currentUser: any;
 
   constructor(
@@ -37,13 +37,13 @@ export class BuyPage {
     private modal: ModalController
   ) {}
 
-  ionViewDidLoad() {
+  ionViewDidLoad() { // Executes these on the view loading
     this.currentUser = this.afAuth.auth.currentUser.uid;
     this.retrieveCheckoutTickets();
     this.displayTimer();
   }
 
-  checkOutTimer() {
+  checkOutTimer() { // Removes a ticket from a users basket when timer runs out
     var currentUser = this.afAuth.auth.currentUser.uid;
     var ref = this.afDatabase.object(`ticketsInBasket/${currentUser}`);
     ref.snapshotChanges().subscribe(snapshot => {
@@ -75,32 +75,35 @@ export class BuyPage {
           .remove()
           .then(res => {
             console.log(res);
-            this.afDatabase.list(`approvedTickets`).push({
-              Name: eventName,
-              Venue: eventVenue,
-              Price: eventPrice,
-              Date: eventDate,
-              Time: eventTime,
-              Creation: eventCreationDate,
-              Seller: eventSellerUID,
-              Payout: eventCustomerPayout,
-              Charge: eventServiceCharge,
-              Lat: lats,
-              Long: longs,
-              PayoutAccount: payoutAccount,
-              PayoutSortCode: payoutSortCode,
-              downloadURL: downloadURL,
-              interested: interested
-            }).catch(error => {
-              console.log(error);
-            });
+            this.afDatabase
+              .list(`approvedTickets`)
+              .push({
+                Name: eventName,
+                Venue: eventVenue,
+                Price: eventPrice,
+                Date: eventDate,
+                Time: eventTime,
+                Creation: eventCreationDate,
+                Seller: eventSellerUID,
+                Payout: eventCustomerPayout,
+                Charge: eventServiceCharge,
+                Lat: lats,
+                Long: longs,
+                PayoutAccount: payoutAccount,
+                PayoutSortCode: payoutSortCode,
+                downloadURL: downloadURL,
+                interested: interested
+              })
+              .catch(error => {
+                console.log(error);
+              });
           });
-          this.items = [];
+        this.items = [];
       });
     });
   }
 
-  displayTimer() {
+  displayTimer() { // Works out when users ticket reservation period ends and calculates a countdown based on it.
     var currentUser = this.afAuth.auth.currentUser.uid;
     var ref = this.afDatabase.object(`ticketsInBasket/${currentUser}`);
     ref.snapshotChanges().subscribe(snapshot => {
@@ -131,29 +134,32 @@ export class BuyPage {
         });
     });
   }
-  updateSeconds(minutes: number, seconds: number) {
-     if (this.secondsLeft < 10){
-     this.belowTen = "0" }
-     if (this.minutesLeft < 10){
-     this.belowTenMin = "0"
-     if (this.secondsLeft <= 0) {
-     this.secondsLeft = this.secondsLeft + 59;
-     this.minutesLeft = this.minutesLeft - 1;
-     this.belowTen = "";
-     if (this.minutesLeft < 0 && this.secondsLeft < 2) {
-     this.timeIsUp();
-     this.checkOutTimer();
+  updateSeconds(minutes: number, seconds: number) { // Called by the above function, minutes and seconds
+    // are passed as parameters and the functions then will count down to 0:00
+    if (this.secondsLeft < 10) {
+      this.belowTen = "0";
     }
-    console.log(minutes, seconds);
-  }
-}
+    if (this.minutesLeft < 10) {
+      this.belowTenMin = "0";
+      if (this.secondsLeft <= 0) {
+        this.secondsLeft = this.secondsLeft + 59;
+        this.minutesLeft = this.minutesLeft - 1;
+        this.belowTen = "";
+        if (this.minutesLeft < 0 && this.secondsLeft < 2) {
+          this.timeIsUp();
+          this.checkOutTimer();
+        }
+        console.log(minutes, seconds);
+      }
+    }
   }
 
-  timeIsUp() {
+  timeIsUp() { // Clears the interval above
     clearInterval(this.timer);
   }
 
-  checkOut() {
+  checkOut() { // Works out what ticket has been clicked, creates and object to pass into the modal opened
+    // so that it doesn't go out of scope
     var target = event.srcElement;
     var uId = this.afAuth.auth.currentUser.uid;
     var ticketId = target.parentElement.parentElement.children.item(1)
@@ -165,9 +171,8 @@ export class BuyPage {
     var sArtist = target.parentElement.parentElement.children
       .item(3)
       .innerHTML.substr(0);
-    var sortCode = target.parentElement.parentElement.children
-      .item(9)
-      .innerHTML
+    var sortCode = target.parentElement.parentElement.children.item(9)
+      .innerHTML;
     var long = target.parentElement.parentElement.children
       .item(10)
       .innerHTML.substr(0);
@@ -180,8 +185,7 @@ export class BuyPage {
     var sCharge = target.parentElement.parentElement.children
       .item(13)
       .innerHTML.substr(0);
-    var sAccountNo = target.parentElement.parentElement.children
-      .item(8)
+    var sAccountNo = target.parentElement.parentElement.children.item(8)
       .innerHTML;
     var sVenue = target.parentElement.parentElement.children
       .item(4)
@@ -192,7 +196,7 @@ export class BuyPage {
     var sTime = target.parentElement.parentElement.children
       .item(7)
       .innerHTML.substr(5);
-      var sURL = target.parentElement.parentElement.children
+    var sURL = target.parentElement.parentElement.children
       .item(14)
       .innerHTML.substr(0);
     var temp = [];
@@ -256,7 +260,7 @@ export class BuyPage {
     myModal.present();
   }
 
-  retrieveCheckoutTickets() {
+  retrieveCheckoutTickets() { // Retrieves a users tickets that are in the basket table.
     var currentUser = this.afAuth.auth.currentUser.uid;
     var ref = this.afDatabase.object(`ticketsInBasket/${currentUser}`);
     ref.snapshotChanges().subscribe(snapshot => {
@@ -319,7 +323,7 @@ export class BuyPage {
     });
   }
 
-  remove() {
+  remove() { // Removes ticket from a users basket and puts it back in active listings
     var target = event.srcElement;
     var ticketId = target.parentElement.parentElement.children.item(1)
       .innerHTML;
@@ -360,7 +364,7 @@ export class BuyPage {
           PayoutAccount: payoutAccount,
           PayoutSortCode: payoutSortCode,
           downloadURL: downloadURL,
-          interested:interested
+          interested: interested
         });
         this.items = [];
       });

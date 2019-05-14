@@ -40,11 +40,11 @@ var AccountPageModule = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(121);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -114,14 +114,38 @@ var AccountPage = /** @class */ (function () {
         var currentUser = this.afAuth.auth.currentUser.uid;
         var ref = this.afDatabase.object("user/" + currentUser);
         ref.snapshotChanges().subscribe(function (snapshot) {
-            var ad1 = snapshot.payload.child("addressL1/").val().toString();
-            var ad2 = snapshot.payload.child("addressPC/").val().toString();
-            var dob = snapshot.payload.child("dOb/").val().toString();
-            var em = snapshot.payload.child("email/").val().toString();
-            var fn = snapshot.payload.child("firstname/").val().toString();
-            var pw = snapshot.payload.child("password/").val().toString();
-            var pn = snapshot.payload.child("phoneNo/").val().toString();
-            var sn = snapshot.payload.child("surname/").val().toString();
+            var ad1 = snapshot.payload
+                .child("addressL1/")
+                .val()
+                .toString();
+            var ad2 = snapshot.payload
+                .child("addressPC/")
+                .val()
+                .toString();
+            var dob = snapshot.payload
+                .child("dOb/")
+                .val()
+                .toString();
+            var em = snapshot.payload
+                .child("email/")
+                .val()
+                .toString();
+            var fn = snapshot.payload
+                .child("firstname/")
+                .val()
+                .toString();
+            var pw = snapshot.payload
+                .child("password/")
+                .val()
+                .toString();
+            var pn = snapshot.payload
+                .child("phoneNo/")
+                .val()
+                .toString();
+            var sn = snapshot.payload
+                .child("surname/")
+                .val()
+                .toString();
             var myModalOpts = {
                 cssClass: "modal",
                 enableBackdropDismiss: true,
@@ -158,27 +182,30 @@ var AccountPage = /** @class */ (function () {
             return __generator(this, function (_a) {
                 ref = this.afDatabase.object("user/" + this.afAuth.auth.currentUser.uid);
                 ref.snapshotChanges().subscribe(function (snapshot) {
-                    var pw = snapshot.payload.child("password/").val().toString();
+                    var pw = snapshot.payload
+                        .child("password/")
+                        .val()
+                        .toString();
                     console.log(pw);
                     var alert = _this.aCtrl.create({
-                        title: 'Enter password to delete account',
+                        title: "Enter password to delete account",
                         inputs: [
                             {
-                                name: 'password',
-                                placeholder: 'Password',
-                                type: 'password'
+                                name: "password",
+                                placeholder: "Password",
+                                type: "password"
                             }
                         ],
                         buttons: [
                             {
-                                text: 'Cancel',
-                                role: 'cancel',
+                                text: "Cancel",
+                                role: "cancel",
                                 handler: function (cancelled) {
-                                    console.log('Cancel clicked');
+                                    console.log("Cancel clicked");
                                 }
                             },
                             {
-                                text: 'Login',
+                                text: "Login",
                                 handler: function (data) {
                                     console.log(data);
                                     if (data.password == pw) {
@@ -194,7 +221,7 @@ var AccountPage = /** @class */ (function () {
                                         }
                                     }
                                     else {
-                                        console.log('Cancelled');
+                                        console.log("Cancelled");
                                         return false;
                                     }
                                 }
@@ -207,52 +234,11 @@ var AccountPage = /** @class */ (function () {
             });
         });
     };
-    AccountPage.prototype.getUserPassword = function () {
-        var _this = this;
-        this.playerPassword = this.afDatabase.object("user/" + this.afAuth.auth.currentUser.uid);
-        this.playerPassword.snapshotChanges().subscribe(function (snapshot) {
-            var password = snapshot.payload.child("password/").val();
-            _this.gPassword = password;
-        });
-    };
-    AccountPage.prototype.updateUserPassword = function () {
-        var key = this.afAuth.auth.currentUser.uid;
-        this.getUserPassword();
-        if (this.currentPassword == this.gPassword &&
-            this.newPassword == this.comparePassword) {
-            this.afAuth.auth.currentUser.updatePassword(this.newPassword);
-            this.afDatabase
-                .object("/user/" + key)
-                .update({ password: this.newPassword });
-            this.passwordChangedMessage();
-            this.currentPassword = "";
-            this.newPassword = "";
-            this.comparePassword = "";
-        }
-    };
     AccountPage.prototype.checkOut = function () {
         this.navCtrl.push("BuyPage");
     };
     AccountPage.prototype.orderHistory = function () {
         this.navCtrl.push("OrderHistoryPage");
-    };
-    AccountPage.prototype.passwordValidationMessage = function () {
-        this.toast
-            .create({
-            message: "Please ensure all fields are filled out",
-            position: "middle",
-            duration: 2000
-        })
-            .present();
-    };
-    AccountPage.prototype.passwordChangedMessage = function () {
-        this.toast
-            .create({
-            message: "Password successfully changed",
-            position: "middle",
-            duration: 2000
-        })
-            .present();
     };
     AccountPage.prototype.displayAccountData = function () {
         var _this = this;
@@ -283,7 +269,7 @@ var AccountPage = /** @class */ (function () {
                 duration: 3500
             })
                 .present();
-            _this.app.getRootNav().setRoot('LoginPage');
+            _this.app.getRootNav().setRoot("LoginPage");
         });
     };
     AccountPage = __decorate([
@@ -291,13 +277,13 @@ var AccountPage = /** @class */ (function () {
             selector: "page-account",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\account\account.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="cloud-download"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Account</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-content>\n    <div class="ngDivAccount">\n      <ion-label position text-center>First name</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.firstname\n      }}</ion-item>\n      <ion-label position text-center>Surname</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.surname\n      }}</ion-item>\n      <ion-label position text-center>Email Address</ion-label>\n      <ion-item position text-center>{{ (userData | async)?.email }}</ion-item>\n      <ion-label position text-center>Address</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.addressL1\n      }}</ion-item>\n      <ion-label position text-center>Postcode</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.addressPC\n      }}</ion-item>\n      <ion-label position text-center>Phone Number</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.phoneNo\n      }}</ion-item>\n      <ion-label position text-center>Date of birth</ion-label>\n      <ion-item position text-center>{{ (userData | async)?.dOb }}</ion-item>\n      <br />\n      <button\n        ion-button\n        class="sellTicketButtons"\n        icon-only\n        id="btnDeleteAcc"\n        color="midnight-blue"\n        (click)="addCard()"\n      >\n        <ion-icon name="card"></ion-icon>\n      </button>\n      <button\n        ion-button\n        class="sellTicketButtons"\n        icon-only\n        id="btnChangePassword"\n        color="midnight-blue"\n        (click)="openModal()"\n      >\n        <ion-icon name="folder-open"></ion-icon>\n      </button>\n      <button\n        ion-button\n        class="buttonDeleteAccount"\n        color="midnight-blue"\n        id="btnDeleteAcc"\n        block\n        (click)="deleteAccount()"\n      >\n        Delete Account\n      </button>\n    </div>\n  </ion-content>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\account\account.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
-            __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+            __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["AngularFireAuth"],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* App */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */]])
     ], AccountPage);
     return AccountPage;
 }());

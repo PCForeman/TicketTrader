@@ -43,7 +43,9 @@
         icon-only
         color="midnight-blue"
         size="large"
-        (click)="accept(index)"> <ion-icon name="thumbs-up"></ion-icon>
+        (click)="accept(index)"
+      >
+        <ion-icon name="thumbs-up"></ion-icon>
       </button>
       <button
         [id]="i"
@@ -52,17 +54,21 @@
         icon-only
         color="midnight-blue"
         size="large"
-        (click)="reject(index)"> <ion-icon name="thumbs-down"></ion-icon>
+        (click)="reject(index)"
+      >
+        <ion-icon name="thumbs-down"></ion-icon>
       </button>
       <button
-      [id]="i"
-      class="imageButton"
-      ion-button
-      icon-only
-      color="midnight-blue"
-      size="large"
-      (click)="openImage()"><ion-icon name="image"></ion-icon>
-    </button>
+        [id]="i"
+        class="imageButton"
+        ion-button
+        icon-only
+        color="midnight-blue"
+        size="large"
+        (click)="openImage()"
+      >
+        <ion-icon name="image"></ion-icon>
+      </button>
     </div>
   </ion-list>
 </ion-content>

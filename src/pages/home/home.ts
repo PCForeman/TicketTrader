@@ -12,7 +12,6 @@ import { Observable } from "rxjs";
 import { Geolocation } from "@ionic-native/geolocation";
 import { AngularFireDatabase } from "angularfire2/database";
 
-
 declare var google;
 var userLat: number;
 var userLong: number;
@@ -47,18 +46,19 @@ export class HomePage {
   }
 
   async ionViewWillLoad() {
-  await  this.loadMap();
-  await this.loadListings();
+    await this.loadMap();
+    await this.loadListings();
+    this.fetchTickets();
   }
 
   listingData: Observable<any>;
 
- loadMap() {
+  loadMap() { // Loads the google maps API on screen it then calls functions to populate it with data.
     this.gLocation
       .getCurrentPosition()
       .then(resp => {
-       userLat = resp.coords.latitude;
-       userLong = resp.coords.longitude;
+        userLat = resp.coords.latitude;
+        userLong = resp.coords.longitude;
         let latLng = new google.maps.LatLng(userLat, userLong);
         userPos = latLng;
         let mapOptions = {
@@ -70,7 +70,7 @@ export class HomePage {
         };
         this.map = new google.maps.Map(
           this.mapElement.nativeElement,
-          mapOptions,
+          mapOptions
         );
         this.loadListings();
         this.addUserMarker();
@@ -80,7 +80,7 @@ export class HomePage {
       });
   }
 
-  addUserMarker() {
+  addUserMarker() { // Adds a marker for the user based on their geolocation
     let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
@@ -90,7 +90,8 @@ export class HomePage {
     this.addInfoWindow(marker, content);
   }
 
-  loadListings() {
+  loadListings() { // Retrives approved listings from the table, create an object for each
+    // and then plots them on the map with their respective Lat/Lng
     var ref = this.afDatabase.object(`approvedTickets/`);
     ref.snapshotChanges().subscribe(snapshot => {
       var allData = snapshot.payload.val();
@@ -148,10 +149,11 @@ export class HomePage {
           let marker = new google.maps.Marker({
             map: this.map,
             position: latLng,
-            icon: 'https://firebasestorage.googleapis.com/v0/b/dissy-c7abe.appspot.com/o/Webp.net-resizeimage%20(1).png?alt=media&token=689f51f3-e576-49bd-abc2-36b892a58fa6'
+            icon:
+              "https://firebasestorage.googleapis.com/v0/b/dissy-c7abe.appspot.com/o/Webp.net-resizeimage%20(1).png?alt=media&token=689f51f3-e576-49bd-abc2-36b892a58fa6"
           });
           let content =
-            "<div class='infoWindowDiv'>" +           
+            "<div class='infoWindowDiv'>" +
             "<h1 hidden>" +
             ticket.Key +
             "</h1>" +
@@ -178,7 +180,8 @@ export class HomePage {
             "£" +
             ticket.Price +
             "<br>" +
-            "People interested:" + " " +
+            "People interested:" +
+            " " +
             ticket.interested +
             "<br>" +
             " " +
@@ -189,28 +192,35 @@ export class HomePage {
     });
   }
 
-  buyTicketAlert(){
+  fetchTickets() { // Makes the listings refresh every 20 seconds.
+    setInterval(() => this.loadListings(), 20000);
+  }
+
+  buyTicketAlert() { // Propmpts an alert when the user clicks to buy a ticket, and will execute based on users input
     const target = event.srcElement;
     const userId = this.afAuth.auth.currentUser.uid;
     const sellerId = target.parentElement.children.item(4).innerHTML;
-    const ticketClickedId = target.parentElement.children.item(0).innerHTML.toString();
+    const ticketClickedId = target.parentElement.children
+      .item(0)
+      .innerHTML.toString();
     const index = target.parentElement.children.item(2).innerHTML.toString();
     let alert = this.aCtrl.create({
       title: "Payment",
       mode: "ios",
-      message:'Do you want to buy this ticket? The ticket will be reserved for 10 minutes.',
+      message:
+        "Do you want to buy this ticket? The ticket will be reserved for 10 minutes.",
       buttons: [
         {
           text: "Proceed",
           handler: () => {
-          this.buyTickets(userId, sellerId, ticketClickedId, index)
+            this.buyTickets(userId, sellerId, ticketClickedId, index);
           }
         },
         {
           text: "Dismiss",
           role: "cancel",
           handler: () => {
-          console.log('No thank you')
+            console.log("No thank you");
           }
         }
       ]
@@ -218,13 +228,14 @@ export class HomePage {
     alert.present();
   }
 
-  buyTickets(userId, sellerId, ticketClickedId, index) {
+  buyTickets(userId, sellerId, ticketClickedId, index) { //Check that the user isn't the person who listed the ticket
+  //If condition is met it will remove the ticket from the map and active listings and place the ticket in a users basket
     const temp = [];
     console.log(userId, sellerId, ticketClickedId, index);
-      if (userId == sellerId) {
-      this.yourTicketMessage();  
-      }else{
-      const timeClicked = Date.now()
+    if (userId == sellerId) {
+      this.yourTicketMessage();
+    } else {
+      const timeClicked = Date.now();
       const checkOutBy = timeClicked + 600000;
       temp.push(this.items[index]);
       temp.filter(v => {
@@ -252,34 +263,35 @@ export class HomePage {
           .list(`ticketsInBasket/${checkOutRef}`)
           .push(tempArray[0]);
         this.afDatabase.list(`approvedTickets/${tempArray[0].Key}`).remove();
-       this.items = [];
-       this.navCtrl.push('BuyPage');
+        this.items = [];
+        this.navCtrl.push("BuyPage");
       });
     }
   }
 
-  yourTicketMessage() {
+  yourTicketMessage() { // Displays a toast to user if they try to buy their own ticket listing
     this.toast
-    .create({
-      message: "This is your listing.",
-      duration: 2000,
-      position: "Middle"
-    }).present();
+      .create({
+        message: "This is your listing.",
+        duration: 2000,
+        position: "Middle"
+      })
+      .present();
   }
 
   refresh(): void {
     window.location.reload();
   }
 
-  checkOut() {
+  checkOut() { // redirection
     this.navCtrl.push("BuyPage");
   }
 
-  orderHistory() {
+  orderHistory() { // redirection
     this.navCtrl.push("OrderHistoryPage");
   }
 
-  addInfoWindow(marker, content) {
+  addInfoWindow(marker, content) { // Adds infowindow to markers on map (marker, content)
     let infoWindow = new google.maps.InfoWindow({
       content: content
     });
@@ -288,7 +300,7 @@ export class HomePage {
     });
   }
 
-  logout() {
+  logout() { // Logs a user out
     this.afAuth.auth.signOut().then(() => {
       this.toast
         .create({
@@ -297,7 +309,7 @@ export class HomePage {
           duration: 3500
         })
         .present();
-        this.app.getRootNav().setRoot('LoginPage');
-      })
+      this.app.getRootNav().setRoot("LoginPage");
+    });
   }
 }

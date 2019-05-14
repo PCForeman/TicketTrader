@@ -8,9 +8,9 @@ webpackJsonp([16],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__register_register__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__admin_admin__ = __webpack_require__(344);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -89,7 +89,8 @@ var LoginPage = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.showSpinner()];
+                    case 0: // Redirects user to registration page
+                    return [4 /*yield*/, this.showSpinner()];
                     case 1:
                         _a.sent();
                         return [4 /*yield*/, this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__register_register__["a" /* RegisterPage */])];
@@ -117,7 +118,8 @@ var LoginPage = /** @class */ (function () {
             var result, lastSignIn, creation, currentTime, x, z, key, e_1, disableLogin, disableReg;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.showSpinner()];
+                    case 0: // Validates a user and logs them into the system, directs them passed on different variables
+                    return [4 /*yield*/, this.showSpinner()];
                     case 1:
                         _a.sent();
                         _a.label = 2;
@@ -232,9 +234,9 @@ var LoginPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -602,9 +604,9 @@ var LoginPageModule = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AdminPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(45);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -676,6 +678,7 @@ var AdminPage = /** @class */ (function () {
         this.copyItems();
     };
     AdminPage.prototype.openImage = function () {
+        // Opens a modal to display the image that is viewed via a download url
         var target = event.srcElement;
         var imageUrl = target.parentElement.parentElement.children.item(7)
             .innerHTML;
@@ -691,9 +694,11 @@ var AdminPage = /** @class */ (function () {
         myModal.present();
     };
     AdminPage.prototype.refresh = function () {
+        // Can be called to refresh the page
         window.location.reload();
     };
     AdminPage.prototype.initializeItems = function () {
+        // Initialises item search
         this.itemSearch = this.items;
     };
     AdminPage.prototype.copyItems = function () {
@@ -704,13 +709,13 @@ var AdminPage = /** @class */ (function () {
     };
     AdminPage.prototype.getItems = function (searchbar) {
         var _this = this;
-        // Reset items back to all of the items
+        //Allows user to filter through items via the users input
+        // Reset items
         this.initializeItems();
         console.log(this.itemSearch);
-        // set q to the value of the searchbar
+        // set q to the value search
         var q = searchbar.srcElement.value;
         console.log(q);
-        // if the value is an empty string don't filter the items
         if (q == undefined || q == "") {
             this.items = this.items2;
             this.items.splice(this.items.length - 1);
@@ -732,10 +737,12 @@ var AdminPage = /** @class */ (function () {
         }
     };
     AdminPage.prototype.reloadData = function () {
+        // Reloads the items.
         this.items = this.itemSearch;
     };
     AdminPage.prototype.retrieveUnaprovedTickets = function () {
         var _this = this;
+        // Retrieve all of the unapproved tickets that are in the database, and creates an object for each one
         var ref = this.fbDatabase.object("unaprovedTickets/");
         ref.snapshotChanges().subscribe(function (snapshot) {
             var allData = snapshot.payload.val();
@@ -802,6 +809,7 @@ var AdminPage = /** @class */ (function () {
     };
     AdminPage.prototype.accept = function () {
         var _this = this;
+        // Move the ticket from the unaproved table to the approved table
         var temp = [];
         var target = event.srcElement;
         var ticketClicked = parseInt(target.parentElement.parentElement.children.item(0).innerHTML.valueOf()) - 1;
@@ -856,6 +864,7 @@ var AdminPage = /** @class */ (function () {
         }); });
     };
     AdminPage.prototype.showSpinner = function () {
+        // Displays a spinner
         var loading = this.ldCtrl.create({
             content: ""
         });
@@ -866,6 +875,7 @@ var AdminPage = /** @class */ (function () {
     };
     AdminPage.prototype.reject = function () {
         var _this = this;
+        // Rejects a ticket and removes it from the database.
         var temp = [];
         var target = event.srcElement;
         var ticketClicked = parseInt(target.parentElement.parentElement.children.item(0).innerHTML.valueOf()) - 1;
@@ -895,11 +905,7 @@ var AdminPage = /** @class */ (function () {
                         this.fbDatabase.list("unaprovedTickets/" + temp[0].Key).remove();
                         return [4 /*yield*/, this.toast
                                 .create({
-                                message: "Ticket" +
-                                    " " +
-                                    temp[0].Key +
-                                    " " +
-                                    "has been rejected.",
+                                message: "Ticket" + " " + temp[0].Key + " " + "has been rejected.",
                                 position: "top",
                                 duration: 2000
                             })
@@ -917,6 +923,7 @@ var AdminPage = /** @class */ (function () {
     };
     AdminPage.prototype.logout = function () {
         var _this = this;
+        // Logs a user out
         this.afAuth.auth.signOut().then(function () {
             _this.toast
                 .create({
@@ -930,7 +937,7 @@ var AdminPage = /** @class */ (function () {
     };
     AdminPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-admin",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin\admin.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Pending listings</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <ion-list>\n    <div\n      class="ngDivAdmin"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h2 position text-center>{{ item.Key }}</h2>\n      <h3 position text-center>{{ item.Name }}</h3>\n      <h4 position text-center>Venue: {{ item.Venue }}</h4>\n      <h5 position text-center>Price: £{{ item.Price }}</h5>\n      <h6 position text-center>Date: {{ item.Date }}</h6>\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n      <h6 hidden>{{ item.downloadURL }}</h6>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="midnight-blue"\n        size="large"\n        (click)="accept(index)"> <ion-icon name="thumbs-up"></ion-icon>\n      </button>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="midnight-blue"\n        size="large"\n        (click)="reject(index)"> <ion-icon name="thumbs-down"></ion-icon>\n      </button>\n      <button\n      [id]="i"\n      class="imageButton"\n      ion-button\n      icon-only\n      color="midnight-blue"\n      size="large"\n      (click)="openImage()"><ion-icon name="image"></ion-icon>\n    </button>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin\admin.html"*/
+            selector: "page-admin",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin\admin.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Pending listings</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <ion-list>\n    <div\n      class="ngDivAdmin"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h2 position text-center>{{ item.Key }}</h2>\n      <h3 position text-center>{{ item.Name }}</h3>\n      <h4 position text-center>Venue: {{ item.Venue }}</h4>\n      <h5 position text-center>Price: £{{ item.Price }}</h5>\n      <h6 position text-center>Date: {{ item.Date }}</h6>\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n      <h6 hidden>{{ item.downloadURL }}</h6>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="midnight-blue"\n        size="large"\n        (click)="accept(index)"\n      >\n        <ion-icon name="thumbs-up"></ion-icon>\n      </button>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="midnight-blue"\n        size="large"\n        (click)="reject(index)"\n      >\n        <ion-icon name="thumbs-down"></ion-icon>\n      </button>\n      <button\n        [id]="i"\n        class="imageButton"\n        ion-button\n        icon-only\n        color="midnight-blue"\n        size="large"\n        (click)="openImage()"\n      >\n        <ion-icon name="image"></ion-icon>\n      </button>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin\admin.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */],
@@ -991,9 +998,9 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17_angularfire2__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_angularfire2_storage__ = __webpack_require__(349);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18_angularfire2_storage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angularfire2_database__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angularfire2_database__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_angularfire2_auth__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_angularfire2_auth__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_android_permissions___ = __webpack_require__(346);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_native_stripe__ = __webpack_require__(345);
@@ -1094,10 +1101,10 @@ var AppModule = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(231);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angularfire2_database__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1180,6 +1187,7 @@ var HomePage = /** @class */ (function () {
                         return [4 /*yield*/, this.loadListings()];
                     case 2:
                         _a.sent();
+                        this.fetchTickets();
                         return [2 /*return*/];
                 }
             });
@@ -1220,6 +1228,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.loadListings = function () {
         var _this = this;
+        // and then plots them on the map with their respective Lat/Lng
         var ref = this.afDatabase.object("approvedTickets/");
         ref.snapshotChanges().subscribe(function (snapshot) {
             var allData = snapshot.payload.val();
@@ -1277,7 +1286,7 @@ var HomePage = /** @class */ (function () {
                     var marker = new google.maps.Marker({
                         map: _this.map,
                         position: latLng,
-                        icon: 'https://firebasestorage.googleapis.com/v0/b/dissy-c7abe.appspot.com/o/Webp.net-resizeimage%20(1).png?alt=media&token=689f51f3-e576-49bd-abc2-36b892a58fa6'
+                        icon: "https://firebasestorage.googleapis.com/v0/b/dissy-c7abe.appspot.com/o/Webp.net-resizeimage%20(1).png?alt=media&token=689f51f3-e576-49bd-abc2-36b892a58fa6"
                     });
                     var content = "<div class='infoWindowDiv'>" +
                         "<h1 hidden>" +
@@ -1306,7 +1315,8 @@ var HomePage = /** @class */ (function () {
                         "£" +
                         ticket.Price +
                         "<br>" +
-                        "People interested:" + " " +
+                        "People interested:" +
+                        " " +
                         ticket.interested +
                         "<br>" +
                         " " +
@@ -1316,17 +1326,23 @@ var HomePage = /** @class */ (function () {
             }
         });
     };
+    HomePage.prototype.fetchTickets = function () {
+        var _this = this;
+        setInterval(function () { return _this.loadListings(); }, 20000);
+    };
     HomePage.prototype.buyTicketAlert = function () {
         var _this = this;
         var target = event.srcElement;
         var userId = this.afAuth.auth.currentUser.uid;
         var sellerId = target.parentElement.children.item(4).innerHTML;
-        var ticketClickedId = target.parentElement.children.item(0).innerHTML.toString();
+        var ticketClickedId = target.parentElement.children
+            .item(0)
+            .innerHTML.toString();
         var index = target.parentElement.children.item(2).innerHTML.toString();
         var alert = this.aCtrl.create({
             title: "Payment",
             mode: "ios",
-            message: 'Do you want to buy this ticket? The ticket will be reserved for 10 minutes.',
+            message: "Do you want to buy this ticket? The ticket will be reserved for 10 minutes.",
             buttons: [
                 {
                     text: "Proceed",
@@ -1338,7 +1354,7 @@ var HomePage = /** @class */ (function () {
                     text: "Dismiss",
                     role: "cancel",
                     handler: function () {
-                        console.log('No thank you');
+                        console.log("No thank you");
                     }
                 }
             ]
@@ -1347,6 +1363,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.buyTickets = function (userId, sellerId, ticketClickedId, index) {
         var _this = this;
+        //If condition is met it will remove the ticket from the map and active listings and place the ticket in a users basket
         var temp = [];
         console.log(userId, sellerId, ticketClickedId, index);
         if (userId == sellerId) {
@@ -1382,7 +1399,7 @@ var HomePage = /** @class */ (function () {
                     .push(tempArray[0]);
                 _this.afDatabase.list("approvedTickets/" + tempArray[0].Key).remove();
                 _this.items = [];
-                _this.navCtrl.push('BuyPage');
+                _this.navCtrl.push("BuyPage");
             });
         }
     };
@@ -1392,7 +1409,8 @@ var HomePage = /** @class */ (function () {
             message: "This is your listing.",
             duration: 2000,
             position: "Middle"
-        }).present();
+        })
+            .present();
     };
     HomePage.prototype.refresh = function () {
         window.location.reload();
@@ -1422,7 +1440,7 @@ var HomePage = /** @class */ (function () {
                 duration: 3500
             })
                 .present();
-            _this.app.getRootNav().setRoot('LoginPage');
+            _this.app.getRootNav().setRoot("LoginPage");
         });
     };
     __decorate([
@@ -1431,7 +1449,7 @@ var HomePage = /** @class */ (function () {
     ], HomePage.prototype, "mapElement", void 0);
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-home",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="button" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="checkOut()"\n      >\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="orderHistory()"\n      >\n      <ion-icon name="cloud-download"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <div #map id="map"></div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\home\home.html"*/
+            selector: "page-home",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="button" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="checkOut()"\n      >\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="orderHistory()"\n      >\n        <ion-icon name="cloud-download"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <div #map id="map"></div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\home\home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],

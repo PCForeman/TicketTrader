@@ -9,12 +9,6 @@ import {
 } from "ionic-angular";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
-/**
- * Generated class for the Admin2Page page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -59,14 +53,11 @@ export class Admin2Page {
     this.itemSearch = this.items2;
   }
 
-  getItems(searchbar) {
-    // Reset items back to all of the items
+  getItems(searchbar) { // Allows user to search through items based on input
     this.initializeItems();
     console.log(this.itemSearch);
-    // set q to the value of the searchbar
     var q = searchbar.srcElement.value;
     console.log(q);
-    // if the value is an empty string don't filter the items
     if (q == undefined || q == "") {
       this.items = this.items2;
       this.items.splice(this.items.length - 1);
@@ -91,7 +82,7 @@ export class Admin2Page {
     this.items = this.itemSearch;
   }
 
-  retrieveApprovedListings() {
+  retrieveApprovedListings() { // Retrieves all of the approved tickets in the database.
     var ref = this.fbDatabase.object(`approvedTickets/`);
     ref.snapshotChanges().subscribe(snapshot => {
       var allData = snapshot.payload.val();
@@ -137,7 +128,7 @@ export class Admin2Page {
     });
   }
 
-  remove() {
+  remove() { // Removes a ticket from the approved tickets table
     var temp = [];
     var target = event.srcElement;
     var ticketClicked =
@@ -179,7 +170,7 @@ export class Admin2Page {
     });
   }
 
-  showSpinner() {
+  showSpinner() { // displays a spinner on screen
     let loading = this.ldCtrl.create({
       content: ""
     });
@@ -189,7 +180,7 @@ export class Admin2Page {
     }, 1500);
   }
 
-  logout() {
+  logout() { // Logs user out and redirects them
     this.afAuth.auth.signOut().then(() => {
       this.toast
         .create({

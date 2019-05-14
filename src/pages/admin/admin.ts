@@ -42,6 +42,7 @@ export class AdminPage {
   }
 
   openImage() {
+    // Opens a modal to display the image that is viewed via a download url
     var target = event.srcElement;
     var imageUrl = target.parentElement.parentElement.children.item(7)
       .innerHTML;
@@ -62,10 +63,12 @@ export class AdminPage {
   }
 
   refresh(): void {
+    // Can be called to refresh the page
     window.location.reload();
   }
 
   initializeItems(): void {
+    // Initialises item search
     this.itemSearch = this.items;
   }
 
@@ -78,13 +81,13 @@ export class AdminPage {
   }
 
   getItems(searchbar) {
-    // Reset items back to all of the items
+    //Allows user to filter through items via the users input
+    // Reset items
     this.initializeItems();
     console.log(this.itemSearch);
-    // set q to the value of the searchbar
+    // set q to the value search
     var q = searchbar.srcElement.value;
     console.log(q);
-    // if the value is an empty string don't filter the items
     if (q == undefined || q == "") {
       this.items = this.items2;
       this.items.splice(this.items.length - 1);
@@ -106,10 +109,12 @@ export class AdminPage {
   }
 
   reloadData() {
+    // Reloads the items.
     this.items = this.itemSearch;
   }
 
   retrieveUnaprovedTickets() {
+    // Retrieve all of the unapproved tickets that are in the database, and creates an object for each one
     var ref = this.fbDatabase.object(`unaprovedTickets/`);
     ref.snapshotChanges().subscribe(snapshot => {
       var allData = snapshot.payload.val();
@@ -177,6 +182,7 @@ export class AdminPage {
   }
 
   accept() {
+    // Move the ticket from the unaproved table to the approved table
     var temp = [];
     var target = event.srcElement;
     var ticketClicked =
@@ -227,6 +233,7 @@ export class AdminPage {
   }
 
   showSpinner() {
+    // Displays a spinner
     let loading = this.ldCtrl.create({
       content: ""
     });
@@ -237,6 +244,7 @@ export class AdminPage {
   }
 
   reject() {
+    // Rejects a ticket and removes it from the database.
     var temp = [];
     var target = event.srcElement;
     var ticketClicked =
@@ -267,12 +275,7 @@ export class AdminPage {
       this.fbDatabase.list(`unaprovedTickets/${temp[0].Key}`).remove();
       await this.toast
         .create({
-          message:
-            "Ticket" +
-            " " +
-            temp[0].Key +
-            " " +
-            "has been rejected.",
+          message: "Ticket" + " " + temp[0].Key + " " + "has been rejected.",
           position: "top",
           duration: 2000
         })
@@ -283,6 +286,7 @@ export class AdminPage {
   }
 
   logout() {
+    // Logs a user out
     this.afAuth.auth.signOut().then(() => {
       this.toast
         .create({

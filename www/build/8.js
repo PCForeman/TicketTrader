@@ -41,9 +41,9 @@ var BuyPageModule = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BuyPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -108,7 +108,9 @@ var BuyPage = /** @class */ (function () {
                     .remove()
                     .then(function (res) {
                     console.log(res);
-                    _this.afDatabase.list("approvedTickets").push({
+                    _this.afDatabase
+                        .list("approvedTickets")
+                        .push({
                         Name: eventName,
                         Venue: eventVenue,
                         Price: eventPrice,
@@ -124,7 +126,8 @@ var BuyPage = /** @class */ (function () {
                         PayoutSortCode: payoutSortCode,
                         downloadURL: downloadURL,
                         interested: interested
-                    }).catch(function (error) {
+                    })
+                        .catch(function (error) {
                         console.log(error);
                     });
                 });
@@ -160,6 +163,7 @@ var BuyPage = /** @class */ (function () {
         });
     };
     BuyPage.prototype.updateSeconds = function (minutes, seconds) {
+        // are passed as parameters and the functions then will count down to 0:00
         if (this.secondsLeft < 10) {
             this.belowTen = "0";
         }
@@ -181,6 +185,7 @@ var BuyPage = /** @class */ (function () {
         clearInterval(this.timer);
     };
     BuyPage.prototype.checkOut = function () {
+        // so that it doesn't go out of scope
         var target = event.srcElement;
         var uId = this.afAuth.auth.currentUser.uid;
         var ticketId = target.parentElement.parentElement.children.item(1)
@@ -192,8 +197,7 @@ var BuyPage = /** @class */ (function () {
         var sArtist = target.parentElement.parentElement.children
             .item(3)
             .innerHTML.substr(0);
-        var sortCode = target.parentElement.parentElement.children
-            .item(9)
+        var sortCode = target.parentElement.parentElement.children.item(9)
             .innerHTML;
         var long = target.parentElement.parentElement.children
             .item(10)
@@ -207,8 +211,7 @@ var BuyPage = /** @class */ (function () {
         var sCharge = target.parentElement.parentElement.children
             .item(13)
             .innerHTML.substr(0);
-        var sAccountNo = target.parentElement.parentElement.children
-            .item(8)
+        var sAccountNo = target.parentElement.parentElement.children.item(8)
             .innerHTML;
         var sVenue = target.parentElement.parentElement.children
             .item(4)

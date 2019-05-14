@@ -5,7 +5,8 @@ import {
   NavParams,
   ToastController,
   ModalController,
-  ModalOptions
+  ModalOptions,
+  AlertController
 } from "ionic-angular";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -22,7 +23,15 @@ export class OrderHistoryPage {
   kA = [];
   items2 = [];
   itemSearch = [];
+  seperator: any;
+  seperator2: any;
   plainTextCard: any;
+  hoursLeft: number;
+  minutesLeft: number;
+  secondsLeft: number;
+  timer: any;
+  belowTen: any;
+  belowTenMin: any;
   constructor(
     public navCtrl: NavController,
     private afAuth: AngularFireAuth,
@@ -30,55 +39,28 @@ export class OrderHistoryPage {
     private toast: ToastController,
     private aes: AES256,
     private modal: ModalController,
+    private aCtrl: AlertController,
     public navParams: NavParams
   ) {}
 
   ionViewDidLoad() {
     this.retrieveBoughtListings();
     this.retrieveSoldListings();
+    this.fetchTickets();
   }
 
-  remove() {
-    var temp = [];
-    var target = event.srcElement;
-    var ticketClicked =
-      parseInt(
-        target.parentElement.parentElement.children.item(0).innerHTML.valueOf()
-      ) - 1;
-    console.log(ticketClicked);
-    temp.push(this.items[ticketClicked]);
-    console.log(temp);
-    temp.filter(v => {
-      var tempArray = [
-        {
-          Key: v.Key,
-          Name: v.Name,
-          Venue: v.Venue,
-          Price: v.Price,
-          Date: v.Date,
-          Seller: v.Seller,
-          Time: v.Time,
-          Payout: v.Payout,
-          Creation: v.Creation,
-          Charge: v.Charge
-        }
-      ];
-      this.afDatabase.list(`approvedTickets/${tempArray[0].Key}`).remove();
-      this.toast
-        .create({
-          message:
-            "Ticket" +
-            " " +
-            tempArray[0].Key +
-            " " +
-            "has been removed from active listings",
-          position: "middle",
-          duration: 2000
-        })
-        .present();
-      this.navCtrl.setRoot("HomePage");
-      this.refresh();
-    });
+  remove(currentuser, id) {
+    this.afDatabase
+      .list(`sold/${currentuser}/${id}`)
+      .remove()
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    this.items = [];
+    this.retrieveSoldListings;
   }
 
   refresh(): void {
@@ -87,7 +69,7 @@ export class OrderHistoryPage {
 
   async viewTicket() {
     const button = event.srcElement;
-    var url = button.parentElement.parentElement.children.item(5).innerHTML;
+    var url = button.parentElement.parentElement.children.item(6).innerHTML;
     console.log(url);
     const myModalOpts: ModalOptions = {
       enableBackdropDismiss: true,
@@ -112,10 +94,12 @@ export class OrderHistoryPage {
       var keyValues = Object.keys(allData);
       console.log(keyValues);
       for (var i = 0; i < keyValues.length; ) {
+        const key = keyValues[i].valueOf();
         this.afDatabase
           .object(`sold/${currentUser}/${keyValues[i]}`)
           .snapshotChanges()
           .subscribe(async data => {
+            console.log(key);
             const Artist = data.payload.child(`Artist`).val();
             const AccountNo = data.payload.child(`AccountNo`).val();
             const Date = data.payload.child(`Date`).val();
@@ -125,6 +109,7 @@ export class OrderHistoryPage {
             const Venue = data.payload.child(`Venue`).val();
             const Status = data.payload.child(`Status`).val();
             var ticketObject = {
+              Key: key,
               Artist: Artist,
               Venue: Venue,
               Date: Date,
@@ -142,13 +127,124 @@ export class OrderHistoryPage {
     });
   }
 
+  removeAlertSold() {
+    const target = event.srcElement;
+    const id = target.parentElement.parentElement.children.item(1).innerHTML;
+    const currentUser = this.afAuth.auth.currentUser.uid;
+    let alert = this.aCtrl.create({
+      title: "Order history",
+      mode: "ios",
+      message: "Remove this record?",
+      buttons: [
+        {
+          text: "Yes",
+          handler: () => {
+            this.remove(currentUser, id);
+          }
+        },
+        {
+          text: "NO",
+          role: "cancel",
+          handler: () => {}
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  fetchTickets() {
+    setInterval(() => this.retrieveBoughtListings(), 20000);
+    setInterval(() => this.retrieveSoldListings(), 20000);
+  }
+
+  removeBoughtTicket(currentUser, id) {
+    this.afDatabase.list(`bought/${currentUser}/${id}`).remove;
+  }
+
+  removeAlertBought() {
+    const target = event.srcElement;
+    const id = target.parentElement.parentElement.children.item(1).innerHTML;
+    const currentUser = this.afAuth.auth.currentUser.uid;
+    let alert = this.aCtrl.create({
+      title: "Order history",
+      mode: "ios",
+      message: "Remove this record?",
+      buttons: [
+        {
+          text: "Yes",
+          handler: () => {
+            this.removeBoughtTicket(currentUser, id);
+          }
+        },
+        {
+          text: "NO",
+          role: "cancel",
+          handler: () => {}
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  eTicketRemoval() {
+    const target = event.srcElement;
+    const dateSpecified = target.parentElement.parentElement.children.item(3)
+      .innerHTML;
+    console.log(dateSpecified);
+    var mydate = new Date(2020, 10, 4).getMilliseconds();
+    console.log(mydate);
+  }
+
+  paymentDetails() {
+    const target = event.srcElement;
+    const id = target.parentElement.parentElement.children.item(1).innerHTML;
+    const Account = target.parentElement.parentElement.children.item(6)
+      .innerHTML;
+    const Sort = target.parentElement.parentElement.children.item(7).innerHTML;
+    const currentUser = this.afAuth.auth.currentUser.uid;
+    console.log(Date.now() + 960000);
+    var ref = this.afDatabase.object(`sold/${currentUser}/${id}`);
+    ref.snapshotChanges().subscribe(snapshot => {
+      const databaseTime = snapshot.payload.child(`FundRelease`).val();
+      const timeNow = Date.now();
+      const string = "Complete";
+      let alert = this.aCtrl.create({
+        title: "Payment details",
+        mode: "ios",
+        message:
+          "Payment account:" +
+          " " +
+          Account +
+          "<br>" +
+          "Sortcode:" +
+          " " +
+          Sort,
+        buttons: [
+          {
+            text: "Close",
+            handler: () => {}
+          }
+        ]
+      });
+      alert.present();
+      if (timeNow > databaseTime) {
+        this.afDatabase
+          .object(`sold/${currentUser}/${id}`)
+          .update({ Status: string })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+    });
+  }
+
   async retrieveBoughtListings() {
     const currentUser = this.afAuth.auth.currentUser.uid;
     const ref = this.afDatabase.object(`bought/${currentUser}`);
     ref.snapshotChanges().subscribe(snapshot => {
       var allData = snapshot.payload.val();
       var keyValues = Object.keys(allData);
-      for (var i = 0; i < keyValues.length;) {
+      for (var i = 0; i < keyValues.length; ) {
         this.afDatabase
           .object(`bought/${currentUser}/${keyValues[i]}`)
           .snapshotChanges()
