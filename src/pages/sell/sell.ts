@@ -160,7 +160,7 @@ export class SellPage {
     var userFinal = Number(userMoney - ticketTraderMoney).toFixed(2);
     this.payoutAmount = userFinal;
     console.log(userFinal);
-    if (userMoney >= 0 && userMoney <= 1000) {
+    if (userMoney > 1 && userMoney <= 50) {
       gListingCustomerPayout = userFinal;
       gListingServiceCharge = ticketTraderMoney;
       this.toast
@@ -178,7 +178,7 @@ export class SellPage {
     } else {
       this.toast
         .create({
-          message: "Value not numerical, or exceeds the price limit.",
+          message: "Value must be between £1 and £50.",
           position: "middle",
           duration: 3500
         })
@@ -296,6 +296,7 @@ export class SellPage {
                     console.log("Cancel clicked");
                     this.listing.PayoutAccount = accNoPlainText;
                     this.listing.PaySortCode = sortCodePlainText;
+                    this.instructionMessage();
                   }
                 },
                 {
@@ -303,6 +304,7 @@ export class SellPage {
                   role: "cancel",
                   handler: () => {
                     console.log("cancelled");
+                    this.instructionMessage();
                   }
                 }
               ]
@@ -310,6 +312,11 @@ export class SellPage {
             alert.present();
           });
       });
+  }
+
+
+  instructionMessage(){
+    this.toast.create({message:'Listing a ticket is easy fill out the details, check the money you will recieve by clicking the check price button. Then select a location by clicking the venue button and upload the corresponding ticket by clicking the ticket button', duration:7000, position:'middle'}).present();
   }
 
   async createListing(url) {
@@ -323,22 +330,19 @@ export class SellPage {
     var rDate = p1 + "/" + p2 + "/" + p3;
     console.log(rDate);
     var price = this.listing.Price;
-    if (
-      artist == "" ||
-      (startTime < 0 && startTime > 24) ||
-      date == null ||
-      price == NaN ||
-      price < 0 ||
-      price > 1000
-    ) {
-      this.toast
-        .create({
-          message: "One or more fields are incorrect, please check them",
-          duration: 3000,
-          position: "bottom"
-        })
-        .present();
-    } else {
+    if (artist == "" || artist == null){
+    this.toast.create({message:'Artist field is empty', duration:2000, position:'middle'}).present();
+    }else if (startTime < 0 && startTime > 24){
+    this.toast.create({message:'Time must be 24hr clock', duration:2000, position:'middle'}).present();
+    }else if (date == null){
+    this.toast.create({message:'Date cannot be empty', duration:2000, position:'middle'}).present();
+    }else if (price == NaN){
+    this.toast.create({message:'Price must be a numerical value between £1 - £50', duration:2000, position:'middle'}).present();
+    }else if (price < 1){
+    this.toast.create({message:'Price cannot be lower than £1', duration:2000, position:'middle'}).present();
+    }else if (price > 50){
+    this.toast.create({message:'Price cannot exceed £50', duration:2000, position:'middle'}).present();
+    }else{
       await this.upload(this.buffer, this.entryname);
       this.afAuth.authState.take(1).subscribe(auth => {
         this.listing.Date = rDate;

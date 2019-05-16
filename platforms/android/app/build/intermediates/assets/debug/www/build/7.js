@@ -171,62 +171,6 @@ var ModalAccountPage = /** @class */ (function () {
         });
         alert.present();
     };
-    ModalAccountPage.prototype.updateAddressAlert = function () {
-        var _this = this;
-        var alert = this.aCtrl.create({
-            mode: "ios",
-            title: "Update name?",
-            message: "from" +
-                " " +
-                this.userD.adress1 +
-                " " +
-                ", to" +
-                " " +
-                this.uAddressL1,
-            cssClass: "alert-button-group",
-            buttons: [
-                {
-                    text: "Proceed",
-                    handler: function () {
-                        _this.updateAddress();
-                    }
-                },
-                {
-                    text: "Dismiss",
-                    role: "cancel",
-                    handler: function () {
-                        _this.uAddressL1 = "";
-                    }
-                }
-            ]
-        });
-        alert.present();
-    };
-    ModalAccountPage.prototype.updatePostCodeAlert = function () {
-        var _this = this;
-        var alert = this.aCtrl.create({
-            mode: "ios",
-            title: "Update name?",
-            message: "from" + " " + this.userD.adress2 + " " + ", to" + " " + this.uPC,
-            cssClass: "alert-button-group",
-            buttons: [
-                {
-                    text: "Proceed",
-                    handler: function () {
-                        _this.updatePostCode();
-                    }
-                },
-                {
-                    text: "Dismiss",
-                    role: "cancel",
-                    handler: function () {
-                        _this.uPC = "";
-                    }
-                }
-            ]
-        });
-        alert.present();
-    };
     ModalAccountPage.prototype.updateNameAlert = function () {
         var _this = this;
         var alert = this.aCtrl.create({
@@ -396,32 +340,6 @@ var ModalAccountPage = /** @class */ (function () {
             });
         });
     };
-    ModalAccountPage.prototype.updateAddress = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var key, ref;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!(this.uAddressL1 == null || this.uAddressL1 == "")) return [3 /*break*/, 1];
-                        this.emptyStringMessage();
-                        return [3 /*break*/, 4];
-                    case 1:
-                        this.close();
-                        key = this.afAuth.auth.currentUser.uid;
-                        ref = this.afDatabase.object("/user/" + key);
-                        ref.update({ addressL1: this.uAddressL1 });
-                        return [4 /*yield*/, this.showSpinner()];
-                    case 2:
-                        _a.sent();
-                        return [4 /*yield*/, this.successMessage()];
-                    case 3:
-                        _a.sent();
-                        _a.label = 4;
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
     ModalAccountPage.prototype.updatePhoneNo = function () {
         return __awaiter(this, void 0, void 0, function () {
             var len, key, ref;
@@ -443,34 +361,6 @@ var ModalAccountPage = /** @class */ (function () {
                         return [4 /*yield*/, this.successMessage()];
                     case 3:
                         _a.sent();
-                        _a.label = 4;
-                    case 4: return [2 /*return*/];
-                }
-            });
-        });
-    };
-    ModalAccountPage.prototype.updatePostCode = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var pcLen, key, ref;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        pcLen = this.uPC.toString();
-                        console.log(pcLen.length);
-                        if (!(pcLen.length == 7 || pcLen.length == 8)) return [3 /*break*/, 3];
-                        this.close();
-                        key = this.afAuth.auth.currentUser.uid;
-                        ref = this.afDatabase.object("/user/" + key);
-                        ref.update({ addressPC: this.uPC });
-                        return [4 /*yield*/, this.showSpinner()];
-                    case 1:
-                        _a.sent();
-                        return [4 /*yield*/, this.successMessage()];
-                    case 2:
-                        _a.sent();
-                        return [3 /*break*/, 4];
-                    case 3:
-                        this.postCodeMessage();
                         _a.label = 4;
                     case 4: return [2 /*return*/];
                 }
@@ -512,7 +402,7 @@ var ModalAccountPage = /** @class */ (function () {
     };
     ModalAccountPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-modal-account",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\modal-account\modal-account.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n    <ion-title text-center>Edit account</ion-title\n\n    ><ion-buttons end>\n\n      <button ion-button (click)="close()">Close</button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <div class="ngFor">\n\n    <ion-item>\n\n      <ion-title text-center>Update Name</ion-title><br />\n\n      <h1 text-center>{{ userD.firstname }}</h1>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label text-center></ion-label>\n\n      <ion-input text-center placeholder="Enter new value" [(ngModel)]="this.uName"></ion-input>\n\n      <button ion-button icon-only color="dark" (click)="checkForNumerics()" item-end>\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-title text-center>Update Surname</ion-title><br />\n\n      <h1 text-center>{{ userD.surname }}</h1>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label text-center></ion-label>\n\n      <ion-input text-center placeholder="Enter new value" [(ngModel)]="this.uSurname"></ion-input>\n\n      <button\n\n        ion-button\n\n        icon-only\n\n        color="dark"\n\n        (click)="checkSurnameForNumerics()"\n\n        item-end\n\n      >\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-title text-center>Update Phone No</ion-title><br />\n\n      <h1 text-center>{{ userD.phonenumber }}</h1>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label text-center></ion-label>\n\n      <ion-input text-center placeholder="Enter new value" [(ngModel)]="this.uPhoneNo"></ion-input>\n\n      <button\n\n        ion-button\n\n        icon-only\n\n        color="dark"\n\n        (click)="updatePhoneNoAlert()"\n\n        item-end\n\n      >\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-title text-center>Update Address</ion-title><br />\n\n      <h1 text-center>{{ userD.adress1 }}</h1>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label text-center></ion-label>\n\n      <ion-input text-center placeholder="Enter new value" [(ngModel)]="this.uAddressL1"></ion-input>\n\n      <button\n\n        ion-button\n\n        icon-only\n\n        color="dark"\n\n        (click)="updateAddressAlert()"\n\n        item-end\n\n      >\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-title text-center>Update Postcode</ion-title><br />\n\n      <h1 text-center>{{ userD.adress2 }}</h1>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label text-center></ion-label>\n\n      <ion-input text-center placeholder="Enter new value" [(ngModel)]="this.uPC"></ion-input>\n\n      <button\n\n        ion-button\n\n        icon-only\n\n        color="dark"\n\n        (click)="updatePostCodeAlert()"\n\n        item-end\n\n      >\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-title text-center>Update password</ion-title><br />\n\n      <h1 text-center>**********</h1>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label text-center></ion-label>\n\n      <ion-input text-center placeholder="Enter new value" type="password" [(ngModel)]="this.password"></ion-input>\n\n      <button\n\n        ion-button\n\n        icon-only\n\n        color="dark"\n\n        (click)="updatePassword()"\n\n        item-end\n\n      >\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\modal-account\modal-account.html"*/
+            selector: "page-modal-account",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\modal-account\modal-account.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n    <ion-title text-center>Edit account</ion-title\n\n    ><ion-buttons end>\n\n      <button ion-button (click)="close()">Close</button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <div class="ngFor">\n\n    <ion-item>\n\n      <ion-title text-center>Update Name</ion-title><br />\n\n      <h1 text-center>{{ userD.firstname }}</h1>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label text-center></ion-label>\n\n      <ion-input text-center placeholder="Enter new value" [(ngModel)]="this.uName"></ion-input>\n\n      <button ion-button icon-only color="dark" (click)="checkForNumerics()" item-end>\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-title text-center>Update Surname</ion-title><br />\n\n      <h1 text-center>{{ userD.surname }}</h1>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label text-center></ion-label>\n\n      <ion-input text-center placeholder="Enter new value" [(ngModel)]="this.uSurname"></ion-input>\n\n      <button\n\n        ion-button\n\n        icon-only\n\n        color="dark"\n\n        (click)="checkSurnameForNumerics()"\n\n        item-end\n\n      >\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-title text-center>Update Phone No</ion-title><br />\n\n      <h1 text-center>{{ userD.phonenumber }}</h1>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label text-center></ion-label>\n\n      <ion-input text-center placeholder="Enter new value" [(ngModel)]="this.uPhoneNo"></ion-input>\n\n      <button\n\n        ion-button\n\n        icon-only\n\n        color="dark"\n\n        (click)="updatePhoneNoAlert()"\n\n        item-end\n\n      >\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-title text-center>Update password</ion-title><br />\n\n      <h1 text-center>**********</h1>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label text-center></ion-label>\n\n      <ion-input text-center placeholder="Enter new value" type="password" [(ngModel)]="this.password"></ion-input>\n\n      <button\n\n        ion-button\n\n        icon-only\n\n        color="dark"\n\n        (click)="updatePassword()"\n\n        item-end\n\n      >\n\n        <ion-icon name="checkmark-circle"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\modal-account\modal-account.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */],

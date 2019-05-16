@@ -110,66 +110,6 @@ export class ModalAccountPage {
     alert.present();
   }
 
-  updateAddressAlert() {
-    let alert = this.aCtrl.create({
-      mode: "ios",
-      title: "Update name?",
-      message:
-        "from" +
-        " " +
-        this.userD.adress1 +
-        " " +
-        ", to" +
-        " " +
-        this.uAddressL1,
-      cssClass: "alert-button-group",
-      buttons: [
-        {
-          text: "Proceed",
-
-          handler: () => {
-            this.updateAddress();
-          }
-        },
-        {
-          text: "Dismiss",
-          role: "cancel",
-          handler: () => {
-            this.uAddressL1 = "";
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
-
-  updatePostCodeAlert() {
-    let alert = this.aCtrl.create({
-      mode: "ios",
-      title: "Update name?",
-      message:
-        "from" + " " + this.userD.adress2 + " " + ", to" + " " + this.uPC,
-      cssClass: "alert-button-group",
-      buttons: [
-        {
-          text: "Proceed",
-
-          handler: () => {
-            this.updatePostCode();
-          }
-        },
-        {
-          text: "Dismiss",
-          role: "cancel",
-          handler: () => {
-            this.uPC = "";
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
-
   updateNameAlert() {
     let alert = this.aCtrl.create({
       mode: "ios",
@@ -323,18 +263,7 @@ export class ModalAccountPage {
     this.close();
   }
 
-  async updateAddress() {
-    if (this.uAddressL1 == null || this.uAddressL1 == "") {
-      this.emptyStringMessage();
-    } else {
-      this.close();
-      var key = this.afAuth.auth.currentUser.uid;
-      var ref = this.afDatabase.object(`/user/${key}`);
-      ref.update({ addressL1: this.uAddressL1 });
-      await this.showSpinner();
-      await this.successMessage();
-    }
-  }
+
 
   async updatePhoneNo() {
     var len = this.uPhoneNo.toString();
@@ -350,20 +279,6 @@ export class ModalAccountPage {
     }
   }
 
-  async updatePostCode() {
-    var pcLen = this.uPC.toString();
-    console.log(pcLen.length);
-    if (pcLen.length == 7 || pcLen.length == 8) {
-      this.close();
-      var key = this.afAuth.auth.currentUser.uid;
-      var ref = this.afDatabase.object(`/user/${key}`);
-      ref.update({ addressPC: this.uPC });
-      await this.showSpinner();
-      await this.successMessage();
-    } else {
-      this.postCodeMessage();
-    }
-  }
 
   async updatePassword() {
     this.close();

@@ -299,7 +299,7 @@ var RegisterPage = /** @class */ (function () {
     RegisterPage.prototype.rRegister = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
-            var vfirstname, vSurname, vEmail, vAdress1, vPassword, vPostCode, vPCL, vMobile, vDoB, result, e_1;
+            var vfirstname, vSurname, vEmail, vPassword, vMobile, vDoB, result, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.showSpinner()];
@@ -308,55 +308,40 @@ var RegisterPage = /** @class */ (function () {
                         vfirstname = this.user.firstname;
                         vSurname = this.user.surname;
                         vEmail = this.user.email;
-                        vAdress1 = this.user.addressL1;
                         vPassword = this.user.password;
-                        vPostCode = this.user.addressPC;
-                        vPCL = vPostCode.length;
                         vMobile = this.user.phoneNo;
                         vDoB = this.user.dOb;
                         if (!(vfirstname == "" || vfirstname == null)) return [3 /*break*/, 2];
                         this.toast.create({ message: 'First name is empty', duration: 2000 }).present();
-                        return [3 /*break*/, 14];
+                        return [3 /*break*/, 11];
                     case 2:
                         if (!(vSurname == "" || vSurname == null)) return [3 /*break*/, 3];
                         this.toast.create({ message: 'Surname is empty', duration: 2000 }).present();
-                        return [3 /*break*/, 14];
+                        return [3 /*break*/, 11];
                     case 3:
                         if (!(vEmail == "" || vEmail == null)) return [3 /*break*/, 4];
                         this.toast.create({ message: 'email is empty', duration: 2000 }).present();
-                        return [3 /*break*/, 14];
+                        return [3 /*break*/, 11];
                     case 4:
-                        if (!(vAdress1 == "" || vAdress1 == null)) return [3 /*break*/, 5];
-                        this.toast.create({ message: 'adress is empty', duration: 2000 }).present();
-                        return [3 /*break*/, 14];
-                    case 5:
-                        if (!(vPostCode == "" || null)) return [3 /*break*/, 6];
-                        this.toast.create({ message: 'Postcode is empty', duration: 2000 }).present();
-                        return [3 /*break*/, 14];
-                    case 6:
-                        if (!(vPCL < 7 || vPCL > 8)) return [3 /*break*/, 7];
-                        this.toast.create({ message: 'Postcode should be a max of 8 characters', duration: 2000 }).present();
-                        return [3 /*break*/, 14];
-                    case 7:
-                        if (!(vMobile == "" || null)) return [3 /*break*/, 8];
+                        if (!(vMobile == "" || null)) return [3 /*break*/, 5];
                         this.toast.create({ message: 'mobile field is empty', duration: 2000 }).present();
-                        return [3 /*break*/, 14];
-                    case 8:
-                        if (!(vMobile.length < 9)) return [3 /*break*/, 9];
+                        return [3 /*break*/, 11];
+                    case 5:
+                        if (!(vMobile.length < 9)) return [3 /*break*/, 6];
                         this.toast.create({ message: 'Phone number should have a minimum of 9 characters', duration: 2000 }).present();
-                        return [3 /*break*/, 14];
-                    case 9:
-                        if (!(vDoB == null)) return [3 /*break*/, 10];
+                        return [3 /*break*/, 11];
+                    case 6:
+                        if (!(vDoB == null)) return [3 /*break*/, 7];
                         this.toast.create({ message: 'First name is empty', duration: 2000 }).present();
-                        return [3 /*break*/, 14];
-                    case 10:
-                        if (!(vPassword.length < 8)) return [3 /*break*/, 11];
+                        return [3 /*break*/, 11];
+                    case 7:
+                        if (!(vPassword.length < 8)) return [3 /*break*/, 8];
                         this.toast.create({ message: "Password must be 8 or more characters with a special character", duration: 2000, position: "middle" }).present();
-                        return [3 /*break*/, 14];
-                    case 11:
-                        _a.trys.push([11, 13, , 14]);
+                        return [3 /*break*/, 11];
+                    case 8:
+                        _a.trys.push([8, 10, , 11]);
                         return [4 /*yield*/, this.afAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password)];
-                    case 12:
+                    case 9:
                         result = _a.sent();
                         console.log(result);
                         this.afAuth.authState.take(1).subscribe(function (auth) {
@@ -370,12 +355,12 @@ var RegisterPage = /** @class */ (function () {
                         })
                             .present();
                         this.navCtrl.setRoot("LoginPage");
-                        return [3 /*break*/, 14];
-                    case 13:
+                        return [3 /*break*/, 11];
+                    case 10:
                         e_1 = _a.sent();
                         console.log(e_1);
-                        return [3 /*break*/, 14];
-                    case 14: return [2 /*return*/];
+                        return [3 /*break*/, 11];
+                    case 11: return [2 /*return*/];
                 }
             });
         });
@@ -406,7 +391,7 @@ var RegisterPage = /** @class */ (function () {
     };
     RegisterPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-register",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\register\register.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-title position text-center>Register</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-item>\n    <ion-label floating>Enter a valid email address</ion-label>\n    <ion-input type="text" [(ngModel)]="user.email"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Enter a password</ion-label>\n    <ion-input type="password" [(ngModel)]="user.password"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>First name</ion-label>\n    <ion-input [(ngModel)]="user.firstname"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Surname</ion-label>\n    <ion-input [(ngModel)]="user.surname"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>House number and road name</ion-label>\n    <ion-input [(ngModel)]="user.addressL1"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Postcode</ion-label>\n    <ion-input [(ngModel)]="user.addressPC"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Mobile Number</ion-label>\n    <ion-input [(ngModel)]="user.phoneNo"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Date of birth</ion-label>\n    <ion-datetime\n      displayformat="DD/MM/YY"\n      [(ngModel)]="user.dOb"\n    ></ion-datetime>\n  </ion-item>\n\n  <button class="registerButton" ion-button block (click)="rRegister(user)">\n    Register\n  </button>\n  <button class="registerButton" ion-button block (click)="rLogin()">\n    Already registered?\n  </button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\register\register.html"*/
+            selector: "page-register",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\register\register.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-title position text-center>Register</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-item>\n    <ion-label floating>First name</ion-label>\n    <ion-input [(ngModel)]="user.firstname"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Surname</ion-label>\n    <ion-input [(ngModel)]="user.surname"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Enter a valid email address</ion-label>\n    <ion-input type="text" [(ngModel)]="user.email"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Enter a password</ion-label>\n    <ion-input type="password" [(ngModel)]="user.password"></ion-input>\n  </ion-item>\n\n\n  <ion-item>\n    <ion-label floating>Mobile Number</ion-label>\n    <ion-input [(ngModel)]="user.phoneNo"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Date of birth</ion-label>\n    <ion-datetime\n      displayformat="DD/MM/YY"\n      max="2001-05-23"\n      [(ngModel)]="user.dOb"\n    ></ion-datetime>\n  </ion-item>\n\n  <button class="registerButton" color="midnight-blue" ion-button (click)="rRegister(user)">\n    Register\n  </button>\n  <button class="registerButton" color="midnight-blue" ion-button (click)="rLogin()">\n    Have an account?\n  </button>\n</ion-content>\n\n<div class id="footer">\n  <ion-footer>\n    <ion-toolbar color="midnight-blue">\n      <ion-title position text-center>TicketTrader</ion-title>\n    </ion-toolbar>\n  </ion-footer>\n</div>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\register\register.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"],

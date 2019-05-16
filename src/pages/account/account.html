@@ -21,7 +21,7 @@
 </ion-header>
 <ion-content padding>
   <ion-content>
-    <div class="ngDivAccount">
+    <div>
       <ion-label position text-center>First name</ion-label>
       <ion-item position text-center>{{
         (userData | async)?.firstname
@@ -32,14 +32,7 @@
       }}</ion-item>
       <ion-label position text-center>Email Address</ion-label>
       <ion-item position text-center>{{ (userData | async)?.email }}</ion-item>
-      <ion-label position text-center>Address</ion-label>
-      <ion-item position text-center>{{
-        (userData | async)?.addressL1
-      }}</ion-item>
-      <ion-label position text-center>Postcode</ion-label>
-      <ion-item position text-center>{{
-        (userData | async)?.addressPC
-      }}</ion-item>
+
       <ion-label position text-center>Phone Number</ion-label>
       <ion-item position text-center>{{
         (userData | async)?.phoneNo
@@ -54,7 +47,7 @@
         id="btnDeleteAcc"
         color="midnight-blue"
         (click)="addCard()"
-      >
+      >ADD 
         <ion-icon name="card"></ion-icon>
       </button>
       <button
@@ -64,19 +57,30 @@
         id="btnChangePassword"
         color="midnight-blue"
         (click)="openModal()"
-      >
+      >EDIT
         <ion-icon name="folder-open"></ion-icon>
       </button>
+
       <button
-        ion-button
-        class="buttonDeleteAccount"
-        color="midnight-blue"
-        id="btnDeleteAcc"
-        block
-        (click)="deleteAccount()"
-      >
-        Delete Account
-      </button>
+      ion-button
+      class="sellTicketButtons"
+      icon-only
+      id="btnDeleteAcc"
+      color="midnight-blue"
+      (click)="orderHistory()"
+    >ORDERS
+    <ion-icon name="filing"></ion-icon>
+    </button>
+    <button
+      ion-button
+      class="sellTicketButtons"
+      icon-only
+      id="btnDeleteAcc"
+      color="midnight-blue"
+      (click)="deleteAccount()"
+    >DELETE
+    <ion-icon name="person"></ion-icon>
+    </button>
     </div>
   </ion-content>
 </ion-content>

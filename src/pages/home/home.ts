@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, NgZone } from "@angular/core";
+import { Component, ViewChild, ElementRef, NgZone, ɵConsole } from "@angular/core";
 import {
   IonicPage,
   NavController,
@@ -50,6 +50,8 @@ export class HomePage {
     await this.loadListings();
     this.fetchTickets();
   }
+
+
 
   listingData: Observable<any>;
 

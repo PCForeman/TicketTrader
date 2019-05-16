@@ -46,14 +46,6 @@ export class AccountPage {
     var currentUser = this.afAuth.auth.currentUser.uid;
     var ref = this.afDatabase.object(`user/${currentUser}`);
     ref.snapshotChanges().subscribe(snapshot => {
-      const ad1 = snapshot.payload
-        .child(`addressL1/`)
-        .val()
-        .toString();
-      const ad2 = snapshot.payload
-        .child(`addressPC/`)
-        .val()
-        .toString();
       const dob = snapshot.payload
         .child(`dOb/`)
         .val()
@@ -84,8 +76,6 @@ export class AccountPage {
         showBackdrop: true
       };
       const accountData = {
-        adress1: ad1,
-        adress2: ad2,
         dOb: dob,
         email: em,
         password: pw,
@@ -147,7 +137,7 @@ export class AccountPage {
             }
           },
           {
-            text: "Login",
+            text: "Delete",
             handler: data => {
               console.log(data);
               if (data.password == pw) {
@@ -156,12 +146,13 @@ export class AccountPage {
                   console.log(tempKey);
                   this.logout();
                   this.app.getRootNav().setRoot(LoginPage);
+                  this.afAuth.auth.signOut();
                   this.afDatabase.object(`user/${tempKey}`).remove();
                 } catch (e) {
                   console.log(e);
                 }
               } else {
-                console.log("Cancelled");
+                this.toast.create({message:'Incorrect password', duration:2000, position:'middle'}).present();
                 return false;
               }
             }
@@ -172,6 +163,8 @@ export class AccountPage {
     });
   }
 
+
+  
   checkOut() {// Redirects to the checkout tab
     this.navCtrl.push("BuyPage");
   }

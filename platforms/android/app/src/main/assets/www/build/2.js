@@ -270,7 +270,7 @@ var SellPage = /** @class */ (function () {
         var userFinal = Number(userMoney - ticketTraderMoney).toFixed(2);
         this.payoutAmount = userFinal;
         console.log(userFinal);
-        if (userMoney >= 0 && userMoney <= 1000) {
+        if (userMoney > 1 && userMoney <= 50) {
             gListingCustomerPayout = userFinal;
             gListingServiceCharge = ticketTraderMoney;
             this.toast
@@ -288,7 +288,7 @@ var SellPage = /** @class */ (function () {
         else {
             this.toast
                 .create({
-                message: "Value not numerical, or exceeds the price limit.",
+                message: "Value must be between £1 and £50.",
                 position: "middle",
                 duration: 3500
             })
@@ -398,6 +398,7 @@ var SellPage = /** @class */ (function () {
                                             console.log("Cancel clicked");
                                             _this.listing.PayoutAccount = accNoPlainText;
                                             _this.listing.PaySortCode = sortCodePlainText;
+                                            _this.instructionMessage();
                                         }
                                     },
                                     {
@@ -405,6 +406,7 @@ var SellPage = /** @class */ (function () {
                                         role: "cancel",
                                         handler: function () {
                                             console.log("cancelled");
+                                            _this.instructionMessage();
                                         }
                                     }
                                 ]
@@ -415,6 +417,9 @@ var SellPage = /** @class */ (function () {
                 });
             }); });
         });
+    };
+    SellPage.prototype.instructionMessage = function () {
+        this.toast.create({ message: 'Listing a ticket is easy fill out the details, check the money you will recieve by clicking the check price button. Then select a location by clicking the venue button and upload the corresponding ticket by clicking the ticket button', duration: 7000, position: 'middle' }).present();
     };
     SellPage.prototype.createListing = function (url) {
         return __awaiter(this, void 0, void 0, function () {
@@ -433,22 +438,31 @@ var SellPage = /** @class */ (function () {
                         rDate = p1 + "/" + p2 + "/" + p3;
                         console.log(rDate);
                         price = this.listing.Price;
-                        if (!(artist == "" ||
-                            (startTime < 0 && startTime > 24) ||
-                            date == null ||
-                            price == NaN ||
-                            price < 0 ||
-                            price > 1000)) return [3 /*break*/, 1];
-                        this.toast
-                            .create({
-                            message: "One or more fields are incorrect, please check them",
-                            duration: 3000,
-                            position: "bottom"
-                        })
-                            .present();
-                        return [3 /*break*/, 3];
-                    case 1: return [4 /*yield*/, this.upload(this.buffer, this.entryname)];
+                        if (!(artist == "" || artist == null)) return [3 /*break*/, 1];
+                        this.toast.create({ message: 'Artist field is empty', duration: 2000, position: 'middle' }).present();
+                        return [3 /*break*/, 8];
+                    case 1:
+                        if (!(startTime < 0 && startTime > 24)) return [3 /*break*/, 2];
+                        this.toast.create({ message: 'Time must be 24hr clock', duration: 2000, position: 'middle' }).present();
+                        return [3 /*break*/, 8];
                     case 2:
+                        if (!(date == null)) return [3 /*break*/, 3];
+                        this.toast.create({ message: 'Date cannot be empty', duration: 2000, position: 'middle' }).present();
+                        return [3 /*break*/, 8];
+                    case 3:
+                        if (!(price == NaN)) return [3 /*break*/, 4];
+                        this.toast.create({ message: 'Price must be a numerical value between £1 - £50', duration: 2000, position: 'middle' }).present();
+                        return [3 /*break*/, 8];
+                    case 4:
+                        if (!(price < 1)) return [3 /*break*/, 5];
+                        this.toast.create({ message: 'Price cannot be lower than £1', duration: 2000, position: 'middle' }).present();
+                        return [3 /*break*/, 8];
+                    case 5:
+                        if (!(price > 50)) return [3 /*break*/, 6];
+                        this.toast.create({ message: 'Price cannot exceed £50', duration: 2000, position: 'middle' }).present();
+                        return [3 /*break*/, 8];
+                    case 6: return [4 /*yield*/, this.upload(this.buffer, this.entryname)];
+                    case 7:
                         _a.sent();
                         this.afAuth.authState.take(1).subscribe(function (auth) {
                             _this.listing.Date = rDate;
@@ -480,8 +494,8 @@ var SellPage = /** @class */ (function () {
                             _this.clearSellFields();
                             _this.navCtrl.setRoot('Page');
                         });
-                        _a.label = 3;
-                    case 3: return [2 /*return*/];
+                        _a.label = 8;
+                    case 8: return [2 /*return*/];
                 }
             });
         });
@@ -553,7 +567,7 @@ var SellPage = /** @class */ (function () {
     };
     SellPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-sell",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/'<ion-header>\n\n  <ion-navbar hideBackButton="true" color="midnight-blue">\n\n    <ion-buttons right>\n\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n\n        <ion-icon name="information-circle"></ion-icon>\n\n      </button>\n\n      <button ion-button icon-only color="light" (click)="logout()">\n\n        <ion-icon name="log-out"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-buttons left>\n\n      <button ion-button icon-only color="light" (click)="checkOut()">\n\n        <ion-icon name="basket"></ion-icon>\n\n      </button>\n\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n\n        <ion-icon name="cloud-download"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-title position text-center>Sell Tickets</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <div class="ngDivAccount">\n\n    <ion-list-header text-center>List a ticket</ion-list-header>\n\n\n\n    <ion-item>\n\n      <ion-label floating>Account number to pay</ion-label>\n\n      <ion-input id="txtTime" [(ngModel)]="listing.PayoutAccount"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-label floating>Sort code</ion-label>\n\n      <ion-input id="txtTime" [(ngModel)]="listing.PaySortCode"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-label floating>Artist(s)</ion-label>\n\n      <ion-input id="txtEvent" [(ngModel)]="listing.Name"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-label floating>Start time</ion-label>\n\n      <ion-input id="txtTime" [(ngModel)]="listing.Time"></ion-input>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label floating>Date of event</ion-label>\n\n      <ion-datetime\n\n        id="listingDate"\n\n        displayFormat="DD/MM/YY"\n\n        min="2019-05-16"\n\n        max="2020-05-23"\n\n        [(ngModel)]="listing.Date"\n\n      ></ion-datetime>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label floating>Price £</ion-label>\n\n      <ion-input id="txtPrice" [(ngModel)]="listing.Price"></ion-input>\n\n      <button\n\n        ion-button\n\n        id="btnCheckPrice"\n\n        class="priceButton"\n\n        icon-only\n\n        color="midnight-blue"\n\n        (click)="ticketIncomeCalc()"\n\n        item-end\n\n      >\n\n        <ion-icon name="checkmark-circle">Calculate</ion-icon>\n\n      </button>\n\n    </ion-item>\n\n    <p>\n\n      <button\n\n        class="iconButtons"\n\n        ion-button\n\n        id="btnLocation"\n\n        icon-only\n\n        position="text-center"\n\n        (click)="findVenue()"\n\n        color="midnight-blue"\n\n      >\n\n        <ion-icon name="search"></ion-icon>Venue\n\n      </button>\n\n\n\n      <button\n\n        ion-button\n\n        class="iconButtons"\n\n        id="btnUploadTicket"\n\n        icon-only\n\n        position="text-center"\n\n        color="midnight-blue"\n\n        (click)="selectTicket()"\n\n      >\n\n        <ion-icon name="cloud-upload"></ion-icon>Ticket\n\n      </button>\n\n      <br />\n\n      <button\n\n        class="createListingButton"\n\n        ion-button\n\n        block\n\n        position="text-center"\n\n        color="midnight-blue"\n\n        id="btnCreateListing"\n\n        (click)="createListingConfirmation()"\n\n      >\n\n        Confirm listing\n\n      </button>\n\n    </p>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/
+            selector: "page-sell",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/'<ion-header>\n\n  <ion-navbar hideBackButton="true" color="midnight-blue">\n\n    <ion-buttons right>\n\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n\n        <ion-icon name="information-circle"></ion-icon>\n\n      </button>\n\n      <button ion-button icon-only color="light" (click)="logout()">\n\n        <ion-icon name="log-out"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-buttons left>\n\n      <button ion-button icon-only color="light" (click)="checkOut()">\n\n        <ion-icon name="basket"></ion-icon>\n\n      </button>\n\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n\n        <ion-icon name="cloud-download"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-title position text-center>Sell Tickets</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n\n  <div class="ngDivAccount">\n\n    <ion-list-header text-center>List a ticket</ion-list-header>\n\n\n\n    <ion-item>\n\n      <ion-label floating>Account number to pay</ion-label>\n\n      <ion-input id="txtTime" [(ngModel)]="listing.PayoutAccount"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-label floating>Sort code</ion-label>\n\n      <ion-input id="txtTime" [(ngModel)]="listing.PaySortCode"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-label floating>Artist(s)</ion-label>\n\n      <ion-input id="txtEvent" [(ngModel)]="listing.Name"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-label floating>Start time</ion-label>\n\n      <ion-input id="txtTime" [(ngModel)]="listing.Time"></ion-input>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label floating>Date of event</ion-label>\n\n      <ion-datetime\n\n        id="listingDate"\n\n        displayFormat="DD/MM/YY"\n\n        min="2019-05-16"\n\n        max="2020-05-23"\n\n        [(ngModel)]="listing.Date"\n\n      ></ion-datetime>\n\n    </ion-item>\n\n    <ion-item>\n\n      <ion-label floating>Price £</ion-label>\n\n      <ion-input id="txtPrice" [(ngModel)]="listing.Price"></ion-input>\n\n      <button\n\n        ion-button\n\n        id="btnCheckPrice"\n\n        icon-only\n\n        color="midnight-blue"\n\n        (click)="ticketIncomeCalc()"\n\n        item-end\n\n      >\n\n      <ion-icon name="calculator"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n    <p>\n\n      <button\n\n        class="iconButtons"\n\n        ion-button\n\n        id="btnLocation"\n\n        icon-only\n\n        position="text-center"\n\n        (click)="findVenue()"\n\n        color="midnight-blue"\n\n      >\n\n        <ion-icon name="search"></ion-icon>Venue\n\n      </button>\n\n\n\n      <button\n\n        ion-button\n\n        class="iconButtons"\n\n        id="btnUploadTicket"\n\n        icon-only\n\n        position="text-center"\n\n        color="midnight-blue"\n\n        (click)="selectTicket()"\n\n      >\n\n        <ion-icon name="cloud-upload"></ion-icon>Ticket\n\n      </button>\n\n      <br />\n\n      <button\n\n        class="createListingButton"\n\n        ion-button\n\n        block\n\n        position="text-center"\n\n        color="midnight-blue"\n\n        id="btnCreateListing"\n\n        (click)="createListingConfirmation()"\n\n      >\n\n        Confirm listing\n\n      </button>\n\n    </p>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\sell\sell.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],

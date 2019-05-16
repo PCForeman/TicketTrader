@@ -132,6 +132,24 @@ var OrderHistoryPage = /** @class */ (function () {
     OrderHistoryPage.prototype.refresh = function () {
         window.location.reload();
     };
+    OrderHistoryPage.prototype.getTime = function () {
+        var button = event.srcElement;
+        var date = button.parentElement.parentElement.children.item(3).innerHTML;
+        var hours = button.parentElement.parentElement.children.item(4).innerHTML;
+        var YYYY = parseInt(date.substr(6));
+        var MM = parseInt(date.substr(3, 3));
+        var DD = parseInt(date.substr(0, 2));
+        var HH = parseInt(hours.substr(0, 2));
+        var eventInMilliseconds = new Date(YYYY, MM, DD, HH).getTime();
+        var removalAllowedTime = eventInMilliseconds + 960000;
+        var timeNow = new Date().getTime();
+        if (timeNow >= removalAllowedTime) {
+            this.removeAlertBought();
+        }
+        else {
+            this.toast.create({ message: 'You will be able to remove this record 24hrs after the event has taken place', duration: 3000, position: 'middle' }).present();
+        }
+    };
     OrderHistoryPage.prototype.viewTicket = function () {
         return __awaiter(this, void 0, void 0, function () {
             var button, url, myModalOpts, imageToView, myModal;
@@ -264,14 +282,6 @@ var OrderHistoryPage = /** @class */ (function () {
         });
         alert.present();
     };
-    OrderHistoryPage.prototype.eTicketRemoval = function () {
-        var target = event.srcElement;
-        var dateSpecified = target.parentElement.parentElement.children.item(3)
-            .innerHTML;
-        console.log(dateSpecified);
-        var mydate = new Date(2020, 10, 4).getMilliseconds();
-        console.log(mydate);
-    };
     OrderHistoryPage.prototype.paymentDetails = function () {
         var _this = this;
         var target = event.srcElement;
@@ -373,7 +383,7 @@ var OrderHistoryPage = /** @class */ (function () {
     };
     OrderHistoryPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-order-history",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="info"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n\n  <ion-title position text-center>Purchased Tickets</ion-title>\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h2 position text-center>{{ item.Artist }}</h2>\n      <h3 position text-center>{{ item.Venue }}</h3>\n      <h4 position text-center>{{ item.Date }}</h4>\n      <h5 position text-center>AT {{ item.Time }}</h5>\n      <h5 position text-center>{{ item.Price }} paid with card ending in {{item.Card}}</h5>\n      <h6 hidden>{{ item.Ticket }}</h6>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="midnight-blue"\n        (click)="feedback()"\n      ><ion-icon name="star"></ion-icon>\n      </button>\n    <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    icon-only\n    color="midnight-blue"\n    (click)="viewTicket()"\n  ><ion-icon name="images"></ion-icon>\n  </button>\n  <button\n  [id]="i"\n  class="adminButtons"\n  ion-button\n  icon-only\n  color="midnight-blue"\n  (click)="removeAlertBought()"\n><ion-icon name="trash"></ion-icon>\n</button>\n      <h6></h6>\n    </div>\n  </ion-list>\n\n  <ion-title position text-center>Tickets Sold</ion-title>\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of itemSold; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h1 hidden>{{ item.Key }}</h1>\n      <h2 position text-center>{{ item.Artist }}</h2>\n      <h3 position text-center>{{ item.Venue }}</h3>\n      <h4 position text-center>{{ item.Date }}</h4>\n      <h5 position text-center>{{ item.Price }}</h5>\n      <h5 hidden> {{item.AccountNo}} </h5>\n      <h5 hidden> {{ item.SortCode }}</h5>\n      <button\n      [id]="i"\n      id="btnPayout"\n      class="adminButtons"\n      ion-button\n      icon-only\n      color="midnight-blue"\n      (click)="paymentDetails()"\n    ><ion-icon name="cash"></ion-icon>\n    </button>\n    <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    color="midnight-blue"\n  >{{item.Status}}\n  </button>\n  <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    icon-only\n    (click)="removeAlertSold()"\n    color="midnight-blue"><ion-icon name="trash"></ion-icon>\n  </button>\n      <h6></h6>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/
+            selector: "page-order-history",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="info"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n\n  <ion-title position text-center>Purchased Tickets</ion-title>\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h2 position text-center>{{ item.Artist }}</h2>\n      <h3 position text-center>{{ item.Venue }}</h3>\n      <h4 position text-center>{{ item.Date }}</h4>\n      <h5 position text-center>AT {{ item.Time }}</h5>\n      <h5 position text-center>{{ item.Price }} paid with card ending in {{item.Card}}</h5>\n      <h6 hidden>{{ item.Ticket }}</h6>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="midnight-blue"\n        (click)="feedback()"\n      ><ion-icon name="star"></ion-icon>\n      </button>\n    <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    icon-only\n    color="midnight-blue"\n    (click)="viewTicket()"\n  ><ion-icon name="images"></ion-icon>\n  </button>\n  <button\n  [id]="i"\n  class="adminButtons"\n  ion-button\n  icon-only\n  color="midnight-blue"\n  (click)="getTime()"\n><ion-icon name="trash"></ion-icon>\n</button>\n      <h6></h6>\n    </div>\n  </ion-list>\n\n  <ion-title position text-center>Tickets Sold</ion-title>\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of itemSold; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h1 hidden>{{ item.Key }}</h1>\n      <h2 position text-center>{{ item.Artist }}</h2>\n      <h3 position text-center>{{ item.Venue }}</h3>\n      <h4 position text-center>{{ item.Date }}</h4>\n      <h5 position text-center>{{ item.Price }}</h5>\n      <h5 hidden> {{item.AccountNo}} </h5>\n      <h5 hidden> {{ item.SortCode }}</h5>\n      <button\n      [id]="i"\n      id="btnPayout"\n      class="adminButtons"\n      ion-button\n      icon-only\n      color="midnight-blue"\n      (click)="paymentDetails()"\n    ><ion-icon name="cash"></ion-icon>\n    </button>\n    <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    color="midnight-blue"\n  >{{item.Status}}\n  </button>\n  <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    icon-only\n    (click)="removeAlertSold()"\n    color="midnight-blue"><ion-icon name="trash"></ion-icon>\n  </button>\n      <h6></h6>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"],

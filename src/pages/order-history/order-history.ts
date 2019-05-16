@@ -67,6 +67,26 @@ export class OrderHistoryPage {
     window.location.reload();
   }
 
+
+  getTime(){
+    const button = event.srcElement;
+    const date = button.parentElement.parentElement.children.item(3).innerHTML;
+    const  hours = button.parentElement.parentElement.children.item(4).innerHTML;
+    const YYYY = parseInt(date.substr(6));
+    const MM = parseInt(date.substr(3, 3));
+    const DD = parseInt(date.substr(0, 2));
+    const HH = parseInt(hours.substr(0,2))
+    const eventInMilliseconds = new Date(YYYY, MM, DD, HH).getTime();
+    const removalAllowedTime = eventInMilliseconds + 960000;
+    const timeNow = new Date().getTime();
+    if (timeNow >= removalAllowedTime){
+    this.removeAlertBought();
+    }else{
+    this.toast.create({message:'You will be able to remove this record 24hrs after the event has taken place', duration:3000, position:'middle'}).present();
+    }
+  }
+
+
   async viewTicket() {
     const button = event.srcElement;
     var url = button.parentElement.parentElement.children.item(6).innerHTML;
@@ -184,15 +204,6 @@ export class OrderHistoryPage {
       ]
     });
     alert.present();
-  }
-
-  eTicketRemoval() {
-    const target = event.srcElement;
-    const dateSpecified = target.parentElement.parentElement.children.item(3)
-      .innerHTML;
-    console.log(dateSpecified);
-    var mydate = new Date(2020, 10, 4).getMilliseconds();
-    console.log(mydate);
   }
 
   paymentDetails() {
