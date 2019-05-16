@@ -1,14 +1,14 @@
 webpackJsonp([13],{
 
-/***/ 628:
+/***/ 629:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AccountPageModule", function() { return AccountPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddCardModalPageModule", function() { return AddCardModalPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__account__ = __webpack_require__(644);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_card_modal__ = __webpack_require__(646);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +18,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AccountPageModule = /** @class */ (function () {
-    function AccountPageModule() {
+var AddCardModalPageModule = /** @class */ (function () {
+    function AddCardModalPageModule() {
     }
-    AccountPageModule = __decorate([
+    AddCardModalPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [__WEBPACK_IMPORTED_MODULE_2__account__["a" /* AccountPage */]],
-            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__account__["a" /* AccountPage */])]
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__add_card_modal__["a" /* AddCardModalPage */],
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__add_card_modal__["a" /* AddCardModalPage */]),
+            ],
         })
-    ], AccountPageModule);
-    return AccountPageModule;
+    ], AddCardModalPageModule);
+    return AddCardModalPageModule;
 }());
 
-//# sourceMappingURL=account.module.js.map
+//# sourceMappingURL=add-card-modal.module.js.map
 
 /***/ }),
 
-/***/ 644:
+/***/ 646:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AccountPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddCardModalPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(64);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_aes_256__ = __webpack_require__(343);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth____default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database____default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database___);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ionic_angular__ = __webpack_require__(45);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -95,191 +99,255 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var AccountPage = /** @class */ (function () {
-    function AccountPage(afDatabase, afAuth, toast, app, modal, navCtrl, navParams, aCtrl) {
+var AddCardModalPage = /** @class */ (function () {
+    function AddCardModalPage(navCtrl, navParams, vCtrl, afDatabase, afAuth, toast, aes, aCtrl) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.vCtrl = vCtrl;
         this.afDatabase = afDatabase;
         this.afAuth = afAuth;
         this.toast = toast;
-        this.app = app;
-        this.modal = modal;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
+        this.aes = aes;
         this.aCtrl = aCtrl;
+        this.generateSecureKeyAndIV();
     }
-    AccountPage.prototype.ionViewDidLoad = function () {
-        this.displayAccountData();
+    AddCardModalPage.prototype.close = function () {
+        this.vCtrl.dismiss(); //The view controller dismisses the display view
     };
-    AccountPage.prototype.openModal = function () {
+    AddCardModalPage.prototype.addCardAlert = function () {
         var _this = this;
-        var currentUser = this.afAuth.auth.currentUser.uid;
-        var ref = this.afDatabase.object("user/" + currentUser);
-        ref.snapshotChanges().subscribe(function (snapshot) {
-            var dob = snapshot.payload
-                .child("dOb/")
-                .val()
-                .toString();
-            var em = snapshot.payload
-                .child("email/")
-                .val()
-                .toString();
-            var fn = snapshot.payload
-                .child("firstname/")
-                .val()
-                .toString();
-            var pw = snapshot.payload
-                .child("password/")
-                .val()
-                .toString();
-            var pn = snapshot.payload
-                .child("phoneNo/")
-                .val()
-                .toString();
-            var sn = snapshot.payload
-                .child("surname/")
-                .val()
-                .toString();
-            var myModalOpts = {
-                cssClass: "modal",
-                enableBackdropDismiss: true,
-                showBackdrop: true
-            };
-            var accountData = {
-                dOb: dob,
-                email: em,
-                password: pw,
-                firstname: fn,
-                phonenumber: pn,
-                surname: sn
-            };
-            var myModal = _this.modal.create("ModalAccountPage", { data: accountData }, myModalOpts);
-            myModal.present();
-        });
+        if (this.cardNo != null &&
+            this.expiry != null &&
+            this.Cvc != null &&
+            this.sortcode != null &&
+            this.accountNumber != null &&
+            this.holderName != null) {
+            var alert_1 = this.aCtrl.create({
+                title: "Add payment method",
+                mode: "ios",
+                message: "Are you sure you want to add a card?",
+                buttons: [
+                    {
+                        text: "Proceed",
+                        handler: function () {
+                            _this.addDetails();
+                        }
+                    },
+                    {
+                        text: "Dismiss",
+                        role: "cancel",
+                        handler: function () {
+                            console.log("cancelled");
+                        }
+                    }
+                ]
+            });
+            alert_1.present();
+        }
+        else {
+            this.toast
+                .create({
+                message: "Ensure fields are filled out",
+                duration: 2000,
+                position: "middle"
+            })
+                .present();
+        }
     };
-    AccountPage.prototype.addCard = function () {
-        var myModalOpts = {
-            cssClass: "modal",
-            enableBackdropDismiss: true,
-            showBackdrop: true
-        };
-        var listingRef = {};
-        var myModal = this.modal.create("AddCardModalPage", { ticket: listingRef }, myModalOpts);
-        myModal.present();
-    };
-    AccountPage.prototype.deleteAccount = function () {
+    AddCardModalPage.prototype.addDetails = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            var ref;
+            var formatExpiry, formatSortCode, formatCardNo, key, eText1, eText2, eText3, eText4, eText5, eText6, payment;
             return __generator(this, function (_a) {
-                ref = this.afDatabase.object("user/" + this.afAuth.auth.currentUser.uid);
-                ref.snapshotChanges().subscribe(function (snapshot) {
-                    var pw = snapshot.payload
-                        .child("password/")
-                        .val()
-                        .toString();
-                    console.log(pw);
-                    var alert = _this.aCtrl.create({
-                        title: "Enter password to delete account",
-                        inputs: [
+                switch (_a.label) {
+                    case 0:
+                        formatExpiry = this.expiry.toString().substr(0, 2) +
+                            "/" +
+                            this.expiry.toString().substr(2);
+                        formatSortCode = this.sortcode.toString().substr(0, 2) +
+                            "-" +
+                            this.sortcode.toString().substr(2, 2) +
+                            "-" +
+                            this.sortcode.toString().substr(4, 2);
+                        formatCardNo = this.cardNo.toString().substr(0, 4) +
+                            "-" +
+                            this.cardNo.toString().substr(4, 4) +
+                            "-" +
+                            this.cardNo.toString().substr(8, 4) +
+                            "-" +
+                            this.cardNo.toString().substr(12, 4);
+                        console.log(formatSortCode, formatExpiry);
+                        this.sortcode = formatSortCode;
+                        this.expiry = formatExpiry;
+                        this.cardNo = formatCardNo;
+                        key = this.afAuth.auth.currentUser.uid;
+                        if (!(this.holderName == " " && this.cardNo == " ")) return [3 /*break*/, 1];
+                        this.toast
+                            .create({
+                            message: "One or more fields are empty",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
+                        return [3 /*break*/, 14];
+                    case 1:
+                        if (!(this.holderName == undefined ||
+                            this.holderName == " " ||
+                            this.holderName == null)) return [3 /*break*/, 2];
+                        this.toast
+                            .create({
+                            message: "Cardholder cannot be empty.",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
+                        return [3 /*break*/, 14];
+                    case 2:
+                        if (!(formatCardNo.length != 19)) return [3 /*break*/, 3];
+                        this.toast
+                            .create({
+                            message: "Card number Must be 16 digits.",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
+                        return [3 /*break*/, 14];
+                    case 3:
+                        if (!(this.sortcode.length != 8)) return [3 /*break*/, 4];
+                        this.toast
+                            .create({
+                            message: "Sortcode Must be 6 digits.",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
+                        this.sortcode = "";
+                        return [3 /*break*/, 14];
+                    case 4:
+                        if (!(this.accountNumber.length != 8)) return [3 /*break*/, 5];
+                        this.toast
+                            .create({
+                            message: "Account number Must be 8 digits.",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
+                        return [3 /*break*/, 14];
+                    case 5:
+                        if (!(this.Cvc.length != 3)) return [3 /*break*/, 6];
+                        this.toast
+                            .create({
+                            message: "CVC must be 3 digits",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
+                        return [3 /*break*/, 14];
+                    case 6:
+                        if (!(this.expiry.length != 5)) return [3 /*break*/, 7];
+                        this.toast
+                            .create({
+                            message: "Must be MM/YY",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
+                        this.expiry = "";
+                        return [3 /*break*/, 14];
+                    case 7:
+                        console.log(this.thrtyTwoBit, this.sixteenBit);
+                        return [4 /*yield*/, this.aes
+                                .encrypt(this.thrtyTwoBit, this.sixteenBit, this.cardNo)
+                                .then(function (promise) { return (eText1 = promise.valueOf()); })
+                                .catch(function (error) { return console.error(error); })];
+                    case 8:
+                        _a.sent();
+                        return [4 /*yield*/, this.aes
+                                .encrypt(this.thrtyTwoBit, this.sixteenBit, this.accountNumber)
+                                .then(function (promise) { return (eText2 = promise.valueOf()); })];
+                    case 9:
+                        _a.sent();
+                        return [4 /*yield*/, this.aes
+                                .encrypt(this.thrtyTwoBit, this.sixteenBit, this.holderName)
+                                .then(function (promise) { return (eText4 = promise.valueOf()); })];
+                    case 10:
+                        _a.sent();
+                        return [4 /*yield*/, this.aes
+                                .encrypt(this.thrtyTwoBit, this.sixteenBit, this.Cvc)
+                                .then(function (promise) { return (eText5 = promise.valueOf()); })];
+                    case 11:
+                        _a.sent();
+                        return [4 /*yield*/, this.aes
+                                .encrypt(this.thrtyTwoBit, this.sixteenBit, this.expiry)
+                                .then(function (promise) { return (eText6 = promise.valueOf()); })
+                                .catch(function (error) { return console.error(error); })];
+                    case 12:
+                        _a.sent();
+                        return [4 /*yield*/, this.aes
+                                .encrypt(this.thrtyTwoBit, this.sixteenBit, this.sortcode)
+                                .then(function (promise) { return (eText3 = promise.valueOf()); })
+                                .catch(function (error) { return console.error(error); })];
+                    case 13:
+                        _a.sent();
+                        payment = [
                             {
-                                name: "password",
-                                placeholder: "Password",
-                                type: "password"
+                                Holder: eText4,
+                                Card: eText1,
+                                Expiry: eText6,
+                                CVC: eText5,
+                                Sort: eText3,
+                                AccountNo: eText2,
+                                Key: this.thrtyTwoBit,
+                                IV: this.sixteenBit
                             }
-                        ],
-                        buttons: [
-                            {
-                                text: "Cancel",
-                                role: "cancel",
-                                handler: function (cancelled) {
-                                    console.log("Cancel clicked");
-                                }
-                            },
-                            {
-                                text: "Delete",
-                                handler: function (data) {
-                                    console.log(data);
-                                    if (data.password == pw) {
-                                        try {
-                                            var tempKey = _this.afAuth.auth.currentUser.uid;
-                                            console.log(tempKey);
-                                            _this.logout();
-                                            _this.app.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_4__login_login__["a" /* LoginPage */]);
-                                            _this.afAuth.auth.signOut();
-                                            _this.afDatabase.object("user/" + tempKey).remove();
-                                        }
-                                        catch (e) {
-                                            console.log(e);
-                                        }
-                                    }
-                                    else {
-                                        _this.toast.create({ message: 'Incorrect password', duration: 2000, position: 'middle' }).present();
-                                        return false;
-                                    }
-                                }
-                            }
-                        ]
-                    });
-                    alert.present();
-                });
-                return [2 /*return*/];
+                        ];
+                        console.log(payment);
+                        this.afDatabase.list("user/" + key).push(payment[0]);
+                        this.close();
+                        _a.label = 14;
+                    case 14: return [2 /*return*/];
+                }
             });
         });
     };
-    AccountPage.prototype.checkOut = function () {
-        this.navCtrl.push("BuyPage");
-    };
-    AccountPage.prototype.orderHistory = function () {
-        this.navCtrl.push("OrderHistoryPage");
-    };
-    AccountPage.prototype.displayAccountData = function () {
-        var _this = this;
-        this.afAuth.authState.take(1).subscribe(function (data) {
-            if (data && data.email && data.uid) {
-                _this.userData = _this.afDatabase
-                    .object("user/" + data.uid)
-                    .valueChanges();
-            }
-            else {
-                _this.toast
-                    .create({
-                    message: "Could not find authentication details",
-                    position: "middle",
-                    duration: 3000
-                })
-                    .present();
-            }
+    AddCardModalPage.prototype.generateSecureKeyAndIV = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        _a = this;
+                        return [4 /*yield*/, this.aes.generateSecureKey("pook")];
+                    case 1:
+                        _a.thrtyTwoBit = _c.sent(); // Returns a 32 bytes string
+                        _b = this;
+                        return [4 /*yield*/, this.aes.generateSecureIV("pook")];
+                    case 2:
+                        _b.sixteenBit = _c.sent(); // Returns a 16 bytes string
+                        return [2 /*return*/];
+                }
+            });
         });
     };
-    AccountPage.prototype.logout = function () {
-        var _this = this;
-        this.afAuth.auth.signOut().then(function () {
-            _this.toast
-                .create({
-                message: "Signed out",
-                position: "middle",
-                duration: 3500
-            })
-                .present();
-            _this.app.getRootNav().setRoot("LoginPage");
-        });
+    AddCardModalPage.prototype.ionViewDidLoad = function () {
+        console.log("ionViewDidLoad AddCardModalPage");
     };
-    AccountPage = __decorate([
+    AddCardModalPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-account",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\account\account.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="cloud-download"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Account</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-content>\n    <div>\n      <ion-label position text-center>First name</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.firstname\n      }}</ion-item>\n      <ion-label position text-center>Surname</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.surname\n      }}</ion-item>\n      <ion-label position text-center>Email Address</ion-label>\n      <ion-item position text-center>{{ (userData | async)?.email }}</ion-item>\n\n      <ion-label position text-center>Phone Number</ion-label>\n      <ion-item position text-center>{{\n        (userData | async)?.phoneNo\n      }}</ion-item>\n      <ion-label position text-center>Date of birth</ion-label>\n      <ion-item position text-center>{{ (userData | async)?.dOb }}</ion-item>\n      <br />\n      <button\n        ion-button\n        class="sellTicketButtons"\n        icon-only\n        id="btnDeleteAcc"\n        color="midnight-blue"\n        (click)="addCard()"\n      >ADD \n        <ion-icon name="card"></ion-icon>\n      </button>\n      <button\n        ion-button\n        class="sellTicketButtons"\n        icon-only\n        id="btnChangePassword"\n        color="midnight-blue"\n        (click)="openModal()"\n      >EDIT\n        <ion-icon name="folder-open"></ion-icon>\n      </button>\n\n      <button\n      ion-button\n      class="sellTicketButtons"\n      icon-only\n      id="btnDeleteAcc"\n      color="midnight-blue"\n      (click)="orderHistory()"\n    >ORDERS\n    <ion-icon name="filing"></ion-icon>\n    </button>\n    <button\n      ion-button\n      class="sellTicketButtons"\n      icon-only\n      id="btnDeleteAcc"\n      color="midnight-blue"\n      (click)="deleteAccount()"\n    >DELETE\n    <ion-icon name="person"></ion-icon>\n    </button>\n    </div>\n  </ion-content>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\account\account.html"*/
+            selector: "page-add-card-modal",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\add-card-modal\add-card-modal.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n      <ion-buttons left>\n          <button ion-button (click)="close()">Info</button>\n        </ion-buttons>\n      <ion-buttons right>\n      <button ion-button (click)="close()">Close</button>\n    </ion-buttons>\n    <ion-title position text-center>Card</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <div class="ngFor">\n    <ion-item>\n      <ion-label position text-center>Cardholder name</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="holderName" placeholder="Enter cardholder name" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>16 Digit card number</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="cardNo" placeholder="Enter card number" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>Expiry date</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="expiry" id="input" placeholder="Enter expiry date" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>CVC</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="Cvc" placeholder="Enter CVC" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>Sort code</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="sortcode" placeholder="Enter Sortcode" position text-center></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position text-center>Account number</ion-label>\n    </ion-item>\n    <ion-item>\n      <ion-input [(ngModel)]="accountNumber" placeholder="Enter Account number" position text-center></ion-input>\n    </ion-item>\n\n    <button class="addCardButtons" color="midnight-blue"  (click)="addCardAlert()" ion-button>Add details</button>\n    <button class="addCardButtons" color="midnight-blue" (click)="clearInputs()" ion-button>Clear form</button>\n  </div>\n</ion-content>'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\add-card-modal\add-card-modal.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
-            __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["AngularFireAuth"],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* App */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */]])
-    ], AccountPage);
-    return AccountPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["m" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___["AngularFireDatabase"],
+            __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___["AngularFireAuth"],
+            __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_1__ionic_native_aes_256__["a" /* AES256 */],
+            __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["a" /* AlertController */]])
+    ], AddCardModalPage);
+    return AddCardModalPage;
 }());
 
-//# sourceMappingURL=account.js.map
+//# sourceMappingURL=add-card-modal.js.map
 
 /***/ })
 

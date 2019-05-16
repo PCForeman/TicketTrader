@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar color="midnight-blue">
+    <ion-buttons right>
+      <button ion-button icon-only color="light" (click)="logout()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">
+        <ion-icon name="information-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title position text-center>Pending listings</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+
+    <ion-list>
+        <div
+          class="ngDivAdmin"
+          [id]="i"
+          ion-item
+          *ngFor="let item of items; let i = index"
+        >
+          <h1 hidden>{{ i + 1 }}</h1>
+          <h2 position text-center>Amount {{ item.Amount }}</h2>
+          <h3 position text-center>Sale reference {{ item.Ref }}</h3>
+          <h4 position text-center>{{ item.pId }}</h4>
+</div>

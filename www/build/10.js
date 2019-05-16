@@ -1,14 +1,14 @@
 webpackJsonp([10],{
 
-/***/ 632:
+/***/ 633:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Admin2PageModule", function() { return Admin2PageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Admin3PageModule", function() { return Admin3PageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__admin2__ = __webpack_require__(647);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__admin3__ = __webpack_require__(649);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,27 +18,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var Admin2PageModule = /** @class */ (function () {
-    function Admin2PageModule() {
+var Admin3PageModule = /** @class */ (function () {
+    function Admin3PageModule() {
     }
-    Admin2PageModule = __decorate([
+    Admin3PageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
-            declarations: [__WEBPACK_IMPORTED_MODULE_2__admin2__["a" /* Admin2Page */]],
-            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__admin2__["a" /* Admin2Page */])]
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__admin3__["a" /* Admin3Page */]],
+            imports: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__admin3__["a" /* Admin3Page */])]
         })
-    ], Admin2PageModule);
-    return Admin2PageModule;
+    ], Admin3PageModule);
+    return Admin3PageModule;
 }());
 
-//# sourceMappingURL=admin2.module.js.map
+//# sourceMappingURL=admin3.module.js.map
 
 /***/ }),
 
-/***/ 647:
+/***/ 649:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Admin2Page; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Admin3Page; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(64);
@@ -93,8 +93,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 
-var Admin2Page = /** @class */ (function () {
-    function Admin2Page(navCtrl, navParams, ldCtrl, afAuth, fbDatabase, toast, app) {
+var Admin3Page = /** @class */ (function () {
+    function Admin3Page(navCtrl, navParams, ldCtrl, afAuth, fbDatabase, toast, app) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.ldCtrl = ldCtrl;
@@ -107,23 +107,20 @@ var Admin2Page = /** @class */ (function () {
         this.items2 = [];
         this.itemSearch = [];
     }
-    Admin2Page.prototype.ionViewDidLoad = function () {
-        this.retrieveApprovedListings();
+    Admin3Page.prototype.ionViewDidLoad = function () {
+        this.retrieveRejectedTickets();
         this.copyItems();
     };
-    Admin2Page.prototype.initializeItems = function () {
+    Admin3Page.prototype.initializeItems = function () {
         this.itemSearch = this.items;
     };
-    Admin2Page.prototype.refresh = function () {
-        window.location.reload();
-    };
-    Admin2Page.prototype.copyItems = function () {
+    Admin3Page.prototype.copyItems = function () {
         this.items2 = this.items;
     };
-    Admin2Page.prototype.onCancel = function () {
+    Admin3Page.prototype.onCancel = function () {
         this.itemSearch = this.items2;
     };
-    Admin2Page.prototype.getItems = function (searchbar) {
+    Admin3Page.prototype.getItems = function (searchbar) {
         var _this = this;
         this.initializeItems();
         console.log(this.itemSearch);
@@ -149,56 +146,7 @@ var Admin2Page = /** @class */ (function () {
             this.reloadData();
         }
     };
-    Admin2Page.prototype.reloadData = function () {
-        this.items = this.itemSearch;
-    };
-    Admin2Page.prototype.retrieveApprovedListings = function () {
-        var _this = this;
-        var ref = this.fbDatabase.object("approvedTickets/");
-        ref.snapshotChanges().subscribe(function (snapshot) {
-            var allData = snapshot.payload.val();
-            var array = [];
-            array.push(allData);
-            var value = Object.keys(allData);
-            var keyArray = [];
-            keyArray.push(value);
-            for (var i = 0; i < value.length; i++) {
-                var x = 0;
-                var selectedIndex = i;
-                var keyValue = value[selectedIndex];
-                var indexSelecta = value.length - value.length + i;
-                var id = value[indexSelecta];
-                _this.kA.push(id);
-                var ref = _this.fbDatabase.object("approvedTickets/" + keyValue);
-                ref.snapshotChanges().subscribe(function (snapshot) {
-                    var finalKey = _this.kA[_this.kA.length - _this.kA.length + x];
-                    var eventName = snapshot.payload.child("Name").val();
-                    var eventPrice = snapshot.payload.child("Price").val();
-                    var eventVenue = snapshot.payload.child("Venue").val();
-                    var eventDate = snapshot.payload.child("Date").val();
-                    var eventTime = snapshot.payload.child("Time").val();
-                    var eventCreationDate = snapshot.payload.child("Creation").val();
-                    var eventSellerUID = snapshot.payload.child("Seller").val();
-                    var eventCustomerPayout = snapshot.payload.child("Payout").val();
-                    var eventServiceCharge = snapshot.payload.child("Charge").val();
-                    _this.items.push({
-                        Key: finalKey,
-                        Name: eventName,
-                        Venue: eventVenue,
-                        Price: eventPrice,
-                        Date: eventDate,
-                        Time: eventTime,
-                        Creation: eventCreationDate,
-                        Seller: eventSellerUID,
-                        Payout: eventCustomerPayout,
-                        Charge: eventServiceCharge
-                    });
-                    x++;
-                });
-            }
-        });
-    };
-    Admin2Page.prototype.remove = function () {
+    Admin3Page.prototype.remove = function () {
         var _this = this;
         var temp = [];
         var target = event.srcElement;
@@ -223,7 +171,7 @@ var Admin2Page = /** @class */ (function () {
                                 Charge: v.Charge
                             }
                         ];
-                        this.fbDatabase.list("approvedTickets/" + temp[0].Key).remove();
+                        this.fbDatabase.list("rejectedTickets/" + temp[0].Key).remove();
                         return [4 /*yield*/, this.toast
                                 .create({
                                 message: "Ticket" +
@@ -241,12 +189,16 @@ var Admin2Page = /** @class */ (function () {
                     case 2:
                         _a.sent();
                         this.refresh();
+                        this.items = this.items;
                         return [2 /*return*/];
                 }
             });
         }); });
     };
-    Admin2Page.prototype.showSpinner = function () {
+    Admin3Page.prototype.refresh = function () {
+        window.location.reload();
+    };
+    Admin3Page.prototype.showSpinner = function () {
         var loading = this.ldCtrl.create({
             content: ""
         });
@@ -255,7 +207,56 @@ var Admin2Page = /** @class */ (function () {
             loading.dismiss();
         }, 1500);
     };
-    Admin2Page.prototype.logout = function () {
+    Admin3Page.prototype.reloadData = function () {
+        this.items = this.itemSearch;
+    };
+    Admin3Page.prototype.retrieveRejectedTickets = function () {
+        var _this = this;
+        var ref = this.fbDatabase.object("rejectedTickets/");
+        ref.snapshotChanges().subscribe(function (snapshot) {
+            var allData = snapshot.payload.val();
+            var array = [];
+            array.push(allData);
+            var value = Object.keys(allData);
+            var keyArray = [];
+            keyArray.push(value);
+            for (var i = 0; i < value.length; i++) {
+                var x = 0;
+                var selectedIndex = i;
+                var keyValue = value[selectedIndex];
+                var indexSelecta = value.length - value.length + i;
+                var id = value[indexSelecta];
+                _this.kA.push(id);
+                var ref = _this.fbDatabase.object("rejectedTickets/" + keyValue);
+                ref.snapshotChanges().subscribe(function (snapshot) {
+                    var finalKey = _this.kA[_this.kA.length - _this.kA.length + x];
+                    var eventName = snapshot.payload.child("Name").val();
+                    var eventPrice = snapshot.payload.child("Price").val();
+                    var eventVenue = snapshot.payload.child("Location").val();
+                    var eventDate = snapshot.payload.child("Date").val();
+                    var eventTime = snapshot.payload.child("Time").val();
+                    var eventCreationDate = snapshot.payload.child("Creation").val();
+                    var eventSellerUID = snapshot.payload.child("Seller").val();
+                    var eventCustomerPayout = snapshot.payload.child("Payout").val();
+                    var eventServiceCharge = snapshot.payload.child("Charge").val();
+                    _this.items.push({
+                        Key: finalKey,
+                        Name: eventName,
+                        Venue: eventVenue,
+                        Price: eventPrice,
+                        Date: eventDate,
+                        Time: eventTime,
+                        Creation: eventCreationDate,
+                        Seller: eventSellerUID,
+                        Payout: eventCustomerPayout,
+                        Charge: eventServiceCharge
+                    });
+                    x++;
+                });
+            }
+        });
+    };
+    Admin3Page.prototype.logout = function () {
         var _this = this;
         this.afAuth.auth.signOut().then(function () {
             _this.toast
@@ -268,9 +269,9 @@ var Admin2Page = /** @class */ (function () {
             _this.app.getRootNav().setRoot("LoginPage");
         });
     };
-    Admin2Page = __decorate([
+    Admin3Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-admin2",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin2\admin2.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Active listings</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <ion-list>\n    <div class="ngDivAdmin" id="pendingTickets" ion-item *ngFor="let item of items; let i = index">\n      <h1 id="ticketId" position left>{{ i + 1 }} {{ item.Key }}</h1>\n      <h2 position text-center>Artist: {{ item.Name }}</h2>\n      <h2 position text-center>Venue: {{ item.Venue }}</h2>\n      <h2 position text-center>Price:£{{ item.Price }}</h2>\n      <h2 position text-center>Date: {{ item.Date }}</h2>\n      <h2 position text-center>Time: {{ item.Time }}</h2>\n      <button\n        [id]="i"\n        ion-button\n        class="modalButton"\n        block\n        (click)="remove()"\n      >\n        Remove listing\n      </button>\n      <h2></h2>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin2\admin2.html"*/
+            selector: "page-admin3",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin3\admin3.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Sale History</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <ion-list>\n    <div class="ngDivAdmin" id="pendingTickets" ion-item *ngFor="let item of items; let i = index">\n      <h1 id="ticketId" position left>{{ i + 1 }} {{ item.Key }}</h1>\n      <h2 position text-center>Artist: {{ item.Name }}</h2>\n      <h2 position text-center>Venue: {{ item.Venue }}</h2>\n      <h2 position text-center>Price:£{{ item.Price }}</h2>\n      <h2 position text-center>Date: {{ item.Date }}</h2>\n      <h2 position text-center>Time: {{ item.Time }}</h2>\n      <button\n        [id]="i"\n        ion-button\n        class="modalButton"\n        block\n        (click)="remove()"\n      >\n        Remove listing\n      </button>\n      <h2></h2>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\admin3\admin3.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
@@ -279,11 +280,11 @@ var Admin2Page = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */]])
-    ], Admin2Page);
-    return Admin2Page;
+    ], Admin3Page);
+    return Admin3Page;
 }());
 
-//# sourceMappingURL=admin2.js.map
+//# sourceMappingURL=admin3.js.map
 
 /***/ })
 
