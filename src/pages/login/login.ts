@@ -96,9 +96,8 @@ export class LoginPage {
               message:
                 "Welcome back " + gFirstname + " " + " enjoy your stay :)",
               position: "middle",
-              duration: 1000
-            })
-            .present();
+              duration: 2000
+            }).present();
           this.navCtrl.setRoot("Page");
         } else {
           this.toast

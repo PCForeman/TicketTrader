@@ -48,7 +48,7 @@ export class HomePage {
   async ionViewWillLoad() {
     await this.loadMap();
     await this.loadListings();
-    this.fetchTickets();
+   // this.fetchTickets();
   }
 
 

@@ -5,4 +5,6 @@ export interface User {
   surname: string;
   phoneNo: string;
   dOb: string;
+  NumberOfSales: number;
+  Rating:number;
 }

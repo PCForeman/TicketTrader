@@ -46,7 +46,7 @@ export class OrderHistoryPage {
   ionViewDidLoad() {
     this.retrieveBoughtListings();
     this.retrieveSoldListings();
-    this.fetchTickets();
+  //  this.fetchTickets();
   }
 
   remove(currentuser, id) {
@@ -172,13 +172,13 @@ export class OrderHistoryPage {
     alert.present();
   }
 
-  fetchTickets() {
-    setInterval(() => this.retrieveBoughtListings(), 20000);
-    setInterval(() => this.retrieveSoldListings(), 20000);
-  }
+  //fetchTickets() {
+  //  setInterval(() => this.retrieveBoughtListings(), 45000);
+  //  setInterval(() => this.retrieveSoldListings(), 45000);
+  //}
 
   removeBoughtTicket(currentUser, id) {
-    this.afDatabase.list(`bought/${currentUser}/${id}`).remove;
+    this.afDatabase.list(`bought/${currentUser}/${id}`).remove();
   }
 
   removeAlertBought() {

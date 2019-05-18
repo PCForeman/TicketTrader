@@ -1,6 +1,6 @@
 webpackJsonp([6],{
 
-/***/ 636:
+/***/ 635:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -41,9 +41,9 @@ var OrderHistoryPageModule = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrderHistoryPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_aes_256__ = __webpack_require__(343);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -114,7 +114,7 @@ var OrderHistoryPage = /** @class */ (function () {
     OrderHistoryPage.prototype.ionViewDidLoad = function () {
         this.retrieveBoughtListings();
         this.retrieveSoldListings();
-        this.fetchTickets();
+        //  this.fetchTickets();
     };
     OrderHistoryPage.prototype.remove = function (currentuser, id) {
         this.afDatabase
@@ -249,11 +249,10 @@ var OrderHistoryPage = /** @class */ (function () {
         });
         alert.present();
     };
-    OrderHistoryPage.prototype.fetchTickets = function () {
-        var _this = this;
-        setInterval(function () { return _this.retrieveBoughtListings(); }, 20000);
-        setInterval(function () { return _this.retrieveSoldListings(); }, 20000);
-    };
+    //fetchTickets() {
+    //  setInterval(() => this.retrieveBoughtListings(), 45000);
+    //  setInterval(() => this.retrieveSoldListings(), 45000);
+    //}
     OrderHistoryPage.prototype.removeBoughtTicket = function (currentUser, id) {
         this.afDatabase.list("bought/" + currentUser + "/" + id).remove;
     };

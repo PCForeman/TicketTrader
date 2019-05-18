@@ -57,6 +57,8 @@ export class RegisterPage {
         );
         console.log(result);
         this.afAuth.authState.take(1).subscribe(auth => {
+          this.user.NumberOfSales = 0;
+          this.user.Rating = 0;
           this.afDatabase.object(`user/${auth.uid}`).set(this.user);
         });
         this.toast

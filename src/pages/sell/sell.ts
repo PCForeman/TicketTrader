@@ -175,7 +175,7 @@ export class SellPage {
         .present();
       this.unlockLocationButton();
       this.unlockUploadButton();
-    } else {
+    }else{
       this.toast
         .create({
           message: "Value must be between £1 and £50.",
@@ -319,7 +319,7 @@ export class SellPage {
     this.toast.create({message:'Listing a ticket is easy fill out the details, check the money you will recieve by clicking the check price button. Then select a location by clicking the venue button and upload the corresponding ticket by clicking the ticket button', duration:7000, position:'middle'}).present();
   }
 
-  async createListing(url) {
+  async createListing(url:string) {
     this.showSpinner();
     var artist = this.listing.Name.toUpperCase();
     var startTime = this.listing.Time;
@@ -345,8 +345,11 @@ export class SellPage {
     }else{
       await this.upload(this.buffer, this.entryname);
       this.afAuth.authState.take(1).subscribe(auth => {
+        this.afDatabase.object(`user/${auth.uid}`).snapshotChanges().subscribe(res => {
+          res.payload.child(`Rating`).val();
         this.listing.Date = rDate;
         this.listing.Seller = auth.uid;
+        
         this.listing.CreationDate = gListingCreationTime;
         this.listing.ServiceCharge = gListingServiceCharge;
         this.listing.CustomerPayout = gListingCustomerPayout;
@@ -368,12 +371,15 @@ export class SellPage {
           .create({
             message: "Listing successfully created.",
             position: "middle",
-            duration: 2000
-          })
-          .present();
+            duration: 2000,
+            closeButtonText: 'Dismiss',
+            showCloseButton: true,
+            cssClass: 'toastCss'
+          }).present();
         this.clearSellFields();
         this.navCtrl.setRoot('Page');
       });
+    })
     }
   }
 

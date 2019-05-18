@@ -16,4 +16,5 @@ export interface Listings {
   Long: number;
   downloadURL:string;
   interested:number;
+  Rating:number;
 }

@@ -1,6 +1,6 @@
 webpackJsonp([2],{
 
-/***/ 641:
+/***/ 642:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SellPageModule", function() { return SellPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sell__ = __webpack_require__(656);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sell__ = __webpack_require__(657);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,16 +34,16 @@ var SellPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 656:
+/***/ 657:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SellPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_aes_256___ = __webpack_require__(343);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_android_permissions___ = __webpack_require__(346);
@@ -465,34 +465,39 @@ var SellPage = /** @class */ (function () {
                     case 7:
                         _a.sent();
                         this.afAuth.authState.take(1).subscribe(function (auth) {
-                            _this.listing.Date = rDate;
-                            _this.listing.Seller = auth.uid;
-                            _this.listing.CreationDate = gListingCreationTime;
-                            _this.listing.ServiceCharge = gListingServiceCharge;
-                            _this.listing.CustomerPayout = gListingCustomerPayout;
-                            _this.listing.Long = gLng[0];
-                            _this.listing.Lat = gLat[0];
-                            _this.listing.Location = gVenue[0];
-                            _this.listing.Sold = false;
-                            _this.listing.PaySortCode;
-                            _this.listing.PayoutAccount;
-                            _this.listing.Name = artist;
-                            _this.listing.downloadURL = _this.url;
-                            _this.listing.interested = 0;
-                            var ref = _this.afDatabase
-                                .list("unaprovedTickets/")
-                                .push(_this.listing)
-                                .orderByKey();
-                            console.log(ref);
-                            _this.toast
-                                .create({
-                                message: "Listing successfully created.",
-                                position: "middle",
-                                duration: 2000
-                            })
-                                .present();
-                            _this.clearSellFields();
-                            _this.navCtrl.setRoot('Page');
+                            _this.afDatabase.object("user/" + auth.uid).snapshotChanges().subscribe(function (res) {
+                                res.payload.child("Rating").val();
+                                _this.listing.Date = rDate;
+                                _this.listing.Seller = auth.uid;
+                                _this.listing.CreationDate = gListingCreationTime;
+                                _this.listing.ServiceCharge = gListingServiceCharge;
+                                _this.listing.CustomerPayout = gListingCustomerPayout;
+                                _this.listing.Long = gLng[0];
+                                _this.listing.Lat = gLat[0];
+                                _this.listing.Location = gVenue[0];
+                                _this.listing.Sold = false;
+                                _this.listing.PaySortCode;
+                                _this.listing.PayoutAccount;
+                                _this.listing.Name = artist;
+                                _this.listing.downloadURL = _this.url;
+                                _this.listing.interested = 0;
+                                var ref = _this.afDatabase
+                                    .list("unaprovedTickets/")
+                                    .push(_this.listing)
+                                    .orderByKey();
+                                console.log(ref);
+                                _this.toast
+                                    .create({
+                                    message: "Listing successfully created.",
+                                    position: "middle",
+                                    duration: 2000,
+                                    closeButtonText: 'Dismiss',
+                                    showCloseButton: true,
+                                    cssClass: 'toastCss'
+                                }).present();
+                                _this.clearSellFields();
+                                _this.navCtrl.setRoot('Page');
+                            });
                         });
                         _a.label = 8;
                     case 8: return [2 /*return*/];

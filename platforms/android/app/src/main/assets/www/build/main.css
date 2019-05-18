@@ -28000,6 +28000,11 @@ ion-navbar.toolbar {
   color: midnightblue;
 }
 
+.calcButton {
+  width: 50px;
+  height: 100px;
+}
+
 .canvasButton {
   position: absolute;
   top: 50%;

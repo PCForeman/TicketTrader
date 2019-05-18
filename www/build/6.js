@@ -1,6 +1,6 @@
 webpackJsonp([6],{
 
-/***/ 636:
+/***/ 637:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderHistoryPageModule", function() { return OrderHistoryPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__order_history__ = __webpack_require__(652);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__order_history__ = __webpack_require__(653);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,16 +34,16 @@ var OrderHistoryPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 652:
+/***/ 653:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrderHistoryPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_aes_256__ = __webpack_require__(343);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -114,7 +114,7 @@ var OrderHistoryPage = /** @class */ (function () {
     OrderHistoryPage.prototype.ionViewDidLoad = function () {
         this.retrieveBoughtListings();
         this.retrieveSoldListings();
-        this.fetchTickets();
+        //  this.fetchTickets();
     };
     OrderHistoryPage.prototype.remove = function (currentuser, id) {
         this.afDatabase
@@ -249,13 +249,12 @@ var OrderHistoryPage = /** @class */ (function () {
         });
         alert.present();
     };
-    OrderHistoryPage.prototype.fetchTickets = function () {
-        var _this = this;
-        setInterval(function () { return _this.retrieveBoughtListings(); }, 20000);
-        setInterval(function () { return _this.retrieveSoldListings(); }, 20000);
-    };
+    //fetchTickets() {
+    //  setInterval(() => this.retrieveBoughtListings(), 45000);
+    //  setInterval(() => this.retrieveSoldListings(), 45000);
+    //}
     OrderHistoryPage.prototype.removeBoughtTicket = function (currentUser, id) {
-        this.afDatabase.list("bought/" + currentUser + "/" + id).remove;
+        this.afDatabase.list("bought/" + currentUser + "/" + id).remove();
     };
     OrderHistoryPage.prototype.removeAlertBought = function () {
         var _this = this;
@@ -383,18 +382,12 @@ var OrderHistoryPage = /** @class */ (function () {
     };
     OrderHistoryPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-order-history",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="info"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n\n  <ion-title position text-center>Purchased Tickets</ion-title>\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h2 position text-center>{{ item.Artist }}</h2>\n      <h3 position text-center>{{ item.Venue }}</h3>\n      <h4 position text-center>{{ item.Date }}</h4>\n      <h5 position text-center>AT {{ item.Time }}</h5>\n      <h5 position text-center>{{ item.Price }} paid with card ending in {{item.Card}}</h5>\n      <h6 hidden>{{ item.Ticket }}</h6>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="midnight-blue"\n        (click)="feedback()"\n      ><ion-icon name="star"></ion-icon>\n      </button>\n    <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    icon-only\n    color="midnight-blue"\n    (click)="viewTicket()"\n  ><ion-icon name="images"></ion-icon>\n  </button>\n  <button\n  [id]="i"\n  class="adminButtons"\n  ion-button\n  icon-only\n  color="midnight-blue"\n  (click)="getTime()"\n><ion-icon name="trash"></ion-icon>\n</button>\n      <h6></h6>\n    </div>\n  </ion-list>\n\n  <ion-title position text-center>Tickets Sold</ion-title>\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of itemSold; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h1 hidden>{{ item.Key }}</h1>\n      <h2 position text-center>{{ item.Artist }}</h2>\n      <h3 position text-center>{{ item.Venue }}</h3>\n      <h4 position text-center>{{ item.Date }}</h4>\n      <h5 position text-center>{{ item.Price }}</h5>\n      <h5 hidden> {{item.AccountNo}} </h5>\n      <h5 hidden> {{ item.SortCode }}</h5>\n      <button\n      [id]="i"\n      id="btnPayout"\n      class="adminButtons"\n      ion-button\n      icon-only\n      color="midnight-blue"\n      (click)="paymentDetails()"\n    ><ion-icon name="cash"></ion-icon>\n    </button>\n    <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    color="midnight-blue"\n  >{{item.Status}}\n  </button>\n  <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    icon-only\n    (click)="removeAlertSold()"\n    color="midnight-blue"><ion-icon name="trash"></ion-icon>\n  </button>\n      <h6></h6>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/
+            selector: "page-order-history",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="info"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n\n  <ion-title position text-center>Purchased Tickets</ion-title>\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h2 position text-center>{{ item.Artist }}</h2>\n      <h3 position text-center>{{ item.Venue }}</h3>\n      <h4 position text-center>{{ item.Date }}</h4>\n      <h5 position text-center>AT {{ item.Time }}</h5>\n      <h5 position text-center>{{ item.Price }} paid with card ending in {{item.Card}}</h5>\n      <h6 hidden>{{ item.Ticket }}</h6>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="midnight-blue"\n        (click)="feedback()"\n      ><ion-icon name="star"></ion-icon>\n      </button>\n    <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    icon-only\n    color="midnight-blue"\n    (click)="viewTicket()"\n  ><ion-icon name="images"></ion-icon>\n  </button>\n  <button\n  [id]="i"\n  class="adminButtons"\n  ion-button\n  icon-only\n  color="midnight-blue"\n  (click)="getTime()"\n><ion-icon name="trash"></ion-icon>\n</button>\n      <h6></h6>\n    </div>\n  </ion-list>\n\n  <ion-title position text-center>Tickets Sold</ion-title>\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of itemSold; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h1 hidden>{{ item.Key }}</h1>\n      <h2 position text-center>{{ item.Artist }}</h2>\n      <h3 position text-center>{{ item.Venue }}</h3>\n      <h4 position text-center>{{ item.Date }}</h4>\n      <h5 position text-center>{{ item.Price }}</h5>\n      <h5 hidden> {{item.AccountNo}} </h5>\n      <h5 hidden> {{ item.SortCode }}</h5>\n      <button\n      [id]="i"\n      class="adminButtons"\n      ion-button\n      color="midnight-blue"\n    >{{item.Status}}\n    </button>\n      <button\n      [id]="i"\n      id="btnPayout"\n      class="adminButtons"\n      ion-button\n      icon-only\n      color="midnight-blue"\n      (click)="paymentDetails()"\n    ><ion-icon name="cash"></ion-icon>\n    </button>\n  <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    icon-only\n    (click)="removeAlertSold()"\n    color="midnight-blue"><ion-icon name="trash"></ion-icon>\n  </button>\n      <h6></h6>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"],
-            __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_4__ionic_native_aes_256__["a" /* AES256 */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_aes_256__["a" /* AES256 */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_aes_256__["a" /* AES256 */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _h || Object])
     ], OrderHistoryPage);
     return OrderHistoryPage;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
 
 //# sourceMappingURL=order-history.js.map

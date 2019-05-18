@@ -62,10 +62,10 @@
       class="buyTicketButtons"
       [id]="i"
       ion-button
-      (click)="showInterest()"
       color="midnight-blue"
+      (click)="sellerDetails()"
     >
-      Interested?
+      Seller Info
     </button>
 
     <button
@@ -74,6 +74,7 @@
     ion-button
     icon-only
     color="midnight-blue"
+    (click)="showInterest()"
      > <ion-icon name="thumbs-up">{{item.interested}}</ion-icon>
   </button>
       <h6></h6>

@@ -88,6 +88,13 @@
       <h5 hidden> {{ item.SortCode }}</h5>
       <button
       [id]="i"
+      class="adminButtons"
+      ion-button
+      color="midnight-blue"
+    >{{item.Status}}
+    </button>
+      <button
+      [id]="i"
       id="btnPayout"
       class="adminButtons"
       ion-button
@@ -96,13 +103,6 @@
       (click)="paymentDetails()"
     ><ion-icon name="cash"></ion-icon>
     </button>
-    <button
-    [id]="i"
-    class="adminButtons"
-    ion-button
-    color="midnight-blue"
-  >{{item.Status}}
-  </button>
   <button
     [id]="i"
     class="adminButtons"

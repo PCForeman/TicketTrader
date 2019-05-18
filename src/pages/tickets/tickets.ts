@@ -6,10 +6,10 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  ToastController
+  ToastController,
+  AlertController
 } from "ionic-angular";
 import { Observable } from "rxjs";
-import { LoginPage } from "../login/login";
 
 @IonicPage()
 @Component({
@@ -24,12 +24,14 @@ export class TicketsPage {
   itemSearch = [];
   items2 = [];
   peopleInterested: number;
+  img:any;
 
   constructor(
     private afAuth: AngularFireAuth,
     private afDatabase: AngularFireDatabase,
     private toast: ToastController,
     private app: App,
+    private aCtrl: AlertController,
     public navCtrl: NavController,
     public navParams: NavParams
   ) {}
@@ -37,13 +39,17 @@ export class TicketsPage {
   timeData: any;
 
   ionViewDidLoad() {
+    this.img = new Image()
+    this.img.src = 'https://firebasestorage.googleapis.com/v0/b/dissy-c7abe.appspot.com/o/_ionicons_svg_md-star.svg?alt=media&token=4ee46a02-3edb-48a0-894a-7e1c385f204a'
+    this.img.width = 50;
+    this.img.height = 50;
     console.log("ionViewDidLoad TicketsPage");
     this.displayTickets();
     this.fetchTickets();
   }
 
   fetchTickets() {
-    setInterval(() => this.displayTickets(), 15000);
+    setInterval(() => this.displayTickets(), 20000);
   }
 
   initializeItems(): void {
@@ -116,7 +122,7 @@ export class TicketsPage {
           message: "This is your listing.",
           duration: 2000,
           position: "Middle"
-        }).present();
+        }).setCssClass(`toastCss`).present();
 
       }else{
     var checkOutBy = timeClicked + 600000;
@@ -158,6 +164,33 @@ export class TicketsPage {
       });
       this.items = [];
     }
+  }
+
+  sellerDetails(){
+    const target = event.srcElement
+    const seller = target.parentElement.parentElement.children.item(2).innerHTML;
+    this.afDatabase.object(`user/${seller}`).snapshotChanges().subscribe(vals => {
+    const NoS = vals.payload.child(`NumberOfSales`).val();
+    const Rating = vals.payload.child(`Rating`).val();
+    const RatingScore = (Rating / NoS).toPrecision(3);
+    let alert = this.aCtrl.create({
+      title: "Seller",
+      mode: "ios",
+      message:
+        "Number of sales:" +
+        " " + NoS +
+        "<br>" +
+        "Seller Rating:" + " " + 
+        RatingScore + '/5',
+      buttons: [
+        {
+          text: "Close",
+          handler: () => {}
+        }
+      ]
+    });
+    alert.present();
+    })
   }
 
   reloadData() {
