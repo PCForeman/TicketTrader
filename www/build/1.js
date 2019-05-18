@@ -59,13 +59,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var TicketsPage = /** @class */ (function () {
-    function TicketsPage(afAuth, afDatabase, toast, app, aCtrl, navCtrl, navParams) {
+    function TicketsPage(afAuth, afDatabase, toast, app, aCtrl, navCtrl, loadingCtrl, navParams) {
         this.afAuth = afAuth;
         this.afDatabase = afDatabase;
         this.toast = toast;
         this.app = app;
         this.aCtrl = aCtrl;
         this.navCtrl = navCtrl;
+        this.loadingCtrl = loadingCtrl;
         this.navParams = navParams;
         this.items = [];
         this.kA = [];
@@ -81,6 +82,7 @@ var TicketsPage = /** @class */ (function () {
         console.log("ionViewDidLoad TicketsPage");
         this.displayTickets();
         this.fetchTickets();
+        this.checkIfOutDated();
     };
     TicketsPage.prototype.fetchTickets = function () {
         var _this = this;
@@ -221,6 +223,47 @@ var TicketsPage = /** @class */ (function () {
             alert.present();
         });
     };
+    TicketsPage.prototype.checkIfOutDated = function () {
+        var _this = this;
+        this.loadingCtrl.create({ spinner: 'bubbles', duration: 2500, content: 'Updating list' }).present();
+        this.items = [];
+        var ref = this.afDatabase.object("approvedTickets/");
+        ref.snapshotChanges().subscribe(function (snapshot) {
+            var allData = snapshot.payload.val();
+            var array = [];
+            array.push(allData);
+            var value = Object.keys(allData);
+            var keyArray = [];
+            keyArray.push(value);
+            for (var i = 0; i < value.length; i++) {
+                var selectedIndex = i;
+                var keyValue = value[selectedIndex];
+                var indexSelecta = value.length - value.length + i;
+                var id = value[indexSelecta];
+                _this.kA.push(id);
+                var ref2 = _this.afDatabase.object("approvedTickets/" + keyValue);
+                ref2.snapshotChanges().subscribe(function (snapshot) {
+                    var date = snapshot.payload.child("Date").val();
+                    var Hour = snapshot.payload.child("Time").val();
+                    var YYYY = parseInt(date.substr(6));
+                    var MM = parseInt(date.substr(3, 3));
+                    var DD = parseInt(date.substr(0, 2));
+                    var HH = parseInt(Hour.substr(0));
+                    var hoursToMilliSeconds = (3.6e+6 * HH);
+                    var eventInMilliSeconds = new Date(YYYY, MM, DD).getTime();
+                    var removalTime = eventInMilliSeconds + hoursToMilliSeconds;
+                    console.log(removalTime);
+                    var timeNow = new Date().getTime();
+                    if (timeNow >= removalTime) {
+                        ref2.remove();
+                    }
+                    else {
+                        console.log('Still valid');
+                    }
+                });
+            }
+        });
+    };
     TicketsPage.prototype.reloadData = function () {
         this.items = this.itemSearch;
     };
@@ -327,10 +370,10 @@ var TicketsPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: "page-tickets",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\tickets\tickets.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="info"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="checkOut()">\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="cloud-download"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Buy Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <ion-searchbar\n    [showCancelButton]="ShowCancel"\n    (ionInput)="getItems($event)"\n    (ionCancel)="onCancel()"\n    (ionClear)="initializeItems()"\n  >\n  </ion-searchbar>\n  <br />\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h1 hidden>{{ item.Key }}</h1>\n      <h1 hidden>{{ item.Seller }}</h1>\n      <h2 position text-center>{{ item.Name }}</h2>\n      <h3 position text-center>Venue: {{ item.Venue }}</h3>\n      <h4 position text-center>Price: £{{ item.Price }}</h4>\n      <h5 position text-center>Date: {{ item.Date }}</h5>\n      <h6 position text-center>Time: {{ item.Time }}</h6>\n      <button\n        [id]="i"\n        ion-button\n        class="buyTicketButtons"\n        (click)="buy(index)"\n        color="midnight-blue"\n      >\n        Buy ticket\n      </button>\n      <button\n      class="buyTicketButtons"\n      [id]="i"\n      ion-button\n      color="midnight-blue"\n      (click)="sellerDetails()"\n    >\n      Seller Info\n    </button>\n\n    <button\n    [id]="i"\n    class="buyTicketButtons"\n    ion-button\n    icon-only\n    color="midnight-blue"\n    (click)="showInterest()"\n     > <ion-icon name="thumbs-up">{{item.interested}}</ion-icon>\n  </button>\n      <h6></h6>\n    </div>\n  </ion-list>\n  <br />\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\tickets\tickets.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["AngularFireAuth"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["AngularFireAuth"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* ToastController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* App */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */]) === "function" && _g || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["AngularFireAuth"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["AngularFireAuth"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* ToastController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* App */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* LoadingController */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["j" /* NavParams */]) === "function" && _h || Object])
     ], TicketsPage);
     return TicketsPage;
-    var _a, _b, _c, _d, _e, _f, _g;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
 
 //# sourceMappingURL=tickets.js.map

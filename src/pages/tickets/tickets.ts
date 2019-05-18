@@ -7,7 +7,8 @@ import {
   NavController,
   NavParams,
   ToastController,
-  AlertController
+  AlertController,
+  LoadingController
 } from "ionic-angular";
 import { Observable } from "rxjs";
 
@@ -33,6 +34,7 @@ export class TicketsPage {
     private app: App,
     private aCtrl: AlertController,
     public navCtrl: NavController,
+    private loadingCtrl: LoadingController,
     public navParams: NavParams
   ) {}
 
@@ -46,6 +48,7 @@ export class TicketsPage {
     console.log("ionViewDidLoad TicketsPage");
     this.displayTickets();
     this.fetchTickets();
+    this.checkIfOutDated();
   }
 
   fetchTickets() {
@@ -192,6 +195,44 @@ export class TicketsPage {
     alert.present();
     })
   }
+
+
+  checkIfOutDated(){
+    this.loadingCtrl.create({spinner: 'bubbles', duration:2500, content:'Updating list' }).present();
+    this.items = [];
+    var ref = this.afDatabase.object(`approvedTickets/`);
+    ref.snapshotChanges().subscribe(snapshot => {
+      var allData = snapshot.payload.val();
+      var array = [];
+      array.push(allData);
+      var value = Object.keys(allData);
+      var keyArray = [];
+      keyArray.push(value);
+      for (var i = 0; i < value.length; i++) {
+        var selectedIndex = i;
+        var keyValue = value[selectedIndex];
+        var indexSelecta = value.length - value.length + i;
+        var id = value[indexSelecta];
+        this.kA.push(id);
+        var ref2 = this.afDatabase.object(`approvedTickets/${keyValue}`);
+    ref2.snapshotChanges().subscribe(snapshot => {
+    const date = snapshot.payload.child(`Date`).val(); const Hour = snapshot.payload.child(`Time`).val();
+    const YYYY = parseInt(date.substr(6));  const MM = parseInt(date.substr(3, 3));
+    const DD = parseInt(date.substr(0, 2)); const HH = parseInt(Hour.substr(0));
+    const hoursToMilliSeconds = (3.6e+6 * HH);
+    const eventInMilliSeconds = new Date(YYYY, MM, DD).getTime();
+    const removalTime = eventInMilliSeconds +  hoursToMilliSeconds;
+    console.log(removalTime);
+    const timeNow = new Date().getTime();
+    if (timeNow >= removalTime){
+    ref2.remove();
+    }else{
+    console.log('Still valid');
+    }
+    })
+  }}
+  )}
+
 
   reloadData() {
     this.items = this.itemSearch;

@@ -172,11 +172,6 @@ export class OrderHistoryPage {
     alert.present();
   }
 
-  //fetchTickets() {
-  //  setInterval(() => this.retrieveBoughtListings(), 45000);
-  //  setInterval(() => this.retrieveSoldListings(), 45000);
-  //}
-
   removeBoughtTicket(currentUser, id) {
     this.afDatabase.list(`bought/${currentUser}/${id}`).remove();
   }

@@ -1,4 +1,4 @@
-webpackJsonp([6],{
+webpackJsonp([24],{
 
 /***/ 637:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -391,4 +391,4 @@ var OrderHistoryPage = /** @class */ (function () {
 /***/ })
 
 });
-//# sourceMappingURL=6.js.map
+//# sourceMappingURL=24.js.map

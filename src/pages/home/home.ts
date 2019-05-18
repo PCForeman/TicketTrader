@@ -5,7 +5,8 @@ import {
   App,
   NavParams,
   ToastController,
-  AlertController
+  AlertController,
+  Icon
 } from "ionic-angular";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Observable } from "rxjs";
@@ -48,7 +49,7 @@ export class HomePage {
   async ionViewWillLoad() {
     await this.loadMap();
     await this.loadListings();
-   // this.fetchTickets();
+    //this.fetchTickets();
   }
 
 
@@ -65,7 +66,7 @@ export class HomePage {
         userPos = latLng;
         let mapOptions = {
           center: latLng,
-          zoom: 7,
+          zoom: 10,
           zoomControl: true,
           disableDefaultUI: true,
           mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -86,7 +87,8 @@ export class HomePage {
     let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
-      position: userPos
+      position: userPos,
+      color: 'blue'
     });
     let content = "You are here" + " ";
     this.addInfoWindow(marker, content);

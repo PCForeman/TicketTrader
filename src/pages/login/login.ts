@@ -35,12 +35,11 @@ export class LoginPage {
 
   showSpinner() {
     let loading = this.ldCtrl.create({
-      content: ""
+      spinner: 'bubbles',
+      content: "Authenticating",
+      duration:500
     });
     loading.present();
-    setTimeout(() => {
-      loading.dismiss();
-    }, 250);
   }
 
   async loginRegister() { // Redirects user to registration page
