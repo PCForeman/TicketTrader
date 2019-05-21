@@ -96,7 +96,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 var OrderHistoryPage = /** @class */ (function () {
-    function OrderHistoryPage(navCtrl, afAuth, afDatabase, toast, aes, modal, aCtrl, navParams, app) {
+    function OrderHistoryPage(navCtrl, afAuth, afDatabase, toast, aes, modal, aCtrl, navParams, ldCtrl, app) {
         this.navCtrl = navCtrl;
         this.afAuth = afAuth;
         this.afDatabase = afDatabase;
@@ -105,6 +105,7 @@ var OrderHistoryPage = /** @class */ (function () {
         this.modal = modal;
         this.aCtrl = aCtrl;
         this.navParams = navParams;
+        this.ldCtrl = ldCtrl;
         this.app = app;
         this.items = [];
         this.itemSold = [];
@@ -115,7 +116,7 @@ var OrderHistoryPage = /** @class */ (function () {
     OrderHistoryPage.prototype.ionViewDidLoad = function () {
         this.retrieveBoughtListings();
         this.retrieveSoldListings();
-        //  this.fetchTickets();
+        this.releaseFunds();
     };
     OrderHistoryPage.prototype.remove = function (currentuser, id) {
         this.afDatabase
@@ -340,6 +341,42 @@ var OrderHistoryPage = /** @class */ (function () {
             }
         });
     };
+    OrderHistoryPage.prototype.releaseFunds = function () {
+        var _this = this;
+        var userId = this.afAuth.auth.currentUser.uid;
+        this.ldCtrl
+            .create({ spinner: "bubbles", duration: 2500, content: "Updating list" })
+            .present();
+        var ref = this.afDatabase.object("sold/" + userId);
+        ref.snapshotChanges().subscribe(function (snapshot) {
+            var allData = snapshot.payload.val();
+            var array = [];
+            array.push(allData);
+            var value = Object.keys(allData);
+            var keyArray = [];
+            keyArray.push(value);
+            for (var i = 0; i < value.length; i++) {
+                var selectedIndex = i;
+                var keyValue = value[selectedIndex];
+                var indexSelecta = value.length - value.length + i;
+                var id = value[indexSelecta];
+                _this.kA.push(id);
+                var ref2 = _this.afDatabase.object("sold/" + keyValue);
+                ref2.snapshotChanges().subscribe(function (snapshot) {
+                    var fundRelease = snapshot.payload.child("FundRelease").val();
+                    var timeNow = new Date().getTime();
+                    if (timeNow > fundRelease) {
+                        _this.afDatabase.database
+                            .ref("sold/" + keyValue).update({ Status: 'Paid' })
+                            .catch(function (error) {
+                            console.log(error);
+                        });
+                        console.log("Pending release");
+                    }
+                });
+            }
+        });
+    };
     OrderHistoryPage.prototype.feedback = function () {
         var _this = this;
         var button = event.srcElement;
@@ -498,6 +535,7 @@ var OrderHistoryPage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */]])
     ], OrderHistoryPage);
     return OrderHistoryPage;

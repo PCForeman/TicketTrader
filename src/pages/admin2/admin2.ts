@@ -53,27 +53,45 @@ export class Admin2Page {
     this.itemSearch = this.items2;
   }
 
+
   getItems(searchbar) {
-    // Allows user to search through items based on input
+    // Reset items back to all of the items
     this.initializeItems();
     console.log(this.itemSearch);
-    var q = searchbar.srcElement.value;
-    console.log(q);
-    if (q == undefined || q == "") {
+    // set q to the value of the searchbar
+    var term = searchbar.srcElement.value;
+    console.log(term);
+    // if the value is an empty string don't filter the items
+    if (term == undefined || term == "") {
       this.items = this.items2;
       this.items.splice(this.items.length - 1);
       console.log(this.items);
     } else {
       this.itemSearch = this.itemSearch.filter(v => {
-        if (v.Key && q) {
-          if (v.Key.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+        if (v.Key && term) {
+          if (v.Key.toLowerCase().indexOf(term.toLowerCase()) > -1) {
             this.items = this.itemSearch;
             return true;
+          } else if (v.Name && term) {
+            if (v.Name.toLowerCase().indexOf(term.toLowerCase()) > -1) {
+              this.items = this.itemSearch;
+              return true;
+            } else if (v.Venue && term) {
+              if (v.Venue.toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                this.items = this.itemSearch;
+                return true;
+            } else if (v.Date && term) {
+              if (v.Date.toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                this.items = this.itemSearch;
+                return true;
+              }
+            }
           }
-          return false;
+            return false;
+          }
         }
       });
-      console.log(q, this.itemSearch.length, this.itemSearch);
+      console.log(term, this.itemSearch.length, this.itemSearch);
       this.items.push(this.itemSearch);
       this.reloadData();
     }

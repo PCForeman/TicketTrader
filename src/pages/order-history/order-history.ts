@@ -7,7 +7,8 @@ import {
   ModalController,
   ModalOptions,
   AlertController,
-  App
+  App,
+  LoadingController
 } from "ionic-angular";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -43,13 +44,14 @@ export class OrderHistoryPage {
     private modal: ModalController,
     private aCtrl: AlertController,
     public navParams: NavParams,
+    private ldCtrl: LoadingController,
     private app: App
   ) {}
 
   ionViewDidLoad() {
     this.retrieveBoughtListings();
     this.retrieveSoldListings();
-    //  this.fetchTickets();
+    this.releaseFunds();
   }
 
   remove(currentuser, id) {
@@ -265,6 +267,43 @@ export class OrderHistoryPage {
     });
   }
 
+  releaseFunds() {
+    const userId = this.afAuth.auth.currentUser.uid
+    this.ldCtrl
+      .create({ spinner: "bubbles", duration: 2500, content: "Updating list" })
+      .present();
+    var ref = this.afDatabase.object(`sold/${userId}`);
+    ref.snapshotChanges().subscribe(snapshot => {
+      var allData = snapshot.payload.val();
+      var array = [];
+      array.push(allData);
+      var value = Object.keys(allData);
+      var keyArray = [];
+      keyArray.push(value);
+      for (var i = 0; i < value.length; i++) {
+        var selectedIndex = i;
+        var keyValue = value[selectedIndex];
+        var indexSelecta = value.length - value.length + i;
+        var id = value[indexSelecta];
+        this.kA.push(id);
+        var ref2 = this.afDatabase.object(`sold/${keyValue}`);
+        ref2.snapshotChanges().subscribe(snapshot => {
+          const fundRelease = snapshot.payload.child(`FundRelease`).val();
+          const timeNow = new Date().getTime();
+          if (timeNow > fundRelease) {
+            this.afDatabase.database
+              .ref(`sold/${keyValue}`).update({Status: 'Paid'})
+              .catch(error => {
+                console.log(error);
+              });
+            console.log("Pending release");
+          }
+        });
+      }
+    });
+  }
+
+
   feedback() {
     const button = event.srcElement;
     const buyerId = this.afAuth.auth.currentUser.uid;
@@ -278,7 +317,7 @@ export class OrderHistoryPage {
         const bool = result.payload.child(`Feedback`).val();
         if (bool == false) {
           this.feedbackForm(buyerId, id, sellerId);
-        } else {
+        }else{
           this.toast
             .create({
               message: "You have already left feedback for this ticket",

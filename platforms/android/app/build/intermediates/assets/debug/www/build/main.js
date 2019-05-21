@@ -1,4 +1,4 @@
-webpackJsonp([17],{
+webpackJsonp([18],{
 
 /***/ 121:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -457,76 +457,80 @@ webpackEmptyAsyncContext.id = 230;
 var map = {
 	"../pages/account/account.module": [
 		628,
-		14
+		15
 	],
 	"../pages/add-card-modal/add-card-modal.module": [
 		629,
-		13
+		14
 	],
 	"../pages/admin-view/admin-view.module": [
 		630,
-		12
+		13
 	],
 	"../pages/admin/admin.module": [
 		631,
-		16
+		17
 	],
 	"../pages/admin2/admin2.module": [
 		632,
-		11
+		12
 	],
 	"../pages/admin3/admin3.module": [
 		633,
-		10
+		11
 	],
 	"../pages/adminpayments/adminpayments.module": [
 		634,
-		9
+		10
 	],
 	"../pages/buy/buy.module": [
 		635,
-		8
+		9
 	],
 	"../pages/home/home.module": [
 		298
+	],
+	"../pages/information-modal/information-modal.module": [
+		636,
+		8
 	],
 	"../pages/login/login.module": [
 		299
 	],
 	"../pages/modal-account/modal-account.module": [
-		636,
+		637,
 		7
 	],
 	"../pages/order-history/order-history.module": [
-		637,
+		638,
 		6
 	],
 	"../pages/page/page.module": [
-		638,
+		639,
 		5
 	],
 	"../pages/payment-modal/payment-modal.module": [
-		639,
+		640,
 		4
 	],
 	"../pages/register/register.module": [
-		640,
-		15
+		641,
+		16
 	],
 	"../pages/select-location-modal/select-location-modal.module": [
-		641,
+		642,
 		3
 	],
 	"../pages/sell/sell.module": [
-		642,
+		643,
 		2
 	],
 	"../pages/tickets/tickets.module": [
-		643,
+		644,
 		1
 	],
 	"../pages/view-image-modal/view-image-modal.module": [
-		644,
+		645,
 		0
 	]
 };
@@ -714,46 +718,74 @@ var AdminPage = /** @class */ (function () {
         window.location.reload();
     };
     AdminPage.prototype.initializeItems = function () {
-        // Initialises item search
         this.itemSearch = this.items;
     };
     AdminPage.prototype.copyItems = function () {
-        this.items2.push(this.items);
+        this.items2 = this.items;
     };
     AdminPage.prototype.onCancel = function () {
         this.itemSearch = this.items2;
     };
     AdminPage.prototype.getItems = function (searchbar) {
         var _this = this;
-        //Allows user to filter through items via the users input
-        // Reset items
+        // Reset items back to all of the items
         this.initializeItems();
         console.log(this.itemSearch);
-        // set q to the value search
-        var q = searchbar.srcElement.value;
-        console.log(q);
-        if (q == undefined || q == "") {
+        // set q to the value of the searchbar
+        var term = searchbar.srcElement.value;
+        console.log(term);
+        // if the value is an empty string don't filter the items
+        if (term == undefined || term == "") {
             this.items = this.items2;
             this.items.splice(this.items.length - 1);
             console.log(this.items);
         }
         else {
             this.itemSearch = this.itemSearch.filter(function (v) {
-                if (v.Key && q) {
-                    if (v.Key.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+                if (v.Key && term) {
+                    if (v.Key.toLowerCase().indexOf(term.toLowerCase()) > -1) {
                         _this.items = _this.itemSearch;
                         return true;
                     }
-                    return false;
+                    else if (v.Name && term) {
+                        if (v.Name.toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                            _this.items = _this.itemSearch;
+                            return true;
+                        }
+                        else if (v.Venue && term) {
+                            if (v.Venue.toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                                _this.items = _this.itemSearch;
+                                return true;
+                            }
+                            else if (v.Date && term) {
+                                if (v.Date.toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                                    _this.items = _this.itemSearch;
+                                    return true;
+                                }
+                                else if (v.Price && term) {
+                                    if (v.Price.toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                                        _this.items = _this.itemSearch;
+                                        return true;
+                                    }
+                                    else if (v.Time && term) {
+                                        if (v.Time.toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                                            _this.items = _this.itemSearch;
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        return false;
+                    }
                 }
             });
-            console.log(q, this.itemSearch.length, this.itemSearch);
+            console.log(term, this.itemSearch.length, this.itemSearch);
             this.items.push(this.itemSearch);
             this.reloadData();
         }
     };
     AdminPage.prototype.reloadData = function () {
-        // Reloads the items.
         this.items = this.itemSearch;
     };
     AdminPage.prototype.retrieveUnaprovedTickets = function () {
@@ -1081,6 +1113,7 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/adminpayments/adminpayments.module#AdminpaymentsPageModule', name: 'AdminpaymentsPage', segment: 'adminpayments', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/buy/buy.module#BuyPageModule', name: 'BuyPage', segment: 'buy', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/information-modal/information-modal.module#InformationModalPageModule', name: 'InformationModalPage', segment: 'information-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/modal-account/modal-account.module#ModalAccountPageModule', name: 'ModalAccountPage', segment: 'modal-account', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/order-history/order-history.module#OrderHistoryPageModule', name: 'OrderHistoryPage', segment: 'order-history', priority: 'low', defaultHistory: [] },
@@ -1190,7 +1223,7 @@ var userLong;
 var userPos;
 var keys = [];
 var HomePage = /** @class */ (function () {
-    function HomePage(afAuth, toast, gLocation, afDatabase, app, aCtrl, ngZone, vCtrl, navCtrl, navParams, ldCtrl) {
+    function HomePage(afAuth, toast, gLocation, afDatabase, app, aCtrl, ngZone, vCtrl, navCtrl, navParams, ldCtrl, modal) {
         this.afAuth = afAuth;
         this.toast = toast;
         this.gLocation = gLocation;
@@ -1202,6 +1235,7 @@ var HomePage = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.ldCtrl = ldCtrl;
+        this.modal = modal;
         this.markerObject = [];
         this.items = [];
         window.ionicPageRef = {
@@ -1249,6 +1283,15 @@ var HomePage = /** @class */ (function () {
             .catch(function (error) {
             console.log("Cannot locate you", error);
         });
+    };
+    HomePage.prototype.ticketTraderInfo = function () {
+        var myModalOpts = {
+            cssClass: "modal",
+            enableBackdropDismiss: true,
+            showBackdrop: true
+        };
+        var myModal = this.modal.create("InformationModalPage", {}, myModalOpts);
+        myModal.present();
     };
     HomePage.prototype.addUserMarker = function () {
         // Adds a marker for the user based on their geolocation
@@ -1520,7 +1563,7 @@ var HomePage = /** @class */ (function () {
     ], HomePage.prototype, "mapElement", void 0);
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-home",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="button" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="checkOut()"\n      >\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="orderHistory()"\n      >\n        <ion-icon name="cloud-download"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <div #map id="map"></div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\home\home.html"*/
+            selector: "page-home",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTraderInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="button" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="checkOut()"\n      >\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="orderHistory()"\n      >\n        <ion-icon name="cloud-download"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <div #map id="map"></div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\home\home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */],
@@ -1532,7 +1575,8 @@ var HomePage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]])
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */]])
     ], HomePage);
     return HomePage;
 }());

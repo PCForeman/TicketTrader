@@ -25,8 +25,11 @@ export class AdminpaymentsPage {
   ) {}
   kA = [];
   items = [];
+  items2 = [];
+  itemSearch = [];
   ionViewDidLoad() {
     this.retrievePayments();
+    this.copyItems();
   }
 
   logout() {
@@ -76,4 +79,65 @@ export class AdminpaymentsPage {
       }
     });
   }
+
+
+  initializeItems(): void {
+    this.itemSearch = this.items;
+  }
+
+  refresh(): void {
+    window.location.reload();
+  }
+
+  copyItems(): void {
+    this.items2 = this.items;
+  }
+
+  onCancel() {
+    this.itemSearch = this.items2;
+  }
+
+
+  getItems(searchbar) {
+    // Reset items back to all of the items
+    this.initializeItems();
+    console.log(this.itemSearch);
+    // set q to the value of the searchbar
+    var term = searchbar.srcElement.value;
+    console.log(term);
+    // if the value is an empty string don't filter the items
+    if (term == undefined || term == "") {
+      this.items = this.items2;
+      this.items.splice(this.items.length - 1);
+      console.log(this.items);
+    } else {
+      this.itemSearch = this.itemSearch.filter(v => {
+        if (v.Ref && term) {
+          if (v.Ref.toLowerCase().indexOf(term.toLowerCase()) > -1) {
+            this.items = this.itemSearch;
+            return true;
+          } else if (v.Amount && term) {
+            if (v.Amount.toLowerCase().indexOf(term.toLowerCase()) > -1) {
+              this.items = this.itemSearch;
+              return true;
+            } else if (v.pId && term) {
+              if (v.pId.toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                this.items = this.itemSearch;
+                return true;
+            }
+          }
+            return false;
+          }
+        }
+      });
+      console.log(term, this.itemSearch.length, this.itemSearch);
+      this.items.push(this.itemSearch);
+      this.reloadData();
+    }
+  }
+
+  reloadData() {
+    this.items = this.itemSearch;
+  }
+
 }

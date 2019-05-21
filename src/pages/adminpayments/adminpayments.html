@@ -14,7 +14,13 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-
+    <ion-searchbar
+    [showCancelButton]="ShowCancel"
+    (ionInput)="getItems($event)"
+    (ionCancel)="onCancel()"
+    (ionClear)="initializeItems()"
+  >
+  </ion-searchbar>
     <ion-list>
         <div
           class="ngDivAdmin"

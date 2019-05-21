@@ -72,9 +72,12 @@ var AdminpaymentsPage = /** @class */ (function () {
         this.fbDatabase = fbDatabase;
         this.kA = [];
         this.items = [];
+        this.items2 = [];
+        this.itemSearch = [];
     }
     AdminpaymentsPage.prototype.ionViewDidLoad = function () {
         this.retrievePayments();
+        this.copyItems();
     };
     AdminpaymentsPage.prototype.logout = function () {
         var _this = this;
@@ -124,9 +127,65 @@ var AdminpaymentsPage = /** @class */ (function () {
             }
         });
     };
+    AdminpaymentsPage.prototype.initializeItems = function () {
+        this.itemSearch = this.items;
+    };
+    AdminpaymentsPage.prototype.refresh = function () {
+        window.location.reload();
+    };
+    AdminpaymentsPage.prototype.copyItems = function () {
+        this.items2 = this.items;
+    };
+    AdminpaymentsPage.prototype.onCancel = function () {
+        this.itemSearch = this.items2;
+    };
+    AdminpaymentsPage.prototype.getItems = function (searchbar) {
+        var _this = this;
+        // Reset items back to all of the items
+        this.initializeItems();
+        console.log(this.itemSearch);
+        // set q to the value of the searchbar
+        var term = searchbar.srcElement.value;
+        console.log(term);
+        // if the value is an empty string don't filter the items
+        if (term == undefined || term == "") {
+            this.items = this.items2;
+            this.items.splice(this.items.length - 1);
+            console.log(this.items);
+        }
+        else {
+            this.itemSearch = this.itemSearch.filter(function (v) {
+                if (v.Ref && term) {
+                    if (v.Ref.toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                        _this.items = _this.itemSearch;
+                        return true;
+                    }
+                    else if (v.Amount && term) {
+                        if (v.Amount.toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                            _this.items = _this.itemSearch;
+                            return true;
+                        }
+                        else if (v.pId && term) {
+                            if (v.pId.toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                                _this.items = _this.itemSearch;
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                }
+            });
+            console.log(term, this.itemSearch.length, this.itemSearch);
+            this.items.push(this.itemSearch);
+            this.reloadData();
+        }
+    };
+    AdminpaymentsPage.prototype.reloadData = function () {
+        this.items = this.itemSearch;
+    };
     AdminpaymentsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-adminpayments",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\adminpayments\adminpayments.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n    <ion-buttons right>\n\n      <button ion-button icon-only color="light" (click)="logout()">\n\n        <ion-icon name="log-out"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-buttons left>\n\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n\n        <ion-icon name="information-circle"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-title position text-center>Pending listings</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n\n\n    <ion-list>\n\n        <div\n\n          class="ngDivAdmin"\n\n          [id]="i"\n\n          ion-item\n\n          *ngFor="let item of items; let i = index"\n\n        >\n\n          <h1 hidden>{{ i + 1 }}</h1>\n\n          <h2 position text-center>Amount {{ item.Amount }}</h2>\n\n          <h3 position text-center>Sale reference {{ item.Ref }}</h3>\n\n          <h4 position text-center>{{ item.pId }}</h4>\n\n</div>'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\adminpayments\adminpayments.html"*/
+            selector: "page-adminpayments",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\adminpayments\adminpayments.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n    <ion-buttons right>\n\n      <button ion-button icon-only color="light" (click)="logout()">\n\n        <ion-icon name="log-out"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-buttons left>\n\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n\n        <ion-icon name="information-circle"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-title position text-center>Pending listings</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n    <ion-searchbar\n\n    [showCancelButton]="ShowCancel"\n\n    (ionInput)="getItems($event)"\n\n    (ionCancel)="onCancel()"\n\n    (ionClear)="initializeItems()"\n\n  >\n\n  </ion-searchbar>\n\n    <ion-list>\n\n        <div\n\n          class="ngDivAdmin"\n\n          [id]="i"\n\n          ion-item\n\n          *ngFor="let item of items; let i = index"\n\n        >\n\n          <h1 hidden>{{ i + 1 }}</h1>\n\n          <h2 position text-center>Amount {{ item.Amount }}</h2>\n\n          <h3 position text-center>Sale reference {{ item.Ref }}</h3>\n\n          <h4 position text-center>{{ item.pId }}</h4>\n\n</div>'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\adminpayments\adminpayments.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
