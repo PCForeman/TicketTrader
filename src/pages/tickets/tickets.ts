@@ -40,20 +40,16 @@ export class TicketsPage {
 
   timeData: any;
 
-  ionViewDidLoad() {
-    this.img = new Image()
-    this.img.src = 'https://firebasestorage.googleapis.com/v0/b/dissy-c7abe.appspot.com/o/_ionicons_svg_md-star.svg?alt=media&token=4ee46a02-3edb-48a0-894a-7e1c385f204a'
-    this.img.width = 50;
-    this.img.height = 50;
+  async ionViewDidLoad() {
     console.log("ionViewDidLoad TicketsPage");
-    this.displayTickets();
+    await this.checkIfOutDated();
+    await this.displayTickets();
     this.fetchTickets();
-    this.checkIfOutDated();
   }
 
   fetchTickets() {
-    setInterval(() => this.displayTickets(), 20000);
-  }
+   setInterval(() => this.displayTickets(), 45000);
+ }
 
   initializeItems(): void {
     this.itemSearch = this.items;
@@ -113,7 +109,8 @@ export class TicketsPage {
     this.navCtrl.push("OrderHistoryPage");
   }
 
-  buy() {
+  async buy() {
+  this.loadingCtrl.create({spinner: 'bubbles', duration:2500, content:'Securing ticket' }).present();
     var target = event.srcElement
     const checkId = target.parentElement.parentElement.children.item(2).innerHTML;
     console.log(checkId);
@@ -218,20 +215,27 @@ export class TicketsPage {
     ref2.snapshotChanges().subscribe(snapshot => {
     const date = snapshot.payload.child(`Date`).val(); const Hour = snapshot.payload.child(`Time`).val();
     const YYYY = parseInt(date.substr(6));  const MM = parseInt(date.substr(3, 3));
+    console.log(MM);
     const DD = parseInt(date.substr(0, 2)); const HH = parseInt(Hour.substr(0));
     const hoursToMilliSeconds = (3.6e+6 * HH);
-    const eventInMilliSeconds = new Date(YYYY, MM, DD).getTime();
+    const eventInMilliSeconds = new Date(YYYY, MM - 1, DD).getTime();
     const removalTime = eventInMilliSeconds +  hoursToMilliSeconds;
-    console.log(removalTime);
     const timeNow = new Date().getTime();
-    if (timeNow >= removalTime){
-    ref2.remove();
+    console.log(removalTime, timeNow);
+    if (timeNow > removalTime){
+    this.afDatabase.database.ref(`approvedTickets/${keyValue}`).remove().then(res => {
+    console.log(res, 'Removed');
+    }).catch(error => {
+    console.log(error);
+    });
     }else{
-    console.log('Still valid');
+    console.log('Valid.')
     }
-    })
-  }}
-  )}
+  })
+}
+
+})
+}
 
 
   reloadData() {

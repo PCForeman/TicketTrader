@@ -1,6 +1,6 @@
 webpackJsonp([4],{
 
-/***/ 641:
+/***/ 639:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaymentModalPageModule", function() { return PaymentModalPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payment_modal__ = __webpack_require__(656);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__payment_modal__ = __webpack_require__(655);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,7 +34,7 @@ var PaymentModalPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 656:
+/***/ 655:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44,7 +44,7 @@ var PaymentModalPageModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_aes_256__ = __webpack_require__(343);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_stripe__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_stripe__ = __webpack_require__(345);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -118,7 +118,7 @@ var PaymentModalPage = /** @class */ (function () {
         this.listingData = ticket;
         this.minutes = this.listingData.mins;
         this.seconds = this.listingData.seconds;
-        console.log(ticket);
+        console.log(this.listingData);
         this.useExistingCard();
         this.checkOutTimer();
     };
@@ -144,8 +144,8 @@ var PaymentModalPage = /** @class */ (function () {
     PaymentModalPage.prototype.displayLoader = function () {
         var loading = this.ldCtrl.create({
             content: 'Processing',
-            spinner: 'ios',
-            duration: 2500
+            spinner: 'bubbles',
+            duration: 2000
         });
         loading.present();
         setTimeout(function () {
@@ -276,7 +276,7 @@ var PaymentModalPage = /** @class */ (function () {
                 this.seconds = this.seconds + 59;
                 this.minutes = this.minutes - 1;
                 this.belowTen = "";
-                if (this.minutes < 0 && this.seconds < 2) {
+                if (this.minutes == 0 && this.seconds <= 1) {
                     this.timeIsUp();
                     this.checkOutTimer();
                 }
@@ -451,7 +451,7 @@ var PaymentModalPage = /** @class */ (function () {
                                     transactionRef: transRefNo,
                                     TicketRef: _this.listingData.ticketRef,
                                     Paid: _this.listingData.price,
-                                    FileUrl: "www.firebase.com"
+                                    FileUrl: _this.listingData.FileUrl
                                 }
                             ];
                             var sellerRef = [
@@ -510,10 +510,10 @@ var PaymentModalPage = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */],
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_aes_256__["a" /* AES256 */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_4__ionic_native_stripe__["a" /* Stripe */],
             __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["AngularFireAuth"],

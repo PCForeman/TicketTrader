@@ -1,4 +1,9 @@
-import { Component, ViewChild, ElementRef, NgZone, ɵConsole } from "@angular/core";
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  NgZone,
+} from "@angular/core";
 import {
   IonicPage,
   NavController,
@@ -6,7 +11,7 @@ import {
   NavParams,
   ToastController,
   AlertController,
-  Icon
+  ViewController
 } from "ionic-angular";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Observable } from "rxjs";
@@ -37,6 +42,7 @@ export class HomePage {
     private app: App,
     private aCtrl: AlertController,
     private ngZone: NgZone,
+    private vCtrl: ViewController,
     public navCtrl: NavController,
     public navParams: NavParams
   ) {
@@ -52,11 +58,10 @@ export class HomePage {
     //this.fetchTickets();
   }
 
-
-
   listingData: Observable<any>;
 
-  loadMap() { // Loads the google maps API on screen it then calls functions to populate it with data.
+  loadMap() {
+    // Loads the google maps API on screen it then calls functions to populate it with data.
     this.gLocation
       .getCurrentPosition()
       .then(resp => {
@@ -66,7 +71,7 @@ export class HomePage {
         userPos = latLng;
         let mapOptions = {
           center: latLng,
-          zoom: 10,
+          zoom: 14,
           zoomControl: true,
           disableDefaultUI: true,
           mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -83,18 +88,20 @@ export class HomePage {
       });
   }
 
-  addUserMarker() { // Adds a marker for the user based on their geolocation
+  addUserMarker() {
+    // Adds a marker for the user based on their geolocation
     let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
       position: userPos,
-      color: 'blue'
+      color: "blue"
     });
     let content = "You are here" + " ";
     this.addInfoWindow(marker, content);
   }
 
-  loadListings() { // Retrives approved listings from the table, create an object for each
+  loadListings() {
+    // Retrives approved listings from the table, create an object for each
     // and then plots them on the map with their respective Lat/Lng
     var ref = this.afDatabase.object(`approvedTickets/`);
     ref.snapshotChanges().subscribe(snapshot => {
@@ -196,11 +203,17 @@ export class HomePage {
     });
   }
 
-  fetchTickets() { // Makes the listings refresh every 20 seconds.
+  fetchTickets() {
+    // Makes the listings refresh every 20 seconds.
     setInterval(() => this.loadListings(), 20000);
   }
 
-  buyTicketAlert() { // Propmpts an alert when the user clicks to buy a ticket, and will execute based on users input
+  ionViewWillEnter() {
+    this.vCtrl.showBackButton(false);
+  }
+
+  buyTicketAlert() {
+    // Propmpts an alert when the user clicks to buy a ticket, and will execute based on users input
     const target = event.srcElement;
     const userId = this.afAuth.auth.currentUser.uid;
     const sellerId = target.parentElement.children.item(4).innerHTML;
@@ -232,8 +245,9 @@ export class HomePage {
     alert.present();
   }
 
-  buyTickets(userId, sellerId, ticketClickedId, index) { //Check that the user isn't the person who listed the ticket
-  //If condition is met it will remove the ticket from the map and active listings and place the ticket in a users basket
+  buyTickets(userId, sellerId, ticketClickedId, index) {
+    //Check that the user isn't the person who listed the ticket
+    //If condition is met it will remove the ticket from the map and active listings and place the ticket in a users basket
     const temp = [];
     console.log(userId, sellerId, ticketClickedId, index);
     if (userId == sellerId) {
@@ -273,7 +287,8 @@ export class HomePage {
     }
   }
 
-  yourTicketMessage() { // Displays a toast to user if they try to buy their own ticket listing
+  yourTicketMessage() {
+    // Displays a toast to user if they try to buy their own ticket listing
     this.toast
       .create({
         message: "This is your listing.",
@@ -287,15 +302,18 @@ export class HomePage {
     window.location.reload();
   }
 
-  checkOut() { // redirection
+  checkOut() {
+    // redirection
     this.navCtrl.push("BuyPage");
   }
 
-  orderHistory() { // redirection
+  orderHistory() {
+    // redirection
     this.navCtrl.push("OrderHistoryPage");
   }
 
-  addInfoWindow(marker, content) { // Adds infowindow to markers on map (marker, content)
+  addInfoWindow(marker, content) {
+    // Adds infowindow to markers on map (marker, content)
     let infoWindow = new google.maps.InfoWindow({
       content: content
     });
@@ -304,7 +322,8 @@ export class HomePage {
     });
   }
 
-  logout() { // Logs a user out
+  logout() {
+    // Logs a user out
     this.afAuth.auth.signOut().then(() => {
       this.toast
         .create({

@@ -269,7 +269,7 @@ var AccountPage = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
             __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["AngularFireAuth"],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["m" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* App */],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["i" /* NavController */],

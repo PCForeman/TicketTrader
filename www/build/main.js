@@ -211,10 +211,14 @@ var LoginPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: "page-login",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\login\login.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-title position text-center>Login</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-item>\n    <ion-label floating>Enter your email address</ion-label>\n    <ion-input type="text" [(ngModel)]="user.email"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Enter your password</ion-label>\n    <ion-input type="password" [(ngModel)]="user.password"></ion-input>\n  </ion-item>\n<br>\n  <button\n  class="loginButton"\n    ion-button\n    id="btnLogin"\n    color="midnight-blue"\n    (click)="loginLogin(user)"\n  >\n    Login\n  </button>\n  <button\n    class="loginButton"\n    ion-button\n    id="btnReg"\n    color="midnight-blue"\n    (click)="loginRegister()"\n  >\n    Need an account?\n  </button>\n\n  <img height="220" src="https://firebasestorage.googleapis.com/v0/b/dissy-c7abe.appspot.com/o/received_1965782907049858.jpeg?alt=media&token=847a23a2-0a59-4698-af2c-5b8bcb7939c0">\n</ion-content>\n\n<div class id="footer">\n  <ion-footer>\n    <ion-toolbar color="midnight-blue">\n      <ion-title position text-center>TicketTrader</ion-title>\n    </ion-toolbar>\n  </ion-footer>\n</div>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\login\login.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["AngularFireDatabase"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["AngularFireDatabase"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _f || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"],
+            __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["AngularFireDatabase"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], LoginPage);
     return LoginPage;
-    var _a, _b, _c, _d, _e, _f;
 }());
 
 //# sourceMappingURL=login.js.map
@@ -394,7 +398,7 @@ var RegisterPage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */]])
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */]])
     ], RegisterPage);
     return RegisterPage;
 }());
@@ -929,7 +933,7 @@ var AdminPage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__["AngularFireAuth"],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* LoadingController */],
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
-            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["m" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["b" /* App */],
             __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["h" /* ModalController */]])
     ], AdminPage);
@@ -1146,7 +1150,7 @@ var userLong;
 var userPos;
 var keys = [];
 var HomePage = /** @class */ (function () {
-    function HomePage(afAuth, toast, gLocation, afDatabase, app, aCtrl, ngZone, navCtrl, navParams) {
+    function HomePage(afAuth, toast, gLocation, afDatabase, app, aCtrl, ngZone, vCtrl, navCtrl, navParams) {
         this.afAuth = afAuth;
         this.toast = toast;
         this.gLocation = gLocation;
@@ -1154,6 +1158,7 @@ var HomePage = /** @class */ (function () {
         this.app = app;
         this.aCtrl = aCtrl;
         this.ngZone = ngZone;
+        this.vCtrl = vCtrl;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.markerObject = [];
@@ -1180,6 +1185,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.loadMap = function () {
         var _this = this;
+        // Loads the google maps API on screen it then calls functions to populate it with data.
         this.gLocation
             .getCurrentPosition()
             .then(function (resp) {
@@ -1189,7 +1195,7 @@ var HomePage = /** @class */ (function () {
             userPos = latLng;
             var mapOptions = {
                 center: latLng,
-                zoom: 10,
+                zoom: 14,
                 zoomControl: true,
                 disableDefaultUI: true,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -1203,17 +1209,19 @@ var HomePage = /** @class */ (function () {
         });
     };
     HomePage.prototype.addUserMarker = function () {
+        // Adds a marker for the user based on their geolocation
         var marker = new google.maps.Marker({
             map: this.map,
             animation: google.maps.Animation.DROP,
             position: userPos,
-            color: 'blue'
+            color: "blue"
         });
         var content = "You are here" + " ";
         this.addInfoWindow(marker, content);
     };
     HomePage.prototype.loadListings = function () {
         var _this = this;
+        // Retrives approved listings from the table, create an object for each
         // and then plots them on the map with their respective Lat/Lng
         var ref = this.afDatabase.object("approvedTickets/");
         ref.snapshotChanges().subscribe(function (snapshot) {
@@ -1314,10 +1322,15 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.fetchTickets = function () {
         var _this = this;
+        // Makes the listings refresh every 20 seconds.
         setInterval(function () { return _this.loadListings(); }, 20000);
+    };
+    HomePage.prototype.ionViewWillEnter = function () {
+        this.vCtrl.showBackButton(false);
     };
     HomePage.prototype.buyTicketAlert = function () {
         var _this = this;
+        // Propmpts an alert when the user clicks to buy a ticket, and will execute based on users input
         var target = event.srcElement;
         var userId = this.afAuth.auth.currentUser.uid;
         var sellerId = target.parentElement.children.item(4).innerHTML;
@@ -1349,6 +1362,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.buyTickets = function (userId, sellerId, ticketClickedId, index) {
         var _this = this;
+        //Check that the user isn't the person who listed the ticket
         //If condition is met it will remove the ticket from the map and active listings and place the ticket in a users basket
         var temp = [];
         console.log(userId, sellerId, ticketClickedId, index);
@@ -1390,6 +1404,7 @@ var HomePage = /** @class */ (function () {
         }
     };
     HomePage.prototype.yourTicketMessage = function () {
+        // Displays a toast to user if they try to buy their own ticket listing
         this.toast
             .create({
             message: "This is your listing.",
@@ -1402,13 +1417,16 @@ var HomePage = /** @class */ (function () {
         window.location.reload();
     };
     HomePage.prototype.checkOut = function () {
+        // redirection
         this.navCtrl.push("BuyPage");
     };
     HomePage.prototype.orderHistory = function () {
+        // redirection
         this.navCtrl.push("OrderHistoryPage");
     };
     HomePage.prototype.addInfoWindow = function (marker, content) {
         var _this = this;
+        // Adds infowindow to markers on map (marker, content)
         var infoWindow = new google.maps.InfoWindow({
             content: content
         });
@@ -1418,6 +1436,7 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.logout = function () {
         var _this = this;
+        // Logs a user out
         this.afAuth.auth.signOut().then(function () {
             _this.toast
                 .create({
@@ -1431,16 +1450,24 @@ var HomePage = /** @class */ (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])("map"),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */])
     ], HomePage.prototype, "mapElement", void 0);
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: "page-home",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\home\home.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="button" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="checkOut()"\n      >\n        <ion-icon name="basket"></ion-icon>\n      </button>\n      <button\n        id="button"\n        ion-button\n        icon-only\n        color="light"\n        (click)="orderHistory()"\n      >\n        <ion-icon name="cloud-download"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Home</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n  <div #map id="map"></div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\home\home.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["AngularFireDatabase"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["AngularFireDatabase"]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _k || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["AngularFireAuth"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__["a" /* Geolocation */],
+            __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__["AngularFireDatabase"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
     ], HomePage);
     return HomePage;
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
 }());
 
 //# sourceMappingURL=home.js.map

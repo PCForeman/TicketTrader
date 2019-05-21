@@ -337,10 +337,10 @@ var AddCardModalPage = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["j" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["m" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["n" /* ViewController */],
             __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___["AngularFireDatabase"],
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___["AngularFireAuth"],
-            __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["m" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_1__ionic_native_aes_256__["a" /* AES256 */],
             __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["a" /* AlertController */]])
     ], AddCardModalPage);

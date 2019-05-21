@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { IonicPage, NavController } from "ionic-angular";
+import { Component, ViewChild } from "@angular/core";
+import { IonicPage, NavController, Tabs } from "ionic-angular";
 
 /**
  * Generated class for the Page tabs.
@@ -14,6 +14,8 @@ import { IonicPage, NavController } from "ionic-angular";
   templateUrl: "page.html"
 })
 export class Page {
+  @ViewChild('myTab') tabRef: Tabs;
+
   homeRoot = "HomePage";
   ticketsRoot = "TicketsPage";
   sellRoot = "SellPage";
@@ -24,5 +26,7 @@ export class Page {
   tab3Root = "SellPage";
   tab4Root = "AccountPage";
 
-  constructor(public navCtrl: NavController) {}
+  constructor(public navCtrl: NavController) {
+
+  }
 }

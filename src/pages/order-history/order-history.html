@@ -33,6 +33,7 @@
       *ngFor="let item of items; let i = index"
     >
       <h1 hidden>{{ i + 1 }}</h1>
+      <h1 hidden>{{ item.Key }}</h1>
       <h2 position text-center>{{ item.Artist }}</h2>
       <h3 position text-center>{{ item.Venue }}</h3>
       <h4 position text-center>{{ item.Date }}</h4>

@@ -67,6 +67,8 @@ export class SellPage {
   url: any;
   buffer: any;
   entryname: any;
+  PayoutAccount:any;
+  PayoutSortCode:any;
 
   requestPermissions() {
     this.androidPermissions
@@ -244,7 +246,7 @@ export class SellPage {
   showSpinner() {
     let loading = this.ldCtrl.create({
       content: "Processing",
-      spinner: 'bubble'
+      spinner: 'bubbles'
     });
     loading.present();
     setTimeout(() => {
@@ -294,8 +296,8 @@ export class SellPage {
                   text: "Proceed",
                   handler: () => {
                     console.log("Cancel clicked");
-                    this.listing.PayoutAccount = accNoPlainText;
-                    this.listing.PaySortCode = sortCodePlainText;
+                    this.PayoutAccount = accNoPlainText;
+                    this.PayoutSortCode = sortCodePlainText;
                     this.instructionMessage();
                   }
                 },
@@ -316,11 +318,11 @@ export class SellPage {
 
 
   instructionMessage(){
-    this.toast.create({message:'Listing a ticket is easy fill out the details, check the money you will recieve by clicking the check price button. Then select a location by clicking the venue button and upload the corresponding ticket by clicking the ticket button', duration:7000, position:'middle'}).present();
+    this.toast.create({message:'Listing a ticket is easy just fill out the ticket details below, check the money you will recieve by clicking the calculator. Then select a location by clicking the venue button and upload the corresponding ticket by clicking the ticket button', duration:7000, position:'middle'}).present();
   }
 
   async createListing(url:string) {
-    this.showSpinner();
+   await this.showSpinner();
     var artist = this.listing.Name.toUpperCase();
     var startTime = this.listing.Time;
     var date = this.listing.Date.toString();
@@ -348,8 +350,7 @@ export class SellPage {
         this.afDatabase.object(`user/${auth.uid}`).snapshotChanges().subscribe(res => {
           res.payload.child(`Rating`).val();
         this.listing.Date = rDate;
-        this.listing.Seller = auth.uid;
-        
+        this.listing.Seller = auth.uid;        
         this.listing.CreationDate = gListingCreationTime;
         this.listing.ServiceCharge = gListingServiceCharge;
         this.listing.CustomerPayout = gListingCustomerPayout;
@@ -357,9 +358,11 @@ export class SellPage {
         this.listing.Lat = gLat[0];
         this.listing.Location = gVenue[0];
         this.listing.Sold = false;
-        this.listing.PaySortCode;
-        this.listing.PayoutAccount;
+        this.listing.PaySortCode = this.PayoutSortCode;
+        this.listing.Price = price
+        this.listing.PayoutAccount = this.PayoutAccount;
         this.listing.Name = artist;
+        this.listing.Time = startTime;
         this.listing.downloadURL = this.url;
         this.listing.interested = 0;
         var ref = this.afDatabase
@@ -372,13 +375,12 @@ export class SellPage {
             message: "Listing successfully created.",
             position: "middle",
             duration: 2000,
-            closeButtonText: 'Dismiss',
-            showCloseButton: true,
-            cssClass: 'toastCss'
           }).present();
-        this.clearSellFields();
-        this.navCtrl.setRoot('Page');
+        this.navCtrl.setRoot('Page').catch(error => {
+        console.log(error)
+        })
       });
+      this.clearSellFields();
     })
     }
   }

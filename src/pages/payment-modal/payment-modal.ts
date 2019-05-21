@@ -54,7 +54,7 @@ export class PaymentModalPage {
     this.listingData = ticket;
     this.minutes = this.listingData.mins;
     this.seconds = this.listingData.seconds;
-    console.log(ticket);
+    console.log(this.listingData);
     this.useExistingCard();
     this.checkOutTimer();
   }
@@ -67,8 +67,8 @@ export class PaymentModalPage {
 displayLoader(){
   let loading = this.ldCtrl.create({
     content: 'Processing',
-    spinner: 'ios',
-    duration: 2500
+    spinner: 'bubbles',
+    duration: 2000
   });
 
   loading.present();
@@ -189,7 +189,7 @@ if (this.seconds <= 0) {
 this.seconds = this.seconds + 59;
 this.minutes = this.minutes - 1;
 this.belowTen = "";
-if (this.minutes < 0 && this.seconds < 2) {
+if (this.minutes == 0 && this.seconds <= 1 ) {
 this.timeIsUp();
 this.checkOutTimer();
 }
@@ -362,7 +362,7 @@ clearInterval(this.timer);
                   transactionRef: transRefNo,
                   TicketRef: this.listingData.ticketRef,
                   Paid: this.listingData.price,
-                  FileUrl: "www.firebase.com"
+                  FileUrl: this.listingData.FileUrl
                 }
               ];
 

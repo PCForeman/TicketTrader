@@ -1,6 +1,6 @@
 webpackJsonp([5],{
 
-/***/ 637:
+/***/ 638:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PageModule", function() { return PageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__page__ = __webpack_require__(653);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__page__ = __webpack_require__(654);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -34,7 +34,7 @@ var PageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 653:
+/***/ 654:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -70,9 +70,13 @@ var Page = /** @class */ (function () {
         this.tab3Root = "SellPage";
         this.tab4Root = "AccountPage";
     }
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('myTab'),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Tabs */])
+    ], Page.prototype, "tabRef", void 0);
     Page = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-page",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\page\page.html"*/'<ion-tabs position="centered" color="midnight-blue">\n  <ion-tab\n    color="midnight-blue"\n    [root]="homeRoot"\n    tabTitle="Home"\n    tabIcon="home"\n  ></ion-tab>\n  <ion-tab\n    color="midnight-blue"\n    [root]="ticketsRoot"\n    tabTitle="Listings"\n    tabIcon="search"\n  ></ion-tab>\n  <ion-tab\n    color="midnight-blue"\n    [root]="sellRoot"\n    tabTitle="Sell"\n    tabIcon="cart"\n  ></ion-tab>\n  <ion-tab\n    color="midnight-blue"\n    [root]="accountRoot"\n    tabTitle="Account"\n    tabIcon="settings"\n  ></ion-tab>\n</ion-tabs>\n\n<head>\n  <link\n    href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css"\n    rel="stylesheet"\n  />\n</head>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\page\page.html"*/
+            selector: "page-page",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\page\page.html"*/'<ion-tabs position="centered" color="midnight-blue">\n  <ion-tab\n    color="midnight-blue"\n    [root]="homeRoot"\n    tabTitle="Home"\n    tabIcon="map"\n  ></ion-tab>\n  <ion-tab\n    color="midnight-blue"\n    [root]="ticketsRoot"\n    tabTitle="Listings"\n    tabIcon="search"\n  ></ion-tab>\n  <ion-tab\n    color="midnight-blue"\n    [root]="sellRoot"\n    tabTitle="Sell"\n    tabIcon="cart"\n  ></ion-tab>\n  <ion-tab\n    color="midnight-blue"\n    [root]="accountRoot"\n    tabTitle="Account"\n    tabIcon="settings"\n  ></ion-tab>\n</ion-tabs>\n\n<head>\n  <link\n    href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css"\n    rel="stylesheet"\n  />\n</head>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\page\page.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]])
     ], Page);

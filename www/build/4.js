@@ -118,7 +118,7 @@ var PaymentModalPage = /** @class */ (function () {
         this.listingData = ticket;
         this.minutes = this.listingData.mins;
         this.seconds = this.listingData.seconds;
-        console.log(ticket);
+        console.log(this.listingData);
         this.useExistingCard();
         this.checkOutTimer();
     };
@@ -144,8 +144,8 @@ var PaymentModalPage = /** @class */ (function () {
     PaymentModalPage.prototype.displayLoader = function () {
         var loading = this.ldCtrl.create({
             content: 'Processing',
-            spinner: 'ios',
-            duration: 2500
+            spinner: 'bubbles',
+            duration: 2000
         });
         loading.present();
         setTimeout(function () {
@@ -276,7 +276,7 @@ var PaymentModalPage = /** @class */ (function () {
                 this.seconds = this.seconds + 59;
                 this.minutes = this.minutes - 1;
                 this.belowTen = "";
-                if (this.minutes < 0 && this.seconds < 2) {
+                if (this.minutes == 0 && this.seconds <= 1) {
                     this.timeIsUp();
                     this.checkOutTimer();
                 }
@@ -451,7 +451,7 @@ var PaymentModalPage = /** @class */ (function () {
                                     transactionRef: transRefNo,
                                     TicketRef: _this.listingData.ticketRef,
                                     Paid: _this.listingData.price,
-                                    FileUrl: "www.firebase.com"
+                                    FileUrl: _this.listingData.FileUrl
                                 }
                             ];
                             var sellerRef = [
@@ -510,10 +510,10 @@ var PaymentModalPage = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */],
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_aes_256__["a" /* AES256 */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_4__ionic_native_stripe__["a" /* Stripe */],
             __WEBPACK_IMPORTED_MODULE_5_angularfire2_auth__["AngularFireAuth"],

@@ -30,6 +30,7 @@ export class OrderHistoryPage {
   minutesLeft: number;
   secondsLeft: number;
   timer: any;
+  hours:any;
   belowTen: any;
   belowTenMin: any;
   constructor(
@@ -70,26 +71,35 @@ export class OrderHistoryPage {
 
   getTime(){
     const button = event.srcElement;
-    const date = button.parentElement.parentElement.children.item(3).innerHTML;
-    const  hours = button.parentElement.parentElement.children.item(4).innerHTML;
+    const ID = this.afAuth.auth.currentUser.uid;
+    const TicketID = button.parentElement.parentElement.children.item(1).innerHTML;
+    console.log(TicketID);
+    const date = button.parentElement.parentElement.children.item(4).innerHTML;
     const YYYY = parseInt(date.substr(6));
     const MM = parseInt(date.substr(3, 3));
     const DD = parseInt(date.substr(0, 2));
-    const HH = parseInt(hours.substr(0,2))
-    const eventInMilliseconds = new Date(YYYY, MM, DD, HH).getTime();
-    const removalAllowedTime = eventInMilliseconds + 960000;
+    this.afDatabase.object(`/bought/${ID}/${TicketID}`).snapshotChanges().subscribe(result => {
+    const HH = result.payload.child(`Time`).val();
+    this.hours = parseInt(HH);
+    const eventInMilliseconds = new Date(YYYY, MM - 1, DD).getTime();
+    const hoursToMilliSeconds = (3.6e+6 * this.hours);
+    const removalAllowedTime = (eventInMilliseconds + hoursToMilliSeconds);
     const timeNow = new Date().getTime();
+    console.log(eventInMilliseconds, removalAllowedTime, timeNow)
     if (timeNow >= removalAllowedTime){
-    this.removeAlertBought();
+    this.removeAlertBought(ID ,TicketID);
     }else{
-    this.toast.create({message:'You will be able to remove this record 24hrs after the event has taken place', duration:3000, position:'middle'}).present();
+    this.toast.create({message:'You will be able to remove this record 24hrs after the event has taken place', duration:3000, position:'middle'}).present().catch(error => {
+    console.log(error);
+    });
     }
+  })
   }
 
 
   async viewTicket() {
     const button = event.srcElement;
-    var url = button.parentElement.parentElement.children.item(6).innerHTML;
+    var url = button.parentElement.parentElement.children.item(7).innerHTML;
     console.log(url);
     const myModalOpts: ModalOptions = {
       enableBackdropDismiss: true,
@@ -173,13 +183,12 @@ export class OrderHistoryPage {
   }
 
   removeBoughtTicket(currentUser, id) {
+    console.log(currentUser, id)
     this.afDatabase.list(`bought/${currentUser}/${id}`).remove();
   }
 
-  removeAlertBought() {
-    const target = event.srcElement;
-    const id = target.parentElement.parentElement.children.item(1).innerHTML;
-    const currentUser = this.afAuth.auth.currentUser.uid;
+  removeAlertBought(currentUser ,id) {
+    console.log(currentUser, id)
     let alert = this.aCtrl.create({
       title: "Order history",
       mode: "ios",
@@ -251,10 +260,12 @@ export class OrderHistoryPage {
       var allData = snapshot.payload.val();
       var keyValues = Object.keys(allData);
       for (var i = 0; i < keyValues.length; ) {
+        const finalKey = keyValues[i].valueOf();
         this.afDatabase
           .object(`bought/${currentUser}/${keyValues[i]}`)
           .snapshotChanges()
           .subscribe(async data => {
+            console.log(finalKey);
             const Artist = data.payload.child(`Artist`).val();
             var Card = data.payload.child(`Card`).val();
             const Date = data.payload.child(`Date`).val();
@@ -269,6 +280,7 @@ export class OrderHistoryPage {
               .then(acc => (this.plainTextCard = acc))
               .catch((error: any) => console.log(error));
             var ticketObject = {
+              Key: finalKey,
               Artist: Artist,
               Card: this.plainTextCard.substr(15),
               Date: Date,
