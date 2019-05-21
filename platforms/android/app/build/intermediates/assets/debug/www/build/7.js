@@ -126,7 +126,7 @@ var ModalAccountPage = /** @class */ (function () {
         var alert = this.aCtrl.create({
             mode: "ios",
             title: "Update name?",
-            message: "from" + " " + this.userD.surname + " " + ", to" + " " + this.uSurname,
+            message: "from" + " " + this.userD.surname + " " + "to" + " " + this.uSurname,
             cssClass: "alert-button-group",
             buttons: [
                 {
@@ -151,7 +151,7 @@ var ModalAccountPage = /** @class */ (function () {
         var alert = this.aCtrl.create({
             mode: "ios",
             title: "Update name?",
-            message: "from" + " " + this.userD.phoneNo + " " + ", to" + " " + this.uPhoneNo,
+            message: "from" + " " + this.userD.phoneNo + " " + "to" + " " + this.uPhoneNo,
             cssClass: "alert-button-group",
             buttons: [
                 {
@@ -176,7 +176,7 @@ var ModalAccountPage = /** @class */ (function () {
         var alert = this.aCtrl.create({
             mode: "ios",
             title: "Update name?",
-            message: "from" + " " + this.userD.firstname + " " + ", to" + " " + this.uName,
+            message: "from" + " " + this.userD.firstname + " " + "to" + " " + this.uName,
             cssClass: "alert-button-group",
             buttons: [
                 {

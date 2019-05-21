@@ -39,7 +39,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Start time</ion-label>
+      <ion-label floating>Start time (24.00 Hr)</ion-label>
       <ion-input id="txtTime" [(ngModel)]="listing.Time"></ion-input>
     </ion-item>
     <ion-item>
@@ -47,13 +47,13 @@
       <ion-datetime
         id="listingDate"
         displayFormat="DD/MM/YY"
-        min="2019-05-16"
-        max="2020-05-23"
+        min="2019-05-22"
+        max="2020-05-22"
         [(ngModel)]="listing.Date"
       ></ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-label floating>Price £</ion-label>
+      <ion-label floating>Price £1-50</ion-label>
       <ion-input id="txtPrice" [(ngModel)]="listing.Price"></ion-input>
       <button
         ion-button
