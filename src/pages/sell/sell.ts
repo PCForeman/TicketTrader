@@ -67,8 +67,8 @@ export class SellPage {
   url: any;
   buffer: any;
   entryname: any;
-  PayoutAccount:any;
-  PayoutSortCode:any;
+  PayoutAccount: any;
+  PayoutSortCode: any;
 
   requestPermissions() {
     this.androidPermissions
@@ -94,7 +94,7 @@ export class SellPage {
 
   async selectTicket() {
     const files = await (<any>window).chooser
-      .getFile('image/jpeg/png')
+      .getFile("image/jpeg/png")
       .then(async uri => {
         this.nativepath = uri.uri;
         await this.resolvePath(this.nativepath);
@@ -177,7 +177,7 @@ export class SellPage {
         .present();
       this.unlockLocationButton();
       this.unlockUploadButton();
-    }else{
+    } else {
       this.toast
         .create({
           message: "Value must be between £1 and £50.",
@@ -197,7 +197,7 @@ export class SellPage {
           duration: 3500
         })
         .present();
-      this.app.getRootNav().setRoot('LoginPage');
+      this.app.getRootNav().setRoot("LoginPage");
     });
   }
 
@@ -246,7 +246,7 @@ export class SellPage {
   showSpinner() {
     let loading = this.ldCtrl.create({
       content: "Processing",
-      spinner: 'bubbles'
+      spinner: "bubbles"
     });
     loading.present();
     setTimeout(() => {
@@ -316,13 +316,19 @@ export class SellPage {
       });
   }
 
-
-  instructionMessage(){
-    this.toast.create({message:'Listing a ticket is easy just fill out the ticket details below, check the money you will recieve by clicking the calculator. Then select a location by clicking the venue button and upload the corresponding ticket by clicking the ticket button', duration:7000, position:'middle'}).present();
+  instructionMessage() {
+    this.toast
+      .create({
+        message:
+          "Listing a ticket is easy just fill out the ticket details below, check the money you will recieve by clicking the calculator. Then select a location by clicking the venue button and upload the corresponding ticket by clicking the ticket button",
+        duration: 7000,
+        position: "middle"
+      })
+      .present();
   }
 
-  async createListing(url:string) {
-   await this.showSpinner();
+  async createListing(url: string) {
+    await this.showSpinner();
     var artist = this.listing.Name.toUpperCase();
     var startTime = this.listing.Time;
     var date = this.listing.Date.toString();
@@ -332,56 +338,96 @@ export class SellPage {
     var rDate = p1 + "/" + p2 + "/" + p3;
     console.log(rDate);
     var price = this.listing.Price;
-    if (artist == "" || artist == null){
-    this.toast.create({message:'Artist field is empty', duration:2000, position:'middle'}).present();
-    }else if (startTime < 0 && startTime > 24){
-    this.toast.create({message:'Time must be 24hr clock', duration:2000, position:'middle'}).present();
-    }else if (date == null){
-    this.toast.create({message:'Date cannot be empty', duration:2000, position:'middle'}).present();
-    }else if (price == NaN){
-    this.toast.create({message:'Price must be a numerical value between £1 - £50', duration:2000, position:'middle'}).present();
-    }else if (price < 1){
-    this.toast.create({message:'Price cannot be lower than £1', duration:2000, position:'middle'}).present();
-    }else if (price > 50){
-    this.toast.create({message:'Price cannot exceed £50', duration:2000, position:'middle'}).present();
-    }else{
+    if (artist == "" || artist == null) {
+      this.toast
+        .create({
+          message: "Artist field is empty",
+          duration: 2000,
+          position: "middle"
+        })
+        .present();
+    } else if (startTime < 0 && startTime > 24) {
+      this.toast
+        .create({
+          message: "Time must be 24hr clock",
+          duration: 2000,
+          position: "middle"
+        })
+        .present();
+    } else if (date == null) {
+      this.toast
+        .create({
+          message: "Date cannot be empty",
+          duration: 2000,
+          position: "middle"
+        })
+        .present();
+    } else if (price == NaN) {
+      this.toast
+        .create({
+          message: "Price must be a numerical value between £1 - £50",
+          duration: 2000,
+          position: "middle"
+        })
+        .present();
+    } else if (price < 1) {
+      this.toast
+        .create({
+          message: "Price cannot be lower than £1",
+          duration: 2000,
+          position: "middle"
+        })
+        .present();
+    } else if (price > 50) {
+      this.toast
+        .create({
+          message: "Price cannot exceed £50",
+          duration: 2000,
+          position: "middle"
+        })
+        .present();
+    } else {
       await this.upload(this.buffer, this.entryname);
       this.afAuth.authState.take(1).subscribe(auth => {
-        this.afDatabase.object(`user/${auth.uid}`).snapshotChanges().subscribe(res => {
-          res.payload.child(`Rating`).val();
-        this.listing.Date = rDate;
-        this.listing.Seller = auth.uid;        
-        this.listing.CreationDate = gListingCreationTime;
-        this.listing.ServiceCharge = gListingServiceCharge;
-        this.listing.CustomerPayout = gListingCustomerPayout;
-        this.listing.Long = gLng[0];
-        this.listing.Lat = gLat[0];
-        this.listing.Location = gVenue[0];
-        this.listing.Sold = false;
-        this.listing.PaySortCode = this.PayoutSortCode;
-        this.listing.Price = price
-        this.listing.PayoutAccount = this.PayoutAccount;
-        this.listing.Name = artist;
-        this.listing.Time = startTime;
-        this.listing.downloadURL = this.url;
-        this.listing.interested = 0;
-        var ref = this.afDatabase
-          .list(`unaprovedTickets/`)
-          .push(this.listing)
-          .orderByKey();
-        console.log(ref);
-        this.toast
-          .create({
-            message: "Listing successfully created.",
-            position: "middle",
-            duration: 2000,
-          }).present();
-        this.navCtrl.setRoot('Page').catch(error => {
-        console.log(error)
-        })
+        this.afDatabase
+          .object(`user/${auth.uid}`)
+          .snapshotChanges()
+          .subscribe(res => {
+            res.payload.child(`Rating`).val();
+            this.listing.Date = rDate;
+            this.listing.Seller = auth.uid;
+            this.listing.CreationDate = gListingCreationTime;
+            this.listing.ServiceCharge = gListingServiceCharge;
+            this.listing.CustomerPayout = gListingCustomerPayout;
+            this.listing.Long = gLng[0];
+            this.listing.Lat = gLat[0];
+            this.listing.Location = gVenue[0];
+            this.listing.Sold = false;
+            this.listing.PaySortCode = this.PayoutSortCode;
+            this.listing.Price = price;
+            this.listing.PayoutAccount = this.PayoutAccount;
+            this.listing.Name = artist;
+            this.listing.Time = startTime;
+            this.listing.downloadURL = this.url;
+            this.listing.interested = 0;
+            var ref = this.afDatabase
+              .list(`unaprovedTickets/`)
+              .push(this.listing)
+              .orderByKey();
+            console.log(ref);
+            this.toast
+              .create({
+                message: "Listing successfully created.",
+                position: "middle",
+                duration: 2000
+              })
+              .present();
+            this.navCtrl.setRoot("Page").catch(error => {
+              console.log(error);
+            });
+          });
+        this.clearSellFields();
       });
-      this.clearSellFields();
-    })
     }
   }
 

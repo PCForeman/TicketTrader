@@ -227,10 +227,11 @@ export class AdminPage {
           position: "top",
           duration: 2000
         })
-        .present().catch(error => {
+        .present()
+        .catch(error => {
           console.log(error);
-        })
-        this.refresh();
+        });
+      this.refresh();
     });
   }
 

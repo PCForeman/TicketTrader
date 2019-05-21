@@ -45,7 +45,8 @@ export class AddCardModalPage {
     this.vCtrl.dismiss(); //The view controller dismisses the display view
   }
 
-  addCardAlert() { // Creates an alert, if conditions are met. Then calls a function based on user interaction
+  addCardAlert() {
+    // Creates an alert, if conditions are met. Then calls a function based on user interaction
     if (
       this.cardNo != null &&
       this.expiry != null &&
@@ -86,7 +87,8 @@ export class AddCardModalPage {
     }
   }
 
-  async addDetails() { // Validates the card details, on success encrypts them and stores them in the database
+  async addDetails() {
+    // Validates the card details, on success encrypts them and stores them in the database
     var formatExpiry =
       this.expiry.toString().substr(0, 2) +
       "/" +
@@ -220,11 +222,18 @@ export class AddCardModalPage {
     }
   }
 
-info(){
-  this.toast.create({message:'All of your details will be encrypted and stored safely', duration: 2000, position:'middle'}).present();
-}
+  info() {
+    this.toast
+      .create({
+        message: "All of your details will be encrypted and stored safely",
+        duration: 2000,
+        position: "middle"
+      })
+      .present();
+  }
 
-  async generateSecureKeyAndIV() { // Use the Ionic AES26 plugin to generate two keys.
+  async generateSecureKeyAndIV() {
+    // Use the Ionic AES26 plugin to generate two keys.
     this.thrtyTwoBit = await this.aes.generateSecureKey("pook"); // Returns a 32 bytes string
     this.sixteenBit = await this.aes.generateSecureIV("pook"); // Returns a 16 bytes string
   }

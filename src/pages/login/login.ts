@@ -35,19 +35,21 @@ export class LoginPage {
 
   showSpinner() {
     let loading = this.ldCtrl.create({
-      spinner: 'bubbles',
+      spinner: "bubbles",
       content: "Authenticating",
-      duration:500
+      duration: 500
     });
     loading.present();
   }
 
-  async loginRegister() { // Redirects user to registration page
+  async loginRegister() {
+    // Redirects user to registration page
     await this.showSpinner();
     await this.navCtrl.setRoot(RegisterPage);
   }
 
-  adminLogin(user: User) { // Checks if the user is an admin, Otherwise calls the normal user login
+  adminLogin(user: User) {
+    // Checks if the user is an admin, Otherwise calls the normal user login
     var adminCredential1 = user.email;
     var adminCredential2 = user.password;
     if (
@@ -60,7 +62,8 @@ export class LoginPage {
     }
   }
 
-  async loginLogin(user: User) { // Validates a user and logs them into the system, directs them passed on different variables
+  async loginLogin(user: User) {
+    // Validates a user and logs them into the system, directs them passed on different variables
     await this.showSpinner();
     try {
       const result = await this.afAuth.auth.signInWithEmailAndPassword(
@@ -96,7 +99,8 @@ export class LoginPage {
                 "Welcome back " + gFirstname + " " + " enjoy your stay :)",
               position: "middle",
               duration: 2000
-            }).present();
+            })
+            .present();
           this.navCtrl.setRoot("Page");
         } else {
           this.toast

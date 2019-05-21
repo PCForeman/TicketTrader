@@ -10,6 +10,6 @@ export class AdminViewPage {
   adminRoot = "AdminPage";
   admin2Root = "Admin2Page";
   admin3Root = "Admin3Page";
-  admin4Root = "AdminpaymentsPage"
+  admin4Root = "AdminpaymentsPage";
   constructor(public navCtrl: NavController) {}
 }

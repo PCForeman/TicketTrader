@@ -1,9 +1,4 @@
-import {
-  Component,
-  ViewChild,
-  ElementRef,
-  NgZone,
-} from "@angular/core";
+import { Component, ViewChild, ElementRef, NgZone } from "@angular/core";
 import {
   IonicPage,
   NavController,
@@ -250,7 +245,7 @@ export class HomePage {
   showSpinner() {
     let loading = this.ldCtrl.create({
       content: "Processing",
-      spinner: 'bubbles'
+      spinner: "bubbles"
     });
     loading.present();
     setTimeout(() => {
@@ -261,7 +256,7 @@ export class HomePage {
   async buyTickets(userId, sellerId, ticketClickedId, index) {
     //Check that the user isn't the person who listed the ticket
     //If condition is met it will remove the ticket from the map and active listings and place the ticket in a users basket
-   await this.showSpinner();
+    await this.showSpinner();
     const temp = [];
     console.log(userId, sellerId, ticketClickedId, index);
     if (userId == sellerId) {

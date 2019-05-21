@@ -35,21 +35,43 @@ export class RegisterPage {
     var vPassword = this.user.password;
     var vMobile = this.user.phoneNo;
     var vDoB = this.user.dOb;
-    if (vfirstname == "" || vfirstname == null){
-    this.toast.create({message: 'First name is empty', duration:2000}).present();
-    }else if (vSurname == "" || vSurname == null){
-    this.toast.create({message: 'Surname is empty', duration:2000}).present();
-    }else if (vEmail == "" || vEmail == null){
-    this.toast.create({message: 'email is empty', duration:2000}).present();
-    }else if (vMobile == "" || null){
-    this.toast.create({message: 'mobile field is empty', duration:2000}).present();
-    }else if (vMobile.length < 9){
-    this.toast.create({message: 'Phone number should have a minimum of 9 characters', duration:2000}).present();
-    }else if (vDoB == null) {
-    this.toast.create({message: 'First name is empty', duration:2000}).present();
-    }else if (vPassword.length < 8) {
-    this.toast.create({message:"Password must be 8 or more characters with a special character",duration: 2000,position: "middle"}).present();
-    }else{
+    if (vfirstname == "" || vfirstname == null) {
+      this.toast
+        .create({ message: "First name is empty", duration: 2000 })
+        .present();
+    } else if (vSurname == "" || vSurname == null) {
+      this.toast
+        .create({ message: "Surname is empty", duration: 2000 })
+        .present();
+    } else if (vEmail == "" || vEmail == null) {
+      this.toast
+        .create({ message: "email is empty", duration: 2000 })
+        .present();
+    } else if (vMobile == "" || null) {
+      this.toast
+        .create({ message: "mobile field is empty", duration: 2000 })
+        .present();
+    } else if (vMobile.length < 9) {
+      this.toast
+        .create({
+          message: "Phone number should have a minimum of 9 characters",
+          duration: 2000
+        })
+        .present();
+    } else if (vDoB == null) {
+      this.toast
+        .create({ message: "First name is empty", duration: 2000 })
+        .present();
+    } else if (vPassword.length < 8) {
+      this.toast
+        .create({
+          message:
+            "Password must be 8 or more characters with a special character",
+          duration: 2000,
+          position: "middle"
+        })
+        .present();
+    } else {
       try {
         const result = await this.afAuth.auth.createUserWithEmailAndPassword(
           this.user.email,

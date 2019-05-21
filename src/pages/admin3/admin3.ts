@@ -74,7 +74,8 @@ export class Admin3Page {
     }
   }
 
-  remove() { // removes a ticket from the table
+  remove() {
+    // removes a ticket from the table
     var temp = [];
     var target = event.srcElement;
     var ticketClicked =
@@ -135,7 +136,8 @@ export class Admin3Page {
     this.items = this.itemSearch;
   }
 
-  retrieveRejectedTickets() { // Retrieve all of the rejected tickets from the rejected tickets table.
+  retrieveRejectedTickets() {
+    // Retrieve all of the rejected tickets from the rejected tickets table.
     var ref = this.fbDatabase.object(`rejectedTickets/`);
     ref.snapshotChanges().subscribe(snapshot => {
       var allData = snapshot.payload.val();
@@ -181,7 +183,8 @@ export class Admin3Page {
     });
   }
 
-  logout() { // Logs user out and redirects
+  logout() {
+    // Logs user out and redirects
     this.afAuth.auth.signOut().then(() => {
       this.toast
         .create({

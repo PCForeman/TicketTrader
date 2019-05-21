@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { Component } from "@angular/core";
+import { AngularFireAuth } from "angularfire2/auth";
+import { AngularFireDatabase, AngularFireObject } from "angularfire2/database";
 import {
   AlertController,
   App,
@@ -9,10 +9,10 @@ import {
   ModalOptions,
   NavController,
   NavParams,
-  ToastController,
-} from 'ionic-angular';
-import { Observable } from 'rxjs';
-import { LoginPage } from '../login/login';
+  ToastController
+} from "ionic-angular";
+import { Observable } from "rxjs";
+import { LoginPage } from "../login/login";
 
 @IonicPage()
 @Component({
@@ -42,7 +42,8 @@ export class AccountPage {
     this.displayAccountData();
   }
 
-  openModal() { //Opens a modal and passes revelevant variables so they are in scope
+  openModal() {
+    //Opens a modal and passes revelevant variables so they are in scope
     var currentUser = this.afAuth.auth.currentUser.uid;
     var ref = this.afDatabase.object(`user/${currentUser}`);
     ref.snapshotChanges().subscribe(snapshot => {
@@ -93,7 +94,8 @@ export class AccountPage {
     });
   }
 
-  addCard() { //Opens a modal to add a payment method
+  addCard() {
+    //Opens a modal to add a payment method
     const myModalOpts: ModalOptions = {
       cssClass: "modal",
       enableBackdropDismiss: true,
@@ -109,7 +111,8 @@ export class AccountPage {
     myModal.present();
   }
 
-  async deleteAccount() {//Deletes a users ticket trader account if condition is met.
+  async deleteAccount() {
+    //Deletes a users ticket trader account if condition is met.
     var ref = this.afDatabase.object(
       `user/${this.afAuth.auth.currentUser.uid}`
     );
@@ -152,7 +155,13 @@ export class AccountPage {
                   console.log(e);
                 }
               } else {
-                this.toast.create({message:'Incorrect password', duration:2000, position:'middle'}).present();
+                this.toast
+                  .create({
+                    message: "Incorrect password",
+                    duration: 2000,
+                    position: "middle"
+                  })
+                  .present();
                 return false;
               }
             }
@@ -163,19 +172,18 @@ export class AccountPage {
     });
   }
 
-
-  
-  checkOut() {// Redirects to the checkout tab
+  checkOut() {
+    // Redirects to the checkout tab
     this.navCtrl.push("BuyPage");
   }
 
-  orderHistory() {//Redirects to the orderHistory tab
+  orderHistory() {
+    //Redirects to the orderHistory tab
     this.navCtrl.push("OrderHistoryPage");
   }
 
-
-
-  displayAccountData() { //Fetchs a users details from the database and makes them an observable
+  displayAccountData() {
+    //Fetchs a users details from the database and makes them an observable
     this.afAuth.authState.take(1).subscribe(data => {
       if (data && data.email && data.uid) {
         this.userData = this.afDatabase
@@ -193,7 +201,8 @@ export class AccountPage {
     });
   }
 
-  logout() { //Signs user out and re-routes them to login page
+  logout() {
+    //Signs user out and re-routes them to login page
     this.afAuth.auth.signOut().then(() => {
       this.toast
         .create({

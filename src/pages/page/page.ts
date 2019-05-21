@@ -14,7 +14,7 @@ import { IonicPage, NavController, Tabs } from "ionic-angular";
   templateUrl: "page.html"
 })
 export class Page {
-  @ViewChild('myTab') tabRef: Tabs;
+  @ViewChild("myTab") tabRef: Tabs;
 
   homeRoot = "HomePage";
   ticketsRoot = "TicketsPage";
@@ -26,7 +26,5 @@ export class Page {
   tab3Root = "SellPage";
   tab4Root = "AccountPage";
 
-  constructor(public navCtrl: NavController) {
-
-  }
+  constructor(public navCtrl: NavController) {}
 }

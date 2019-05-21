@@ -36,16 +36,18 @@ export class BuyPage {
     private afDatabase: AngularFireDatabase,
     public navParams: NavParams,
     private modal: ModalController,
-    private app: App,
+    private app: App
   ) {}
 
-  ionViewDidLoad() { // Executes these on the view loading
+  ionViewDidLoad() {
+    // Executes these on the view loading
     this.currentUser = this.afAuth.auth.currentUser.uid;
     this.retrieveCheckoutTickets();
     this.displayTimer();
   }
 
-  checkOutTimer() { // Removes a ticket from a users basket when timer runs out
+  checkOutTimer() {
+    // Removes a ticket from a users basket when timer runs out
     var currentUser = this.afAuth.auth.currentUser.uid;
     var ref = this.afDatabase.object(`ticketsInBasket/${currentUser}`);
     ref.snapshotChanges().subscribe(snapshot => {
@@ -105,7 +107,8 @@ export class BuyPage {
     });
   }
 
-  displayTimer() { // Works out when users ticket reservation period ends and calculates a countdown based on it.
+  displayTimer() {
+    // Works out when users ticket reservation period ends and calculates a countdown based on it.
     var currentUser = this.afAuth.auth.currentUser.uid;
     var ref = this.afDatabase.object(`ticketsInBasket/${currentUser}`);
     ref.snapshotChanges().subscribe(snapshot => {
@@ -136,7 +139,8 @@ export class BuyPage {
         });
     });
   }
-  updateSeconds(minutes: number, seconds: number) { // Called by the above function, minutes and seconds
+  updateSeconds(minutes: number, seconds: number) {
+    // Called by the above function, minutes and seconds
     // are passed as parameters and the functions then will count down to 0:00
     if (this.secondsLeft < 10) {
       this.belowTen = "0";
@@ -170,11 +174,13 @@ export class BuyPage {
     });
   }
 
-  timeIsUp() { // Clears the interval above
+  timeIsUp() {
+    // Clears the interval above
     clearInterval(this.timer);
   }
 
-  checkOut() { // Works out what ticket has been clicked, creates and object to pass into the modal opened
+  checkOut() {
+    // Works out what ticket has been clicked, creates and object to pass into the modal opened
     // so that it doesn't go out of scope
     var target = event.srcElement;
     var uId = this.afAuth.auth.currentUser.uid;
@@ -276,7 +282,8 @@ export class BuyPage {
     myModal.present();
   }
 
-  retrieveCheckoutTickets() { // Retrieves a users tickets that are in the basket table.
+  retrieveCheckoutTickets() {
+    // Retrieves a users tickets that are in the basket table.
     var currentUser = this.afAuth.auth.currentUser.uid;
     var ref = this.afDatabase.object(`ticketsInBasket/${currentUser}`);
     ref.snapshotChanges().subscribe(snapshot => {
@@ -339,7 +346,8 @@ export class BuyPage {
     });
   }
 
-  remove() { // Removes ticket from a users basket and puts it back in active listings
+  remove() {
+    // Removes ticket from a users basket and puts it back in active listings
     var target = event.srcElement;
     var ticketId = target.parentElement.parentElement.children.item(1)
       .innerHTML;

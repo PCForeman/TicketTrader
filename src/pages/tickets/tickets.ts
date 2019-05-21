@@ -25,7 +25,7 @@ export class TicketsPage {
   itemSearch = [];
   items2 = [];
   peopleInterested: number;
-  img:any;
+  img: any;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -48,8 +48,8 @@ export class TicketsPage {
   }
 
   fetchTickets() {
-   setInterval(() => this.displayTickets(), 45000);
- }
+    setInterval(() => this.displayTickets(), 45000);
+  }
 
   initializeItems(): void {
     this.itemSearch = this.items;
@@ -110,9 +110,16 @@ export class TicketsPage {
   }
 
   async buy() {
-  this.loadingCtrl.create({spinner: 'bubbles', duration:2500, content:'Securing ticket' }).present();
-    var target = event.srcElement
-    const checkId = target.parentElement.parentElement.children.item(2).innerHTML;
+    this.loadingCtrl
+      .create({
+        spinner: "bubbles",
+        duration: 2500,
+        content: "Securing ticket"
+      })
+      .present();
+    var target = event.srcElement;
+    const checkId = target.parentElement.parentElement.children.item(2)
+      .innerHTML;
     console.log(checkId);
     const userId = this.afAuth.auth.currentUser.uid;
     var timeClicked = Date.now();
@@ -122,15 +129,18 @@ export class TicketsPage {
           message: "This is your listing.",
           duration: 2000,
           position: "Middle"
-        }).setCssClass(`toastCss`).present();
-
-      }else{
-    var checkOutBy = timeClicked + 600000;
-    var temp = [];
-    var ticketClicked =
-      parseInt(
-        target.parentElement.parentElement.children.item(0).innerHTML.valueOf()
-      ) - 1;
+        })
+        .setCssClass(`toastCss`)
+        .present();
+    } else {
+      var checkOutBy = timeClicked + 600000;
+      var temp = [];
+      var ticketClicked =
+        parseInt(
+          target.parentElement.parentElement.children
+            .item(0)
+            .innerHTML.valueOf()
+        ) - 1;
       temp.push(this.items[ticketClicked]);
       temp.filter(v => {
         var tempArray = [
@@ -166,36 +176,44 @@ export class TicketsPage {
     }
   }
 
-  sellerDetails(){
-    const target = event.srcElement
-    const seller = target.parentElement.parentElement.children.item(2).innerHTML;
-    this.afDatabase.object(`user/${seller}`).snapshotChanges().subscribe(vals => {
-    const NoS = vals.payload.child(`NumberOfSales`).val();
-    const Rating = vals.payload.child(`Rating`).val();
-    const RatingScore = (Rating / NoS).toPrecision(3);
-    let alert = this.aCtrl.create({
-      title: "Seller",
-      mode: "ios",
-      message:
-        "Number of sales:" +
-        " " + NoS +
-        "<br>" +
-        "Seller Rating:" + " " + 
-        RatingScore + '/5',
-      buttons: [
-        {
-          text: "Close",
-          handler: () => {}
-        }
-      ]
-    });
-    alert.present();
-    })
+  sellerDetails() {
+    const target = event.srcElement;
+    const seller = target.parentElement.parentElement.children.item(2)
+      .innerHTML;
+    this.afDatabase
+      .object(`user/${seller}`)
+      .snapshotChanges()
+      .subscribe(vals => {
+        const NoS = vals.payload.child(`NumberOfSales`).val();
+        const Rating = vals.payload.child(`Rating`).val();
+        const RatingScore = (Rating / NoS).toPrecision(3);
+        let alert = this.aCtrl.create({
+          title: "Seller",
+          mode: "ios",
+          message:
+            "Number of sales:" +
+            " " +
+            NoS +
+            "<br>" +
+            "Seller Rating:" +
+            " " +
+            RatingScore +
+            "/5",
+          buttons: [
+            {
+              text: "Close",
+              handler: () => {}
+            }
+          ]
+        });
+        alert.present();
+      });
   }
 
-
-  checkIfOutDated(){
-    this.loadingCtrl.create({spinner: 'bubbles', duration:2500, content:'Updating list' }).present();
+  checkIfOutDated() {
+    this.loadingCtrl
+      .create({ spinner: "bubbles", duration: 2500, content: "Updating list" })
+      .present();
     this.items = [];
     var ref = this.afDatabase.object(`approvedTickets/`);
     ref.snapshotChanges().subscribe(snapshot => {
@@ -212,31 +230,36 @@ export class TicketsPage {
         var id = value[indexSelecta];
         this.kA.push(id);
         var ref2 = this.afDatabase.object(`approvedTickets/${keyValue}`);
-    ref2.snapshotChanges().subscribe(snapshot => {
-    const date = snapshot.payload.child(`Date`).val(); const Hour = snapshot.payload.child(`Time`).val();
-    const YYYY = parseInt(date.substr(6));  const MM = parseInt(date.substr(3, 3));
-    console.log(MM);
-    const DD = parseInt(date.substr(0, 2)); const HH = parseInt(Hour.substr(0));
-    const hoursToMilliSeconds = (3.6e+6 * HH);
-    const eventInMilliSeconds = new Date(YYYY, MM - 1, DD).getTime();
-    const removalTime = eventInMilliSeconds +  hoursToMilliSeconds;
-    const timeNow = new Date().getTime();
-    console.log(removalTime, timeNow);
-    if (timeNow > removalTime){
-    this.afDatabase.database.ref(`approvedTickets/${keyValue}`).remove().then(res => {
-    console.log(res, 'Removed');
-    }).catch(error => {
-    console.log(error);
+        ref2.snapshotChanges().subscribe(snapshot => {
+          const date = snapshot.payload.child(`Date`).val();
+          const Hour = snapshot.payload.child(`Time`).val();
+          const YYYY = parseInt(date.substr(6));
+          const MM = parseInt(date.substr(3, 3));
+          console.log(MM);
+          const DD = parseInt(date.substr(0, 2));
+          const HH = parseInt(Hour.substr(0));
+          const hoursToMilliSeconds = 3.6e6 * HH;
+          const eventInMilliSeconds = new Date(YYYY, MM - 1, DD).getTime();
+          const removalTime = eventInMilliSeconds + hoursToMilliSeconds;
+          const timeNow = new Date().getTime();
+          console.log(removalTime, timeNow);
+          if (timeNow > removalTime) {
+            this.afDatabase.database
+              .ref(`approvedTickets/${keyValue}`)
+              .remove()
+              .then(res => {
+                console.log(res, "Removed");
+              })
+              .catch(error => {
+                console.log(error);
+              });
+          } else {
+            console.log("Valid.");
+          }
+        });
+      }
     });
-    }else{
-    console.log('Valid.')
-    }
-  })
-}
-
-})
-}
-
+  }
 
   reloadData() {
     this.items = this.itemSearch;
@@ -295,7 +318,7 @@ export class TicketsPage {
             PayoutSortCode: payoutSortCode,
             downloadURL: downloadURL,
             interested: interested
-          }
+          };
           this.items.push(itemObj);
           x++;
         });
@@ -333,7 +356,7 @@ export class TicketsPage {
           duration: 3500
         })
         .present();
-      this.app.getRootNav().setRoot('LoginPage');
+      this.app.getRootNav().setRoot("LoginPage");
     });
   }
 

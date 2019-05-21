@@ -1,22 +1,30 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, App } from 'ionic-angular';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth'
+import { Component } from "@angular/core";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  ToastController,
+  App
+} from "ionic-angular";
+import { AngularFireDatabase } from "angularfire2/database";
+import { AngularFireAuth } from "angularfire2/auth";
 
 @IonicPage()
 @Component({
-  selector: 'page-adminpayments',
-  templateUrl: 'adminpayments.html',
+  selector: "page-adminpayments",
+  templateUrl: "adminpayments.html"
 })
 export class AdminpaymentsPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
     private afAuth: AngularFireAuth,
     private toast: ToastController,
-    private app: App, private fbDatabase: AngularFireDatabase) {
-  }
+    private app: App,
+    private fbDatabase: AngularFireDatabase
+  ) {}
   kA = [];
-items = [];
+  items = [];
   ionViewDidLoad() {
     this.retrievePayments();
   }
@@ -68,6 +76,4 @@ items = [];
       }
     });
   }
-
-
 }

@@ -31,7 +31,7 @@ export class ViewImageModalPage {
   ) {}
 
   async ionViewDidLoad() {
-    const data = this.navParams.get('image');
+    const data = this.navParams.get("image");
     console.log(data);
     this.myImg = new Image();
     this.myImg.src = data.url;
@@ -56,7 +56,7 @@ export class ViewImageModalPage {
     );
   }
 
-  renderImage(){
+  renderImage() {
     this.context.drawImage(
       this.myImg,
       0,
@@ -68,8 +68,8 @@ export class ViewImageModalPage {
       this.canvas.width,
       this.canvas.height
     );
-   var button = document.getElementById('displayButton');
-   button.hidden = true;
+    var button = document.getElementById("displayButton");
+    button.hidden = true;
   }
 
   initialiseCanvas() {
@@ -79,7 +79,6 @@ export class ViewImageModalPage {
   }
 
   async setupCanvas() {
-
     this.context = this.canvas.getContext("2d");
     this.context.fillStyle = "#3e3e3e";
     this.context.fillRect(0, 0, 800, 800);

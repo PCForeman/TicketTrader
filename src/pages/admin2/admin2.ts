@@ -53,7 +53,8 @@ export class Admin2Page {
     this.itemSearch = this.items2;
   }
 
-  getItems(searchbar) { // Allows user to search through items based on input
+  getItems(searchbar) {
+    // Allows user to search through items based on input
     this.initializeItems();
     console.log(this.itemSearch);
     var q = searchbar.srcElement.value;
@@ -82,7 +83,8 @@ export class Admin2Page {
     this.items = this.itemSearch;
   }
 
-  retrieveApprovedListings() { // Retrieves all of the approved tickets in the database.
+  retrieveApprovedListings() {
+    // Retrieves all of the approved tickets in the database.
     var ref = this.fbDatabase.object(`approvedTickets/`);
     ref.snapshotChanges().subscribe(snapshot => {
       var allData = snapshot.payload.val();
@@ -128,7 +130,8 @@ export class Admin2Page {
     });
   }
 
-  remove() { // Removes a ticket from the approved tickets table
+  remove() {
+    // Removes a ticket from the approved tickets table
     var temp = [];
     var target = event.srcElement;
     var ticketClicked =
@@ -170,7 +173,8 @@ export class Admin2Page {
     });
   }
 
-  showSpinner() { // displays a spinner on screen
+  showSpinner() {
+    // displays a spinner on screen
     let loading = this.ldCtrl.create({
       content: ""
     });
@@ -180,7 +184,8 @@ export class Admin2Page {
     }, 1500);
   }
 
-  logout() { // Logs user out and redirects them
+  logout() {
+    // Logs user out and redirects them
     this.afAuth.auth.signOut().then(() => {
       this.toast
         .create({

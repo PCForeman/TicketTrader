@@ -43,7 +43,7 @@ export class OrderHistoryPage {
     private modal: ModalController,
     private aCtrl: AlertController,
     public navParams: NavParams,
-    private app: App,
+    private app: App
   ) {}
 
   ionViewDidLoad() {
@@ -295,7 +295,7 @@ export class OrderHistoryPage {
   feedbackForm(buyerId, id, seller) {
     let alert = this.aCtrl.create({
       title: "Leave feedback between 1 and 5",
-      mode: 'ios',
+      mode: "ios",
       inputs: [
         {
           name: "Number",
@@ -307,26 +307,27 @@ export class OrderHistoryPage {
         {
           text: "Proceed",
           handler: data => {
-            console.log(data)
-            if (data.Number > 1 && data.Number <= 5){
-              this.afDatabase.object(`bought/${buyerId}/${id}`).update({Feedback: true})
-              this.afDatabase.database.ref(`user/${seller}/rating`).transaction(res => {
-                res + data.Number              
-                })
+            console.log(data);
+            if (data.Number > 1 && data.Number <= 5) {
+              this.afDatabase
+                .object(`bought/${buyerId}/${id}`)
+                .update({ Feedback: true });
+              this.afDatabase.database
+                .ref(`user/${seller}/rating`)
+                .transaction(res => {
+                  res + data.Number;
+                });
             }
           }
         },
         {
           text: "Dismiss",
           role: "cancel",
-          handler: () => {
-          
-          }
+          handler: () => {}
         }
       ]
     });
     alert.present();
-
   }
 
   async retrieveBoughtListings() {
@@ -374,7 +375,6 @@ export class OrderHistoryPage {
       }
     });
   }
-
 
   logout() {
     // Logs a user out

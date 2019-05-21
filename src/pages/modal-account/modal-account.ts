@@ -263,8 +263,6 @@ export class ModalAccountPage {
     this.close();
   }
 
-
-
   async updatePhoneNo() {
     var len = this.uPhoneNo.toString();
     if (len.length < 7 || len.length > 15) {
@@ -278,7 +276,6 @@ export class ModalAccountPage {
       await this.successMessage();
     }
   }
-
 
   async updatePassword() {
     this.close();

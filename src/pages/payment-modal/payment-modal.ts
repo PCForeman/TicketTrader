@@ -6,8 +6,7 @@ import {
   AlertController,
   ToastController,
   NavController,
-  LoadingController,
-
+  LoadingController
 } from "ionic-angular";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AES256 } from "@ionic-native/aes-256";
@@ -30,10 +29,12 @@ export class PaymentModalPage {
     private stripe: Stripe,
     private auth: AngularFireAuth,
     private ldCtrl: LoadingController
-  ) { this.generateSecureKeyAndIV()}
+  ) {
+    this.generateSecureKeyAndIV();
+  }
   private secureKey: string;
   private secureIV: string;
-  private encryptedText: string
+  private encryptedText: string;
   listingData: any;
   cardName: any;
   CVC: any;
@@ -44,7 +45,7 @@ export class PaymentModalPage {
   minutes: any;
   timer: any;
   belowTen: any;
-  belowTenMin: any
+  belowTenMin: any;
   ionViewWillLoad() {
     this.userId = this.auth.auth.currentUser.uid;
     const paymentApiKey = this.stripe.setPublishableKey(
@@ -64,22 +65,22 @@ export class PaymentModalPage {
     this.secureIV = await this.aes.generateSecureIV("at1x3fcaq"); // Returns a 16 bytes string
   }
 
-displayLoader(){
-  let loading = this.ldCtrl.create({
-    content: 'Processing',
-    spinner: 'bubbles',
-    duration: 2000
-  });
+  displayLoader() {
+    let loading = this.ldCtrl.create({
+      content: "Processing",
+      spinner: "bubbles",
+      duration: 2000
+    });
 
-  loading.present();
+    loading.present();
 
-  setTimeout(() => {
-    loading.dismiss();
-  }, 5000);
-}
+    setTimeout(() => {
+      loading.dismiss();
+    }, 5000);
+  }
 
- async proccessCard() {
-   await this.displayLoader();
+  async proccessCard() {
+    await this.displayLoader();
     let card = {
       number: "4242424242424242",
       expMonth: 12,
@@ -104,39 +105,37 @@ displayLoader(){
           ticketRef: this.listingData.ticketRef
         };
         await this.aes
-        .encrypt(this.secureKey, this.secureIV, this.cardNo)
-        .then(promise => (this.encryptedText = promise.valueOf()))
-        .catch((error: any) => console.error(error));
+          .encrypt(this.secureKey, this.secureIV, this.cardNo)
+          .then(promise => (this.encryptedText = promise.valueOf()))
+          .catch((error: any) => console.error(error));
         const buyerObj = {
-        Artist: this.listingData.artist,
-        Venue: this.listingData.location,
-        Date: this.listingData.date,
-        Price: this.listingData.price,
-        Card: this.encryptedText,
-        eKey: this.secureKey,
-        eIV: this.secureIV,
-        Ticket: this.listingData.downloadURL,
-        Time: this.listingData.time,
-        Feedback: false,
-        Seller: this.listingData.sellerId
-        }
+          Artist: this.listingData.artist,
+          Venue: this.listingData.location,
+          Date: this.listingData.date,
+          Price: this.listingData.price,
+          Card: this.encryptedText,
+          eKey: this.secureKey,
+          eIV: this.secureIV,
+          Ticket: this.listingData.downloadURL,
+          Time: this.listingData.time,
+          Feedback: false,
+          Seller: this.listingData.sellerId
+        };
         const sellerObj = {
-        Artist: this.listingData.artist,
-        Venue: this.listingData.location,
-        Date: this.listingData.date,
-        Price: this.listingData.price,
-        Status: 'Pending',
-        AccountNo: this.listingData.payoutAccount,
-        SortCode: this.listingData.sortcode,
-        FundRelease: (Date.now() + 86400000),
-        }
+          Artist: this.listingData.artist,
+          Venue: this.listingData.location,
+          Date: this.listingData.date,
+          Price: this.listingData.price,
+          Status: "Pending",
+          AccountNo: this.listingData.payoutAccount,
+          SortCode: this.listingData.sortcode,
+          FundRelease: Date.now() + 86400000
+        };
         this.afDatabase
           .list(`payments/`)
           .push(paymentObj)
           .then(buyer => {
-            this.afDatabase
-              .list(`bought/${this.userId}`)
-              .push(buyerObj);
+            this.afDatabase.list(`bought/${this.userId}`).push(buyerObj);
           })
           .then(seller => {
             this.afDatabase
@@ -148,14 +147,21 @@ displayLoader(){
               .list(
                 `ticketsInBasket/${this.userId}/${this.listingData.ticketRef}`
               )
-              .remove().then(navigation => {
-                this.toast.create({message: 'Payment successful', duration:2000, position:'middle'}).present();
+              .remove()
+              .then(navigation => {
+                this.toast
+                  .create({
+                    message: "Payment successful",
+                    duration: 2000,
+                    position: "middle"
+                  })
+                  .present();
                 this.close();
-                this.navCtrl.setRoot('Page');
-                this.navCtrl.push('OrderHistoryPage').catch(error => {
-                console.log(error);
-                })
-              })
+                this.navCtrl.setRoot("Page");
+                this.navCtrl.push("OrderHistoryPage").catch(error => {
+                  console.log(error);
+                });
+              });
           });
       })
       .catch(error => {
@@ -170,39 +176,36 @@ displayLoader(){
     this.expiry = null;
   }
 
-checkOutTimer(){
-  this.timer = setInterval(
-    () =>
-      this.updateSeconds(
-        this.minutes,
-        (this.seconds = this.seconds - 1)
-      ),
-    1000
-  );
-  console.log({ minutes: this.minutes, seconds: this.seconds});
-}
+  checkOutTimer() {
+    this.timer = setInterval(
+      () => this.updateSeconds(this.minutes, (this.seconds = this.seconds - 1)),
+      1000
+    );
+    console.log({ minutes: this.minutes, seconds: this.seconds });
+  }
 
-updateSeconds(minutes: number, seconds: number) {
-if (this.seconds < 10){
-this.belowTen = "0" }
-if (this.minutes< 10){
-this.belowTenMin = "0"
-if (this.seconds <= 0) {
-this.seconds = this.seconds + 59;
-this.minutes = this.minutes - 1;
-this.belowTen = "";
-if (this.minutes == 0 && this.seconds <= 1 ) {
-this.timeIsUp();
-this.checkOutTimer();
-}
-console.log(minutes, seconds);
-}
-}
-}
+  updateSeconds(minutes: number, seconds: number) {
+    if (this.seconds < 10) {
+      this.belowTen = "0";
+    }
+    if (this.minutes < 10) {
+      this.belowTenMin = "0";
+      if (this.seconds <= 0) {
+        this.seconds = this.seconds + 59;
+        this.minutes = this.minutes - 1;
+        this.belowTen = "";
+        if (this.minutes == 0 && this.seconds <= 1) {
+          this.timeIsUp();
+          this.checkOutTimer();
+        }
+        console.log(minutes, seconds);
+      }
+    }
+  }
 
-timeIsUp() {
-clearInterval(this.timer);
-}
+  timeIsUp() {
+    clearInterval(this.timer);
+  }
 
   close() {
     this.vCtrl.dismiss();
