@@ -61,7 +61,7 @@ export class ModalAccountPage {
       mode: "ios",
       title: "Update name?",
       message:
-        "from" + " " + this.userD.surname + " " + ", to" + " " + this.uSurname,
+        "from" + " " + this.userD.surname + " " + "to" + " " + this.uSurname,
       cssClass: "alert-button-group",
       buttons: [
         {
@@ -88,7 +88,7 @@ export class ModalAccountPage {
       mode: "ios",
       title: "Update name?",
       message:
-        "from" + " " + this.userD.phoneNo + " " + ", to" + " " + this.uPhoneNo,
+        "from" + " " + this.userD.phoneNo + " " + "to" + " " + this.uPhoneNo,
       cssClass: "alert-button-group",
       buttons: [
         {
@@ -115,7 +115,7 @@ export class ModalAccountPage {
       mode: "ios",
       title: "Update name?",
       message:
-        "from" + " " + this.userD.firstname + " " + ", to" + " " + this.uName,
+        "from" + " " + this.userD.firstname + " " + "to" + " " + this.uName,
       cssClass: "alert-button-group",
       buttons: [
         {

@@ -71,7 +71,7 @@ var Page = /** @class */ (function () {
         this.tab4Root = "AccountPage";
     }
     __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])('myTab'),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])("myTab"),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Tabs */])
     ], Page.prototype, "tabRef", void 0);
     Page = __decorate([

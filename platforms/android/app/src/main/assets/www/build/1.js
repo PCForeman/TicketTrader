@@ -192,9 +192,16 @@ var TicketsPage = /** @class */ (function () {
             var _this = this;
             var target, checkId, userId, timeClicked, checkOutBy, temp, ticketClicked;
             return __generator(this, function (_a) {
-                this.loadingCtrl.create({ spinner: 'bubbles', duration: 2500, content: 'Securing ticket' }).present();
+                this.loadingCtrl
+                    .create({
+                    spinner: "bubbles",
+                    duration: 2500,
+                    content: "Securing ticket"
+                })
+                    .present();
                 target = event.srcElement;
-                checkId = target.parentElement.parentElement.children.item(2).innerHTML;
+                checkId = target.parentElement.parentElement.children.item(2)
+                    .innerHTML;
                 console.log(checkId);
                 userId = this.afAuth.auth.currentUser.uid;
                 timeClicked = Date.now();
@@ -204,12 +211,16 @@ var TicketsPage = /** @class */ (function () {
                         message: "This is your listing.",
                         duration: 2000,
                         position: "Middle"
-                    }).setCssClass("toastCss").present();
+                    })
+                        .setCssClass("toastCss")
+                        .present();
                 }
                 else {
                     checkOutBy = timeClicked + 600000;
                     temp = [];
-                    ticketClicked = parseInt(target.parentElement.parentElement.children.item(0).innerHTML.valueOf()) - 1;
+                    ticketClicked = parseInt(target.parentElement.parentElement.children
+                        .item(0)
+                        .innerHTML.valueOf()) - 1;
                     temp.push(this.items[ticketClicked]);
                     temp.filter(function (v) {
                         var tempArray = [
@@ -250,8 +261,12 @@ var TicketsPage = /** @class */ (function () {
     TicketsPage.prototype.sellerDetails = function () {
         var _this = this;
         var target = event.srcElement;
-        var seller = target.parentElement.parentElement.children.item(2).innerHTML;
-        this.afDatabase.object("user/" + seller).snapshotChanges().subscribe(function (vals) {
+        var seller = target.parentElement.parentElement.children.item(2)
+            .innerHTML;
+        this.afDatabase
+            .object("user/" + seller)
+            .snapshotChanges()
+            .subscribe(function (vals) {
             var NoS = vals.payload.child("NumberOfSales").val();
             var Rating = vals.payload.child("Rating").val();
             var RatingScore = (Rating / NoS).toPrecision(3);
@@ -259,10 +274,13 @@ var TicketsPage = /** @class */ (function () {
                 title: "Seller",
                 mode: "ios",
                 message: "Number of sales:" +
-                    " " + NoS +
+                    " " +
+                    NoS +
                     "<br>" +
-                    "Seller Rating:" + " " +
-                    RatingScore + '/5',
+                    "Seller Rating:" +
+                    " " +
+                    RatingScore +
+                    "/5",
                 buttons: [
                     {
                         text: "Close",
@@ -275,7 +293,9 @@ var TicketsPage = /** @class */ (function () {
     };
     TicketsPage.prototype.checkIfOutDated = function () {
         var _this = this;
-        this.loadingCtrl.create({ spinner: 'bubbles', duration: 2500, content: 'Updating list' }).present();
+        this.loadingCtrl
+            .create({ spinner: "bubbles", duration: 2500, content: "Updating list" })
+            .present();
         this.items = [];
         var ref = this.afDatabase.object("approvedTickets/");
         ref.snapshotChanges().subscribe(function (snapshot) {
@@ -300,20 +320,24 @@ var TicketsPage = /** @class */ (function () {
                     console.log(MM);
                     var DD = parseInt(date.substr(0, 2));
                     var HH = parseInt(Hour.substr(0));
-                    var hoursToMilliSeconds = (3.6e+6 * HH);
+                    var hoursToMilliSeconds = 3.6e6 * HH;
                     var eventInMilliSeconds = new Date(YYYY, MM - 1, DD).getTime();
                     var removalTime = eventInMilliSeconds + hoursToMilliSeconds;
                     var timeNow = new Date().getTime();
                     console.log(removalTime, timeNow);
                     if (timeNow > removalTime) {
-                        _this.afDatabase.database.ref("approvedTickets/" + keyValue).remove().then(function (res) {
-                            console.log(res, 'Removed');
-                        }).catch(function (error) {
+                        _this.afDatabase.database
+                            .ref("approvedTickets/" + keyValue)
+                            .remove()
+                            .then(function (res) {
+                            console.log(res, "Removed");
+                        })
+                            .catch(function (error) {
                             console.log(error);
                         });
                     }
                     else {
-                        console.log('Valid.');
+                        console.log("Valid.");
                     }
                 });
             }
@@ -415,7 +439,7 @@ var TicketsPage = /** @class */ (function () {
                 duration: 3500
             })
                 .present();
-            _this.app.getRootNav().setRoot('LoginPage');
+            _this.app.getRootNav().setRoot("LoginPage");
         });
     };
     TicketsPage.prototype.navMakeListing = function () {

@@ -143,8 +143,8 @@ var PaymentModalPage = /** @class */ (function () {
     };
     PaymentModalPage.prototype.displayLoader = function () {
         var loading = this.ldCtrl.create({
-            content: 'Processing',
-            spinner: 'bubbles',
+            content: "Processing",
+            spinner: "bubbles",
             duration: 2000
         });
         loading.present();
@@ -213,18 +213,16 @@ var PaymentModalPage = /** @class */ (function () {
                                             Venue: this.listingData.location,
                                             Date: this.listingData.date,
                                             Price: this.listingData.price,
-                                            Status: 'Pending',
+                                            Status: "Pending",
                                             AccountNo: this.listingData.payoutAccount,
                                             SortCode: this.listingData.sortcode,
-                                            FundRelease: (Date.now() + 86400000),
+                                            FundRelease: Date.now() + 86400000
                                         };
                                         this.afDatabase
                                             .list("payments/")
                                             .push(paymentObj)
                                             .then(function (buyer) {
-                                            _this.afDatabase
-                                                .list("bought/" + _this.userId)
-                                                .push(buyerObj);
+                                            _this.afDatabase.list("bought/" + _this.userId).push(buyerObj);
                                         })
                                             .then(function (seller) {
                                             _this.afDatabase
@@ -234,11 +232,18 @@ var PaymentModalPage = /** @class */ (function () {
                                             .then(function (basket) {
                                             _this.afDatabase
                                                 .list("ticketsInBasket/" + _this.userId + "/" + _this.listingData.ticketRef)
-                                                .remove().then(function (navigation) {
-                                                _this.toast.create({ message: 'Payment successful', duration: 2000, position: 'middle' }).present();
+                                                .remove()
+                                                .then(function (navigation) {
+                                                _this.toast
+                                                    .create({
+                                                    message: "Payment successful",
+                                                    duration: 2000,
+                                                    position: "middle"
+                                                })
+                                                    .present();
                                                 _this.close();
-                                                _this.navCtrl.setRoot('Page');
-                                                _this.navCtrl.push('OrderHistoryPage').catch(function (error) {
+                                                _this.navCtrl.setRoot("Page");
+                                                _this.navCtrl.push("OrderHistoryPage").catch(function (error) {
                                                     console.log(error);
                                                 });
                                             });
@@ -263,9 +268,7 @@ var PaymentModalPage = /** @class */ (function () {
     };
     PaymentModalPage.prototype.checkOutTimer = function () {
         var _this = this;
-        this.timer = setInterval(function () {
-            return _this.updateSeconds(_this.minutes, (_this.seconds = _this.seconds - 1));
-        }, 1000);
+        this.timer = setInterval(function () { return _this.updateSeconds(_this.minutes, (_this.seconds = _this.seconds - 1)); }, 1000);
         console.log({ minutes: this.minutes, seconds: this.seconds });
     };
     PaymentModalPage.prototype.updateSeconds = function (minutes, seconds) {

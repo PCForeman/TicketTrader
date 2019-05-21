@@ -116,6 +116,7 @@ var AddCardModalPage = /** @class */ (function () {
     };
     AddCardModalPage.prototype.addCardAlert = function () {
         var _this = this;
+        // Creates an alert, if conditions are met. Then calls a function based on user interaction
         if (this.cardNo != null &&
             this.expiry != null &&
             this.Cvc != null &&
@@ -310,7 +311,13 @@ var AddCardModalPage = /** @class */ (function () {
         });
     };
     AddCardModalPage.prototype.info = function () {
-        this.toast.create({ message: 'All of your details will be encrypted and stored safely', duration: 2000, position: 'middle' }).present();
+        this.toast
+            .create({
+            message: "All of your details will be encrypted and stored safely",
+            duration: 2000,
+            position: "middle"
+        })
+            .present();
     };
     AddCardModalPage.prototype.generateSecureKeyAndIV = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -318,9 +325,11 @@ var AddCardModalPage = /** @class */ (function () {
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
+                        // Use the Ionic AES26 plugin to generate two keys.
                         _a = this;
                         return [4 /*yield*/, this.aes.generateSecureKey("pook")];
                     case 1:
+                        // Use the Ionic AES26 plugin to generate two keys.
                         _a.thrtyTwoBit = _c.sent(); // Returns a 32 bytes string
                         _b = this;
                         return [4 /*yield*/, this.aes.generateSecureIV("pook")];

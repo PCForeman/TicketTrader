@@ -373,7 +373,7 @@ var OrderHistoryPage = /** @class */ (function () {
         var _this = this;
         var alert = this.aCtrl.create({
             title: "Leave feedback between 1 and 5",
-            mode: 'ios',
+            mode: "ios",
             inputs: [
                 {
                     name: "Number",
@@ -387,8 +387,12 @@ var OrderHistoryPage = /** @class */ (function () {
                     handler: function (data) {
                         console.log(data);
                         if (data.Number > 1 && data.Number <= 5) {
-                            _this.afDatabase.object("bought/" + buyerId + "/" + id).update({ Feedback: true });
-                            _this.afDatabase.database.ref("user/" + seller + "/rating").transaction(function (res) {
+                            _this.afDatabase
+                                .object("bought/" + buyerId + "/" + id)
+                                .update({ Feedback: true });
+                            _this.afDatabase.database
+                                .ref("user/" + seller + "/rating")
+                                .transaction(function (res) {
                                 res + data.Number;
                             });
                         }
@@ -397,8 +401,7 @@ var OrderHistoryPage = /** @class */ (function () {
                 {
                     text: "Dismiss",
                     role: "cancel",
-                    handler: function () {
-                    }
+                    handler: function () { }
                 }
             ]
         });

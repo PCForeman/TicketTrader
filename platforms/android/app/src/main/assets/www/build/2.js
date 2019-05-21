@@ -167,7 +167,7 @@ var SellPage = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, window.chooser
-                            .getFile('image/jpeg/png')
+                            .getFile("image/jpeg/png")
                             .then(function (uri) { return __awaiter(_this, void 0, void 0, function () {
                             return __generator(this, function (_a) {
                                 switch (_a.label) {
@@ -305,7 +305,7 @@ var SellPage = /** @class */ (function () {
                 duration: 3500
             })
                 .present();
-            _this.app.getRootNav().setRoot('LoginPage');
+            _this.app.getRootNav().setRoot("LoginPage");
         });
     };
     SellPage.prototype.lockFileUpload = function () {
@@ -339,7 +339,7 @@ var SellPage = /** @class */ (function () {
     SellPage.prototype.showSpinner = function () {
         var loading = this.ldCtrl.create({
             content: "Processing",
-            spinner: 'bubbles'
+            spinner: "bubbles"
         });
         loading.present();
         setTimeout(function () {
@@ -419,7 +419,13 @@ var SellPage = /** @class */ (function () {
         });
     };
     SellPage.prototype.instructionMessage = function () {
-        this.toast.create({ message: 'Listing a ticket is easy just fill out the ticket details below, check the money you will recieve by clicking the calculator. Then select a location by clicking the venue button and upload the corresponding ticket by clicking the ticket button', duration: 7000, position: 'middle' }).present();
+        this.toast
+            .create({
+            message: "Listing a ticket is easy just fill out the ticket details below, check the money you will recieve by clicking the calculator. Then select a location by clicking the venue button and upload the corresponding ticket by clicking the ticket button",
+            duration: 7000,
+            position: "middle"
+        })
+            .present();
     };
     SellPage.prototype.createListing = function (url) {
         return __awaiter(this, void 0, void 0, function () {
@@ -440,33 +446,72 @@ var SellPage = /** @class */ (function () {
                         console.log(rDate);
                         price = this.listing.Price;
                         if (!(artist == "" || artist == null)) return [3 /*break*/, 2];
-                        this.toast.create({ message: 'Artist field is empty', duration: 2000, position: 'middle' }).present();
+                        this.toast
+                            .create({
+                            message: "Artist field is empty",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
                         return [3 /*break*/, 9];
                     case 2:
                         if (!(startTime < 0 && startTime > 24)) return [3 /*break*/, 3];
-                        this.toast.create({ message: 'Time must be 24hr clock', duration: 2000, position: 'middle' }).present();
+                        this.toast
+                            .create({
+                            message: "Time must be 24hr clock",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
                         return [3 /*break*/, 9];
                     case 3:
                         if (!(date == null)) return [3 /*break*/, 4];
-                        this.toast.create({ message: 'Date cannot be empty', duration: 2000, position: 'middle' }).present();
+                        this.toast
+                            .create({
+                            message: "Date cannot be empty",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
                         return [3 /*break*/, 9];
                     case 4:
                         if (!(price == NaN)) return [3 /*break*/, 5];
-                        this.toast.create({ message: 'Price must be a numerical value between £1 - £50', duration: 2000, position: 'middle' }).present();
+                        this.toast
+                            .create({
+                            message: "Price must be a numerical value between £1 - £50",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
                         return [3 /*break*/, 9];
                     case 5:
                         if (!(price < 1)) return [3 /*break*/, 6];
-                        this.toast.create({ message: 'Price cannot be lower than £1', duration: 2000, position: 'middle' }).present();
+                        this.toast
+                            .create({
+                            message: "Price cannot be lower than £1",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
                         return [3 /*break*/, 9];
                     case 6:
                         if (!(price > 50)) return [3 /*break*/, 7];
-                        this.toast.create({ message: 'Price cannot exceed £50', duration: 2000, position: 'middle' }).present();
+                        this.toast
+                            .create({
+                            message: "Price cannot exceed £50",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
                         return [3 /*break*/, 9];
                     case 7: return [4 /*yield*/, this.upload(this.buffer, this.entryname)];
                     case 8:
                         _a.sent();
                         this.afAuth.authState.take(1).subscribe(function (auth) {
-                            _this.afDatabase.object("user/" + auth.uid).snapshotChanges().subscribe(function (res) {
+                            _this.afDatabase
+                                .object("user/" + auth.uid)
+                                .snapshotChanges()
+                                .subscribe(function (res) {
                                 res.payload.child("Rating").val();
                                 _this.listing.Date = rDate;
                                 _this.listing.Seller = auth.uid;
@@ -493,9 +538,10 @@ var SellPage = /** @class */ (function () {
                                     .create({
                                     message: "Listing successfully created.",
                                     position: "middle",
-                                    duration: 2000,
-                                }).present();
-                                _this.navCtrl.setRoot('Page').catch(function (error) {
+                                    duration: 2000
+                                })
+                                    .present();
+                                _this.navCtrl.setRoot("Page").catch(function (error) {
                                     console.log(error);
                                 });
                             });

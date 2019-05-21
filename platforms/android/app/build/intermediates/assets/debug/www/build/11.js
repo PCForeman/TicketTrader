@@ -125,6 +125,7 @@ var Admin2Page = /** @class */ (function () {
     };
     Admin2Page.prototype.getItems = function (searchbar) {
         var _this = this;
+        // Allows user to search through items based on input
         this.initializeItems();
         console.log(this.itemSearch);
         var q = searchbar.srcElement.value;
@@ -154,6 +155,7 @@ var Admin2Page = /** @class */ (function () {
     };
     Admin2Page.prototype.retrieveApprovedListings = function () {
         var _this = this;
+        // Retrieves all of the approved tickets in the database.
         var ref = this.fbDatabase.object("approvedTickets/");
         ref.snapshotChanges().subscribe(function (snapshot) {
             var allData = snapshot.payload.val();
@@ -200,6 +202,7 @@ var Admin2Page = /** @class */ (function () {
     };
     Admin2Page.prototype.remove = function () {
         var _this = this;
+        // Removes a ticket from the approved tickets table
         var temp = [];
         var target = event.srcElement;
         var ticketClicked = parseInt(target.parentElement.parentElement.children.item(0).innerHTML.valueOf()) - 1;
@@ -247,6 +250,7 @@ var Admin2Page = /** @class */ (function () {
         }); });
     };
     Admin2Page.prototype.showSpinner = function () {
+        // displays a spinner on screen
         var loading = this.ldCtrl.create({
             content: ""
         });
@@ -257,6 +261,7 @@ var Admin2Page = /** @class */ (function () {
     };
     Admin2Page.prototype.logout = function () {
         var _this = this;
+        // Logs user out and redirects them
         this.afAuth.auth.signOut().then(function () {
             _this.toast
                 .create({

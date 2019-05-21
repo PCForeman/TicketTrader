@@ -111,6 +111,7 @@ var AccountPage = /** @class */ (function () {
     };
     AccountPage.prototype.openModal = function () {
         var _this = this;
+        //Opens a modal and passes revelevant variables so they are in scope
         var currentUser = this.afAuth.auth.currentUser.uid;
         var ref = this.afDatabase.object("user/" + currentUser);
         ref.snapshotChanges().subscribe(function (snapshot) {
@@ -156,6 +157,7 @@ var AccountPage = /** @class */ (function () {
         });
     };
     AccountPage.prototype.addCard = function () {
+        //Opens a modal to add a payment method
         var myModalOpts = {
             cssClass: "modal",
             enableBackdropDismiss: true,
@@ -212,7 +214,13 @@ var AccountPage = /** @class */ (function () {
                                         }
                                     }
                                     else {
-                                        _this.toast.create({ message: 'Incorrect password', duration: 2000, position: 'middle' }).present();
+                                        _this.toast
+                                            .create({
+                                            message: "Incorrect password",
+                                            duration: 2000,
+                                            position: "middle"
+                                        })
+                                            .present();
                                         return false;
                                     }
                                 }
@@ -226,13 +234,16 @@ var AccountPage = /** @class */ (function () {
         });
     };
     AccountPage.prototype.checkOut = function () {
+        // Redirects to the checkout tab
         this.navCtrl.push("BuyPage");
     };
     AccountPage.prototype.orderHistory = function () {
+        //Redirects to the orderHistory tab
         this.navCtrl.push("OrderHistoryPage");
     };
     AccountPage.prototype.displayAccountData = function () {
         var _this = this;
+        //Fetchs a users details from the database and makes them an observable
         this.afAuth.authState.take(1).subscribe(function (data) {
             if (data && data.email && data.uid) {
                 _this.userData = _this.afDatabase
@@ -252,6 +263,7 @@ var AccountPage = /** @class */ (function () {
     };
     AccountPage.prototype.logout = function () {
         var _this = this;
+        //Signs user out and re-routes them to login page
         this.afAuth.auth.signOut().then(function () {
             _this.toast
                 .create({

@@ -74,12 +74,14 @@ var BuyPage = /** @class */ (function () {
         this.timedOutListings = [];
     }
     BuyPage.prototype.ionViewDidLoad = function () {
+        // Executes these on the view loading
         this.currentUser = this.afAuth.auth.currentUser.uid;
         this.retrieveCheckoutTickets();
         this.displayTimer();
     };
     BuyPage.prototype.checkOutTimer = function () {
         var _this = this;
+        // Removes a ticket from a users basket when timer runs out
         var currentUser = this.afAuth.auth.currentUser.uid;
         var ref = this.afDatabase.object("ticketsInBasket/" + currentUser);
         ref.snapshotChanges().subscribe(function (snapshot) {
@@ -138,6 +140,7 @@ var BuyPage = /** @class */ (function () {
     };
     BuyPage.prototype.displayTimer = function () {
         var _this = this;
+        // Works out when users ticket reservation period ends and calculates a countdown based on it.
         var currentUser = this.afAuth.auth.currentUser.uid;
         var ref = this.afDatabase.object("ticketsInBasket/" + currentUser);
         ref.snapshotChanges().subscribe(function (snapshot) {
@@ -164,6 +167,7 @@ var BuyPage = /** @class */ (function () {
         });
     };
     BuyPage.prototype.updateSeconds = function (minutes, seconds) {
+        // Called by the above function, minutes and seconds
         // are passed as parameters and the functions then will count down to 0:00
         if (this.secondsLeft < 10) {
             this.belowTen = "0";
@@ -197,9 +201,11 @@ var BuyPage = /** @class */ (function () {
         });
     };
     BuyPage.prototype.timeIsUp = function () {
+        // Clears the interval above
         clearInterval(this.timer);
     };
     BuyPage.prototype.checkOut = function () {
+        // Works out what ticket has been clicked, creates and object to pass into the modal opened
         // so that it doesn't go out of scope
         var target = event.srcElement;
         var uId = this.afAuth.auth.currentUser.uid;
@@ -295,6 +301,7 @@ var BuyPage = /** @class */ (function () {
     };
     BuyPage.prototype.retrieveCheckoutTickets = function () {
         var _this = this;
+        // Retrieves a users tickets that are in the basket table.
         var currentUser = this.afAuth.auth.currentUser.uid;
         var ref = this.afDatabase.object("ticketsInBasket/" + currentUser);
         ref.snapshotChanges().subscribe(function (snapshot) {
@@ -356,6 +363,7 @@ var BuyPage = /** @class */ (function () {
     };
     BuyPage.prototype.remove = function () {
         var _this = this;
+        // Removes ticket from a users basket and puts it back in active listings
         var target = event.srcElement;
         var ticketId = target.parentElement.parentElement.children.item(1)
             .innerHTML;

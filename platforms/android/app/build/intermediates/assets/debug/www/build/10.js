@@ -148,6 +148,7 @@ var Admin3Page = /** @class */ (function () {
     };
     Admin3Page.prototype.remove = function () {
         var _this = this;
+        // removes a ticket from the table
         var temp = [];
         var target = event.srcElement;
         var ticketClicked = parseInt(target.parentElement.parentElement.children.item(0).innerHTML.valueOf()) - 1;
@@ -212,6 +213,7 @@ var Admin3Page = /** @class */ (function () {
     };
     Admin3Page.prototype.retrieveRejectedTickets = function () {
         var _this = this;
+        // Retrieve all of the rejected tickets from the rejected tickets table.
         var ref = this.fbDatabase.object("rejectedTickets/");
         ref.snapshotChanges().subscribe(function (snapshot) {
             var allData = snapshot.payload.val();
@@ -258,6 +260,7 @@ var Admin3Page = /** @class */ (function () {
     };
     Admin3Page.prototype.logout = function () {
         var _this = this;
+        // Logs user out and redirects
         this.afAuth.auth.signOut().then(function () {
             _this.toast
                 .create({

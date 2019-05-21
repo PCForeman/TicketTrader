@@ -78,7 +78,7 @@ var LoginPage = /** @class */ (function () {
     }
     LoginPage.prototype.showSpinner = function () {
         var loading = this.ldCtrl.create({
-            spinner: 'bubbles',
+            spinner: "bubbles",
             content: "Authenticating",
             duration: 500
         });
@@ -88,9 +88,11 @@ var LoginPage = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: // Redirects user to registration page
+                    case 0: 
+                    // Redirects user to registration page
                     return [4 /*yield*/, this.showSpinner()];
                     case 1:
+                        // Redirects user to registration page
                         _a.sent();
                         return [4 /*yield*/, this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__register_register__["a" /* RegisterPage */])];
                     case 2:
@@ -101,6 +103,7 @@ var LoginPage = /** @class */ (function () {
         });
     };
     LoginPage.prototype.adminLogin = function (user) {
+        // Checks if the user is an admin, Otherwise calls the normal user login
         var adminCredential1 = user.email;
         var adminCredential2 = user.password;
         if (adminCredential1 == "admin@TicketTrader.com" &&
@@ -117,9 +120,11 @@ var LoginPage = /** @class */ (function () {
             var result, lastSignIn, creation, currentTime, x, z, key, e_1, disableLogin, disableReg;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: // Validates a user and logs them into the system, directs them passed on different variables
+                    case 0: 
+                    // Validates a user and logs them into the system, directs them passed on different variables
                     return [4 /*yield*/, this.showSpinner()];
                     case 1:
+                        // Validates a user and logs them into the system, directs them passed on different variables
                         _a.sent();
                         _a.label = 2;
                     case 2:
@@ -150,7 +155,8 @@ var LoginPage = /** @class */ (function () {
                                     message: "Welcome back " + gFirstname + " " + " enjoy your stay :)",
                                     position: "middle",
                                     duration: 2000
-                                }).present();
+                                })
+                                    .present();
                                 _this.navCtrl.setRoot("Page");
                             }
                             else {
@@ -310,31 +316,52 @@ var RegisterPage = /** @class */ (function () {
                         vMobile = this.user.phoneNo;
                         vDoB = this.user.dOb;
                         if (!(vfirstname == "" || vfirstname == null)) return [3 /*break*/, 2];
-                        this.toast.create({ message: 'First name is empty', duration: 2000 }).present();
+                        this.toast
+                            .create({ message: "First name is empty", duration: 2000 })
+                            .present();
                         return [3 /*break*/, 11];
                     case 2:
                         if (!(vSurname == "" || vSurname == null)) return [3 /*break*/, 3];
-                        this.toast.create({ message: 'Surname is empty', duration: 2000 }).present();
+                        this.toast
+                            .create({ message: "Surname is empty", duration: 2000 })
+                            .present();
                         return [3 /*break*/, 11];
                     case 3:
                         if (!(vEmail == "" || vEmail == null)) return [3 /*break*/, 4];
-                        this.toast.create({ message: 'email is empty', duration: 2000 }).present();
+                        this.toast
+                            .create({ message: "email is empty", duration: 2000 })
+                            .present();
                         return [3 /*break*/, 11];
                     case 4:
                         if (!(vMobile == "" || null)) return [3 /*break*/, 5];
-                        this.toast.create({ message: 'mobile field is empty', duration: 2000 }).present();
+                        this.toast
+                            .create({ message: "mobile field is empty", duration: 2000 })
+                            .present();
                         return [3 /*break*/, 11];
                     case 5:
                         if (!(vMobile.length < 9)) return [3 /*break*/, 6];
-                        this.toast.create({ message: 'Phone number should have a minimum of 9 characters', duration: 2000 }).present();
+                        this.toast
+                            .create({
+                            message: "Phone number should have a minimum of 9 characters",
+                            duration: 2000
+                        })
+                            .present();
                         return [3 /*break*/, 11];
                     case 6:
                         if (!(vDoB == null)) return [3 /*break*/, 7];
-                        this.toast.create({ message: 'First name is empty', duration: 2000 }).present();
+                        this.toast
+                            .create({ message: "First name is empty", duration: 2000 })
+                            .present();
                         return [3 /*break*/, 11];
                     case 7:
                         if (!(vPassword.length < 8)) return [3 /*break*/, 8];
-                        this.toast.create({ message: "Password must be 8 or more characters with a special character", duration: 2000, position: "middle" }).present();
+                        this.toast
+                            .create({
+                            message: "Password must be 8 or more characters with a special character",
+                            duration: 2000,
+                            position: "middle"
+                        })
+                            .present();
                         return [3 /*break*/, 11];
                     case 8:
                         _a.trys.push([8, 10, , 11]);
@@ -849,7 +876,8 @@ var AdminPage = /** @class */ (function () {
                                                 position: "top",
                                                 duration: 2000
                                             })
-                                                .present().catch(function (error) {
+                                                .present()
+                                                .catch(function (error) {
                                                 console.log(error);
                                             })];
                                     case 1:
@@ -1162,7 +1190,7 @@ var userLong;
 var userPos;
 var keys = [];
 var HomePage = /** @class */ (function () {
-    function HomePage(afAuth, toast, gLocation, afDatabase, app, aCtrl, ngZone, vCtrl, navCtrl, navParams) {
+    function HomePage(afAuth, toast, gLocation, afDatabase, app, aCtrl, ngZone, vCtrl, navCtrl, navParams, ldCtrl) {
         this.afAuth = afAuth;
         this.toast = toast;
         this.gLocation = gLocation;
@@ -1173,6 +1201,7 @@ var HomePage = /** @class */ (function () {
         this.vCtrl = vCtrl;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.ldCtrl = ldCtrl;
         this.markerObject = [];
         this.items = [];
         window.ionicPageRef = {
@@ -1373,48 +1402,72 @@ var HomePage = /** @class */ (function () {
         });
         alert.present();
     };
+    HomePage.prototype.showSpinner = function () {
+        var loading = this.ldCtrl.create({
+            content: "Processing",
+            spinner: "bubbles"
+        });
+        loading.present();
+        setTimeout(function () {
+            loading.dismiss();
+        }, 1000);
+    };
     HomePage.prototype.buyTickets = function (userId, sellerId, ticketClickedId, index) {
-        var _this = this;
-        //Check that the user isn't the person who listed the ticket
-        //If condition is met it will remove the ticket from the map and active listings and place the ticket in a users basket
-        var temp = [];
-        console.log(userId, sellerId, ticketClickedId, index);
-        if (userId == sellerId) {
-            this.yourTicketMessage();
-        }
-        else {
-            var timeClicked_1 = Date.now();
-            var checkOutBy_1 = timeClicked_1 + 600000;
-            temp.push(this.items[index]);
-            temp.filter(function (v) {
-                var tempArray = [
-                    {
-                        Key: v.Key,
-                        Name: v.Name,
-                        Venue: v.Venue,
-                        Price: v.Price,
-                        Date: v.Date,
-                        Seller: v.Seller,
-                        Time: v.Time,
-                        Payout: v.Payout,
-                        Creation: v.Creation,
-                        Charge: v.Charge,
-                        checkOutTime: timeClicked_1,
-                        reservationPerioid: checkOutBy_1,
-                        Lat: v.Lat,
-                        Long: v.Long,
-                        interested: v.interested
-                    }
-                ];
-                var checkOutRef = _this.afAuth.auth.currentUser.uid;
-                _this.afDatabase
-                    .list("ticketsInBasket/" + checkOutRef)
-                    .push(tempArray[0]);
-                _this.afDatabase.list("approvedTickets/" + tempArray[0].Key).remove();
-                _this.items = [];
-                _this.navCtrl.push("BuyPage");
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var temp, timeClicked_1, checkOutBy_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: 
+                    //Check that the user isn't the person who listed the ticket
+                    //If condition is met it will remove the ticket from the map and active listings and place the ticket in a users basket
+                    return [4 /*yield*/, this.showSpinner()];
+                    case 1:
+                        //Check that the user isn't the person who listed the ticket
+                        //If condition is met it will remove the ticket from the map and active listings and place the ticket in a users basket
+                        _a.sent();
+                        temp = [];
+                        console.log(userId, sellerId, ticketClickedId, index);
+                        if (userId == sellerId) {
+                            this.yourTicketMessage();
+                        }
+                        else {
+                            timeClicked_1 = Date.now();
+                            checkOutBy_1 = timeClicked_1 + 600000;
+                            temp.push(this.items[index]);
+                            temp.filter(function (v) {
+                                var tempArray = [
+                                    {
+                                        Key: v.Key,
+                                        Name: v.Name,
+                                        Venue: v.Venue,
+                                        Price: v.Price,
+                                        Date: v.Date,
+                                        Seller: v.Seller,
+                                        Time: v.Time,
+                                        Payout: v.Payout,
+                                        Creation: v.Creation,
+                                        Charge: v.Charge,
+                                        checkOutTime: timeClicked_1,
+                                        reservationPerioid: checkOutBy_1,
+                                        Lat: v.Lat,
+                                        Long: v.Long,
+                                        interested: v.interested
+                                    }
+                                ];
+                                var checkOutRef = _this.afAuth.auth.currentUser.uid;
+                                _this.afDatabase
+                                    .list("ticketsInBasket/" + checkOutRef)
+                                    .push(tempArray[0]);
+                                _this.afDatabase.list("approvedTickets/" + tempArray[0].Key).remove();
+                                _this.items = [];
+                                _this.navCtrl.push("BuyPage");
+                            });
+                        }
+                        return [2 /*return*/];
+                }
             });
-        }
+        });
     };
     HomePage.prototype.yourTicketMessage = function () {
         // Displays a toast to user if they try to buy their own ticket listing
@@ -1478,7 +1531,8 @@ var HomePage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_0__angular_core__["M" /* NgZone */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]])
     ], HomePage);
     return HomePage;
 }());

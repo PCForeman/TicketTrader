@@ -109,7 +109,7 @@ var ViewImageModalPage = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        data = this.navParams.get('image');
+                        data = this.navParams.get("image");
                         console.log(data);
                         this.myImg = new Image();
                         this.myImg.src = data.url;
@@ -135,7 +135,7 @@ var ViewImageModalPage = /** @class */ (function () {
     };
     ViewImageModalPage.prototype.renderImage = function () {
         this.context.drawImage(this.myImg, 0, 0, this.myImg.width, this.myImg.height, 0, 0, this.canvas.width, this.canvas.height);
-        var button = document.getElementById('displayButton');
+        var button = document.getElementById("displayButton");
         button.hidden = true;
     };
     ViewImageModalPage.prototype.initialiseCanvas = function () {
