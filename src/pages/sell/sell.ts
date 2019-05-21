@@ -477,6 +477,22 @@ export class SellPage {
     alert.present();
   }
 
+
+  ticketTraderInfo() {
+    const myModalOpts: ModalOptions = {
+      cssClass: "modal",
+      enableBackdropDismiss: true,
+      showBackdrop: true
+    };
+    const myModal = this.modal.create(
+      "InformationModalPage",
+      {},
+      myModalOpts
+    );
+    myModal.present();
+
+    }
+
   findVenue() {
     const myModalOpts: ModalOptions = {
       cssClass: "modal",

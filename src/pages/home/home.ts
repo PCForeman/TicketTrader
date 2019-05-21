@@ -7,7 +7,9 @@ import {
   ToastController,
   AlertController,
   ViewController,
-  LoadingController
+  LoadingController,
+  ModalController,
+  ModalOptions
 } from "ionic-angular";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Observable } from "rxjs";
@@ -41,7 +43,8 @@ export class HomePage {
     private vCtrl: ViewController,
     public navCtrl: NavController,
     public navParams: NavParams,
-    private ldCtrl: LoadingController
+    private ldCtrl: LoadingController,
+    private modal: ModalController
   ) {
     (<any>window).ionicPageRef = {
       zone: this.ngZone,
@@ -84,6 +87,22 @@ export class HomePage {
         console.log("Cannot locate you", error);
       });
   }
+
+
+  ticketTraderInfo() {
+    const myModalOpts: ModalOptions = {
+      cssClass: "modal",
+      enableBackdropDismiss: true,
+      showBackdrop: true
+    };
+    const myModal = this.modal.create(
+      "InformationModalPage",
+      {},
+      myModalOpts
+    );
+    myModal.present();
+
+    }
 
   addUserMarker() {
     // Adds a marker for the user based on their geolocation

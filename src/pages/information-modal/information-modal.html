@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar color="midnight-blue">
+      <ion-buttons left>
+          <button ion-button>{{ this.date }}</button>
+        </ion-buttons>
+    <ion-buttons right>
+      <button ion-button (click)="close()">Dismiss</button>
+    </ion-buttons>
+    <ion-title position text-center>Information</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<ion-title text-center>Privacy</ion-title>
+All sensitive data is stored safely and encrypted with AES256 encryption. At any point you can delete your account on the accounts tab and this will remove your details from the system.
+<ion-title text-center>Rules</ion-title>
+All listings are subject to a verification process to reduce the chance of ticket scamming, any listings that do not match will be rejected. Anyone caught trying to scam will be banned from TicketTrader indefinitely.
+<ion-title text-center>User guide</ion-title>
+<ion-icon name="map"> Icon for the home tab.</ion-icon>
+<ion-icon name="search"> Icon for the search tab.</ion-icon>
+<ion-icon name="cart"> Icon for the sell tab.</ion-icon>
+<ion-icon name="cog"> Icon for the account tab.</ion-icon>
+<ion-icon name="basket"> Icon for the checkout tab.</ion-icon>
+<ion-icon name="cloud-download"> Icon for the Order history tab.</ion-icon>
+<ion-icon name="log-out"> Icon to log out of the application.</ion-icon>
+</ion-content>
+
+<div class id="footer">
+    <ion-footer>
+      <ion-toolbar color="midnight-blue">
+        <ion-title position text-center>TicketTrader</ion-title>
+      </ion-toolbar>
+    </ion-footer>
+  </div>

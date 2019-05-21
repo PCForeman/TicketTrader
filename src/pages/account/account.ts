@@ -111,6 +111,22 @@ export class AccountPage {
     myModal.present();
   }
 
+
+  ticketTraderInfo() {
+    const myModalOpts: ModalOptions = {
+      cssClass: "modal",
+      enableBackdropDismiss: true,
+      showBackdrop: true
+    };
+    const myModal = this.modal.create(
+      "InformationModalPage",
+      {},
+      myModalOpts
+    );
+    myModal.present();
+
+    }
+
   async deleteAccount() {
     //Deletes a users ticket trader account if condition is met.
     var ref = this.afDatabase.object(

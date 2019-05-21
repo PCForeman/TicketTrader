@@ -8,7 +8,9 @@ import {
   NavParams,
   ToastController,
   AlertController,
-  LoadingController
+  LoadingController,
+  ModalController,
+  ModalOptions
 } from "ionic-angular";
 import { Observable } from "rxjs";
 
@@ -35,6 +37,7 @@ export class TicketsPage {
     private aCtrl: AlertController,
     public navCtrl: NavController,
     private loadingCtrl: LoadingController,
+    private modal: ModalController,
     public navParams: NavParams
   ) {}
 
@@ -62,6 +65,22 @@ export class TicketsPage {
   onCancel() {
     this.itemSearch = this.items2;
   }
+
+  ticketTraderInfo() {
+    const myModalOpts: ModalOptions = {
+      cssClass: "modal",
+      enableBackdropDismiss: true,
+      showBackdrop: true
+    };
+    const myModal = this.modal.create(
+      "InformationModalPage",
+      {},
+      myModalOpts
+    );
+    myModal.present();
+
+    }
+
 
   getItems(searchbar) {
     // Reset items back to all of the items
