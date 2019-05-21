@@ -45,8 +45,10 @@ var AdminpaymentsPageModule = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AdminpaymentsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -59,16 +61,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AdminpaymentsPage = /** @class */ (function () {
-    function AdminpaymentsPage(navCtrl, navParams, fbDatabase) {
+    function AdminpaymentsPage(navCtrl, navParams, afAuth, toast, app, fbDatabase) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.afAuth = afAuth;
+        this.toast = toast;
+        this.app = app;
         this.fbDatabase = fbDatabase;
         this.kA = [];
         this.items = [];
     }
     AdminpaymentsPage.prototype.ionViewDidLoad = function () {
         this.retrievePayments();
+    };
+    AdminpaymentsPage.prototype.logout = function () {
+        var _this = this;
+        // Logs a user out
+        this.afAuth.auth.signOut().then(function () {
+            _this.toast
+                .create({
+                message: "Signed out",
+                position: "middle",
+                duration: 3500
+            })
+                .present();
+            _this.app.getRootNav().setRoot("LoginPage");
+        });
     };
     AdminpaymentsPage.prototype.retrievePayments = function () {
         var _this = this;
@@ -108,7 +128,10 @@ var AdminpaymentsPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-adminpayments',template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\adminpayments\adminpayments.html"*/'<ion-header>\n\n  <ion-navbar color="midnight-blue">\n\n    <ion-buttons right>\n\n      <button ion-button icon-only color="light" (click)="logout()">\n\n        <ion-icon name="log-out"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-buttons left>\n\n      <button ion-button icon-only color="light" (click)="ticketTradeInfo()">\n\n        <ion-icon name="information-circle"></ion-icon>\n\n      </button>\n\n    </ion-buttons>\n\n    <ion-title position text-center>Pending listings</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n\n\n    <ion-list>\n\n        <div\n\n          class="ngDivAdmin"\n\n          [id]="i"\n\n          ion-item\n\n          *ngFor="let item of items; let i = index"\n\n        >\n\n          <h1 hidden>{{ i + 1 }}</h1>\n\n          <h2 position text-center>Amount {{ item.Amount }}</h2>\n\n          <h3 position text-center>Sale reference {{ item.Ref }}</h3>\n\n          <h4 position text-center>{{ item.pId }}</h4>\n\n</div>'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\adminpayments\adminpayments.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"]])
     ], AdminpaymentsPage);
     return AdminpaymentsPage;
 }());

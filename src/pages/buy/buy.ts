@@ -5,7 +5,8 @@ import {
   NavParams,
   ToastController,
   ModalController,
-  ModalOptions
+  ModalOptions,
+  App
 } from "ionic-angular";
 import { AngularFireAuth } from "angularfire2/auth";
 import { AngularFireDatabase } from "angularfire2/database";
@@ -34,7 +35,8 @@ export class BuyPage {
     private toast: ToastController,
     private afDatabase: AngularFireDatabase,
     public navParams: NavParams,
-    private modal: ModalController
+    private modal: ModalController,
+    private app: App,
   ) {}
 
   ionViewDidLoad() { // Executes these on the view loading
@@ -152,6 +154,20 @@ export class BuyPage {
         console.log(minutes, seconds);
       }
     }
+  }
+
+  logout() {
+    // Logs a user out
+    this.afAuth.auth.signOut().then(() => {
+      this.toast
+        .create({
+          message: "Signed out",
+          position: "middle",
+          duration: 3500
+        })
+        .present();
+      this.app.getRootNav().setRoot("LoginPage");
+    });
   }
 
   timeIsUp() { // Clears the interval above

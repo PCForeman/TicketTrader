@@ -1,22 +1,8 @@
 <ion-header>
   <ion-navbar color="midnight-blue">
     <ion-buttons right>
-      <button
-        id="info"
-        ion-button
-        icon-only
-        color="light"
-        (click)="ticketTradeInfo()"
-      >
-        <ion-icon name="information-circle"></ion-icon>
-      </button>
       <button id="logout" ion-button icon-only color="light" (click)="logout()">
         <ion-icon name="log-out"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-buttons left>
-      <button ion-button icon-only color="light" (click)="orderHistory()">
-        <ion-icon name="clipboard"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title position text-center>Tickets</ion-title>
@@ -40,6 +26,7 @@
       <h5 position text-center>AT {{ item.Time }}</h5>
       <h5 position text-center>{{ item.Price }} paid with card ending in {{item.Card}}</h5>
       <h6 hidden>{{ item.Ticket }}</h6>
+      <h6 hidden>{{ item.Seller }}</h6>
       <button
         [id]="i"
         class="adminButtons"

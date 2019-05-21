@@ -41,9 +41,9 @@ var OrderHistoryPageModule = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrderHistoryPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_aes_256__ = __webpack_require__(343);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -96,7 +96,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 
 
 var OrderHistoryPage = /** @class */ (function () {
-    function OrderHistoryPage(navCtrl, afAuth, afDatabase, toast, aes, modal, aCtrl, navParams) {
+    function OrderHistoryPage(navCtrl, afAuth, afDatabase, toast, aes, modal, aCtrl, navParams, app) {
         this.navCtrl = navCtrl;
         this.afAuth = afAuth;
         this.afDatabase = afDatabase;
@@ -105,6 +105,7 @@ var OrderHistoryPage = /** @class */ (function () {
         this.modal = modal;
         this.aCtrl = aCtrl;
         this.navParams = navParams;
+        this.app = app;
         this.items = [];
         this.itemSold = [];
         this.kA = [];
@@ -136,25 +137,36 @@ var OrderHistoryPage = /** @class */ (function () {
         var _this = this;
         var button = event.srcElement;
         var ID = this.afAuth.auth.currentUser.uid;
-        var TicketID = button.parentElement.parentElement.children.item(1).innerHTML;
+        var TicketID = button.parentElement.parentElement.children.item(1)
+            .innerHTML;
         console.log(TicketID);
         var date = button.parentElement.parentElement.children.item(4).innerHTML;
         var YYYY = parseInt(date.substr(6));
         var MM = parseInt(date.substr(3, 3));
         var DD = parseInt(date.substr(0, 2));
-        this.afDatabase.object("/bought/" + ID + "/" + TicketID).snapshotChanges().subscribe(function (result) {
+        this.afDatabase
+            .object("/bought/" + ID + "/" + TicketID)
+            .snapshotChanges()
+            .subscribe(function (result) {
             var HH = result.payload.child("Time").val();
             _this.hours = parseInt(HH);
             var eventInMilliseconds = new Date(YYYY, MM - 1, DD).getTime();
-            var hoursToMilliSeconds = (3.6e+6 * _this.hours);
-            var removalAllowedTime = (eventInMilliseconds + hoursToMilliSeconds);
+            var hoursToMilliSeconds = 3.6e6 * _this.hours;
+            var removalAllowedTime = eventInMilliseconds + hoursToMilliSeconds;
             var timeNow = new Date().getTime();
             console.log(eventInMilliseconds, removalAllowedTime, timeNow);
             if (timeNow >= removalAllowedTime) {
                 _this.removeAlertBought(ID, TicketID);
             }
             else {
-                _this.toast.create({ message: 'You will be able to remove this record 24hrs after the event has taken place', duration: 3000, position: 'middle' }).present().catch(function (error) {
+                _this.toast
+                    .create({
+                    message: "You will be able to remove this record 24hrs after the event has taken place",
+                    duration: 3000,
+                    position: "middle"
+                })
+                    .present()
+                    .catch(function (error) {
                     console.log(error);
                 });
             }
@@ -328,6 +340,70 @@ var OrderHistoryPage = /** @class */ (function () {
             }
         });
     };
+    OrderHistoryPage.prototype.feedback = function () {
+        var _this = this;
+        var button = event.srcElement;
+        var buyerId = this.afAuth.auth.currentUser.uid;
+        var id = button.parentElement.parentElement.children.item(1).innerHTML;
+        var sellerId = button.parentElement.parentElement.children.item(8)
+            .innerHTML;
+        this.afDatabase
+            .object("bought/" + buyerId + "/" + id)
+            .snapshotChanges()
+            .subscribe(function (result) {
+            var bool = result.payload.child("Feedback").val();
+            if (bool == false) {
+                _this.feedbackForm(buyerId, id, sellerId);
+            }
+            else {
+                _this.toast
+                    .create({
+                    message: "You have already left feedback for this ticket",
+                    duration: 2000,
+                    position: "middle"
+                })
+                    .present()
+                    .catch(function (error) {
+                    console.log(error);
+                });
+            }
+        });
+    };
+    OrderHistoryPage.prototype.feedbackForm = function (buyerId, id, seller) {
+        var _this = this;
+        var alert = this.aCtrl.create({
+            title: "Leave feedback between 1 and 5",
+            mode: 'ios',
+            inputs: [
+                {
+                    name: "Number",
+                    placeholder: "Number",
+                    type: "number"
+                }
+            ],
+            buttons: [
+                {
+                    text: "Proceed",
+                    handler: function (data) {
+                        console.log(data);
+                        if (data.Number > 1 && data.Number <= 5) {
+                            _this.afDatabase.object("bought/" + buyerId + "/" + id).update({ Feedback: true });
+                            _this.afDatabase.database.ref("user/" + seller + "/rating").transaction(function (res) {
+                                res + data.Number;
+                            });
+                        }
+                    }
+                },
+                {
+                    text: "Dismiss",
+                    role: "cancel",
+                    handler: function () {
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
     OrderHistoryPage.prototype.retrieveBoughtListings = function () {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
@@ -345,7 +421,7 @@ var OrderHistoryPage = /** @class */ (function () {
                             .snapshotChanges()
                             .subscribe(function (data) { return __awaiter(_this, void 0, void 0, function () {
                             var _this = this;
-                            var Artist, Card, Date, Time, Price, Ticket, Venue, eIV, eKey, ticketObject;
+                            var Artist, Card, Date, Time, Price, Ticket, Venue, eIV, eKey, Seller, ticketObject;
                             return __generator(this, function (_a) {
                                 switch (_a.label) {
                                     case 0:
@@ -359,6 +435,7 @@ var OrderHistoryPage = /** @class */ (function () {
                                         Venue = data.payload.child("Venue").val();
                                         eIV = data.payload.child("eIV").val();
                                         eKey = data.payload.child("eKey").val();
+                                        Seller = data.payload.child("Seller").val();
                                         return [4 /*yield*/, this.aes
                                                 .decrypt(eKey, eIV, Card)
                                                 .then(function (acc) { return (_this.plainTextCard = acc); })
@@ -373,7 +450,8 @@ var OrderHistoryPage = /** @class */ (function () {
                                             Time: Time,
                                             Price: Price,
                                             Ticket: Ticket,
-                                            Venue: Venue
+                                            Venue: Venue,
+                                            Seller: Seller
                                         };
                                         this.items.push(ticketObject);
                                         console.log(this.items);
@@ -391,9 +469,23 @@ var OrderHistoryPage = /** @class */ (function () {
             });
         });
     };
+    OrderHistoryPage.prototype.logout = function () {
+        var _this = this;
+        // Logs a user out
+        this.afAuth.auth.signOut().then(function () {
+            _this.toast
+                .create({
+                message: "Signed out",
+                position: "middle",
+                duration: 3500
+            })
+                .present();
+            _this.app.getRootNav().setRoot("LoginPage");
+        });
+    };
     OrderHistoryPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: "page-order-history",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button\n        id="info"\n        ion-button\n        icon-only\n        color="light"\n        (click)="ticketTradeInfo()"\n      >\n        <ion-icon name="information-circle"></ion-icon>\n      </button>\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-buttons left>\n      <button ion-button icon-only color="light" (click)="orderHistory()">\n        <ion-icon name="clipboard"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n\n  <ion-title position text-center>Purchased Tickets</ion-title>\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h1 hidden>{{ item.Key }}</h1>\n      <h2 position text-center>{{ item.Artist }}</h2>\n      <h3 position text-center>{{ item.Venue }}</h3>\n      <h4 position text-center>{{ item.Date }}</h4>\n      <h5 position text-center>AT {{ item.Time }}</h5>\n      <h5 position text-center>{{ item.Price }} paid with card ending in {{item.Card}}</h5>\n      <h6 hidden>{{ item.Ticket }}</h6>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="midnight-blue"\n        (click)="feedback()"\n      ><ion-icon name="star"></ion-icon>\n      </button>\n    <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    icon-only\n    color="midnight-blue"\n    (click)="viewTicket()"\n  ><ion-icon name="images"></ion-icon>\n  </button>\n  <button\n  [id]="i"\n  class="adminButtons"\n  ion-button\n  icon-only\n  color="midnight-blue"\n  (click)="getTime()"\n><ion-icon name="trash"></ion-icon>\n</button>\n      <h6></h6>\n    </div>\n  </ion-list>\n\n  <ion-title position text-center>Tickets Sold</ion-title>\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of itemSold; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h1 hidden>{{ item.Key }}</h1>\n      <h2 position text-center>{{ item.Artist }}</h2>\n      <h3 position text-center>{{ item.Venue }}</h3>\n      <h4 position text-center>{{ item.Date }}</h4>\n      <h5 position text-center>{{ item.Price }}</h5>\n      <h5 hidden> {{item.AccountNo}} </h5>\n      <h5 hidden> {{ item.SortCode }}</h5>\n      <button\n      [id]="i"\n      class="adminButtons"\n      ion-button\n      color="midnight-blue"\n    >{{item.Status}}\n    </button>\n      <button\n      [id]="i"\n      id="btnPayout"\n      class="adminButtons"\n      ion-button\n      icon-only\n      color="midnight-blue"\n      (click)="paymentDetails()"\n    ><ion-icon name="cash"></ion-icon>\n    </button>\n  <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    icon-only\n    (click)="removeAlertSold()"\n    color="midnight-blue"><ion-icon name="trash"></ion-icon>\n  </button>\n      <h6></h6>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/
+            selector: "page-order-history",template:/*ion-inline-start:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/'<ion-header>\n  <ion-navbar color="midnight-blue">\n    <ion-buttons right>\n      <button id="logout" ion-button icon-only color="light" (click)="logout()">\n        <ion-icon name="log-out"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title position text-center>Tickets</ion-title>\n  </ion-navbar>\n</ion-header>\n<ion-content padding>\n\n  <ion-title position text-center>Purchased Tickets</ion-title>\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of items; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h1 hidden>{{ item.Key }}</h1>\n      <h2 position text-center>{{ item.Artist }}</h2>\n      <h3 position text-center>{{ item.Venue }}</h3>\n      <h4 position text-center>{{ item.Date }}</h4>\n      <h5 position text-center>AT {{ item.Time }}</h5>\n      <h5 position text-center>{{ item.Price }} paid with card ending in {{item.Card}}</h5>\n      <h6 hidden>{{ item.Ticket }}</h6>\n      <h6 hidden>{{ item.Seller }}</h6>\n      <button\n        [id]="i"\n        class="adminButtons"\n        ion-button\n        icon-only\n        color="midnight-blue"\n        (click)="feedback()"\n      ><ion-icon name="star"></ion-icon>\n      </button>\n    <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    icon-only\n    color="midnight-blue"\n    (click)="viewTicket()"\n  ><ion-icon name="images"></ion-icon>\n  </button>\n  <button\n  [id]="i"\n  class="adminButtons"\n  ion-button\n  icon-only\n  color="midnight-blue"\n  (click)="getTime()"\n><ion-icon name="trash"></ion-icon>\n</button>\n      <h6></h6>\n    </div>\n  </ion-list>\n\n  <ion-title position text-center>Tickets Sold</ion-title>\n  <ion-list>\n    <div\n      class="ngDiv"\n      [id]="i"\n      ion-item\n      *ngFor="let item of itemSold; let i = index"\n    >\n      <h1 hidden>{{ i + 1 }}</h1>\n      <h1 hidden>{{ item.Key }}</h1>\n      <h2 position text-center>{{ item.Artist }}</h2>\n      <h3 position text-center>{{ item.Venue }}</h3>\n      <h4 position text-center>{{ item.Date }}</h4>\n      <h5 position text-center>{{ item.Price }}</h5>\n      <h5 hidden> {{item.AccountNo}} </h5>\n      <h5 hidden> {{ item.SortCode }}</h5>\n      <button\n      [id]="i"\n      class="adminButtons"\n      ion-button\n      color="midnight-blue"\n    >{{item.Status}}\n    </button>\n      <button\n      [id]="i"\n      id="btnPayout"\n      class="adminButtons"\n      ion-button\n      icon-only\n      color="midnight-blue"\n      (click)="paymentDetails()"\n    ><ion-icon name="cash"></ion-icon>\n    </button>\n  <button\n    [id]="i"\n    class="adminButtons"\n    ion-button\n    icon-only\n    (click)="removeAlertSold()"\n    color="midnight-blue"><ion-icon name="trash"></ion-icon>\n  </button>\n      <h6></h6>\n    </div>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\paulf\Desktop\TicketTrader\TicketTrader\src\pages\order-history\order-history.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__["AngularFireAuth"],
@@ -402,7 +494,8 @@ var OrderHistoryPage = /** @class */ (function () {
             __WEBPACK_IMPORTED_MODULE_4__ionic_native_aes_256__["a" /* AES256 */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]])
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */]])
     ], OrderHistoryPage);
     return OrderHistoryPage;
 }());

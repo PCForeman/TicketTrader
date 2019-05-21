@@ -8,9 +8,9 @@ webpackJsonp([17],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__register_register__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__admin_admin__ = __webpack_require__(344);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -232,9 +232,9 @@ var LoginPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -593,9 +593,9 @@ var LoginPageModule = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AdminPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(45);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -797,60 +797,72 @@ var AdminPage = /** @class */ (function () {
         });
     };
     AdminPage.prototype.accept = function () {
-        var _this = this;
-        // Move the ticket from the unaproved table to the approved table
-        var temp = [];
-        var target = event.srcElement;
-        var ticketClicked = parseInt(target.parentElement.parentElement.children.item(0).innerHTML.valueOf()) - 1;
-        console.log(ticketClicked);
-        temp.push(this.items[ticketClicked]);
-        temp.filter(function (v) { return __awaiter(_this, void 0, void 0, function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var temp, target, ticketClicked;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        temp = [
-                            {
-                                Key: v.Key,
-                                Name: v.Name,
-                                Venue: v.Venue,
-                                Price: v.Price,
-                                Date: v.Date,
-                                Seller: v.Seller,
-                                Time: v.Time,
-                                Payout: v.Payout,
-                                Creation: v.Creation,
-                                Charge: v.Charge,
-                                Long: v.Long,
-                                Lat: v.Lat,
-                                PayoutAccount: v.PayoutAccount,
-                                PayoutSortCode: v.PayoutSortCode,
-                                downloadURL: v.downloadURL,
-                                interested: v.interested
-                            }
-                        ];
-                        this.fbDatabase.list("approvedTickets/").push(temp[0]);
-                        this.fbDatabase.list("unaprovedTickets/" + temp[0].Key).remove();
-                        return [4 /*yield*/, this.toast
-                                .create({
-                                message: "Ticket" +
-                                    " " +
-                                    temp[0].Key +
-                                    " " +
-                                    "has been approved and moved to active listings",
-                                position: "top",
-                                duration: 2000
-                            })
-                                .present()];
+                    case 0: 
+                    // Move the ticket from the unaproved table to the approved table
+                    return [4 /*yield*/, this.showSpinner()];
                     case 1:
+                        // Move the ticket from the unaproved table to the approved table
                         _a.sent();
-                        return [4 /*yield*/, this.showSpinner()];
-                    case 2:
-                        _a.sent();
-                        this.refresh();
+                        temp = [];
+                        target = event.srcElement;
+                        ticketClicked = parseInt(target.parentElement.parentElement.children.item(0).innerHTML.valueOf()) - 1;
+                        console.log(ticketClicked);
+                        temp.push(this.items[ticketClicked]);
+                        temp.filter(function (v) { return __awaiter(_this, void 0, void 0, function () {
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        temp = [
+                                            {
+                                                Key: v.Key,
+                                                Name: v.Name,
+                                                Venue: v.Venue,
+                                                Price: v.Price,
+                                                Date: v.Date,
+                                                Seller: v.Seller,
+                                                Time: v.Time,
+                                                Payout: v.Payout,
+                                                Creation: v.Creation,
+                                                Charge: v.Charge,
+                                                Long: v.Long,
+                                                Lat: v.Lat,
+                                                PayoutAccount: v.PayoutAccount,
+                                                PayoutSortCode: v.PayoutSortCode,
+                                                downloadURL: v.downloadURL,
+                                                interested: v.interested
+                                            }
+                                        ];
+                                        this.fbDatabase.list("approvedTickets/").push(temp[0]);
+                                        this.fbDatabase.list("unaprovedTickets/" + temp[0].Key).remove();
+                                        return [4 /*yield*/, this.toast
+                                                .create({
+                                                message: "Ticket" +
+                                                    " " +
+                                                    temp[0].Key +
+                                                    " " +
+                                                    "has been approved and moved to active listings",
+                                                position: "top",
+                                                duration: 2000
+                                            })
+                                                .present().catch(function (error) {
+                                                console.log(error);
+                                            })];
+                                    case 1:
+                                        _a.sent();
+                                        this.refresh();
+                                        return [2 /*return*/];
+                                }
+                            });
+                        }); });
                         return [2 /*return*/];
                 }
             });
-        }); });
+        });
     };
     AdminPage.prototype.showSpinner = function () {
         // Displays a spinner
@@ -987,9 +999,9 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17_angularfire2__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_angularfire2_storage__ = __webpack_require__(349);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_angularfire2_storage___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18_angularfire2_storage__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angularfire2_database__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angularfire2_database__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_angularfire2_auth__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_angularfire2_auth__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_android_permissions___ = __webpack_require__(346);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__ionic_native_stripe__ = __webpack_require__(345);
@@ -1091,10 +1103,10 @@ var AppModule = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_geolocation__ = __webpack_require__(231);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angularfire2_database__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1178,6 +1190,7 @@ var HomePage = /** @class */ (function () {
                         return [4 /*yield*/, this.loadListings()];
                     case 2:
                         _a.sent();
+                        this.fetchTickets();
                         return [2 /*return*/];
                 }
             });
@@ -1195,7 +1208,7 @@ var HomePage = /** @class */ (function () {
             userPos = latLng;
             var mapOptions = {
                 center: latLng,
-                zoom: 14,
+                zoom: 15,
                 zoomControl: true,
                 disableDefaultUI: true,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -1323,7 +1336,7 @@ var HomePage = /** @class */ (function () {
     HomePage.prototype.fetchTickets = function () {
         var _this = this;
         // Makes the listings refresh every 20 seconds.
-        setInterval(function () { return _this.loadListings(); }, 20000);
+        setInterval(function () { return _this.loadListings(); }, 60000);
     };
     HomePage.prototype.ionViewWillEnter = function () {
         this.vCtrl.showBackButton(false);

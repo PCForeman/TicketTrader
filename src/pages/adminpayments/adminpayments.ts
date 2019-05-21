@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, App } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
-
+import { AngularFireAuth } from 'angularfire2/auth'
 
 @IonicPage()
 @Component({
@@ -10,12 +10,29 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class AdminpaymentsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private fbDatabase: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private afAuth: AngularFireAuth,
+    private toast: ToastController,
+    private app: App, private fbDatabase: AngularFireDatabase) {
   }
   kA = [];
 items = [];
   ionViewDidLoad() {
     this.retrievePayments();
+  }
+
+  logout() {
+    // Logs a user out
+    this.afAuth.auth.signOut().then(() => {
+      this.toast
+        .create({
+          message: "Signed out",
+          position: "middle",
+          duration: 3500
+        })
+        .present();
+      this.app.getRootNav().setRoot("LoginPage");
+    });
   }
 
   retrievePayments() {

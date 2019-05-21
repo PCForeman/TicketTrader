@@ -11,7 +11,8 @@ import {
   NavParams,
   ToastController,
   AlertController,
-  ViewController
+  ViewController,
+  LoadingController
 } from "ionic-angular";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Observable } from "rxjs";
@@ -44,7 +45,8 @@ export class HomePage {
     private ngZone: NgZone,
     private vCtrl: ViewController,
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    private ldCtrl: LoadingController
   ) {
     (<any>window).ionicPageRef = {
       zone: this.ngZone,
@@ -55,7 +57,7 @@ export class HomePage {
   async ionViewWillLoad() {
     await this.loadMap();
     await this.loadListings();
-    //this.fetchTickets();
+    this.fetchTickets();
   }
 
   listingData: Observable<any>;
@@ -71,7 +73,7 @@ export class HomePage {
         userPos = latLng;
         let mapOptions = {
           center: latLng,
-          zoom: 14,
+          zoom: 15,
           zoomControl: true,
           disableDefaultUI: true,
           mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -205,7 +207,7 @@ export class HomePage {
 
   fetchTickets() {
     // Makes the listings refresh every 20 seconds.
-    setInterval(() => this.loadListings(), 20000);
+    setInterval(() => this.loadListings(), 60000);
   }
 
   ionViewWillEnter() {
@@ -245,9 +247,21 @@ export class HomePage {
     alert.present();
   }
 
-  buyTickets(userId, sellerId, ticketClickedId, index) {
+  showSpinner() {
+    let loading = this.ldCtrl.create({
+      content: "Processing",
+      spinner: 'bubbles'
+    });
+    loading.present();
+    setTimeout(() => {
+      loading.dismiss();
+    }, 1000);
+  }
+
+  async buyTickets(userId, sellerId, ticketClickedId, index) {
     //Check that the user isn't the person who listed the ticket
     //If condition is met it will remove the ticket from the map and active listings and place the ticket in a users basket
+   await this.showSpinner();
     const temp = [];
     console.log(userId, sellerId, ticketClickedId, index);
     if (userId == sellerId) {

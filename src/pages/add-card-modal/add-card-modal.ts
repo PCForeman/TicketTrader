@@ -220,6 +220,10 @@ export class AddCardModalPage {
     }
   }
 
+info(){
+  this.toast.create({message:'All of your details will be encrypted and stored safely', duration: 2000, position:'middle'}).present();
+}
+
   async generateSecureKeyAndIV() { // Use the Ionic AES26 plugin to generate two keys.
     this.thrtyTwoBit = await this.aes.generateSecureKey("pook"); // Returns a 32 bytes string
     this.sixteenBit = await this.aes.generateSecureIV("pook"); // Returns a 16 bytes string

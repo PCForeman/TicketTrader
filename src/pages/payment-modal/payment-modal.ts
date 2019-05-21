@@ -116,7 +116,9 @@ displayLoader(){
         eKey: this.secureKey,
         eIV: this.secureIV,
         Ticket: this.listingData.downloadURL,
-        Time: this.listingData.time
+        Time: this.listingData.time,
+        Feedback: false,
+        Seller: this.listingData.sellerId
         }
         const sellerObj = {
         Artist: this.listingData.artist,

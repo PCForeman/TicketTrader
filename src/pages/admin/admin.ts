@@ -181,8 +181,9 @@ export class AdminPage {
     });
   }
 
-  accept() {
+  async accept() {
     // Move the ticket from the unaproved table to the approved table
+    await this.showSpinner();
     var temp = [];
     var target = event.srcElement;
     var ticketClicked =
@@ -226,9 +227,10 @@ export class AdminPage {
           position: "top",
           duration: 2000
         })
-        .present();
-      await this.showSpinner();
-      this.refresh();
+        .present().catch(error => {
+          console.log(error);
+        })
+        this.refresh();
     });
   }
 
